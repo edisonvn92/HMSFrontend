@@ -1,0 +1,49 @@
+<div class="form-inline date-picker">
+  <div class="form-group hidden">
+    <div class="input-group">
+      <input
+        name="datepicker"
+        ngbDatepicker
+        placement="bottom-end"
+        class="form-control"
+        [class]="inputClass"
+        #datepickerFrom="ngbDatepicker"
+        [minDate]="validateDate(minDate || min)"
+        [maxDate]="validateDate(maxDate || max)"
+        (dateSelect)="onDateSelection($event)"
+        [dayTemplate]="t"
+        outsideDays="collapsed"
+        [startDate]="validateDate(!type ? date! : type === 'start' ? startDate! : endDate!)"
+        tabindex="-1"
+      />
+      <ng-template #t let-date let-focused="focused">
+        <span
+          class="custom-day"
+          [class.range]="isRange(date)"
+          [class.faded]="isHovered(date) || isInside(date)"
+          (mouseenter)="hoveredDate = date"
+          (mouseleave)="hoveredDate = null"
+        >
+          {{ date.day }}
+        </span>
+      </ng-template>
+    </div>
+  </div>
+  <div class="form-group" style="width: 100%">
+    <div class="input-group">
+      <input
+        #dpDate
+        class="form-control"
+        [class.icon-calendar-1]="hasIcon && !(!type ? date! : type === 'start' ? startDate! : endDate!)"
+        [class.icon-calendar-2]="hasIcon && (!type ? date! : type === 'start' ? startDate! : endDate!)"
+        [class]="inputClass"
+        [placeholder]="placeholder"
+        name="dpstartDate"
+        [value]="formatDate(!type ? date! : type === 'start' ? startDate! : endDate!)"
+        (click)="onOpenDatePicker()"
+        [disabled]="disabled"
+        readonly
+      />
+    </div>
+  </div>
+</div>

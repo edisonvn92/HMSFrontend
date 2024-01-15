@@ -1,0 +1,21 @@
+<div class="chart-title d-flex justify-content-between align-items-center">
+  <div class="d-flex">
+    <div class="title-icon">
+      <img src="./assets/images/icon_medicine_chart.svg" />
+    </div>
+    <div class="mr-10 title">
+      {{ 'patient detail.hypertension app medication' | translate }}
+    </div>
+    <div class="cursor-pointer" (click)="showChart = false" [hidden]="!showChart">
+      <div class="icon icon-hide-chart"></div>
+    </div>
+    <div class="cursor-pointer" (click)="showChart = true" [hidden]="showChart">
+      <div class="icon icon-show-chart"></div>
+    </div>
+  </div>
+  <div class="cursor-pointer text-blue-210 detail" (click)="openPrescription.emit()">
+    {{ 'dosing plan' | translate }}>
+  </div>
+</div>
+<div id="bp-medication-chart" class="chart-body mb-0" [class.chart-hidden]="!showChart"></div>
+<div id="bp-medication-plan-chart" class="chart-body" [class.chart-hidden]="!showChart"></div>

@@ -1,0 +1,7 @@
+<div>
+  <div class="title">{{ 'screen display component settings' | translate }}</div>
+  <div class="component-table" *ngFor="let group of componentGroup">
+    <div class="title mb-1">{{ group.text | translate }}</div>
+    <app-component-table #component [id]="group.id" [components]="components[group.key]"></app-component-table>
+  </div>
+</div>

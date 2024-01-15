@@ -1,0 +1,75 @@
+@import 'src/app/styles/variable';
+
+.table-select {
+  width: 50px;
+}
+
+.modal-header {
+  min-height: 40px;
+  padding: 8px 24px 8px 16px;
+
+  .text-left {
+    word-break: break-word;
+  }
+}
+
+tbody {
+  height: 140px;
+}
+
+.table {
+  .hcp-code {
+    width: 100px;
+  }
+}
+
+.group-select {
+  max-height: 200px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0;
+  width: 192px;
+}
+
+.select-box {
+  .btn {
+    width: 192px;
+  }
+}
+
+.group-select-item {
+  padding: 3px 12px;
+  min-height: 32px;
+  word-break: break-word;
+
+  &:hover {
+    background-color: $gray-900;
+  }
+
+  &.active {
+    background-color: $gray-140;
+  }
+
+  &.active {
+    &:hover {
+      background-color: $gray-900;
+    }
+  }
+
+  input {
+    margin-top: 6px;
+  }
+}
+
+.icon {
+  height: 11px;
+  width: 14px;
+}
+
+.edit-content {
+  padding: 24px 28px;
+
+  .btn-cancel {
+    border-color: $gray-200;
+  }
+}

@@ -1,0 +1,18 @@
+<div class="confirm-modal-container">
+  <div class="dialog-body align-items-start">
+    <div><div class="icon icon-warning"></div></div>
+    <div class="body_content text-medium" [innerHTML]="message | translate: params"></div>
+  </div>
+  <div ngbAutoFocus tabindex="0" class="dialog-actions no-focus">
+    <button
+      type="button"
+      class="btn btn-outline-secondary text-black-300 btn-close text-normal mr-5"
+      (click)="clickedClose()"
+    >
+      {{ 'button.Cancel' | translate }}
+    </button>
+    <button type="button" class="btn btn-primary bg-blue-500 btn-close text-normal" (click)="clickedConfirm()">
+      {{ 'button.ok' | translate }}
+    </button>
+  </div>
+</div>

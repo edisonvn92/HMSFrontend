@@ -1,0 +1,128 @@
+@import 'src/app/styles/variable';
+
+:host {
+  ::ng-deep {
+    color: $black-300;
+  }
+}
+
+.doctor-content-header {
+  .search-group {
+    width: 272px;
+    border-radius: 4px;
+    margin-right: 24px;
+
+    input {
+      height: 32px;
+      border-right: none;
+      border-color: $gray-500;
+      color: $black-300;
+    }
+
+    .input-group-append {
+      height: 32px;
+
+      .input-group-text {
+        width: 30px;
+        padding: 0 6px;
+        border-color: $gray-500;
+        background-color: $gray-170;
+      }
+    }
+  }
+}
+
+.alert-content {
+  padding: 24px;
+
+  .table-custom {
+    color: $black-300;
+
+    thead {
+      tr {
+        background-color: white;
+
+        th {
+          vertical-align: top;
+          border-top: none;
+          border-bottom-color: $gray-700;
+          font-weight: 400;
+        }
+      }
+    }
+
+    tbody {
+      max-height: calc(100vh - 214px);
+      height: calc(100vh - 214px);
+
+      tr {
+        cursor: pointer;
+        min-height: 40px;
+      }
+    }
+
+    td {
+      vertical-align: middle;
+      border-top-color: $gray-700;
+    }
+
+    .age {
+      width: 100px;
+    }
+
+    .sex {
+      width: 120px;
+    }
+
+    .alert-confirm {
+      width: 145px;
+    }
+
+    .alert-object {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+
+      .alert-value {
+        .value {
+          text-transform: lowercase;
+        }
+
+        .datetime {
+          font-size: 12px;
+          color: $blue-610;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+    }
+
+    .unit {
+      font-size: 12px;
+      color: $gray-800;
+    }
+
+    &.en-language {
+      .final-medical-treatment {
+        width: 200px;
+      }
+
+      .alert-confirm {
+        width: 160px;
+      }
+    }
+  }
+}
+
+.table {
+  margin-bottom: 22px;
+}
+
+.unseen {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: $red-100;
+  margin-right: 5px;
+}

@@ -1,0 +1,17 @@
+<div class="user-group-container">
+  <div class="modal-header">
+    <div class="modal-title text-medium font-weight-500 text-left" id="modal-basic-title">
+      {{ 'group list' | translate }}
+    </div>
+    <button type="button" class="close none-outline btn-close" aria-label="Close" (click)="clickedClose()">
+      <div class="icon-close btn-icon-close"></div>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="user-group-content text-normal">
+      <div class="group-item d-flex" *ngFor="let item of groupList; index as i">
+        <div class="group-name break-space">{{ item?.group_name }}</div>
+      </div>
+    </div>
+  </div>
+</div>

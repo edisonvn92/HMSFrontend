@@ -1,0 +1,39 @@
+<div class="d-flex align-items-center justify-content-end user-info">
+  <div class="back-icon-wrapper mr-auto cursor-pointer p-1" *ngIf="arrIcon.includes('back')" (click)="goBack()">
+    <div class="icon icon-back"></div>
+  </div>
+  <div class="mr-50" *ngIf="latestDataSync">
+    {{ 'last update' | translate }} :
+    {{ latestDataSync | date: (sharedService.isJa() ? 'yyyy/MM/dd HH:mm' : 'd MMM y HH:mm') }}
+  </div>
+  <div class="help-icon-wrapper cursor-pointer" *ngIf="arrIcon.includes('export')" (click)="clickedExport()">
+    <div class="icon icon-export ml-auto"></div>
+  </div>
+  <div class="help-icon-wrapper cursor-pointer ml-25" *ngIf="arrIcon.includes('help')" (click)="clickedHelp()">
+    <div class="icon icon-help-2 ml-auto"></div>
+  </div>
+  <div class="reload-icon-wrapper ml-25 cursor-pointer" *ngIf="arrIcon.includes('reload')" (click)="clickedReload()">
+    <div class="icon icon-reload"></div>
+  </div>
+  <div class="username text-truncate">
+    {{
+      (currentUser.hcp_first_name || '') +
+        ' ' +
+        (currentUser?.hcp_middle_name || '') +
+        ' ' +
+        (currentUser?.hcp_last_name || '')
+    }}
+  </div>
+
+  <div ngbDropdown>
+    <div class="setting-icon-wrapper cursor-pointer" ngbDropdownToggle>
+      <div class="icon icon-setting-1"></div>
+    </div>
+
+    <div ngbDropdownMenu aria-labelledby="userAvatar">
+      <button ngbDropdownItem class="text-normal" (click)="goToChangePassword()">
+        {{ 'change password' | translate }}
+      </button>
+    </div>
+  </div>
+</div>

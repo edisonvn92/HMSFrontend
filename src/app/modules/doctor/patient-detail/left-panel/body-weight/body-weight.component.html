@@ -1,0 +1,32 @@
+<div class="patient-detail-component">
+  <div class="d-flex justify-content-between align-items-center">
+    <div class="left-title">{{ 'patient detail.body weight' | translate }}</div>
+    <div class="text-small text-gray-190">
+      {{ showDate() ? (showDate() | translate) : '----/--/--' }}
+    </div>
+  </div>
+  <div class="d-flex justify-content-between content">
+    <div class="icon-body-weight icon"></div>
+    <div class="text-right">
+      <div>
+        <span class="primary-value">{{
+          patient?.vital_weight_value ? fixNumber(patient.vital_weight_value) : '-'
+        }}</span>
+        <span class="text-small unit">kg</span>
+      </div>
+      <div class="text-right mt--4">
+        <span class="text-normal" *ngIf="patient && patient.weight_ratio === '--'">--</span>
+        <span class="text-normal" *ngIf="patient && patient.weight_ratio === 0">+0</span>
+        <span class="text-normal" *ngIf="patient && patient.weight_ratio && patient.weight_ratio !== '--'">{{
+          patient.weight_ratio > 0 ? '+' + fixNumber(patient.weight_ratio) : fixNumber(patient.weight_ratio)
+        }}</span>
+        <span class="text-small unit" [hidden]="patient && !patient.weight_ratio && patient.weight_ratio !== 0"
+          >kg
+        </span>
+        <span class="text-small unit" *ngIf="patient && !patient.weight_ratio && patient.weight_ratio !== 0">
+          {{ 'unmeasured' | translate }}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

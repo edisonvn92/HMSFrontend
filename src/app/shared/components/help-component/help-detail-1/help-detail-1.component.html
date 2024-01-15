@@ -1,0 +1,100 @@
+<div class="modal-header">
+  <div class="modal-title font-weight-500 text-medium text-black-300 text-left" id="modal-basic-title">
+    {{ 'icon display' | translate }}
+  </div>
+  <button type="button" class="close none-outline" aria-label="Close" (click)="clickedClose()">
+    <div class="icon-close btn-icon-close"></div>
+  </button>
+</div>
+
+<div class="modal-body text-break d-flex" [class.lang-en]="!sharedService.isJa()">
+  <div>
+    <div class="text-blue-700 text-normal mb-1 pr-10">
+      {{ 'patient self-assessment of monthly achievement' | translate }}
+    </div>
+    <div *ngFor="let evaluation of evaluations" class="mt-10 d-flex align-items-center">
+      <app-evaluation [star]="evaluation.star"></app-evaluation>
+      <span class="text-normal ml-3 text-black-300">{{ evaluation.text | translate }}</span>
+    </div>
+
+    <div class="text-blue-700 text-normal mt-20 mb-1">
+      {{ 'achievement of target blood pressure value' | translate }}
+    </div>
+    <div *ngFor="let bloodPressure of bloodPressures" class="ml-20 mt-22 d-flex">
+      <img [src]="bloodPressure.icon" alt="" class="mr-3" />
+      <div class="text-normal ml-25 text-black-300 pr-20">{{ bloodPressure.text | translate }}</div>
+    </div>
+  </div>
+  <div class="ml-auto">
+    <div class="text-blue-700 text-normal mb-1">{{ 'blood pressure measurement' | translate }}</div>
+    <div class="d-flex">
+      <img src="./assets/images/blood_pressure_chart.svg" alt="" class="mr-3 ml-10" />
+      <div class="mt-15">
+        <div class="d-flex align-items-center">
+          <div class="icon-unit bg-blue-420 mr-2"></div>
+          <span class="text-normal text-black-300" [class.w-112]="!sharedService.isJa()">
+            {{ 'morning' | translate }}
+          </span>
+          <span class="text-normal text-black-300" [class.ml-50]="sharedService.isJa()">
+            {{ setting.hospital_setting_start_morning }} - {{ setting.hospital_setting_end_morning }}
+          </span>
+        </div>
+        <div class="d-flex align-items-center">
+          <div class="icon-unit bg-blue-100 mr-2"></div>
+          <span class="text-normal text-black-300" [class.w-112]="!sharedService.isJa()">
+            {{ 'evening' | translate }}</span
+          >
+          <span class="text-normal text-black-300" [class.ml-50]="sharedService.isJa()">
+            {{ setting.hospital_setting_start_evening }} - {{ setting.hospital_setting_end_evening }}
+          </span>
+        </div>
+        <div class="d-flex align-items-center">
+          <div class="icon-unit bg-gray-360 mr-2"></div>
+          <span class="text-normal text-black-300">{{ 'examination room' | translate }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-blue-700 text-normal mt-20 mb-1">
+      {{ 'measurement status' | translate }}
+    </div>
+    <div *ngFor="let status of measurementStatus" class="ml-10 mt-10 d-flex">
+      <div><img [src]="status.icon" alt="" class="mr-3 status-icon" /></div>
+      <div class="text-normal text-black-300 status-text">{{ status.text1 | translate }}</div>
+      <div class="text-normal text-black-300">{{ status.text2 | translate }}</div>
+    </div>
+
+    <div class="text-blue-700 text-normal mt-20 mb-1">
+      {{ 'taking medicine' | translate }}
+    </div>
+    <div class="d-flex">
+      <div class="ml-2 mt-10 d-flex">
+        <img src="./assets/images/icon_medicine.svg" alt="" class="mr-3" />
+        <div class="text-normal text-black-300 d-flex align-items-center">{{ 'i took the medicine' | translate }}</div>
+      </div>
+      <div class="ml-40 mt-10 d-flex">
+        <img src="./assets/images/icon_medicine_1.svg" alt="" class="mr-3" />
+        <div class="text-normal text-black-300 d-flex align-items-center">
+          {{ "i took it, I didn't take it" | translate }}
+        </div>
+      </div>
+    </div>
+
+    <div class="text-blue-700 text-normal mt-20 mb-1">
+      {{ 'life improvement' | translate }}
+    </div>
+    <div class="d-flex mt-10">
+      <div *ngFor="let status of lifeImprovements; let i = index" [class]="i === 0 ? 'ml-2' : 'ml-40'">
+        <div class="d-flex justify-content-center"><img [src]="status.icon" alt="" /></div>
+        <div class="text-normal text-no-break text-center text-blue-600">{{ status.text | translate }}</div>
+      </div>
+    </div>
+
+    <div class="ml-2 mt-10 d-flex">
+      <img src="./assets/images/icon_memo_event.svg" alt="" class="mr-2" />
+      <div class="text-normal d-flex align-items-center text-black-300">
+        {{ 'there is a patient memo' | translate }}
+      </div>
+    </div>
+  </div>
+</div>

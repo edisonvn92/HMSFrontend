@@ -1,0 +1,153 @@
+$spacer: 1;
+$max: null;
+$baseSize: -50 !default;
+
+$properties: (
+  m: 'margin',
+  p: 'padding',
+);
+
+$positions: (
+  t: 'top',
+  r: 'right',
+  b: 'bottom',
+  l: 'left',
+);
+
+$spacers: (
+  1: $spacer,
+  2: $spacer * 2,
+  3: $spacer *3,
+  4: $spacer * 4,
+);
+
+@mixin spacing($spacer, $max) {
+  @each $prop, $textProp in $properties {
+    @while ($baseSize <= $max) {
+      .#{$prop}-#{$baseSize} {
+        #{$textProp}: #{$baseSize}px !important;
+      }
+      .#{$prop}x-#{$baseSize} {
+        #{$textProp}-right: #{$baseSize}px !important;
+        #{$textProp}-left: #{$baseSize}px !important;
+      }
+      .#{$prop}y-#{$baseSize} {
+        #{$textProp}-top: #{$baseSize}px !important;
+        #{$textProp}-bottom: #{$baseSize}px !important;
+      }
+      @each $pos, $textPos in $positions {
+        .#{$prop}#{$pos}-auto {
+          #{$textProp}-#{$textPos}: auto !important;
+        }
+        .#{$prop}#{$pos}-#{$baseSize} {
+          #{$textProp}-#{$textPos}: #{$baseSize}px !important;
+        }
+      }
+      $baseSize: $baseSize + $spacer;
+    }
+  }
+}
+
+.mt-30vh {
+  margin-top: 30vh !important;
+}
+
+.m-auto {
+  margin: auto;
+}
+
+.mx-auto {
+  margin: 0 auto;
+}
+
+.my-auto {
+  margin: auto 0;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+
+.mt--4 {
+  margin-top: -4px !important;
+}
+
+.mt--3 {
+  margin-top: -3px !important;
+}
+
+.mr-7 {
+  margin-right: 7px !important;
+}
+
+.mr-12 {
+  margin-right: 12px !important;
+}
+
+.ml-12 {
+  margin-left: 12px !important;
+}
+
+.ml-112 {
+  margin-left: 112px !important;
+}
+
+.ml-34 {
+  margin-left: 34px !important;
+}
+
+.mt-96 {
+  margin-top: 96px !important;
+}
+
+.px-24 {
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+}
+
+.mt-2px {
+  margin-top: 2px;
+}
+
+.mt-24 {
+  margin-top: 24px !important;
+}
+
+.mt-27 {
+  margin-top: 27px !important;
+}
+
+.mt-32 {
+  margin-top: 32px !important;
+}
+
+.mt-128 {
+  margin-top: 128px !important;
+}
+
+.ml-30 {
+  margin-left: 30px !important;
+}
+
+.pl-5px {
+  padding-left: 5px;
+}
+
+.mr-32 {
+  margin-right: 32px !important;
+}
+
+.mx-5px {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.pl-3px {
+  padding-left: 3px;
+}
+
+.pr-6 {
+  padding-right: 6px;
+}
+
+@include spacing(5, 200);

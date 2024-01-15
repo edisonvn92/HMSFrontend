@@ -1,0 +1,40 @@
+<div class="font-weight-500 fs-24 mb-3">{{ 'registration confirmation' | translate }}</div>
+<div class="text-left patient-info">
+  <div class="mb-3 text-normal">{{ 'do you want to register with this content?' | translate }}</div>
+  <div class="d-flex mb-3">
+    <div class="text-no-wrap mb-1 div-label text-normal">{{ 'name' | translate }}:</div>
+    <div>{{ patient?.patient_full_name }}</div>
+  </div>
+  <div class="d-flex mb-3">
+    <div class="text-no-wrap mb-1 div-label text-normal">{{ 'sex' | translate }}:</div>
+    <div>{{ (patient?.patient_gender === sex.FEMALE ? 'Female' : 'Male') | translate }}</div>
+  </div>
+  <div class="d-flex mb-3">
+    <div class="text-no-wrap mb-1 div-label text-normal">{{ 'date of birth' | translate }}:</div>
+    <div>{{ patient?.patient_birthday | date: (sharedService.isJa() ? 'y年MM月dd日' : 'd MMM y') }}</div>
+  </div>
+  <div class="d-flex mb-3">
+    <div class="text-no-wrap mb-1 div-label text-normal">{{ 'email address' | translate }}:</div>
+    <div>{{ patient?.patient_email }}</div>
+  </div>
+  <div class="d-flex align-items-center mb-3">
+    <div class="div-checkbox d-flex">
+      <input disabled type="checkbox" [checked]="patient?.isAgreePolicy" class="mr-10" value="" />
+    </div>
+    <label class="text-normal text-black-300">
+      {{ 'i agree to receive sale and marketing communications from OMRON HEALTHCARE.' | translate }}
+    </label>
+  </div>
+  <div class="d-flex">
+    <button
+      type="button"
+      (click)="backClicked.emit()"
+      class="btn btn-outline-secondary text-black-300 ml-auto mr-2 text-normal"
+    >
+      {{ 'button.edit' | translate }}
+    </button>
+    <button type="button" (click)="onRegisterClicked()" class="btn btn-primary bg-blue-300 text-normal">
+      {{ 'button.sign up' | translate }}
+    </button>
+  </div>
+</div>

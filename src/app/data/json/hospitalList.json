@@ -1,0 +1,47 @@
+{
+  "hospitalList": {
+    "data": [
+      {
+        "hospital_id": 1,
+        "hospital_code": "H001",
+        "hospital_name": "hospital 1",
+        "phone_number": "012345685",
+        "group_default": "group 1"
+      },
+      {
+        "hospital_id": 2,
+        "hospital_code": "H002",
+        "hospital_name": "hospital 2",
+        "phone_number": "012345685",
+        "group_default": "group 1"
+      },
+      {
+        "hospital_id": 3,
+        "hospital_code": "H003",
+        "hospital_name": "hospital 3",
+        "phone_number": "012345685",
+        "group_default": "group 1"
+      },
+      {
+        "hospital_id": 4,
+        "hospital_code": "H004",
+        "hospital_name": "hospital 4",
+        "phone_number": "012345685",
+        "group_default": "group 1"
+      },
+      {
+        "hospital_id": 5,
+        "hospital_code": "H005",
+        "hospital_name": "hospital 5",
+        "phone_number": "012345685",
+        "group_default": "group 1"
+      }
+    ],
+    "current_page": 1,
+    "last_page": 1,
+    "per_page": 20,
+    "from": 1,
+    "to": 2,
+    "total": 2000
+  }
+}

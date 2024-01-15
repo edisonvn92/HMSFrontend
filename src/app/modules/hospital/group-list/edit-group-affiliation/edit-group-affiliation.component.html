@@ -1,0 +1,151 @@
+<div class="edit-group-container no-focus" ngbAutoFocus tabindex="0">
+  <div class="modal-header">
+    <div class="modal-title text-medium font-weight-500 text-left break-space text-black-300" id="modal-basic-title">
+      {{ groupDetail.group_name }}
+    </div>
+    <button type="button" class="close none-outline" aria-label="Close" (click)="clickedClose()">
+      <div class="icon-close btn-icon-close"></div>
+    </button>
+  </div>
+  <div class="modal-body text-break p-0">
+    <div class="edit-content">
+      <div class="d-flex align-items-center text-black">
+        <div class="text-black-300">{{ (isEditPatient ? 'Patient' : 'dr./nurse') | translate }}</div>
+        <button
+          type="button"
+          class="btn btn-outline-secondary text-black-300 text-normal ml-auto btn-cancel"
+          (click)="clickedClose()"
+        >
+          {{ 'button.Cancel' | translate }}
+        </button>
+      </div>
+      <table class="table mt-3 hospital-table" appRowSelected="multi">
+        <thead style="z-index: 10">
+          <tr>
+            <th class="table-select">
+              <input
+                type="checkbox"
+                id="check-all"
+                [checked]="directive.isCheckedAll"
+                [indeterminate]="directive.indeterminate"
+                (click)="directive.selectAllClicked($event)"
+              />
+            </th>
+            <ng-template [ngIf]="!isEditPatient">
+              <th class="w-152" scope="col">{{ 'id' | translate }}</th>
+              <th class="w-186" scope="col">{{ 'name' | translate }}</th>
+              <th class="w-128" scope="col">{{ 'tel' | translate }}</th>
+              <th scope="col">{{ 'role' | translate }}</th>
+            </ng-template>
+            <ng-template [ngIf]="isEditPatient">
+              <th class="w-152" scope="col">{{ 'patient id' | translate }}</th>
+              <th class="w-256" scope="col">{{ 'name' | translate }}</th>
+              <th class="w-128" scope="col">{{ 'sex' | translate }}</th>
+              <th scope="col">{{ 'date of birth' | translate }}</th>
+            </ng-template>
+          </tr>
+        </thead>
+        <tbody [attr.noData]="'there is no data' | translate">
+          <tr *ngFor="let item of data; let i = index">
+            <td class="table-select">
+              <input
+                type="checkbox"
+                id="{{ 'item_' + i }}"
+                value=""
+                (click)="directive.onSelectedRowClicked($event, item)"
+                [checked]="directive.isChecked(item)"
+              />
+            </td>
+            <ng-template [ngIf]="!isEditPatient">
+              <td class="w-152">{{ item.hcp_cognito_username }}</td>
+              <td class="w-186">{{ getFullName(item.hcp_first_name, item.hcp_middle_name, item.hcp_last_name) }}</td>
+              <td class="w-128">{{ item.hcp_cognito_phone }}</td>
+              <td>{{ item.roles ? (item.roles[0] ? (item.roles[0].role_name | translate) : '') : '' }}</td>
+            </ng-template>
+            <ng-template [ngIf]="isEditPatient">
+              <td class="w-152">{{ item.patient_code }}</td>
+              <td class="w-256">
+                {{ getFullName(item.patient_first_name, item.patient_middle_name, item.patient_last_name) }}
+              </td>
+              <td class="w-128">{{ (item.patient_gender ? 'male' : 'female') | translate }}</td>
+              <td>{{ (item.patient_birthday | date: (sharedService.isJa() ? 'y年MM月dd日' : 'd MMM y')) || '-' }}</td>
+            </ng-template>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="modal-footer text-black text-center justify-content-center">
+      <div>
+        <div class="text-black-700 text-small" *ngIf="!isEditPatient">
+          {{ 'press Remove to remove Dr. from the group' | translate }}
+        </div>
+        <div class="text-black-700 text-small" *ngIf="isEditPatient">
+          {{ 'press Remove to remove Patient from the group' | translate }}
+        </div>
+        <div class="text-black-400 mt-2 text-small text-center" *ngIf="isEditPatient && groupDetail.group_default">
+          {{ 'you cannot delete patients in the default group.' | translate }}
+        </div>
+        <div class="d-flex justify-content-center">
+          <button
+            type="button"
+            class="btn btn-danger bg-red-200 mt-3 btn-close text-normal"
+            [class.btn-fake-disable]="
+              (isEditPatient && groupDetail.group_default) || directive.selectedRows.length === 0
+            "
+            (click)="onRemoveClicked()"
+          >
+            {{ 'button.delete' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="text-black-300" class="modal-footer text-black justify-content-center">
+      <div>
+        <div class="text-black-700 text-small" *ngIf="!isEditPatient">
+          {{ 'press Add to add a Dr. to a group' | translate }}
+        </div>
+        <div class="text-black-700 text-small" *ngIf="isEditPatient">
+          {{ 'click the "add" button to add a patient to the group.' | translate }}
+        </div>
+        <div class="d-flex justify-content-center mt-3">
+          <div ngbDropdown #groupDropdown class="d-inline-block select-box">
+            <button class="btn btn-outline-secondary d-flex align-items-center" id="dropdownBasic2" ngbDropdownToggle>
+              <div class="text text-black-400 w-186 text-truncate text-normal">{{ groupSelectedString }}</div>
+              <i
+                class="fas ml-auto my-auto opacity-25 icon text-black-300"
+                [class]="dropdown?.isOpen() ? 'icon-arrow-up' : 'icon-arrow-down'"
+              ></i>
+            </button>
+            <div class="group-select" ngbDropdownMenu aria-labelledby="dropdownBasic2">
+              <label
+                *ngFor="let item of groupDetail.other_groups; let i = index"
+                [class.active]="isChecked(item)"
+                class="d-flex align-items-center m-0 text-normal group-select-item"
+              >
+                <div class="d-flex align-items-center">
+                  <input
+                    type="checkbox"
+                    id="{{ 'group_' + i }}"
+                    (click)="onSelectedGroupClicked($event, item)"
+                    class="mr-1 my-0"
+                    tabindex="-1"
+                    value=""
+                  />
+                </div>
+                <div class="break-space">{{ item.group_name }}</div>
+              </label>
+            </div>
+          </div>
+          <button
+            type="button"
+            class="btn btn-primary bg-blue-500 ml-1 btn-close text-normal"
+            [class.btn-fake-disable]="!directive.selectedRows.length || !groupSelected.length"
+            (click)="onAddClicked()"
+          >
+            {{ 'button.add' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

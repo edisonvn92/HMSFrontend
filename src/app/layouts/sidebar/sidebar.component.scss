@@ -1,0 +1,163 @@
+@import 'src/styles';
+
+#sidebar {
+  min-width: 228px;
+  max-width: 228px;
+  height: 100vh;
+  min-height: 100vh;
+  background-color: $blue-100;
+  color: #fff;
+  transition: all 0.3s;
+  position: relative;
+
+  a,
+  a:hover,
+  a:focus {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+
+  .sidebar-header {
+    padding: 15px 16px;
+    background: $blue-100;
+
+    img {
+      cursor: pointer;
+    }
+
+    .bars-solid {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  .menu-list,
+  .logout {
+    li {
+      height: 48px;
+      position: relative;
+
+      a,
+      .hospital-setting {
+        padding: 12px 15px;
+        height: 48px;
+        cursor: pointer;
+        border-radius: 0;
+        display: flex;
+        align-items: center;
+
+        &:hover {
+          background-color: $blue-300;
+        }
+
+        .icon-up-down {
+          width: 12px;
+          height: 12px;
+          position: absolute;
+          right: 15px;
+          margin-top: 5px;
+        }
+
+        .icon-user-menu {
+          margin-right: 15px !important;
+        }
+
+        .icon-alert {
+          padding-right: 3px;
+        }
+
+        .icon-setting {
+          height: 17px;
+          width: 17px;
+        }
+      }
+    }
+
+    .active {
+      background-color: $blue-200;
+    }
+
+    .menu-hospital-setting {
+      .setting-name {
+        padding-left: 3px;
+      }
+
+      #navbarContent {
+        li {
+          background-color: $blue-200;
+
+          a {
+            padding-left: 45px;
+            &:hover {
+              //background-color: $blue-100;
+            }
+          }
+        }
+
+        .setting-active {
+          background-color: $blue-300;
+        }
+      }
+    }
+
+    .alert-number {
+      min-width: 24px;
+      height: 24px;
+      line-height: 24px;
+      border-radius: 50%;
+      position: absolute;
+      right: 15px;
+      padding: 0 2px;
+    }
+
+    .has-alert {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      position: absolute;
+      top: 11px;
+      right: 14px;
+      background-color: $red-100;
+    }
+  }
+
+  .logout {
+    position: absolute;
+    bottom: 0;
+    width: 228px;
+
+    img {
+      width: 18px;
+      height: 14px;
+    }
+  }
+}
+
+.ml-178 {
+  margin-left: 178px !important;
+}
+
+#sidebar.active {
+  margin-left: -180px;
+
+  .menu-name,
+  .alert-number {
+    display: none;
+  }
+
+  .menu-list {
+    #navbarContent,
+    .icon-up-down {
+      display: none;
+    }
+
+    .icon-user-menu {
+      margin-left: 182px !important;
+    }
+
+    .icon-alert {
+      margin-left: 179px !important;
+    }
+  }
+}

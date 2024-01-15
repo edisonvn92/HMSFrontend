@@ -1,0 +1,15 @@
+@import 'src/app/styles/variable';
+
+:host {
+  min-height: 600px;
+  color: $black-300;
+}
+
+.modal-header {
+  height: 40px;
+  padding: 8px 24px 8px 16px;
+
+  .text-left {
+    word-break: break-word;
+  }
+}

@@ -1,0 +1,87 @@
+@import 'src/app/styles/variable';
+
+.patient-content {
+  padding: 24px;
+  height: calc(100vh - 48px);
+
+  .form-control {
+    border: 1px solid $gray-200;
+  }
+
+  tbody {
+    max-height: calc(100vh - 280px);
+    height: calc(100vh - 280px);
+  }
+
+  .icon {
+    width: 12px;
+    height: 12px;
+  }
+
+  .w-400 {
+    width: 400px;
+  }
+
+  .search-patient {
+    .mr-51 {
+      margin-right: 51px;
+    }
+
+    .patient-id {
+      height: 32px;
+      width: 224px;
+    }
+
+    .group {
+      height: 32px;
+      width: 168px;
+      line-height: 2 !important;
+
+      .text {
+        max-width: 120px;
+      }
+    }
+
+    .sex {
+      height: 32px;
+      width: 112px;
+      line-height: 2 !important;
+    }
+
+    .select {
+      max-height: 200px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 0;
+      width: 192px;
+    }
+
+    .dropdown-toggle {
+      border: 1px solid #d9d9d9;
+
+      &::after {
+        display: none;
+      }
+
+      &:hover {
+        background-color: $gray-220;
+      }
+
+      &:focus {
+        background-color: $gray-220;
+        box-shadow: none;
+      }
+    }
+    .show > .dropdown-toggle {
+      background-color: $gray-900;
+    }
+    .icon {
+      height: 11px;
+      width: 14px;
+    }
+  }
+}
+
+.table {
+  margin-bottom: 32px;
+}

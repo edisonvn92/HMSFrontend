@@ -1,0 +1,88 @@
+<div class="auth-page">
+  <p>
+    <img src="./assets/images/icon_title_login.svg" />
+  </p>
+  <p class="login-title">{{ 'login title' | translate }}</p>
+
+  <div class="form-area">
+    <ul class="invalid mb-3 text-normal text-black-300" *ngIf="incorrectPwError || userExpiredError || otherError">
+      <li *ngIf="incorrectPwError">
+        {{ 'error.Incorrect username or password.' | translate }}
+      </li>
+      <li *ngIf="userExpiredError">
+        {{ 'error.user expired' | translate }}
+      </li>
+      <li *ngIf="otherError">
+        {{ 'error.' + errorMessage | translate }}
+      </li>
+    </ul>
+    <form class="login-form" #signInForm="ngForm" autocomplete="chrome-off">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <img class="input-group-text" src="./assets/images/icon_user_blue.svg" />
+        </div>
+        <input
+          id="userid-field"
+          class="form-control"
+          type="text"
+          ngModel
+          name="username"
+          #userid="ngModel"
+          [(ngModel)]="username"
+          placeholder="{{ 'user name' | translate }}"
+          required
+          autocomplete="off"
+          readonly
+          onfocus="this.removeAttribute('readonly');"
+        />
+      </div>
+
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <img class="input-group-text" src="./assets/images/icon_password_blue.svg" />
+        </div>
+        <input
+          id="password-field"
+          class="form-control base-input password-field"
+          [type]="showPassword ? 'text' : 'password'"
+          ngModel
+          name="password"
+          #password="ngModel"
+          placeholder="{{ 'password' | translate }}"
+          required
+          maxlength="100"
+          minlength="8"
+          readonly
+          autocomplete="off"
+          onfocus="this.removeAttribute('readonly');"
+        />
+        <div
+          class="cursor-pointer toggle-password"
+          [ngClass]="showPassword ? ['icon-eye-slashed'] : ['icon-eye-open']"
+          (click)="showPassword = !showPassword"
+        ></div>
+      </div>
+
+      <div class="row">
+        <div>
+          <app-customized-checkbox
+            [checked]="rememberUsername"
+            (clickCheckbox)="rememberUsername = !rememberUsername"
+          ></app-customized-checkbox>
+          <span>{{ 'remember username' | translate }}</span>
+        </div>
+        <a routerLink="/auth/forgot-password" routerLinkActive="active" class="link">
+          {{ 'forgot password' | translate }}
+        </a>
+      </div>
+
+      <button
+        class="btn btn-primary login-btn bg-blue-300 border-radius-2"
+        [disabled]="signInForm.invalid"
+        (click)="onSubmit(signInForm)"
+      >
+        <span class="text-normal">{{ 'login' | translate }} </span>
+      </button>
+    </form>
+  </div>
+</div>

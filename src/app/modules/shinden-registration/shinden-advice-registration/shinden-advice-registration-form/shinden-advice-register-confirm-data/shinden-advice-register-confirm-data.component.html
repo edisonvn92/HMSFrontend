@@ -1,0 +1,35 @@
+<div class="text-left content-div">
+  <div class="font-weight-700 fs-20 mb-3">{{ 'registration confirmation' | translate }}</div>
+  <div class="mb-3 text-normal">{{ 'do you want to register with this content?' | translate }}</div>
+  <div class="d-flex mb-3 text-group">
+    <span class="mr-2 font-weight-700 title"> {{ 'name (kanji)' | translate }}</span>
+    <span class="mr-2 font-weight-700">:</span>
+    <span>{{ patient?.full_name }}</span>
+  </div>
+  <div class="d-flex mb-3 text-group">
+    <span class="mr-2 font-weight-700 title">{{ 'sex' | translate }}</span>
+    <span class="mr-2 font-weight-700">:</span>
+    <span>{{ (patient?.gender === sex.FEMALE ? 'Female' : 'Male') | translate }}</span>
+  </div>
+  <div class="d-flex mb-3 text-group">
+    <span class="mr-2 font-weight-700 title">{{ 'date of birth' | translate }}</span>
+    <span class="mr-2 font-weight-700">:</span>
+    <span>{{ patient?.birthday | date: (sharedService.isJa() ? 'y年MM月dd日' : 'd MMM y') }}</span>
+  </div>
+  <div class="d-flex mb-3 text-group">
+    <span class="mr-2 font-weight-700 title"> {{ 'email address' | translate }}</span>
+    <span class="mr-2 font-weight-700">:</span>
+    <span>{{ patient?.email }}</span>
+  </div>
+  <div class="mb-3 font-weight-700">{{ 'message' | translate }}</div>
+  <textarea disabled class="form-control text-normal" id="letter-body" [value]="patient?.note ? patient.note : ''">
+  </textarea>
+</div>
+<div class="d-flex button-group">
+  <button type="button" (click)="onRegisterClicked()" class="btn btn-primary bg-blue-300 ml-auto mr-2 text-normal">
+    {{ 'button.sign up' | translate }}
+  </button>
+  <button type="button" (click)="backClicked.emit()" class="btn btn-outline-secondary text-black-300 text-normal">
+    {{ 'button.edit' | translate }}
+  </button>
+</div>

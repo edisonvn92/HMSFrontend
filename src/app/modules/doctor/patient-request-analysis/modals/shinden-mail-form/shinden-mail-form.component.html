@@ -1,0 +1,132 @@
+<div
+  class="drag-boundary"
+  [style.width]="sharedService.closeSidebar ? 'calc(100% - 48px)' : 'calc(100% - 228px)'"
+  [ngClass]="{ 'top-b': !edge?.top, 'bottom-b': !edge?.bottom, 'left-b': !edge?.left, 'right-b': !edge?.right }"
+  #myBounds
+>
+  <form
+    [formGroup]="mailForm"
+    autocomplete="off"
+    [ngDraggable]="isDraggable"
+    class="shinden-mail cursor-pointer w-720 drag-block"
+    (edge)="checkEdge($event)"
+    [bounds]="myBounds"
+    [inBounds]="inBounds"
+  >
+    <div class="mail-container">
+      <div class="modal-header align-items-center">
+        <div class="modal-title text-medium font-weight-500 text-left" id="modal-basic-title">
+          {{ !isConfirm ? ('mail creation' | translate) : ('email contents confirmation' | translate) }}
+        </div>
+        <button
+          type="button"
+          class="btn btn-outline-secondary text-normal text-black-300 btn-close"
+          (click)="clickedClose()"
+          (focusin)="isDraggable = false"
+          (focusout)="isDraggable = true"
+          *ngIf="!isConfirm"
+        >
+          {{ 'button.Close' | translate }}
+        </button>
+        <button #submitButton type="submit" class="d-none"></button>
+      </div>
+      <div class="modal-body" [class.en-language]="!sharedService.isJa()">
+        <ul class="invalid mb-3 text-normal text-gray-190" *ngIf="isError">
+          <li *ngIf="mailForm.controls.subject?.errors?.required">
+            {{ 'validator.required' | translate: { field: 'subject' | translate } }}
+          </li>
+          <li *ngIf="mailForm.controls.subject?.errors?.maxlength">
+            {{ 'validator.maxlength' | translate: { field: 'subject' | translate, length: 100 } }}
+          </li>
+          <li *ngIf="mailForm.controls.letter_body?.errors?.required">
+            {{ 'validator.required' | translate: { field: 'letter body' | translate } }}
+          </li>
+          <li *ngIf="mailForm.controls.letter_body?.errors?.maxlength">
+            {{ 'validator.maxlength' | translate: { field: 'letter body' | translate, length: 30000 } }}
+          </li>
+          <li [class.px-2]="sharedService.isJa()" *ngIf="validationErr">
+            {{ 'errMsg.' + validationErr | translate }}
+          </li>
+        </ul>
+
+        <div class="align-items-center content-item">
+          <label class="form-label d-flex text-normal destination">
+            {{ 'destination' | translate }}
+          </label>
+          <div class="d-flex content-right">
+            <div>
+              {{
+                joinName(
+                  patient.patient.patient_first_name,
+                  patient.patient.patient_middle_name,
+                  patient.patient.patient_last_name
+                )
+              }}
+            </div>
+            <div [class.ml-3]="patient?.patient.patient_full_name">
+              {{ patient.patient.patient_email }}
+            </div>
+          </div>
+        </div>
+        <div class="align-items-center content-item">
+          <label for="subject" class="form-label d-flex text-normal subject">
+            {{ 'subject' | translate }} <span class="required">*</span>
+          </label>
+          <div class="content-right">
+            <input
+              type="text"
+              class="form-control"
+              maxlength="100"
+              [placeholder]="'subject' | translate"
+              formControlName="subject"
+              id="subject"
+              [readOnly]="isConfirm"
+              (focusin)="isDraggable = false"
+              (focusout)="isDraggable = true"
+            />
+          </div>
+        </div>
+        <div class="content-item">
+          <label for="letter-body" class="form-label d-flex text-normal text">
+            {{ 'letter body' | translate }} <span class="required">*</span>
+          </label>
+          <div class="content-right">
+            <textarea
+              [readOnly]="isConfirm"
+              class="form-control"
+              rows="5"
+              id="letter-body"
+              [placeholder]="'letter body' | translate"
+              formControlName="letter_body"
+              maxlength="30000"
+              (focusin)="isDraggable = false"
+              (focusout)="isDraggable = true"
+            >
+            </textarea>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          *ngIf="isConfirm"
+          type="submit"
+          class="btn btn-outline-secondary text-normal text-black-300 custom-button-back"
+          (click)="clickedBack()"
+          (focusin)="isDraggable = false"
+          (focusout)="isDraggable = true"
+        >
+          {{ 'button.back' | translate }}
+        </button>
+        <button
+          type="submit"
+          (click)="!isConfirm ? confirmClicked() : sendClicked()"
+          class="btn btn-primary bg-blue-500 btn-confirm text-normal"
+          (focusin)="isDraggable = false"
+          (focusout)="isDraggable = true"
+        >
+          {{ (!isConfirm ? 'button.confirm' : 'send') | translate }}
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

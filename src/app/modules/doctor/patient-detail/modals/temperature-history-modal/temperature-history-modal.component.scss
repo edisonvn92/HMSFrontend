@@ -1,0 +1,41 @@
+@import 'src/app/styles/variable';
+
+.modal-body {
+  padding: 1rem 0;
+}
+
+.history-modal {
+  .list {
+    .header-content {
+      margin: auto 47px;
+    }
+
+    .date {
+      width: 63%;
+    }
+
+    .temperature {
+      width: 37%;
+    }
+
+    .history-content {
+      .month {
+        margin: 9px 47px 0 47px;
+      }
+
+      .content {
+        margin: auto 47px;
+      }
+    }
+
+    &.en-language {
+      .header-content {
+        margin: auto 40px auto 10px;
+      }
+    }
+  }
+
+  .pagination-history {
+    margin-right: 44px;
+  }
+}

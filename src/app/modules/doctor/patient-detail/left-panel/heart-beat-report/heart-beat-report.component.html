@@ -1,0 +1,15 @@
+<div class="patient-detail-component" [class.en-patient-detail-component]="!sharedService.isJa()">
+  <div class="d-flex justify-content-between align-items-center">
+    <button type="button" class="btn btn-primary" (click)="modalSelectMonthReport()">
+      <img class="icon-up-down" [src]="'assets/images/icon_report_month.svg'" alt="icon" />
+      {{ 'ecg report output' | translate }}
+    </button>
+    <button type="button" class="btn btn-secondary bg-blue-510 text-blue-500" (click)="modalHistoryReport()">
+      <img class="icon-up-down" [src]="'assets/images/icon_history.svg'" alt="icon" />
+      {{ 'see history' | translate }}
+    </button>
+  </div>
+  <div class="d-flex justify-content-between content">
+    <p>{{ 'last output date' | translate }}: {{ showDate() ? (showDate() | translate) : '----/--/--' }}</p>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+/* set Noto-Sans font */
+@font-face {
+  font-family: 'Noto-Sans';
+  src: url('/assets/fonts/Noto-Sans/NotoSans-Regular.ttf') format('truetype');
+}
+
+/* set Hirakaku Pro */
+@font-face {
+  font-family: 'Hirakaku Pro';
+  src: url('/assets/fonts/hirakakupro-w3/HiraKakuPro-W3.otf') format('opentype'), src('/var/task/.fonts/HiraKakuPro-W3.otf') format('opentype');
+}
+
+/* set Hiragino Kaku Gothic Pro */
+@font-face {
+  font-family: 'Hiragino Kaku Gothic Pro';
+  src: url('/assets/fonts/hirakakupro-w3/HiraginoKakuGothicPro-W3.otf') format('opentype'), src('/var/task/.fonts/HiraginoKakuGothicPro-W3.otf') format('opentype');
+}
+
+/* set SF Pro */
+@font-face {
+  font-family: 'SF Pro';
+  src: url('/assets/fonts/sf-pro/SFPRODISPLAYREGULAR.OTF') format('truetype');
+}
+
+/* set DIN Pro */
+@font-face {
+  font-family: 'DIN Pro';
+  src: url('/assets/fonts/DIN-Pro/DINPro.ttf') format('truetype'), src('/var/task/.fonts/DINPro.ttf') format('truetype');
+}
+
+/* set Yu Gothic */
+@font-face {
+  font-family: 'Yu Gothic';
+  src: url('/assets/fonts/Yu-Gothic/Yu-Gothic-Medium.ttf') format('truetype'), src('/var/task/.fonts/Yu-Gothic-Medium.ttf') format('truetype'),
+  url('/assets/fonts/Yu-Gothic/Yu-Gothic-Bold.ttf') format('truetype'), src('/var/task/.fonts/Yu-Gothic-Bold.ttf') format('truetype');
+}
+
+/* set MS Gothic */
+@font-face {
+  font-family: 'MS Gothic';
+  src: url('/assets/fonts/MS-Gothic/MS-Gothic.ttf') format('truetype'), src('/var/task/.fonts/MS-Gothic.ttf') format('truetype');
+}

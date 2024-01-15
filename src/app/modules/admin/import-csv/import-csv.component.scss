@@ -1,0 +1,89 @@
+@import 'src/app/styles/variable';
+
+.admin-upload-csv {
+  padding: 24px;
+  height: calc(100vh - 48px);
+  overflow: auto;
+
+  .invalid {
+    width: 1100px;
+  }
+
+  .upload-file-content {
+    .upload-file {
+      color: $white;
+      padding: 5px 16px;
+      border-radius: 2px;
+      cursor: pointer;
+      height: 32px;
+      background-color: $blue-500;
+
+      &.disabled {
+        background-color: $gray-150 !important;
+        color: $black-300 !important;
+      }
+      &:hover {
+        background-color: $blue-430;
+      }
+    }
+
+    .file-name {
+      background-color: $gray-810;
+      margin-top: 16px;
+      margin-bottom: 8px;
+      border-radius: 2px;
+      word-break: break-word;
+      min-height: 32px;
+      padding: 5px 16px;
+      width: fit-content;
+    }
+
+    .result-detail {
+      div {
+        margin-top: 8px;
+      }
+    }
+  }
+
+  .registration-result {
+    margin-top: 40px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .result-row {
+    display: flex;
+    width: fit-content;
+    border-collapse: collapse;
+
+    &.h-40 {
+      height: 40px;
+    }
+
+    &.border-top-row {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .information {
+      width: 300px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      min-height: 40px;
+      padding: 8px;
+    }
+
+    .number-of-record {
+      width: 200px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      min-height: 40px;
+      padding: 8px;
+    }
+
+    .situation {
+      width: 600px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      min-height: 40px;
+      text-align: justify;
+      padding: 8px;
+    }
+  }
+}

@@ -1,0 +1,15 @@
+@import 'src/app/styles/variable';
+
+.term-of-use {
+  padding: 16px 8px 16px 16px;
+
+  .policy-tittle {
+    text-align: center;
+    font-weight: 600;
+  }
+
+  a {
+    text-decoration: underline;
+    color: $blue-620;
+  }
+}

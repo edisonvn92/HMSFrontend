@@ -1,0 +1,94 @@
+@import 'src/app/styles/variable';
+
+:host {
+  color: $black-300;
+}
+
+.shinden-mail {
+  position: absolute;
+  right: calc((100vw - 530px) / 2);
+  top: 48px;
+  width: 375px;
+  background-color: white;
+  box-shadow: 0 0 10px #00000040;
+  border-radius: 8px;
+  z-index: 100;
+  overflow: auto;
+  max-height: 835px;
+}
+
+.mail-container {
+  .modal-header {
+    height: 64px;
+    border-bottom-color: $gray-310;
+
+    .btn-close {
+      padding: 6px 15px;
+    }
+  }
+
+  .modal-body {
+    padding: 1.5rem 1rem 0 2rem;
+
+    .content-item {
+      margin-bottom: 16px;
+      display: flex;
+
+      label {
+        width: calc(100% - 588px);
+      }
+
+      .content-right {
+        width: 588px;
+        word-break: break-all;
+      }
+
+      input {
+        height: 32px;
+      }
+
+      input,
+      textarea {
+        font-size: 14px;
+        color: $black-300;
+        resize: none;
+      }
+
+      .form-control[readonly] {
+        background-color: $gray-100;
+      }
+    }
+
+    &.en-language {
+      label {
+        width: calc(100% - 560px) !important;
+      }
+
+      .content-right {
+        width: 560px;
+      }
+    }
+  }
+
+  .modal-footer {
+    padding: 0 0.75rem 1rem 0.75rem;
+    border-top: none;
+
+    button {
+      width: 88px;
+    }
+
+    .custom-button-back {
+      margin-right: 12px;
+    }
+  }
+}
+
+.drag-boundary {
+  width: calc(100% - 48px);
+  height: calc(100vh - 48px);
+  position: absolute;
+  top: 48px;
+  right: 0;
+  z-index: 10;
+}

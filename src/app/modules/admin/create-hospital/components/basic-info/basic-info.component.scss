@@ -1,0 +1,29 @@
+@import 'src/app/styles/variable';
+
+* {
+  color: $black-300;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 24px;
+}
+
+label {
+  width: 230px;
+  margin-right: 18px;
+}
+
+input {
+  font-size: 14px;
+}
+
+.required {
+  color: red;
+}
+
+.form-control {
+  width: calc(100% - 250px);
+  height: 32px;
+}

@@ -1,0 +1,310 @@
+<ng-container
+  *ngIf="!sharedService.hospitalSetting?.hospital_setting?.hospital_setting_alert_function; else alertContent"
+>
+  <div class="doctor-content-header d-flex justify-content-between align-items-center">
+    <div></div>
+    <app-user-login></app-user-login>
+  </div>
+</ng-container>
+<ng-template #alertContent>
+  <div class="doctor-content-header d-flex justify-content-between align-items-center">
+    <div class="d-flex align-items-center">
+      <form class="input-group search-group" (ngSubmit)="searchPatient()">
+        <input
+          type="text"
+          class="form-control text-normal bg-white"
+          placeholder="{{ 'ID, name search' | translate }}"
+          [(ngModel)]="textSearch"
+          name="textSearch"
+          [disabled]="isSearching"
+        />
+        <div class="input-group-append cursor-pointer bg-gray-170" (click)="searchPatient()">
+          <img class="input-group-text" src="./assets/images/icon_search.svg" alt="user" />
+        </div>
+      </form>
+      <div
+        [translate]="'there are :param patients have alert'"
+        [translateParams]="{ param: alertList?.total }"
+        class="text-gray-600 mt-5px"
+      ></div>
+    </div>
+    <app-user-login></app-user-login>
+  </div>
+
+  <div class="alert-content">
+    <table class="table table-custom" id="table-content" [class.en-language]="!sharedService.isJa()">
+      <thead>
+        <tr>
+          <th scope="col" class="patient-id">{{ 'ID' | translate }}</th>
+          <th scope="col" class="patient-name">{{ 'patient.name' | translate }}</th>
+          <th scope="col" class="text-center age">{{ 'patient.age' | translate }}</th>
+          <th scope="col" class="text-center sex">{{ 'patient.sex' | translate }}</th>
+          <th scope="col" class="text-center final-medical-treatment">
+            <div
+              tooltipClass="tooltip-custom"
+              placement="bottom"
+              ngbTooltip="{{ 'number of days elapsed since the last consultation' | translate }}"
+            >
+              {{ 'final medical treatment' | translate }}
+            </div>
+            <div class="unit">{{ 'number day ago' | translate }}</div>
+          </th>
+          <th
+            scope="col"
+            class="text-center weight"
+            *ngIf="
+              sharedService.hospitalSetting?.hospital_setting_functions?.ALERT?.WEIGHT?.hospital_setting_function_status
+            "
+          >
+            <div tooltipClass="tooltip-custom" [ngbTooltip]="tipContentAlert" placement="bottom">
+              {{ 'weight gain' | translate }}
+            </div>
+            <div class="unit">kg</div>
+          </th>
+          <th
+            scope="col"
+            class="text-center blood-pressure"
+            *ngIf="
+              sharedService.hospitalSetting?.hospital_setting_functions?.ALERT?.BP?.hospital_setting_function_status
+            "
+          >
+            <div tooltipClass="tooltip-custom" [ngbTooltip]="tipContentAlert" placement="bottom">
+              {{ 'abnormal blood pressure' | translate }}
+            </div>
+            <div class="unit">mmHg</div>
+          </th>
+          <th
+            scope="col"
+            class="text-center af"
+            *ngIf="
+              sharedService.hospitalSetting?.hospital_setting_functions?.ALERT?.AF?.hospital_setting_function_status
+            "
+          >
+            <div tooltipClass="tooltip-custom" [ngbTooltip]="tipContentAlert" placement="bottom">
+              {{ 'AF detection' | translate }}
+            </div>
+          </th>
+          <th
+            scope="col"
+            class="text-center ihb"
+            *ngIf="
+              sharedService.hospitalSetting?.hospital_setting_functions?.ALERT?.IHB?.hospital_setting_function_status
+            "
+          >
+            <div tooltipClass="tooltip-custom" [ngbTooltip]="tipContentAlert" placement="bottom">
+              {{ 'patient.irregular pulse wave' | translate }}
+            </div>
+          </th>
+          <th scope="col" class="alert-confirm">
+            <div
+              tooltipClass="tooltip-custom"
+              ngbTooltip="{{ 'last confirmation date and time by patient' | translate }}"
+              placement="bottom-right"
+            >
+              <app-label-column-table
+                [active]="tableFields['alert_new_status_updated_at'].isSort"
+                [sortType]="tableFields['alert_new_status_updated_at'].sortType"
+                [label]="'last confirmation date and time'"
+                [labelId]="'alert_new_status_updated_at'"
+                (sortEvent)="sortBy($event)"
+              >
+              </app-label-column-table>
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody [attr.noData]="'there is no data' | translate">
+        <tr *ngFor="let alert of alertList.data" (click)="redirectPatientDetail(alert.patient_id)">
+          <td scope="row" class="patient-id">
+            {{ alert?.patient_code | dash }}
+          </td>
+          <td class="patient-name">
+            {{ joinName(alert.patient_first_name, alert.patient_middle_name, alert.patient_last_name) }}
+          </td>
+          <td class="text-center age">
+            {{ getYearDiff(alert.patient_birthday, now) | dash }}
+          </td>
+          <td class="text-center sex">
+            {{ alert?.patient_gender !== null ? (alert?.patient_gender | gender | translate) : '-' }}
+          </td>
+          <td class="text-center final-medical-treatment">
+            {{
+              alert.medical_registers && alert.medical_registers.length > 0
+                ? getDiffDate(alert.medical_registers[0]?.medical_register_utc_time, now)
+                : '-'
+            }}
+          </td>
+          <td
+            class="text-center weight"
+            *ngIf="
+              sharedService.hospitalSetting?.hospital_setting_functions?.ALERT?.WEIGHT?.hospital_setting_function_status
+            "
+          >
+            <div class="alert-object" [hidden]="!alert?.alert_new_weights[0]">
+              <div class="alert-value">
+                <div class="datetime">
+                  <div
+                    class="unseen"
+                    [ngClass]="alert?.alert_new_weights[0]?.alert_new_status === alertNewStatus.SEEN ? 'bg-white' : ''"
+                  ></div>
+                  {{
+                    alert?.alert_new_weights[0]?.alert_new_vital_utc_time
+                      ? (alert?.alert_new_weights[0]?.alert_new_vital_utc_time
+                        | date: (sharedService.isJa() ? 'yyyy/MM/dd' : 'd MMM y'))
+                      : ''
+                  }}
+                </div>
+                <div class="value">
+                  <span *ngIf="alert?.alert_new_weights[0]?.alert_new_weight_ratio">
+                    {{
+                      alert?.alert_new_weights[0]?.alert_new_weight_ratio > 0
+                        ? '+' + fixNumber(alert?.alert_new_weights[0]?.alert_new_weight_ratio)
+                        : fixNumber(alert?.alert_new_weights[0]?.alert_new_weight_ratio)
+                    }}
+                  </span>
+                  <span [hidden]="!alert?.alert_new_weights[0]?.alert_new_weight_ratio">
+                    <span>/ {{ alert?.alert_new_weights[0]?.alert_new_weight_days | dash }}</span>
+                    <span class="day">
+                      {{ getPluralNoun('day', 'days', alert?.alert_new_weights[0]?.alert_new_weight_days, 'days') }}
+                    </span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td
+            class="text-center blood-pressure"
+            *ngIf="
+              sharedService.hospitalSetting?.hospital_setting_functions?.ALERT?.BP?.hospital_setting_function_status
+            "
+          >
+            <div class="alert-object" [hidden]="!alert?.alert_new_bps[0]">
+              <div class="alert-value">
+                <div class="datetime">
+                  <div
+                    class="unseen"
+                    [ngClass]="alert?.alert_new_bps[0]?.alert_new_status === alertNewStatus.SEEN ? 'bg-white' : ''"
+                  ></div>
+                  {{
+                    alert?.alert_new_bps[0]?.alert_new_vital_utc_time
+                      ? (alert?.alert_new_bps[0]?.alert_new_vital_utc_time
+                        | date: (sharedService.isJa() ? 'yyyy/MM/dd' : 'd MMM y'))
+                      : ''
+                  }}
+                </div>
+                <div class="value">
+                  {{ alert?.alert_new_bps[0]?.alert_new_bp_sys | dash }} /
+                  {{ alert?.alert_new_bps[0]?.alert_new_bp_dia | dash }}
+                </div>
+              </div>
+            </div>
+          </td>
+          <td
+            class="text-center af"
+            *ngIf="
+              sharedService.hospitalSetting?.hospital_setting_functions?.ALERT?.AF?.hospital_setting_function_status
+            "
+          >
+            <div class="alert-object" [hidden]="!alert?.alert_new_afs[0]">
+              <div class="alert-value">
+                <div class="datetime">
+                  <div
+                    class="unseen"
+                    [ngClass]="alert?.alert_new_afs[0]?.alert_new_status === alertNewStatus.SEEN ? 'bg-white' : ''"
+                  ></div>
+                  {{
+                    alert?.alert_new_afs[0]?.alert_new_vital_utc_time
+                      ? (alert?.alert_new_afs[0]?.alert_new_vital_utc_time
+                        | date: (sharedService.isJa() ? 'yyyy/MM/dd' : 'd MMM y'))
+                      : ''
+                  }}
+                </div>
+                <div class="value">
+                  <ng-container *ngIf="alert?.alert_new_afs[0]?.alert_new_af_type === alertType.TYPE2">
+                    <span>{{ alert?.alert_new_afs[0]?.alert_new_af_times | dash }}</span>
+                    <span class="day"> {{ 'continuous detection' | translate }}</span>
+                  </ng-container>
+                  <ng-container *ngIf="alert?.alert_new_afs[0]?.alert_new_af_type === alertType.TYPE1">
+                    <span>{{ alert?.alert_new_afs[0]?.alert_new_af_times | dash }}</span>
+                    <span class="time"> {{ 'times' | translate }} </span> /
+                    <span>{{ alert?.alert_new_afs[0]?.alert_new_af_days | dash }}</span>
+                    <span class="day">
+                      {{ getPluralNoun('day', 'days', alert?.alert_new_afs[0]?.alert_new_af_days, 'Day') }}
+                    </span>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td
+            class="text-center ihb"
+            *ngIf="
+              sharedService.hospitalSetting?.hospital_setting_functions?.ALERT?.IHB?.hospital_setting_function_status
+            "
+          >
+            <div class="alert-object" [hidden]="!alert?.alert_new_ihbs[0]">
+              <div class="alert-value">
+                <div class="datetime">
+                  <div
+                    class="unseen"
+                    [ngClass]="alert?.alert_new_ihbs[0]?.alert_new_status === alertNewStatus.SEEN ? 'bg-white' : ''"
+                  ></div>
+                  {{
+                    alert?.alert_new_ihbs[0]?.alert_new_vital_utc_time
+                      ? (alert?.alert_new_ihbs[0]?.alert_new_vital_utc_time
+                        | date: (sharedService.isJa() ? 'yyyy/MM/dd' : 'd MMM y'))
+                      : ''
+                  }}
+                </div>
+                <div class="value">
+                  <ng-container *ngIf="alert?.alert_new_ihbs[0]?.alert_new_ihb_type === alertType.TYPE2">
+                    <span>{{ alert?.alert_new_ihbs[0]?.alert_new_ihb_times | dash }}</span>
+                    <span class="day"> {{ 'continuous detection' | translate }}</span>
+                  </ng-container>
+                  <ng-container *ngIf="alert?.alert_new_ihbs[0]?.alert_new_ihb_type === alertType.TYPE1">
+                    <span>{{ alert?.alert_new_ihbs[0]?.alert_new_ihb_times | dash }}</span>
+                    <span class="time"> {{ 'times' | translate }}</span
+                    >/
+                    <span>{{ alert?.alert_new_ihbs[0]?.alert_new_ihb_days | dash }}</span>
+                    <span class="day">
+                      {{ getPluralNoun('day', 'days', alert?.alert_new_ihbs[0]?.alert_new_ihb_days, 'Day') }}
+                    </span>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="alert-confirm">
+            <div>
+              {{
+                alert?.alert_new_status_updated_at
+                  ? (alert.alert_new_status_updated_at
+                    | date: (sharedService.isJa() ? 'yyyy/MM/dd HH:mm' : 'd MMM y HH:mm'))
+                  : ''
+              }}
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="d-flex mt-2">
+      <app-paginator
+        *ngIf="alertList.total"
+        class="paginator ml-auto"
+        [page]="bodyRequest.page"
+        [collectionSize]="alertList.total"
+        (pageChange)="pageChange($event)"
+        [pageSize]="alertList.per_page"
+        [perPage]="alertList.per_page"
+      ></app-paginator>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #tipContentAlert>
+  <div>{{ alertTooltip }}</div>
+  <div class="d-flex align-items-baseline">
+    <div class="unseen"></div>
+    <div class="">{{ 'unconfirmed alert' | translate }}</div>
+  </div>
+</ng-template>

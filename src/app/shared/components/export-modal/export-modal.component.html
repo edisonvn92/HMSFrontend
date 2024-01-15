@@ -1,0 +1,80 @@
+<form [formGroup]="groupForm">
+  <div class="export-modal-container">
+    <div class="modal-header">
+      <div class="modal-title text-medium font-weight-500 text-black-300 text-left" id="modal-basic-title">
+        {{ (patientId ? 'export patient detail to csv file' : 'export patient list to csv file') | translate }}
+      </div>
+      <button type="button" class="close none-outline btn-close" aria-label="Close" (click)="clickedClose()">
+        <div class="icon-close btn-icon-close"></div>
+      </button>
+    </div>
+    <div class="modal-body">
+      <ul class="invalid mb-2 text-normal text-black-300" *ngIf="submitted && groupForm.invalid">
+        <li *ngIf="exportTypeField.errors">
+          {{ 'please select export range error' | translate }}
+        </li>
+      </ul>
+      <div class="text-medium font-weight-700 text-black-300 mb-3">{{ 'please select export range' | translate }}</div>
+      <div class="div-checkbox">
+        <input
+          type="radio"
+          id="range"
+          class="mr-2"
+          [checked]="exportTypeField.value === exportTypeValue.range"
+          (change)="changeExportType(exportTypeValue.range)"
+        />
+        <label for="range" class="text-normal text-black-300">
+          {{ 'interval export' | translate }}
+        </label>
+      </div>
+      <div *ngIf="exportTypeField.value === exportTypeValue.range" class="option-div">
+        <div class="text-normal mt-2 text-black-300">{{ 'please select the export period' | translate }}</div>
+        <div class="d-flex mb-2 mt-2">
+          <app-custom-datepicker
+            class="w-174"
+            inputClass="w-174 h-32 text-normal"
+            [hasIcon]="true"
+            [date]="startPeriod"
+            [maxDate]="endPeriod"
+            [format]="sharedService.isJa() ? 'yyyy年MM月DD日' : 'D MMM y'"
+            (dateChange)="chooseStartPeriod($event)"
+          ></app-custom-datepicker>
+          <span class="mx-3 text-normal d-flex align-items-center">～</span>
+          <app-custom-datepicker
+            class="w-174"
+            [hasIcon]="true"
+            inputClass="w-174 h-32 text-normal"
+            [date]="endPeriod"
+            [maxDate]="currentDate"
+            [format]="sharedService.isJa() ? 'yyyy年MM月DD日' : 'D MMM y'"
+            (dateChange)="chooseEndPeriod($event)"
+          ></app-custom-datepicker>
+        </div>
+      </div>
+      <div class="div-checkbox mt-3">
+        <input
+          type="radio"
+          id="export-all"
+          [checked]="exportTypeField.value === exportTypeValue.all"
+          (change)="changeExportType(exportTypeValue.all)"
+          class="mr-2"
+        />
+        <label for="export-all" class="text-normal text-black-300">
+          {{ 'export all' | translate }}
+        </label>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-outline-secondary btn-close text-black-300 text-normal mr-2"
+        (click)="clickedClose()"
+      >
+        {{ 'button.Cancel' | translate }}
+      </button>
+      <button type="submit" class="btn btn-primary bg-blue-500 btn-close text-normal" (click)="clickedExport()">
+        {{ 'button.export' | translate }}
+      </button>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,17 @@
+<div class="sort-by cursor-pointer" [attr.id]="labelId" (click)="sort()" [class.active]="active">
+  <div
+    class="d-flex align-items-start"
+    [class.justify-content-center]="textCenter"
+    [class.justify-content-between]="spaceBetween"
+  >
+    <div></div>
+    <div [attr.id]="labelId" class="column-label">{{ label | translate }}</div>
+    <div class="icon-sort" [ngClass]="classSort || 'ml-auto'">
+      <div class="icon-up icon" [class.sort-active]="active && sortType === 'asc'"></div>
+      <div class="icon-down icon" [class.sort-active]="active && sortType === 'desc'"></div>
+    </div>
+  </div>
+  <div class="text-gray-800 text-small unit" [class.text-center]="textCenter" [hidden]="!unit">
+    {{ unit | translate }}
+  </div>
+</div>

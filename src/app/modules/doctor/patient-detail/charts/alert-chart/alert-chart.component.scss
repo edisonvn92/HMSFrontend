@@ -1,0 +1,18 @@
+.chart-title {
+  margin-bottom: 5px;
+
+  .title-icon {
+    margin-right: 15px;
+  }
+}
+
+#alert-chart {
+  height: 215px;
+  margin-left: -54px;
+}
+
+.chart-en {
+  &#alert-chart {
+    margin-left: -28px;
+  }
+}

@@ -1,0 +1,26 @@
+<div id="message-container" class="message-container" (scroll)="onScroll($event)">
+  <div *ngIf="showLoading" [class.no-data]="!listMessage?.length" class="loader">
+    <div class="spinner-border">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+  <div class="text-center mt-200 no-data" *ngIf="(!listMessage || !listMessage.length) && !showLoading">
+    {{ 'there is no corresponding data' | translate }}
+  </div>
+  <div class="message-wrap" *ngFor="let message of listMessage">
+    <div class="message-date" *ngIf="message?.isShowDate">
+      <div class="date">
+        {{ message?.activated_at | date: 'yyyy年MM月dd日' }}({{ message?.day_of_week | translate }})
+      </div>
+    </div>
+    <div class="message">
+      <div class="message-content">{{ message?.message_text }}</div>
+      <div class="message-addition cursor-pointer">
+        <div class="mr-2 text-blue-500 d-flex" *ngIf="message?.patient_message_is_read">
+          <img src="./assets/images/icon_check_2.svg" alt="message" />{{ 'seen' | translate }}
+        </div>
+        <div>{{ message?.activated_at | date: 'HH:mm' }}</div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<div class="patient-detail-component">
+  <div class="d-flex justify-content-between align-items-center">
+    <div class="left-title">{{ 'latest home morning blood pressure' | translate }}</div>
+    <div class="text-small text-gray-190">
+      {{ showDate() ? (showDate() | translate) : '----/--/--' }}
+    </div>
+  </div>
+  <div class="d-flex justify-content-between align-items-end">
+    <div class="icon-morning icon"></div>
+    <div>
+      <span class="primary-value">
+        {{ patient?.patient_stat_sys_morning | dash }} / {{ patient?.patient_stat_dia_morning | dash }}
+      </span>
+      <span class="text-small unit">mmHg</span>
+    </div>
+  </div>
+</div>

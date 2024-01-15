@@ -1,0 +1,149 @@
+@import '../ecg-report.component.scss';
+
+.record-table {
+  border-bottom: 1px solid $gray-460;
+
+  &.ja-lang {
+    thead,
+    tbody {
+      tr {
+        .date-col {
+          width: 170px;
+
+          div {
+            .left-side {
+              width: 72px;
+            }
+          }
+        }
+
+        .result-col {
+          width: 170px;
+        }
+
+        .heart-rate-col {
+          width: 20mm;
+        }
+      }
+    }
+  }
+  tr {
+    border-bottom: 1px solid $gray-460;
+  }
+
+  thead,
+  tbody {
+    tr {
+      height: 14mm !important;
+      td {
+        padding: 0;
+        padding-left: 8mm;
+        height: 13mm !important;
+      }
+
+      .order-col {
+        width: 25px;
+        text-align: right;
+        padding-left: 0;
+        font-size: 11pt;
+      }
+
+      .date-col {
+        width: 178px;
+
+        div {
+          width: 100%;
+
+          .left-side {
+            width: 80px;
+          }
+
+          .right-side {
+            text-align: right;
+            width: 84px;
+          }
+        }
+      }
+
+      .result-col {
+        width: 150px;
+
+        &.text-afib {
+          font-weight: bold;
+          color: $pink-350;
+        }
+      }
+
+      .heart-rate-col {
+        width: 25mm;
+        padding-left: 6mm;
+        text-align: center;
+      }
+
+      .symptom-col {
+        padding-left: 6mm;
+        width: 64mm;
+        padding-left: 8mm;
+      }
+
+      .intensity-col {
+        width: 25mm;
+        text-align: center;
+        padding-left: 4mm;
+      }
+
+      .memo-col {
+        padding-left: 3mm;
+
+        div {
+          height: 11mm;
+          display: flex;
+          align-items: center;
+          overflow: hidden;
+          font-size: 11pt;
+          line-height: 14pt;
+        }
+      }
+    }
+  }
+
+  thead {
+    tr {
+      td {
+        font-size: 11pt;
+        color: $gray-360;
+        background-color: white;
+        padding-bottom: 3mm;
+      }
+    }
+  }
+
+  tbody {
+    height: 330mm;
+
+    tr {
+      height: 14mm;
+
+      td {
+        font-size: 13pt;
+      }
+    }
+  }
+}
+
+.img-icon-div {
+  height: 8mm;
+  width: 8mm;
+  padding: auto !important;
+
+  img {
+    height: 8mm;
+    width: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+.legend-text {
+  margin-top: 1mm;
+}

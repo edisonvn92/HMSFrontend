@@ -1,0 +1,157 @@
+<div class="history-modal">
+  <div class="modal-body custom-modal-body">
+    <div>
+      <div class="list" [class.en-language]="!sharedService.isJa()" (scroll)="onScroll($event)">
+        <div class="header-title">
+          <div class="header-content no-focus" tabindex="0" ngbAutoFocus>
+            <div class="patient-info d-flex align-items-center">
+              <div class="main-title">
+                {{ 'heart rate ECG' | translate }}
+              </div>
+              <div class="patient text-gray-190 text-normal pl-4 pr-10">
+                <span>{{ patient?.patient?.patient_full_name | dash }} / </span>
+                <span>{{ getYearDiff(patient?.patient?.patient_birthday, now) }}</span>
+                <span [class.pl-5px]="!sharedService.isJa()">{{ 'age' | translate }} / </span>
+                <span>{{ patient?.patient?.patient_gender | gender | translate }}</span>
+                <span [hidden]="!sharedService.isJa()">{{ 'gender' | translate }}</span>
+              </div>
+            </div>
+            <button
+              type="button"
+              class="btn btn-outline-secondary d-flex ml-auto text-normal text-black-300"
+              (click)="clickedClose()"
+            >
+              {{ 'button.Close' | translate }}
+            </button>
+          </div>
+        </div>
+        <div class="header">
+          <div class="header-content">
+            <div class="record-time">
+              {{ 'record time' | translate }}
+            </div>
+            <div class="analysis-result">
+              {{ 'analysis result' | translate }}
+            </div>
+            <div class="heart-rate">
+              {{ 'heart rate' | translate }}
+              <div class="text-gray-800 text-small">bpm</div>
+            </div>
+            <div class="af">
+              {{ 'af' | translate }}
+            </div>
+            <div class="subjective-symptoms">
+              {{ 'patient detail.subjective symptoms' | translate }}
+            </div>
+            <div class="exercise-intensity">
+              {{ 'exercise intensity' | translate }}
+            </div>
+            <div class="memo">
+              {{ 'memo' | translate }}
+            </div>
+            <div></div>
+          </div>
+        </div>
+        <div
+          *ngIf="dataRequestAnalysis && dataRequestAnalysis.data && dataRequestAnalysis.data.length > 0"
+          class="request-content"
+        >
+          <div *ngFor="let item of dataRequestAnalysis.data">
+            <div class="d-flex align-items-center content text-normal column-history">
+              <div class="record-time d-flex justify-content-between text-gray-190">
+                {{
+                  item?.vital_heart_beat_ldatetime
+                    | date: (sharedService.isJa() ? 'yyyy/MM/dd HH:mm' : 'd MMM y HH:mm'):'+0000'
+                }}
+              </div>
+              <div class="analysis-result">
+                {{ getResultText(item.vital_heart_beat_analysis) | translate }}
+              </div>
+              <div class="heart-rate">
+                {{ item.vital_heart_beat_value }}
+              </div>
+              <div class="af">
+                <img
+                  src="./assets/images/icon_heart_2.svg"
+                  alt="prev"
+                  *ngIf="
+                    item.vital_heart_beat_af_flag && item.vital_heart_beat_analysis !== ECGDataResult.AFIB_POSSIBLE
+                  "
+                />
+              </div>
+              <div
+                class="subjective-symptoms"
+                [ngClass]="
+                  item?.count_symptom > 0 ? 'text-blue-500 electrocardiogram underline-hover cursor-pointer' : ''
+                "
+              >
+                <div
+                  [tooltipClass]="'tooltip-custom tooltip-nyha'"
+                  [ngbTooltip]="item?.count_symptom > 0 ? tipContentSubjectiveSymptoms : ''"
+                  placement="left"
+                  triggers="click"
+                >
+                  {{ item?.count_symptom ? item?.count_symptom : ('none' | translate) }}
+                </div>
+                <ng-template #tipContentSubjectiveSymptoms class="detail-csss">
+                  <div class="header-tooltip-content">
+                    <ng-container *ngFor="let symptom of dataContentSubjectiveSymptoms">
+                      <div
+                        class="header-tooltip"
+                        [class.none-symptom]="symptom.value === heartSubjectiveSymptoms.NONE"
+                        [class.other-symptom]="symptom.show_memo"
+                        *ngIf="item.vital_heart_beat_shinden_symptom.includes(symptom.value)"
+                      >
+                        <div class="tooltip-icon">
+                          <img [src]="'./assets/images/' + symptom.icon + '.svg'" alt="prev" *ngIf="symptom.icon" />
+                        </div>
+                        <div *ngIf="symptom.name_title" class="tooltip-title">
+                          {{ symptom.name_title | translate }}
+                        </div>
+                        <div *ngIf="symptom.show_memo" class="custom-title">
+                          <span>{{ item.vital_heart_beat_shinden_symptom_memo }}</span>
+                        </div>
+                      </div>
+                    </ng-container>
+                  </div>
+                </ng-template>
+              </div>
+              <div class="exercise-intensity">
+                {{ getIntensityText(item.vital_heart_beat_shinden_exercise) | translate | dash }}
+              </div>
+              <div
+                class="memo"
+                [ngClass]="
+                  item.vital_heart_beat_shinden_memo
+                    ? 'text-blue-500 electrocardiogram underline-hover cursor-pointer'
+                    : ''
+                "
+              >
+                <div
+                  [tooltipClass]="'tooltip-custom tooltip-nyha tooltip-custom-memo'"
+                  [ngbTooltip]="item.vital_heart_beat_shinden_memo ? tipContentNote : ''"
+                  placement="left"
+                  triggers="click"
+                >
+                  {{ item.vital_heart_beat_shinden_memo ? ('can be' | translate) : '-' }}
+                </div>
+                <ng-template #tipContentNote>
+                  <div class="text-title">
+                    {{ item.vital_heart_beat_shinden_memo }}
+                  </div>
+                </ng-template>
+              </div>
+              <div class="file" [ngClass]="item.ecg_pdf_converted ? 
+              ['cursor-pointer', 'text-blue-500', 'underline-hover']: ['disable']">
+                <div (click)="shindenDownloadAnalysis(item)">
+                  {{ 'detail' | translate }}>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="dataRequestAnalysis.data.length === 0" class="no-data">{{ 'there is no data' | translate }}</div>
+      </div>
+    </div>
+  </div>
+</div>

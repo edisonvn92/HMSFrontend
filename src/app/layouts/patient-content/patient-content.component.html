@@ -1,0 +1,25 @@
+<ng-container *ngIf="isRegistrationScreen"
+  ><div class="main-container">
+    <div class="patient-content-header d-flex bg-gray-510 justify-content-between align-items-center">
+      <img src="./assets/images/icon_omron.svg" />
+    </div>
+
+    <div class="patient-container">
+      <div
+        class="registration-top-title d-flex flex-column align-items-center"
+        *ngIf="error || hospital?.hospital_setting?.hospital_setting_patient_register_web"
+      >
+        <div class="break-space" *ngIf="hospital && hospital.hospital_name">{{ hospital.hospital_name }}</div>
+        <div *ngIf="error" class="invalid mb-3 text-normal text-black-300">
+          {{ "wrong infomation, please contact the hospital's admin" | translate }}
+        </div>
+        <div class="line mt-3"></div>
+      </div>
+
+      <div class="pb-30" *ngIf="!error && hospital?.hospital_setting?.hospital_setting_patient_register_web">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</ng-container>
+<ng-container *ngIf="!isRegistrationScreen"> <router-outlet></router-outlet> </ng-container>

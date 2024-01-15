@@ -1,0 +1,67 @@
+<app-blood-pressure-by-day-table
+  [dailyData]="dailyData1"
+  [startDate]="startDate"
+  [endDate]="midDate"
+  [endDateChart]="midDate"
+  [chartDivName]="'firstDailychartDiv'"
+  [patientId]="patientId"
+  [page]="1"
+  [totalPage]="totalPage"
+  [outputDateTime]="outputDateTime"
+  [hospitalSetting]="hospitalSetting"
+  [patientSysGoal]="patientSysGoal"
+  [patientDiaGoal]="patientDiaGoal"
+  [bpThreshold]="bpThreshold"
+  [language]="language"
+>
+</app-blood-pressure-by-day-table>
+
+<app-blood-pressure-by-day-table
+  [dailyData]="dailyData2"
+  [startDate]="midDate2"
+  [endDate]="endDate"
+  [endDateChart]="endDateChart"
+  [chartDivName]="'secondDailychartDiv'"
+  [patientId]="patientId"
+  [page]="2"
+  [totalPage]="totalPage"
+  [outputDateTime]="outputDateTime"
+  [hospitalSetting]="hospitalSetting"
+  [patientSysGoal]="patientSysGoal"
+  [patientDiaGoal]="patientDiaGoal"
+  [bpThreshold]="bpThreshold"
+  [language]="language"
+>
+</app-blood-pressure-by-day-table>
+
+<app-blood-pressure-by-month-table
+  [inputData]="dataIn6Months"
+  [startDate]="start6Month"
+  [endDate]="endDate"
+  [patientId]="patientId"
+  [page]="3"
+  [totalPage]="totalPage"
+  [outputDateTime]="outputDateTime"
+  [hospitalSetting]="hospitalSetting"
+  [patientSysGoal]="patientSysGoal"
+  [patientDiaGoal]="patientDiaGoal"
+  [bpThreshold]="bpThreshold"
+  [language]="language"
+>
+</app-blood-pressure-by-month-table>
+
+<app-blood-pressure-by-day-of-week-table
+  [chartData]="patientStatDayOfWeek"
+  [startDate]="startDate"
+  [endDate]="endDate"
+  [chartDivName]="'bp-by-day-of-week'"
+  [patientId]="patientId"
+  [outputDateTime]="outputDateTime"
+  [page]="4"
+  [totalPage]="totalPage"
+  [hospitalSetting]="hospitalSetting"
+  [patientSysGoal]="patientSysGoal"
+  [patientDiaGoal]="patientDiaGoal"
+  [language]="language"
+>
+</app-blood-pressure-by-day-of-week-table>

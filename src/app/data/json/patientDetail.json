@@ -1,0 +1,690 @@
+{
+  "calendar": {
+    "calendar": {
+      "2021-09-01": {
+        "patient_stat_ldate": "2021-09-01",
+        "patient_stat_dia_morning": 98,
+        "patient_stat_dia_evening": 168,
+        "patient_stat_sys_morning": 103,
+        "patient_stat_sys_evening": 103,
+        "patient_diary_event": [1, 3, 5],
+        "patient_diary_medication": [1, 2, 3],
+        "patient_diary_memo": "memo"
+      },
+      "2021-09-02": {
+        "patient_stat_ldate": "2021-09-02",
+        "patient_stat_dia_morning": 163,
+        "patient_stat_dia_evening": 163,
+        "patient_stat_sys_morning": 96,
+        "patient_stat_sys_evening": 96,
+        "patient_diary_event": [2, 4, 6],
+        "patient_diary_medication": [2, 3],
+        "patient_diary_memo": null
+      },
+      "2021-09-03": {
+        "patient_stat_ldate": "2021-09-03",
+        "patient_stat_dia_morning": 161,
+        "patient_stat_dia_evening": 161,
+        "patient_stat_sys_morning": 120,
+        "patient_stat_sys_evening": 120,
+        "patient_diary_event": [1, 5],
+        "patient_diary_medication": [1, 3],
+        "patient_diary_memo": "memo"
+      },
+      "2021-09-15": {
+        "patient_stat_ldate": "2021-09-03",
+        "patient_stat_dia_morning": 161,
+        "patient_stat_dia_evening": 161,
+        "patient_stat_sys_morning": 120,
+        "patient_stat_sys_evening": 120,
+        "patient_diary_event": [1, 5],
+        "patient_diary_medication": [1, 3],
+        "patient_diary_memo": "memo"
+      }
+    },
+    "evaluation": null
+  },
+  "hospital_setting": {
+    "hospital_threshold_bp": {
+      "hospital_threshold_bp_black_sys": 130,
+      "hospital_threshold_bp_black_dia": 120,
+      "hospital_threshold_bp_dark_red_sys": 110,
+      "hospital_threshold_bp_dark_red_dia": 100
+    }
+  },
+  "ranking_history": {
+    "data": [
+      {
+        "user_stat_sys": 72,
+        "user_stat_dia": 196,
+        "user_stat_bp_risk": 0,
+        "user_stat_ihb": null,
+        "patient_stat_ldate": "2021-10-24"
+      },
+      {
+        "user_stat_sys": 81,
+        "user_stat_dia": 186,
+        "user_stat_bp_risk": 3,
+        "user_stat_ihb": 120,
+        "patient_stat_ldate": "2021-10-23"
+      },
+      {
+        "user_stat_sys": 83,
+        "user_stat_dia": 178,
+        "user_stat_bp_risk": 3,
+        "user_stat_ihb": 92,
+        "patient_stat_ldate": "2021-09-22"
+      },
+      {
+        "user_stat_sys": 72,
+        "user_stat_dia": 195,
+        "user_stat_bp_risk": 9,
+        "user_stat_ihb": 85,
+        "patient_stat_ldate": "2021-08-26"
+      },
+      {
+        "user_stat_sys": 72,
+        "user_stat_dia": 195,
+        "user_stat_bp_risk": 9,
+        "user_stat_ihb": 85,
+        "patient_stat_ldate": "2021-08-25"
+      },
+      {
+        "user_stat_sys": 83,
+        "user_stat_dia": 178,
+        "user_stat_bp_risk": 3,
+        "user_stat_ihb": 92,
+        "patient_stat_ldate": "2021-08-24"
+      },
+      {
+        "user_stat_sys": 72,
+        "user_stat_dia": 195,
+        "user_stat_bp_risk": 9,
+        "user_stat_ihb": 85,
+        "patient_stat_ldate": "2021-08-20"
+      },
+      {
+        "user_stat_sys": 72,
+        "user_stat_dia": 195,
+        "user_stat_bp_risk": 9,
+        "user_stat_ihb": 85,
+        "patient_stat_ldate": "2021-07-25"
+      },
+      {
+        "user_stat_sys": 83,
+        "user_stat_dia": 178,
+        "user_stat_bp_risk": 3,
+        "user_stat_ihb": 92,
+        "patient_stat_ldate": "2021-06-22"
+      },
+      {
+        "user_stat_sys": 72,
+        "user_stat_dia": 195,
+        "user_stat_bp_risk": 9,
+        "user_stat_ihb": 85,
+        "patient_stat_ldate": "2021-06-18"
+      },
+      {
+        "user_stat_sys": 72,
+        "user_stat_dia": 195,
+        "user_stat_bp_risk": 9,
+        "user_stat_ihb": 85,
+        "patient_stat_ldate": "2021-06-15"
+      }
+    ],
+    "current_page": 1,
+    "last_page": 3,
+    "per_page": 20,
+    "from": 1,
+    "to": 30,
+    "total": 61
+  },
+  "body_weight_history": {
+    "data": [
+      {
+        "vital_weight_value": 56.5,
+        "vital_weight_utc_time": "2021-10-08T02:31:16.000Z"
+      },
+      {
+        "vital_weight_value": 46.5,
+        "vital_weight_utc_time": "2021-10-05T02:31:16.000Z"
+      },
+      {
+        "vital_weight_value": 50,
+        "vital_weight_utc_time": "2021-09-08T02:31:16.000Z"
+      },
+      {
+        "vital_weight_value": 56.5,
+        "vital_weight_utc_time": "2021-08-08T02:31:16.000Z"
+      },
+      {
+        "vital_weight_value": 56.5,
+        "vital_weight_utc_time": "2021-07-08T02:31:16.000Z"
+      },
+      {
+        "vital_weight_value": null,
+        "vital_weight_utc_time": "2021-06-08T02:31:16.000Z"
+      }
+    ],
+    "current_page": 1,
+    "last_page": 3,
+    "per_page": 20,
+    "from": 1,
+    "to": 30,
+    "total": 11
+  },
+  "blood_pressure_history_home": {
+    "data": [
+      {
+        "vital_home_systolic": 120,
+        "vital_home_diastolic": 100,
+        "vital_home_pulse": 60,
+        "vital_home_ihb": false,
+        "vital_home_body_motion": false,
+        "vital_home_tight_fit": false,
+        "vital_home_is_manual": false,
+        "vital_home_ldatetime": "2021-10-08T02:31:16.000Z"
+      },
+      {
+        "vital_home_systolic": 120,
+        "vital_home_diastolic": 100,
+        "vital_home_pulse": 60,
+        "vital_home_temperature_room": 24,
+        "vital_home_ihb": false,
+        "vital_home_body_motion": false,
+        "vital_home_tight_fit": false,
+        "vital_home_is_manual": false,
+        "vital_home_ldatetime": "2021-10-05T02:31:16.000Z"
+      },
+      {
+        "vital_home_systolic": 120,
+        "vital_home_diastolic": 100,
+        "vital_home_pulse": 60,
+        "vital_home_temperature_room": 24,
+        "vital_home_ihb": true,
+        "vital_home_body_motion": true,
+        "vital_home_tight_fit": true,
+        "vital_home_is_manual": false,
+        "vital_home_ldatetime": "2021-09-08T02:31:16.000Z"
+      },
+      {
+        "vital_home_systolic": 120,
+        "vital_home_diastolic": 100,
+        "vital_home_pulse": 60,
+        "vital_home_temperature_room": 24,
+        "vital_home_ihb": false,
+        "vital_home_body_motion": true,
+        "vital_home_tight_fit": false,
+        "vital_home_is_manual": false,
+        "vital_home_ldatetime": "2021-08-08T02:31:16.000Z"
+      },
+      {
+        "vital_home_systolic": 120,
+        "vital_home_diastolic": 100,
+        "vital_home_pulse": 60,
+        "vital_home_temperature_room": 24,
+        "vital_home_ihb": true,
+        "vital_home_body_motion": false,
+        "vital_home_tight_fit": true,
+        "vital_home_is_manual": false,
+        "vital_home_ldatetime": "2021-07-08T02:31:16.000Z"
+      },
+      {
+        "vital_home_systolic": 120,
+        "vital_home_diastolic": 100,
+        "vital_home_pulse": 60,
+        "vital_home_temperature_room": 24,
+        "vital_home_ihb": false,
+        "vital_home_body_motion": false,
+        "vital_home_tight_fit": false,
+        "vital_home_is_manual": false,
+        "vital_home_ldatetime": "2021-06-08T02:31:16.000Z"
+      }
+    ]
+  },
+  "step_count_history": {
+    "data": [
+      {
+        "vital_step_count_value": 12300,
+        "vital_step_ldatetime": "2021-10-08T02:31:16.000Z"
+      },
+      {
+        "vital_step_count_value": 156231,
+        "vital_step_ldatetime": "2021-10-05T02:31:16.000Z"
+      },
+      {
+        "vital_step_count_value": 5000,
+        "vital_step_ldatetime": "2021-09-08T02:31:16.000Z"
+      },
+      {
+        "vital_step_count_value": 597,
+        "vital_step_ldatetime": "2021-08-08T02:31:16.000Z"
+      },
+      {
+        "vital_step_count_value": 1420,
+        "vital_step_ldatetime": "2021-07-08T02:31:16.000Z"
+      },
+      {
+        "vital_step_count_value": null,
+        "vital_step_ldatetime": "2021-06-08T02:31:16.000Z"
+      }
+    ],
+    "current_page": 1,
+    "last_page": 3,
+    "per_page": 20,
+    "from": 1,
+    "to": 30,
+    "total": 61
+  },
+  "vital_office_history": {
+    "data": [
+      {
+        "vital_office_systolic": 120,
+        "vital_office_diastolic": 80,
+        "vital_office_pulse": 90,
+        "vital_office_utc_time": "2021-10-08T02:31:16.000Z"
+      },
+      {
+        "vital_office_systolic": 120,
+        "vital_office_diastolic": 80,
+        "vital_office_pulse": 90,
+        "vital_office_utc_time": "2021-10-08T02:31:16.000Z"
+      },
+      {
+        "vital_office_systolic": 120,
+        "vital_office_diastolic": 80,
+        "vital_office_pulse": 90,
+        "vital_office_utc_time": "2021-09-08T02:31:16.000Z"
+      },
+      {
+        "vital_office_systolic": 120,
+        "vital_office_diastolic": 80,
+        "vital_office_pulse": 90,
+        "vital_office_utc_time": "2021-08-08T02:31:16.000Z"
+      },
+      {
+        "vital_office_systolic": 120,
+        "vital_office_diastolic": 80,
+        "vital_office_pulse": 90,
+        "vital_office_utc_time": "2021-07-08T02:31:16.000Z"
+      },
+      {
+        "vital_office_systolic": 120,
+        "vital_office_diastolic": 80,
+        "vital_office_pulse": 90,
+        "vital_office_utc_time": "2021-06-08T02:31:16.000Z"
+      },
+      {
+        "vital_office_systolic": 120,
+        "vital_office_diastolic": 80,
+        "vital_office_pulse": null,
+        "vital_office_utc_time": "2021-05-08T02:31:16.000Z"
+      },
+      {
+        "vital_office_systolic": 120,
+        "vital_office_diastolic": 80,
+        "vital_office_pulse": 90,
+        "vital_office_utc_time": "2021-05-08T02:31:16.000Z"
+      }
+    ],
+    "current_page": 1,
+    "last_page": 3,
+    "per_page": 20,
+    "from": 1,
+    "to": 30,
+    "total": 61
+  },
+  "diary_chart_data": {
+    "2021-10-23": {
+      "patient_diary_event": [3],
+      "patient_diary_memo": "該当患者情報を見つかりません\n該 \n\na該当患者情報を見つかりませんdjkhj該当患者情報を見つかりませんfsdfdsfkfksd該当患者情報を見つかりませんfjkf\nafasd\nadasdasd\n",
+      "patient_diary_ldate": "2021-10-23"
+    },
+    "2021-11-02": {
+      "patient_diary_event": [3, 4, 6],
+      "patient_diary_memo": "該当患者情報を見つかりません該当患者情報を見つかりませんdddresdfsdfdsfdsfdsf",
+      "patient_diary_ldate": "2021-11-02"
+    },
+    "2021-11-03": {
+      "patient_diary_event": [1, 2, 3, 4, 5, 6],
+      "patient_diary_memo": "test",
+      "patient_diary_ldate": "2021-11-03"
+    },
+    "2021-11-04": {
+      "patient_diary_event": [1, 4, 5, 6],
+      "patient_diary_memo": "test",
+      "patient_diary_ldate": "2021-11-04"
+    },
+    "2021-11-05": {
+      "patient_diary_event": [4, 6],
+      "patient_diary_memo": "test",
+      "patient_diary_ldate": "2021-11-05"
+    },
+    "2021-11-12": {
+      "patient_diary_event": [3],
+      "patient_diary_memo": "該当患者情報を見つかりません\n該 \n\na該当患者情報を見つかりませんdjkhj該当患者情報を見つかりませんfsdfdsfkfksd該当患者情報を見つかりませんfjkf\nafasd\nadasdasd\n",
+      "patient_diary_ldate": "2021-11-12"
+    },
+    "2021-11-13": {
+      "patient_diary_event": [3],
+      "patient_diary_memo": "該当患者情報を見つかりません\n該 \n\na該当患者情報を見つかりませんdjkhj該当患者情報を見つかりませんfsdfdsfkfksd該当患者情報を見つかりませんfjkf\nafasd\nadasdasd\n",
+      "patient_diary_ldate": "2021-11-13"
+    },
+    "2021-11-14": {
+      "patient_diary_event": [3],
+      "patient_diary_memo": "該当患者情報を見つかりません\n該 \n\na該当患者情報を見つかりませんdjkhj該当患者情報を見つかりませんfsdfdsfkfksd該当患者情報を見つかりませんfjkf\nafasd\nadasdasd\n",
+      "patient_diary_ldate": "2021-11-14"
+    },
+    "2021-11-19": {
+      "patient_diary_event": [3],
+      "patient_diary_memo": "該当患者情報を見つかりません\n該 \n\na該当患者情報を見つかりませんdjkhj該当患者情報を見つかりませんfsdfdsfkfksd該当患者情報を見つかりませんfjkf\nafasd\nadasdasd\n",
+      "patient_diary_ldate": "2021-11-19"
+    }
+  },
+  "heart_beat_history": {
+    "data": [
+      {
+        "vital_heart_beat_value": 56,
+        "vital_heart_beat_af_flag": 1,
+        "vital_heart_beat_analysis": 200,
+        "vital_heart_beat_utc_time": "2021-10-19T09:15:14.000Z"
+      },
+      {
+        "vital_heart_beat_value": 26,
+        "vital_heart_beat_af_flag": 1,
+        "vital_heart_beat_analysis": 201,
+        "vital_heart_beat_utc_time": "2021-10-19T09:15:14.000Z"
+      },
+      {
+        "vital_heart_beat_value": 56,
+        "vital_heart_beat_af_flag": 1,
+        "vital_heart_beat_analysis": 207,
+        "vital_heart_beat_utc_time": "2021-10-19T09:15:14.000Z"
+      },
+      {
+        "vital_heart_beat_value": 56,
+        "vital_heart_beat_af_flag": 1,
+        "vital_heart_beat_analysis": 214,
+        "vital_heart_beat_utc_time": "2021-10-19T09:15:14.000Z"
+      },
+      {
+        "vital_heart_beat_value": 56,
+        "vital_heart_beat_af_flag": 1,
+        "vital_heart_beat_analysis": 218,
+        "vital_heart_beat_utc_time": "2021-09-19T09:15:14.000Z"
+      },
+      {
+        "vital_heart_beat_value": 56,
+        "vital_heart_beat_af_flag": 1,
+        "vital_heart_beat_analysis": 296,
+        "vital_heart_beat_utc_time": "2021-09-19T09:15:14.000Z"
+      },
+      {
+        "vital_heart_beat_value": 56,
+        "vital_heart_beat_af_flag": 1,
+        "vital_heart_beat_analysis": 297,
+        "vital_heart_beat_utc_time": "2021-09-19T09:15:14.000Z"
+      },
+      {
+        "vital_heart_beat_value": 56,
+        "vital_heart_beat_af_flag": 1,
+        "vital_heart_beat_analysis": 298,
+        "vital_heart_beat_utc_time": "2021-09-19T09:15:14.000Z"
+      },
+      {
+        "vital_heart_beat_value": 56,
+        "vital_heart_beat_af_flag": 1,
+        "vital_heart_beat_analysis": 299,
+        "vital_heart_beat_utc_time": "2021-09-19T09:15:14.000Z"
+      },
+      {
+        "vital_heart_beat_value": 56,
+        "vital_heart_beat_af_flag": 1,
+        "vital_heart_beat_analysis": 209,
+        "vital_heart_beat_utc_time": "2021-08-19T09:15:14.000Z"
+      },
+      {
+        "vital_heart_beat_value": 56,
+        "vital_heart_beat_af_flag": 1,
+        "vital_heart_beat_analysis": null,
+        "vital_heart_beat_utc_time": "2021-08-19T09:15:14.000Z"
+      }
+    ],
+    "current_page": 1,
+    "last_page": 3,
+    "per_page": 20,
+    "from": 1,
+    "to": 30,
+    "total": 61
+  },
+  "temperature_history": {
+    "data": [
+      {
+        "vital_temperature_id": 56,
+        "vital_temperature_body": 37,
+        "vital_temperature_utc_time": "2021-10-19T09:15:14.000Z"
+      },
+      {
+        "vital_temperature_id": 56,
+        "vital_temperature_body": 37,
+        "vital_temperature_utc_time": "2021-10-19T09:15:14.000Z"
+      },
+      {
+        "vital_temperature_id": 56,
+        "vital_temperature_body": 37.5,
+        "vital_temperature_utc_time": "2021-10-19T09:15:14.000Z"
+      },
+      {
+        "vital_temperature_id": 56,
+        "vital_temperature_body": 37.25,
+        "vital_temperature_utc_time": "2021-10-19T09:15:14.000Z"
+      },
+      {
+        "vital_temperature_id": 56,
+        "vital_temperature_body": 37,
+        "vital_temperature_utc_time": "2021-09-19T09:15:14.000Z"
+      }
+    ],
+    "current_page": 1,
+    "last_page": 3,
+    "per_page": 20,
+    "from": 1,
+    "to": 30,
+    "total": 61
+  },
+  "ranking_history_list": {
+    "data": [
+      {
+        "patient_stat_ldate": "2021-10-28",
+        "patient_stat_dia": 109,
+        "patient_stat_sys": 166,
+        "patient_stat_ihb": null
+      },
+      {
+        "patient_stat_ldate": "2021-10-27",
+        "patient_stat_dia": 80,
+        "patient_stat_sys": 94,
+        "patient_stat_ihb": null
+      },
+      {
+        "patient_stat_ldate": "2021-10-26",
+        "patient_stat_dia": 90,
+        "patient_stat_sys": 173,
+        "patient_stat_ihb": null
+      },
+      {
+        "patient_stat_ldate": "2021-10-25",
+        "patient_stat_dia": 91,
+        "patient_stat_sys": 193,
+        "patient_stat_ihb": null
+      },
+      {
+        "patient_stat_ldate": "2021-10-24",
+        "patient_stat_dia": 114,
+        "patient_stat_sys": 190,
+        "patient_stat_ihb": null
+      },
+      {
+        "patient_stat_ldate": "2021-10-23",
+        "patient_stat_dia": 86,
+        "patient_stat_sys": 170,
+        "patient_stat_ihb": null
+      },
+      {
+        "patient_stat_ldate": "2021-10-22",
+        "patient_stat_dia": 111,
+        "patient_stat_sys": 193,
+        "patient_stat_ihb": null
+      },
+      {
+        "patient_stat_ldate": "2021-10-21",
+        "patient_stat_dia": 73,
+        "patient_stat_sys": 153,
+        "patient_stat_ihb": null
+      },
+      {
+        "patient_stat_ldate": "2021-10-20",
+        "patient_stat_dia": 92,
+        "patient_stat_sys": 166,
+        "patient_stat_ihb": null
+      },
+      {
+        "patient_stat_ldate": "2021-10-19",
+        "patient_stat_dia": 76,
+        "patient_stat_sys": 140,
+        "patient_stat_ihb": null
+      },
+      {
+        "patient_stat_ldate": "2021-10-18",
+        "patient_stat_dia": 84,
+        "patient_stat_sys": 175,
+        "patient_stat_ihb": null
+      },
+      {
+        "patient_stat_ldate": "2021-10-17",
+        "patient_stat_dia": 102,
+        "patient_stat_sys": 165,
+        "patient_stat_ihb": null
+      },
+      {
+        "patient_stat_ldate": "2021-10-16",
+        "patient_stat_dia": 90,
+        "patient_stat_sys": 194,
+        "patient_stat_ihb": null
+      },
+      {
+        "patient_stat_ldate": "2021-10-15",
+        "patient_stat_dia": 74,
+        "patient_stat_sys": 200,
+        "patient_stat_ihb": null
+      },
+      {
+        "patient_stat_ldate": "2021-10-14",
+        "patient_stat_dia": 75,
+        "patient_stat_sys": 190,
+        "patient_stat_ihb": null
+      },
+      {
+        "patient_stat_ldate": "2021-10-13",
+        "patient_stat_dia": 79,
+        "patient_stat_sys": 162,
+        "patient_stat_ihb": null
+      },
+      {
+        "patient_stat_ldate": "2021-10-12",
+        "patient_stat_dia": 109,
+        "patient_stat_sys": 176,
+        "patient_stat_ihb": null
+      },
+      {
+        "patient_stat_ldate": "2021-10-11",
+        "patient_stat_dia": 81,
+        "patient_stat_sys": 156,
+        "patient_stat_ihb": null
+      },
+      {
+        "patient_stat_ldate": "2021-10-10",
+        "patient_stat_dia": 99,
+        "patient_stat_sys": 184,
+        "patient_stat_ihb": null
+      },
+      {
+        "patient_stat_ldate": "2021-10-09",
+        "patient_stat_dia": 81,
+        "patient_stat_sys": 140,
+        "patient_stat_ihb": null
+      },
+      {
+        "patient_stat_ldate": "2021-10-08",
+        "patient_stat_dia": 106,
+        "patient_stat_sys": 157,
+        "patient_stat_ihb": null
+      },
+      {
+        "patient_stat_ldate": "2021-10-07",
+        "patient_stat_dia": 71,
+        "patient_stat_sys": 166,
+        "patient_stat_ihb": null
+      },
+      {
+        "patient_stat_ldate": "2021-10-06",
+        "patient_stat_dia": 119,
+        "patient_stat_sys": 161,
+        "patient_stat_ihb": null
+      },
+      {
+        "patient_stat_ldate": "2021-10-05",
+        "patient_stat_dia": 92,
+        "patient_stat_sys": 174,
+        "patient_stat_ihb": null
+      }
+    ],
+    "current_page": 1,
+    "last_page": 3,
+    "per_page": 30,
+    "from": 1,
+    "to": 30,
+    "total": 61
+  },
+
+  "view_history_report": {
+    "data": [
+      {
+        "date_and_time": "2021年12月17日　10時50分",
+        "target_month": "2021年12月",
+        "file": "ダウンロード"
+      },
+      {
+        "date_and_time": "2021年12月17日　10時50分",
+        "target_month": "2021年12月",
+        "file": "ダウンロード"
+      },
+      {
+        "date_and_time": "2021年12月17日　10時50分",
+        "target_month": "2021年12月",
+        "file": "ダウンロード"
+      }
+    ],
+    "per_page": 30,
+    "total": 61
+  },
+  "data_select_month": {
+    "data": [
+      {
+        "value": "2021年12月"
+      },
+      {
+        "value": "2021年11月"
+      },
+      {
+        "value": "2021年10月"
+      },
+      {
+        "value": "2021年9月"
+      },
+      {
+        "value": "2021年8月"
+      }
+    ]
+  }
+}

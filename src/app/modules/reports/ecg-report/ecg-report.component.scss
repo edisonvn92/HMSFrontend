@@ -1,0 +1,106 @@
+@import 'src/styles';
+
+::ng-deep .page * {
+  color: $black;
+  font-family: 'DIN Pro', 'Yu Gothic', '游ゴシック', sans-serif !important;
+
+  table,
+  div,
+  p {
+    font-size: 12.5pt;
+  }
+}
+
+.mt-8mm {
+  margin-top: 8mm;
+}
+
+.mt-7mm {
+  margin-top: 7mm;
+}
+
+.mt-6mm {
+  margin-top: 6mm;
+}
+
+.mt-5mm {
+  margin-top: 5mm;
+}
+
+.mt-4mm {
+  margin-top: 4mm;
+}
+
+.mt-3mm {
+  margin-top: 3mm;
+}
+
+.ml-6mm {
+  margin-left: 6mm;
+}
+
+.page {
+  position: relative;
+  overflow: hidden;
+  padding: 7mm 10mm;
+  page-break-after: always;
+
+  &.portrait {
+    width: 11.6in;
+    height: 16.2in;
+  }
+}
+
+@page {
+  size: A4 portrait;
+}
+
+.section-header {
+  display: flex;
+
+  .header-text {
+    font-size: 17pt;
+    font-weight: bold;
+    border-top: 4pt solid $black;
+  }
+
+  .separate-line {
+    flex-grow: 1;
+    margin-left: 1.4mm;
+    border-top: 1pt solid $black;
+    line-height: 33pt;
+    padding-left: 0;
+  }
+}
+
+.legend-div {
+  .icon-unit {
+    width: 4mm;
+    height: 4mm;
+    border-radius: 2px;
+    margin-top: 3px;
+    margin-left: 4mm;
+
+    &.normal {
+      background-color: $blue-550;
+    }
+
+    &.danger {
+      background-color: $pink-350;
+    }
+
+    &.abnormal {
+      background-color: $pink-150;
+    }
+
+    &.unclassified {
+      background-color: $gray-460;
+    }
+  }
+
+  .legend-text {
+    margin-left: 1.4mm;
+    font-size: 11pt;
+    color: $gray-360;
+  }
+}

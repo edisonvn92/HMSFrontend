@@ -1,0 +1,73 @@
+<div class="history-modal">
+  <div class="modal-body">
+    <div>
+      <div class="title">{{ 'examination room blood pressure history' | translate }}</div>
+      <div class="list" id="history-content" [class.en-language]="!sharedService.isJa()">
+        <div class="header">
+          <div class="header-content">
+            <div class="date" [class.pl-35]="sharedService.isJa()">{{ 'measurement date and time' | translate }}</div>
+            <div class="blood-pressure text-center">
+              <div>{{ 'patient.blood pressure' | translate }}</div>
+              <div class="unit">mmHg</div>
+            </div>
+            <div class="pulse text-center">
+              <div>{{ 'pulse rate' | translate }}</div>
+              <div class="unit">bpm</div>
+            </div>
+          </div>
+        </div>
+        <div
+          *ngIf="
+            officeBloodPressureHistory && officeBloodPressureHistory.data && officeBloodPressureHistory.data.length > 0
+          "
+          class="history-content"
+        >
+          <div *ngFor="let item of officeBloodPressureHistory.data">
+            <div class="month" *ngIf="item.is_start_month">
+              {{ item.vital_office_utc_time | date: (sharedService.isJa() ? 'yyyy年MM月' : 'MMM y') }}
+            </div>
+            <div class="d-flex align-items-center content text-normal">
+              <div class="date text-left datetime">
+                <div class="date-month">
+                  {{ item.vital_office_utc_time | date: (sharedService.isJa() ? 'MM月dd日' : 'd MMM') }}
+                </div>
+                <div class="weekday" [hidden]="!item.vital_office_utc_time">
+                  ({{ getWeekday(item.vital_office_utc_time) | translate }})
+                </div>
+                <div>{{ item.vital_office_utc_time | date: 'HH:mm' }}</div>
+              </div>
+              <div class="blood-pressure px-30 d-flex justify-content-between">
+                <div class="sys-side">{{ item.vital_office_systolic | dash }}</div>
+                <div>/</div>
+                <div class="dia-side">{{ item.vital_office_diastolic | dash }}</div>
+              </div>
+              <div class="pulse text-center">{{ item.vital_office_pulse | dash }}</div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="officeBloodPressureHistory.data.length === 0" class="no-data">
+          {{ 'there is no data' | translate }}
+        </div>
+      </div>
+      <div
+        class="pagination-history"
+        *ngIf="officeBloodPressureHistory && officeBloodPressureHistory.total > officeBloodPressureHistory.data.length"
+      >
+        <app-paginator
+          class="paginator ml-auto my-auto"
+          [page]="bodyRequest.page"
+          [collectionSize]="officeBloodPressureHistory.total"
+          (pageChange)="pageChange($event)"
+          [pageSize]="officeBloodPressureHistory.per_page"
+          [hasCollectionSize]="false"
+          [className]="'history-pagination'"
+        ></app-paginator>
+      </div>
+    </div>
+  </div>
+  <div ngbAutoFocus tabindex="0" class="modal-footer no-focus" (click)="clickedClose()">
+    <button type="button" class="btn">
+      {{ 'button.Close' | translate }}
+    </button>
+  </div>
+</div>

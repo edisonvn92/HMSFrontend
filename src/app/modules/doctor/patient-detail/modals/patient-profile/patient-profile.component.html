@@ -1,0 +1,203 @@
+<form class="no-focus" tabindex="0" [formGroup]="patientForm" ngbAutoFocus>
+  <div class="text-medium font-weight-500 mb-3">{{ 'profile' | translate }}</div>
+
+  <ul class="invalid mb-3 text-normal text-black-300" *ngIf="isError">
+    <li *ngIf="patientForm.controls.patient_code.errors?.required">
+      {{ 'validator.required' | translate: { field: 'ID' | translate } }}
+    </li>
+    <li [class.px-2]="sharedService.isJa()" *ngIf="patientForm.controls.patient_code?.errors?.pattern">
+      {{ 'validator.login id pattern' | translate }}
+    </li>
+    <li *ngIf="patientForm.controls.patient_first_name.errors?.required">
+      {{ 'validator.required' | translate: { field: 'full name' | translate } }}
+    </li>
+    <li *ngIf="error.patient_gender.required">
+      {{ 'validator.required' | translate: { field: 'gender' | translate } }}
+    </li>
+    <li *ngIf="error.patient_birthday.required">
+      {{ 'validator.required' | translate: { field: 'birthday' | translate } }}
+    </li>
+    <li
+      [class.px-2]="sharedService.isJa()"
+      *ngIf="
+        patientForm.controls.patient_phone?.errors?.pattern ||
+        patientForm.controls.patient_phone?.errors?.minlength ||
+        patientForm.controls.patient_phone?.errors?.maxlength
+      "
+    >
+      {{ 'validator.phone pattern format' | translate }}
+    </li>
+    <li [class.px-2]="sharedService.isJa()" *ngIf="validationErr">
+      {{ 'errMsg.' + validationErr | translate }}
+    </li>
+  </ul>
+  <div class="mb-3">
+    <label for="id" class="form-label text-right text-normal mb-2">
+      {{ 'ID' | translate }} <span class="required">*</span>
+    </label>
+    <input
+      type="text"
+      class="form-control"
+      maxlength="50"
+      [placeholder]="'patient id' | translate"
+      formControlName="patient_code"
+      id="id"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="name" class="form-label text-right text-normal mb-2">
+      {{ 'full name' | translate }} <span class="required">*</span>
+    </label>
+    <input
+      type="text"
+      class="form-control"
+      maxlength="50"
+      [placeholder]="'enter within :field characters' | translate: { field: 50 }"
+      formControlName="patient_full_name"
+      id="name"
+      appTransformSpace
+    />
+  </div>
+  <div class="mb-3 d-flex justify-content-between">
+    <div class="gender-div">
+      <label for="gender" class="form-label text-right text-normal mb-2">
+        {{ 'Gender' | translate }} <span class="required">*</span>
+      </label>
+      <div class="d-flex align-items-center">
+        <div class="form-check mr-3">
+          <input
+            class="form-check-input"
+            type="radio"
+            formControlName="patient_gender"
+            name="patient_gender"
+            [value]="sex.MALE"
+            id="male"
+            [checked]="patientForm.controls.patient_gender.value === sex.MALE"
+          />
+          <label class="form-check-label text-normal" for="male"> {{ 'male' | translate }} </label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            formControlName="patient_gender"
+            name="patient_gender"
+            [value]="sex.FEMALE"
+            id="patient_gender"
+            [checked]="patientForm.controls.patient_gender.value === sex.FEMALE"
+          />
+
+          <label class="form-check-label text-normal" for="patient_gender"> {{ 'female' | translate }} </label>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex" *ngIf="allowSyncPatient">
+      <button
+        type="button"
+        class="btn bg-blue-420 btn-close text-normal text-white mt-27 mr-2"
+        (click)="syncPatientProfile()"
+      >
+        <img src="./assets/images/icon_reload_white.svg" class="mr-2" />
+        {{ 'sync' | translate }}
+      </button>
+      <span class="text-normal mt-32">( {{ 'sex&dob' | translate }} )</span>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="birthday" class="form-label text-right text-normal mb-2">
+      {{ 'birthday' | translate }} <span class="required">*</span>
+    </label>
+    <app-custom-datepicker
+      id="birthday"
+      [hasIcon]="true"
+      class="ml-10"
+      [minDate]="minDate"
+      [maxDate]="maxDate"
+      [date]="patientForm.controls.patient_birthday.value"
+      inputClass="w-368 h-32 text-normal"
+      [format]="sharedService.isJa() ? 'yyyy年MM月DD日' : 'D MMM y'"
+      (dateChange)="onDateChange($event)"
+    ></app-custom-datepicker>
+  </div>
+
+  <div class="mb-3">
+    <label for="tel" class="form-label text-right text-normal mb-2">
+      {{ 'TEL' | translate }}
+    </label>
+    <input
+      type="text"
+      appOnlyNumber
+      [phoneNumber]="true"
+      placeholder="+8112345678"
+      class="form-control"
+      formControlName="patient_phone"
+      id="tel"
+    />
+  </div>
+
+  <div class="mb-3">
+    <label for="language" class="form-label text-right text-normal mb-2">
+      {{ 'language' | translate }}
+    </label>
+    <div ngbDropdown #langDropdown class="select-box">
+      <button
+        type="button"
+        class="btn btn-outline-secondary d-flex align-items-center w-368"
+        id="dropdownBasic2"
+        ngbDropdownToggle
+      >
+        <div class="text text-black-300 text-truncate text-normal">
+          {{ patientForm.controls.user.value.user_language | translate }}
+        </div>
+        <i
+          class="fas my-auto icon ml-auto opacity-25 text-black-300"
+          [class]="ngbLangDropdown?.isOpen() ? 'icon-arrow-up' : 'icon-arrow-down'"
+        ></i>
+      </button>
+      <div class="lang-select w-368" ngbDropdownMenu aria-labelledby="dropdownBasic2">
+        <div
+          *ngFor="let item of language | keyvalue"
+          class="d-flex align-items-start m-0 select-item cursor-pointer"
+          [class.active]="item.value === patientForm.controls.user.value.user_language"
+          (click)="handleSelectLanguage(item.value)"
+        >
+          {{ item.value | translate }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <label for="email" class="form-label text-right text-normal mb-2">
+      {{ 'email address' | translate }}
+    </label>
+    <input type="text" class="form-control mb-1" formControlName="patient_email" id="email" [attr.disabled]="true" />
+
+    <div *ngIf="emailVerified && email" class="text-small d-flex align-items-center text-green-300">
+      <img src="./assets/images/ic_check_circle.svg" class="mr-2" alt="confirm" />
+      {{ 'communication confirmed' | translate }}
+    </div>
+
+    <div
+      *ngIf="emailVerified !== undefined && !emailVerified && email"
+      class="text-small d-flex text-red-100 align-items-center"
+    >
+      <img src="./assets/images/ic_circle_danger_red.svg" class="mr-2 icon-unconfirm" alt="unconfirm" />
+      {{ 'communication unconfirmed' | translate }}
+    </div>
+  </div>
+
+  <div class="form-footer">
+    <button
+      type="button"
+      class="btn btn-outline-secondary btn-close text-black-300 text-normal mr-2"
+      (click)="clickedClose()"
+    >
+      {{ 'button.Cancel' | translate }}
+    </button>
+    <button type="submit" class="btn btn-primary bg-blue-500 btn-close text-normal" (click)="submitClicked()">
+      {{ 'button.save' | translate }}
+    </button>
+  </div>
+</form>

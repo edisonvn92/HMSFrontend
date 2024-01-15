@@ -1,0 +1,56 @@
+@import 'src/app/styles/variable';
+.history-modal {
+  .modal-footer:hover {
+    background-color: unset;
+  }
+
+  .modal-footer {
+    justify-content: center;
+    padding: 0;
+
+    button {
+      height: 50px;
+      width: 50%;
+      margin: 0;
+      border-radius: 0;
+
+      &:disabled {
+        opacity: 0.25;
+      }
+    }
+
+    .left-border {
+      border-left: 1px solid $gray-100;
+    }
+  }
+
+  .modal-body {
+    width: 320px;
+    margin: 0 auto;
+    padding: 0;
+    padding-top: 32px;
+    padding-bottom: 180px;
+  }
+
+  .group-select {
+    max-height: 132px;
+    overflow: auto;
+  }
+
+  .btn {
+    .icon {
+      width: 15px;
+      height: 15px;
+      margin-top: 1px !important;
+    }
+  }
+
+  .modal-header {
+    justify-content: center;
+
+    .title {
+      margin-bottom: 0;
+      margin-top: 2px;
+    }
+  }
+}

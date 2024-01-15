@@ -1,0 +1,66 @@
+<form [formGroup]="groupForm">
+  <div class="blood-pressure-target-container">
+    <div class="modal-header">
+      <div class="modal-title text-medium font-weight-500 text-black-300" id="modal-basic-title">
+        {{ 'goal setting' | translate }}
+      </div>
+    </div>
+    <ng-template [ngIf]="true">
+      <div class="modal-body">
+        <ul class="invalid mb-2 text-normal text-black-300" *ngIf="submitGoal && (groupForm.invalid || serverErr)">
+          <li *ngIf="sysField.errors || (groupForm.errors && groupForm.errors.has_lower_value)">
+            {{ 'validator.invalid' | translate: { field: 'SYS' } }}
+          </li>
+          <li *ngIf="diaField.errors">
+            {{ 'validator.invalid' | translate: { field: 'DIA' } }}
+          </li>
+          <li *ngIf="serverErr">{{ errMess | translate }}</li>
+        </ul>
+        <div class="input-group border-bot">
+          <div class="w-190 my-auto">
+            <label for="sys" class="form-label my-auto d-flex text-normal text-no-wrap">
+              {{ 'sys' | translate }}
+            </label>
+          </div>
+          <input
+            type="number"
+            class="form-control"
+            formControlName="sys"
+            id="sys"
+            [min]="minSys"
+            [max]="maxSys"
+            appOnlyNumber
+            [integer]="true"
+          />
+          <span class="text-small d-flex align-items-center">mmHg</span>
+        </div>
+        <div class="input-group">
+          <div class="w-190 my-auto">
+            <label for="dia" class="form-label text-normal my-auto d-flex text-no-wrap">
+              {{ 'dia' | translate }}
+            </label>
+          </div>
+          <input
+            type="number"
+            class="form-control"
+            formControlName="dia"
+            id="dia"
+            [min]="minDia"
+            [max]="maxDia"
+            appOnlyNumber
+            [integer]="true"
+          />
+          <span class="text-small d-flex align-items-center">mmHg</span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn bg-white text-normal" (click)="clickedClose()">
+          {{ 'button.Cancel' | translate }}
+        </button>
+        <button type="submit" class="btn bg-white text-blue-500 text-normal left-border" (click)="submitClicked()">
+          {{ 'button.save' | translate }}
+        </button>
+      </div>
+    </ng-template>
+  </div>
+</form>

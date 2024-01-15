@@ -1,0 +1,53 @@
+@import 'src/app/styles/variable';
+
+.modal-body {
+  padding: 1rem 0;
+}
+
+.history-modal {
+  .list {
+    .month {
+      margin-left: 46px;
+    }
+
+    .date {
+      width: 31%;
+      display: flex;
+      justify-content: space-around;
+      text-align: center;
+    }
+
+    .blood-pressure {
+      width: 22%;
+      min-width: 130px;
+      padding: 0 30px;
+      .sys-side,
+      .dia-side {
+        width: 22px;
+      }
+
+      .dia-side {
+        text-align: end;
+      }
+    }
+
+    .pulse-rate {
+      width: 17%;
+      min-width: 70px;
+    }
+
+    .measurement-state {
+      width: 30%;
+      display: flex;
+      justify-content: center;
+
+      .state-icon {
+        margin: 0 3px;
+        height: 20px;
+      }
+      .empty-icon {
+        margin: 10px;
+      }
+    }
+  }
+}

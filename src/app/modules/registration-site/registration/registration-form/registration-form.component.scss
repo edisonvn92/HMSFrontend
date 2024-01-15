@@ -1,0 +1,59 @@
+@import 'src/app/styles/variable';
+
+.icon-select {
+  height: 8px;
+  width: 11px;
+}
+
+.form-actions {
+  margin-top: 172px;
+}
+
+.required {
+  margin: 0;
+}
+
+.form-control {
+  height: 32px !important;
+  font-size: 14px;
+  color: $black-300;
+}
+
+.div-input {
+  margin-top: 16px;
+  text-align: left;
+}
+
+.email-address {
+  margin-top: 32px;
+}
+
+.first-row-input {
+  width: 384px;
+}
+
+.second-row-input {
+  width: 244px;
+}
+
+.div-left {
+  margin-right: 32px;
+}
+
+@media only screen and (max-width: 450px) {
+  .first-row-input,
+  .div-input,
+  .second-row-input {
+    width: 100%;
+  }
+
+  .div-left {
+    margin-right: 0;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .form-actions {
+    margin-top: 60px;
+  }
+}

@@ -1,0 +1,365 @@
+<div class="page landscape">
+  <div class="d-flex justify-content-between" id="page-header">
+    <div class="fs-9pt left-side">ID: {{ patientId }}</div>
+    <div class="fs-14pt mb-1">
+      {{ 'morning and evening blood pressure report' | translate }}
+      ({{ 'monthly average / 6 months' | translate }})
+    </div>
+    <div class="fs-9pt right-side">
+      <span>{{ 'target period' | translate }}: </span>
+      {{ getTimeFormat(startDate) }} - {{ getTimeFormat(endDate) }}
+    </div>
+  </div>
+
+  <table>
+    <thead>
+      <tr class="header-cell">
+        <td colspan="2" class="first-col border-bottom-heavy fs-7pt">{{ 'month' | translate }}</td>
+        <td class="data-col border-bottom-heavy" *ngFor="let item of data6Month">
+          <span class="fs-11pt">{{ item.monthYear.split('-')[1] }}</span
+          >&nbsp;
+          <span *ngIf="translate.currentLang === 'ja'" class="fs-7pt">{{ 'month' | translate }}</span>
+        </td>
+        <td class="last-col border-bottom-heavy" colspan="2">
+          {{ 'period average' | translate }}
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="tr-mask">
+        <td
+          colspan="2"
+          class="first-col header-cell text-white border-bottom-heavy"
+          [class.ja-lang]="translate.currentLang === 'ja'"
+        >
+          <div class="text-left text-blue-650" [class]="translate.currentLang === 'ja' ? 'mt-40' : 'mt-20'">
+            <div class="fs-8pt">{{ 'monthly average' | translate }}</div>
+            <div class="d-flex mt-1 fs-8pt">
+              <div class="icon-unit mr-2"></div>
+              <div>{{ 'morning BP' | translate }}</div>
+            </div>
+            <div class="d-flex mt-1 fs-8pt">
+              <div class="icon-unit mr-2 icon-last-bp"></div>
+              <div>{{ 'evening BP' | translate }}</div>
+            </div>
+            <div class="fs-7pt" [class]="translate.currentLang === 'ja' ? 'mt-50' : 'mt-30'">
+              {{ 'patient detail.level of achievement' | translate }}
+            </div>
+            <div class="d-flex align-items-start mt-1">
+              <img src="assets/images/icon_target_achieved.svg" alt="icon" />
+              <div class="text-level">
+                {{ 'achieved the target blood pressure value' | translate }}
+              </div>
+            </div>
+            <div class="d-flex align-items-start mt-1">
+              <img src="assets/images/icon_over_target.svg" alt="icon" />
+              <div class="text-level">
+                {{ 'same as the target blood pressure value somewhat expensive' | translate }}
+              </div>
+            </div>
+            <div class="d-flex align-items-start mt-1">
+              <img src="assets/images/icon_over_target_2.svg" alt="icon" />
+              <div class="text-level">
+                {{ 'higher than the target blood pressure value' | translate }}
+              </div>
+            </div>
+            <div class="d-flex align-items-start mt-1">
+              <img src="assets/images/icon_over_target_3.svg" alt="icon" />
+              <div class="text-level">{{ 'very high above the target blood pressure' | translate }}</div>
+            </div>
+          </div>
+        </td>
+        <td class="data-col memo-text text-white border-bottom-heavy" *ngFor="let item of data6Month"></td>
+        <td class="last-col text-white border-bottom-heavy"></td>
+      </tr>
+      <tr>
+        <td colspan="12">
+          <div id="monthChartDiv" class="chart-div"></div>
+        </td>
+      </tr>
+      <tr>
+        <td
+          class="row-span header-cell icon-col border-bottom-heavy"
+          rowspan="3"
+          [class.ja-lang]="translate.currentLang === 'ja'"
+        >
+          <img class="img-morning" src="./assets/images/icon_morning1.svg" />
+          {{ 'monthly average abbr' | translate }}
+        </td>
+        <td class="first-col header-cell header-col" [class.ja-lang]="translate.currentLang === 'ja'">
+          {{ 'maximum blood pressure' | translate }}
+        </td>
+        <td class="data-col" *ngFor="let item of data6Month">
+          <div class="d-flex justify-content-center">
+            <div [class.target-value]="item.patient_stat_sys_morning" class="text-black-250">
+              {{ getDataText(item, 'patient_stat_sys_morning') }}
+            </div>
+            <img
+              *ngIf="item.patient_stat_sys_morning"
+              class="img-target"
+              [src]="getSysIconTarget(item.patient_stat_sys_morning)"
+            />
+          </div>
+        </td>
+        <td
+          class="header-cell icon-col-2 border-bottom-heavy"
+          rowspan="3"
+          [class.ja-lang]="translate.currentLang === 'ja'"
+        >
+          <img class="img-morning" src="./assets/images/icon_morning1.svg" />
+          <div>{{ 'period' | translate }}</div>
+          <div>{{ 'avg' | translate }}</div>
+        </td>
+        <td class="last-col">
+          <div class="d-flex justify-content-center">
+            <div class="text-black-250" [class.target-value]="average.patient_stat_sys_morning">
+              {{ getDataText(average, 'patient_stat_sys_morning') }}
+            </div>
+            <img
+              *ngIf="average.patient_stat_sys_morning !== '---'"
+              class="img-target"
+              [src]="getSysIconTarget(average.patient_stat_sys_morning)"
+            />
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="first-col header-cell" [class.ja-lang]="translate.currentLang === 'ja'">
+          {{ 'minimum blood pressure' | translate }}
+        </td>
+        <td class="data-col" *ngFor="let item of data6Month">
+          <div class="d-flex justify-content-center">
+            <div [class.target-value]="item.patient_stat_dia_morning" class="text-black-250">
+              {{ getDataText(item, 'patient_stat_dia_morning') }}
+            </div>
+            <img
+              *ngIf="item.patient_stat_dia_morning"
+              class="img-target"
+              [src]="getDiaIconTarget(item.patient_stat_dia_morning)"
+            />
+          </div>
+        </td>
+        <td class="last-col">
+          <div class="d-flex justify-content-center">
+            <div class="text-black-250" [class.target-value]="average.patient_stat_dia_morning">
+              {{ getDataText(average, 'patient_stat_dia_morning') }}
+            </div>
+            <img
+              *ngIf="average.patient_stat_dia_morning !== '---'"
+              class="img-target"
+              [src]="getDiaIconTarget(average.patient_stat_dia_morning)"
+            />
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="first-col header-cell border-bottom-heavy" [class.ja-lang]="translate.currentLang === 'ja'">
+          {{ 'pulse rate' | translate }}
+        </td>
+        <td class="data-col border-bottom-heavy" *ngFor="let item of data6Month">
+          <div class="d-flex justify-content-center text-black-300">
+            <div [class.target-value]="item.patient_stat_pulse_morning" class="text-black-250">
+              {{ getDataText(item, 'patient_stat_pulse_morning') }}
+            </div>
+            <div class="img-target" *ngIf="item.patient_stat_pulse_morning"></div>
+          </div>
+        </td>
+        <td class="last-col border-bottom-heavy">
+          <div class="d-flex justify-content-center">
+            <div class="text-black-250" [class.target-value]="average.patient_stat_pulse_morning">
+              {{ getDataText(average, 'patient_stat_pulse_morning') }}
+            </div>
+            <div class="img-target" *ngIf="average.patient_stat_pulse_morning"></div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td
+          class="row-span header-cell icon-col border-bottom-heavy"
+          rowspan="3"
+          [class.ja-lang]="translate.currentLang === 'ja'"
+        >
+          <img class="img-evening" src="./assets/images/icon_evening.svg" />
+          <span>{{ 'monthly average abbr' | translate }}</span>
+        </td>
+        <td class="first-col header-cell" [class.ja-lang]="translate.currentLang === 'ja'">
+          {{ 'maximum blood pressure' | translate }}
+        </td>
+        <td class="data-col" *ngFor="let item of data6Month">
+          <div class="d-flex justify-content-center">
+            <div [class.target-value]="item.patient_stat_sys_evening" class="text-black-250">
+              {{ getDataText(item, 'patient_stat_sys_evening') }}
+            </div>
+            <img
+              *ngIf="item.patient_stat_sys_evening"
+              class="img-target"
+              [src]="getSysIconTarget(item.patient_stat_sys_evening)"
+            />
+          </div>
+        </td>
+        <td
+          class="header-cell icon-col-2 border-bottom-heavy"
+          rowspan="3"
+          [class.ja-lang]="translate.currentLang === 'ja'"
+        >
+          <img class="img-evening" src="./assets/images/icon_evening.svg" />
+          <div>{{ 'period' | translate }}</div>
+          <div>{{ 'avg' | translate }}</div>
+        </td>
+        <td class="last-col">
+          <div class="d-flex justify-content-center text-black-250">
+            <div class="text-black-250" [class.target-value]="average.patient_stat_sys_evening">
+              {{ getDataText(average, 'patient_stat_sys_evening') }}
+            </div>
+            <img
+              *ngIf="average.patient_stat_sys_evening !== '---'"
+              class="img-target"
+              [src]="getSysIconTarget(average.patient_stat_sys_evening)"
+            />
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="first-col header-cell" [class.ja-lang]="translate.currentLang === 'ja'">
+          {{ 'minimum blood pressure' | translate }}
+        </td>
+        <td class="data-col" *ngFor="let item of data6Month">
+          <div class="d-flex justify-content-center">
+            <div [class.target-value]="item.patient_stat_dia_evening" class="text-black-250">
+              {{ getDataText(item, 'patient_stat_dia_evening') }}
+            </div>
+            <img
+              *ngIf="item.patient_stat_dia_evening"
+              class="img-target"
+              [src]="getDiaIconTarget(item.patient_stat_dia_evening)"
+            />
+          </div>
+        </td>
+        <td class="last-col">
+          <div class="d-flex justify-content-center">
+            <div class="text-black-250" [class.target-value]="average.patient_stat_dia_evening">
+              {{ getDataText(average, 'patient_stat_dia_evening') }}
+            </div>
+            <img
+              *ngIf="average.patient_stat_dia_evening !== '---'"
+              class="img-target"
+              [src]="getDiaIconTarget(average.patient_stat_dia_evening)"
+            />
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="first-col header-cell border-bottom-heavy" [class.ja-lang]="translate.currentLang === 'ja'">
+          {{ 'pulse rate' | translate }}
+        </td>
+        <td class="data-col border-bottom-heavy" *ngFor="let item of data6Month">
+          <div class="d-flex justify-content-center text-black-250">
+            <div [class.target-value]="item.patient_stat_pulse_evening">
+              {{ getDataText(item, 'patient_stat_pulse_evening') }}
+            </div>
+            <div class="img-target" *ngIf="item.patient_stat_pulse_evening"></div>
+          </div>
+        </td>
+        <td class="last-col border-bottom-heavy">
+          <div class="d-flex justify-content-center">
+            <div class="text-black-250" [class.target-value]="average.patient_stat_pulse_evening">
+              {{ getDataText(average, 'patient_stat_pulse_evening') }}
+            </div>
+            <div class="img-target" *ngIf="average.patient_stat_pulse_evening"></div>
+          </div>
+        </td>
+      </tr>
+      <tr class="tr-mask">
+        <td
+          colspan="2"
+          class="first-col header-cell text-white border-bottom-heavy fs-8pt"
+          [class.ja-lang]="translate.currentLang === 'ja'"
+        >
+          <div class="text-left mt-40 text-blue-650">
+            <div>{{ 'monthly average' | translate }}</div>
+            <div class="d-flex align-items-start mt-1">
+              <img src="assets/images/icon_body_weight_chart.svg" alt="icon" class="mr-2" />
+              <div class="text-level fs-8pt">
+                {{ 'body weight' | translate }}
+              </div>
+            </div>
+          </div>
+        </td>
+        <td class="data-col memo-text text-white border-bottom-heavy" *ngFor="let item of data6Month"></td>
+        <td class="last-col text-white border-bottom-heavy"></td>
+      </tr>
+      <tr>
+        <td colspan="11">
+          <div id="weightChartDiv" class="chart-div"></div>
+        </td>
+      </tr>
+      <tr>
+        <td
+          colspan="2"
+          class="first-col header-cell border-bottom-heavy"
+          [class]="translate.currentLang === 'ja' ? 'fs-8pt' : 'fs-7pt'"
+        >
+          ({{ 'monthly average abbr' | translate }}) {{ 'body weight' | translate }}
+        </td>
+        <td class="data-col text-black-250 border-bottom-heavy" *ngFor="let item of data6Month">
+          {{ getDataText(item, 'user_stat_weight') }}
+        </td>
+        <td colspan="2" class="last-col border-bottom-heavy" style="text-align: left">
+          <span class="text-blue-650 fs-8pt">({{ 'period avg' | translate }})</span>
+          &nbsp;&nbsp; &nbsp;&nbsp;
+          <span class="text-black-250">{{ getDataText(average, 'user_stat_weight') }}</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div id="page-footer" class="page-footer">
+    <div class="d-flex justify-content-between">
+      <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center icon-time">
+          <div class="icon-unit mr-2"></div>
+          <img class="img-morning mr-2" src="./assets/images/icon_morning1.svg" />
+        </div>
+        <div class="note">
+          {{ 'blood pressure / pulse when waking up (morning)' | translate }}
+          <span class="dot">{{ '...' | translate }} </span>
+          <span>
+            {{
+              'blood pressure and pulse rate measured during the time period'
+                | translate
+                  : {
+                      startTime: hospitalSetting.hospital_setting_start_morning.substring(0, 5),
+                      endTime: hospitalSetting.hospital_setting_end_morning.substring(0, 5)
+                    }
+            }}
+          </span>
+        </div>
+      </div>
+      <div class="fs-8pt text-gray-190">
+        {{ 'output date and time' | translate }}: {{ getTimeFormat(outputDateTime, 'YYYY/MM/DD HH:mm') }}
+      </div>
+    </div>
+    <div class="d-flex justify-content-between">
+      <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center icon-time">
+          <div class="icon-unit mr-2 icon-last-bp"></div>
+          <img class="img-evening mr-2" src="./assets/images/icon_evening.svg" />
+        </div>
+        <div class="note">
+          {{ 'blood pressure / pulse when going to bed (night)' | translate }}
+          <span class="dot">{{ '...' | translate }}</span>
+          <span>
+            {{
+              'blood pressure and pulse rate measured during the time period'
+                | translate
+                  : {
+                      startTime: hospitalSetting.hospital_setting_start_evening.substring(0, 5),
+                      endTime: hospitalSetting.hospital_setting_end_evening.substring(0, 5)
+                    }
+            }}
+          </span>
+        </div>
+      </div>
+      <div class="fs-7pt text-gray-190">{{ page }}/{{ totalPage }} {{ 'page' | translate }}</div>
+    </div>
+  </div>
+</div>

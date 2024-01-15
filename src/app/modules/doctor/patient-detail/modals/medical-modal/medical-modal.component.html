@@ -1,0 +1,55 @@
+<div class="body-medical" [class.height-en]="!sharedService.isJa()">
+  <div class="title">
+    {{
+      (isRegister ? 'do you want to register the consultation date' : 'do you want to delete the consultation date')
+        | translate
+    }}
+  </div>
+  <div class="content">
+    <div class="left">{{ 'consultation day' | translate }}</div>
+    <div class="right">
+      {{ today | date: (sharedService.isJa() ? 'yyyy年MM月dd日' : 'd MMM y') }}
+    </div>
+  </div>
+  <div class="content" [class.content-en]="!sharedService.isJa()">
+    <div class="left">{{ 'Patient' | translate }}</div>
+    <div class="right">
+      <div class="name">
+        {{ joinName(patient.patient_first_name, patient.patient_middle_name, patient.patient_last_name) | dash }}
+      </div>
+      <div>
+        <span>{{ patient.patient_gender | gender | translate }}</span>
+        <span>
+          |
+          {{
+            patient.patient_birthday
+              ? (patient.patient_birthday | date: (sharedService.isJa() ? 'yyyy年MM月dd日' : 'd MMM y'))
+              : sharedService.isJa()
+              ? '----年--月--日'
+              : '-- --- ----'
+          }}
+        </span>
+        (<span>{{ patient.patient_age | dash }}</span>
+        <span [class.pl-5px]="!sharedService.isJa()">{{ 'age' | translate }}</span
+        >)
+      </div>
+    </div>
+  </div>
+  <div class="action d-flex justify-content-end no-focus" tabindex="0" ngbAutofocus>
+    <button class="btn btn-close text-normal" (click)="clickedClose()">
+      {{ (isRegister ? 'do not register' : 'do not delete') | translate }}
+    </button>
+    <button
+      class="btn btn-register btn-primary bg-blue-210 text-normal"
+      *ngIf="isRegister; else btnDelete"
+      (click)="registerClicked()"
+    >
+      {{ 'button.register' | translate }}
+    </button>
+  </div>
+</div>
+<ng-template #btnDelete>
+  <button class="btn btn-delete bg-red-200 text-normal" (click)="deleteClicked()">
+    {{ 'button.delete' | translate }}
+  </button>
+</ng-template>

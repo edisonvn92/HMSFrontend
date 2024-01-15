@@ -1,0 +1,90 @@
+<div class="group-detail-container no-focus" ngbAutoFocus tabindex="0">
+  <div class="modal-header">
+    <div class="modal-title text-medium text-black-300 break-space font-weight-500 text-left" id="modal-basic-title">
+      {{ groupDetail.group_name }}
+    </div>
+    <button
+      id="icon-close"
+      tabindex="0"
+      type="button"
+      class="close none-outline"
+      aria-label="Close"
+      (click)="clickedClose()"
+    >
+      <div class="icon-close btn-icon-close"></div>
+    </button>
+  </div>
+  <div class="modal-body text-break">
+    <ng-template [ngIf]="!errMess">
+      <div class="d-flex align-items-center">
+        <div class="text-black-300">{{ 'dr./nurse' | translate }}</div>
+        <button
+          type="button"
+          class="btn btn-primary w-112 px-0 bg-blue-500 text-normal ml-auto"
+          (click)="onEditGroupAffiliationClicked()"
+          [disabled]="groupDetail.hcps && !groupDetail.hcps.length"
+        >
+          {{ 'edit dr./nurse' | translate }}
+        </button>
+      </div>
+
+      <table class="table mt-3 hospital-table">
+        <thead>
+          <tr>
+            <th class="w-160" scope="col">{{ 'id' | translate }}</th>
+            <th class="w-256" scope="col">{{ 'name' | translate }}</th>
+            <th class="w-128" scope="col">{{ 'tel' | translate }}</th>
+            <th scope="col">{{ 'role' | translate }}</th>
+          </tr>
+        </thead>
+        <tbody [attr.noData]="'there is no data' | translate">
+          <tr *ngFor="let item of groupDetail.hcps">
+            <td class="w-160">{{ item.hcp_cognito_username }}</td>
+            <td class="w-256">{{ getFullName(item.hcp_first_name, item.hcp_middle_name, item.hcp_last_name) }}</td>
+            <td class="w-128">{{ item.hcp_cognito_phone }}</td>
+            <td>{{ item.roles ? (item.roles[0] ? (item.roles[0].role_name | translate) : '') : '' }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="d-flex align-items-center mt-4">
+        <div class="text-black-300">{{ 'Patient' | translate }}</div>
+        <button
+          type="button"
+          class="btn btn-primary w-112 bg-blue-500 text-normal ml-auto"
+          (click)="onEditGroupAffiliationClicked(true)"
+          [disabled]="groupDetail.patients && !groupDetail.patients.length"
+        >
+          {{ 'edit patient' | translate }}
+        </button>
+      </div>
+
+      <table class="table mt-3 hospital-table">
+        <thead>
+          <tr>
+            <th class="w-128" scope="col">{{ 'patient id' | translate }}</th>
+            <th class="w-312" scope="col">{{ 'name' | translate }}</th>
+            <th class="w-138" scope="col">{{ 'sex' | translate }}</th>
+            <th scope="col">{{ 'date of birth' | translate }}</th>
+          </tr>
+        </thead>
+        <tbody [attr.noData]="'there is no data' | translate">
+          <tr *ngFor="let item of groupDetail.patients">
+            <td class="w-128">{{ item.patient_code }}</td>
+            <td class="w-312">
+              {{ getFullName(item.patient_first_name, item.patient_middle_name, item.patient_last_name) }}
+            </td>
+            <td class="w-138">{{ (item.patient_gender ? 'male' : 'female') | translate }}</td>
+            <td>{{ (item.patient_birthday | date: (sharedService.isJa() ? 'y年MM月dd日' : 'd MMM y')) || '-' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </ng-template>
+    <div *ngIf="errMess" class="error">{{ ':field does not exist' | translate: { field: 'Group' | translate } }}</div>
+  </div>
+  <div (click)="clickedClose()" class="modal-footer cursor-pointer justify-content-center btn-close-hover">
+    <button type="button" class="btn text-normal">
+      {{ 'button.Close' | translate }}
+    </button>
+  </div>
+</div>

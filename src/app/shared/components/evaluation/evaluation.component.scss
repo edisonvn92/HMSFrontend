@@ -1,0 +1,27 @@
+:host {
+  border: 0.5px solid #e6e6e6;
+  height: 40px;
+  width: 80px;
+  border-radius: 2px;
+  background-color: white;
+  padding: 4px 6px;
+  .review-left {
+    margin-right: 5px;
+    .smile {
+      width: 25px;
+      height: 25px;
+    }
+  }
+  .review-right {
+    .star {
+      width: 9px;
+      height: 9px;
+    }
+  }
+  .review-not-complete {
+    width: 9px;
+    height: 14px;
+    margin-top: -16px;
+    margin-left: 29px;
+  }
+}

@@ -1,0 +1,135 @@
+@import 'src/app/styles/variable';
+
+.user-content {
+  padding: 24px;
+  height: calc(100vh - 48px);
+
+  .form-control {
+    border: 1px solid $gray-200;
+  }
+
+  tbody {
+    max-height: calc(100vh - 280px);
+    height: calc(100vh - 280px);
+    .phone-number,
+    .created-date {
+      text-align: end;
+    }
+  }
+
+  .hospital-name {
+    width: 150px;
+  }
+
+  .login-id {
+    width: 155px;
+  }
+
+  .full-name {
+    width: 280px;
+  }
+
+  .phone-number {
+    width: 100px;
+  }
+
+  .created-date {
+    width: 100px;
+  }
+
+  .action-list {
+    width: 80px;
+    text-align: center;
+
+    .border-right {
+      border-right: 1px $gray-200;
+    }
+  }
+
+  .icon {
+    width: 12px;
+    height: 12px;
+  }
+
+  .search-user {
+    flex-wrap: wrap;
+
+    .mr-51 {
+      margin-right: 51px;
+    }
+
+    .search-input {
+      height: 32px;
+      width: 200px;
+      line-height: 2 !important;
+    }
+  }
+
+  .select {
+    max-height: 200px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0;
+    width: 192px;
+  }
+
+  .dropdown-toggle {
+    border: 1px solid #d9d9d9;
+
+    &::after {
+      display: none;
+    }
+
+    &:hover {
+      background-color: $gray-220;
+    }
+
+    &:focus {
+      background-color: $gray-220;
+      box-shadow: none;
+    }
+  }
+  .show > .dropdown-toggle {
+    background-color: $gray-900;
+  }
+  .icon {
+    height: 11px;
+    width: 14px;
+  }
+}
+
+.table {
+  margin-bottom: 24px;
+}
+
+@media screen and (max-width: 1621px) {
+  table {
+    tbody {
+      max-height: calc(100vh - 330px) !important;
+      height: calc(100vh - 330px) !important;
+    }
+  }
+
+  .close-sidebar {
+    table {
+      tbody {
+        max-height: calc(100vh - 330px) !important;
+        height: calc(100vh - 330px) !important;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1803px) {
+  tbody {
+    max-height: calc(100vh - 330px) !important;
+    height: calc(100vh - 330px) !important;
+  }
+
+  .close-sidebar {
+    tbody {
+      max-height: calc(100vh - 330px) !important;
+      height: calc(100vh - 330px) !important;
+    }
+  }
+}

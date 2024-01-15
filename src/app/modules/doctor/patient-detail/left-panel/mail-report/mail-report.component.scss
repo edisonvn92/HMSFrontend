@@ -1,0 +1,38 @@
+@import 'src/app/styles/variable';
+
+.patient-detail-component {
+  height: 96px;
+  padding: 15px 10px 17px 14px;
+
+  .btn {
+    min-width: 88px;
+    border: 1px solid $blue-520;
+    background-color: $blue-510;
+    color: $blue-500;
+    border-radius: 4px;
+    font-size: 14px;
+    height: 24px;
+    padding: 5px 6px;
+    display: flex;
+    align-items: center;
+    margin-right: 4px;
+
+    &:hover {
+      background-color: $blue-530;
+    }
+
+    img {
+      margin-right: 2px;
+    }
+  }
+
+  .date-value {
+    margin-left: 3px;
+  }
+}
+
+.en-language {
+  .btn {
+    min-width: 80px;
+  }
+}

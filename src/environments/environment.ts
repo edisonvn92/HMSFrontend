@@ -1,0 +1,25 @@
+
+  export const environment = {
+    env: 'dev',
+    api_url: 'https://api-dev.ohq-hms-poc.com',
+    aws_cognito_region: 'ap-northeast-1',
+    aws_user_pools_id: 'ap-northeast-1_GxYDACu5Z',
+    aws_user_pools_web_client_id: '5lneaced2mc74ogiu26ajpr2tf',
+    aws_user_pools_id_admin: 'ap-northeast-1_BRKwpYvBT',
+    aws_user_pools_web_client_id_admin: '2natmmcmtprje24cf4f7t3hgqm',
+    frontend_url: 'https://www-dev.ohq-hms-poc.com',
+    omron_connect_registration_link: 'https://data-stg-jp.omronconnect.mobi/api/apps',
+    omron_connect_group_id: '61t2plnxr81s',
+    omron_connect_app_id: 'bdf72f34',
+    amchart_license_code: 'CH300687120',
+    firebase_key_pair: 'BOP7ZxNDFx6H23GSJKzV6Y67dcKtrZUtsb5Sir4LhbrFzR9OZ--u2fFL7nofuew139xn9Wgv8qLj7kN_-Xaiv84',
+    firebase_server_key: 'AAAAArAsLa8:APA91bG-HsDpXIl4W2dKxMUUQ1oYAx6Rk-hss7SI7QpqjPFYeL5eev4-VEyOBuzvxN_o8MHbyTXKjiunhoF1SZMS21J2JG3Zg02J6oWIGB9htwGhtczblDBIk5hGMfOsmHWD4X27V9pC',
+    firebase_api_key: 'AIzaSyBU-zTNUwlV7pZE4THrC8u1P361BFCWl14',
+    firebase_auth_domain: 'ohq-hms2-stg.firebaseapp.com',
+    firebase_project_id: 'ohq-hms2-stg',
+    firebase_storage_bucket: 'ohq-hms2-stg.appspot.com',
+    firebase_messaging_sender_id: '11545619887',
+    firebase_app_id: '1:11545619887:web:7a0081dd0f24a0d7fd535a',
+    service_env: 'SHINDEN',
+    omron_connect_purchase_link: ''
+  };

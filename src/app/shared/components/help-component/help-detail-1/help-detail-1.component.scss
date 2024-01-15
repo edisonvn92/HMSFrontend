@@ -1,0 +1,41 @@
+.modal-header {
+  height: 40px;
+  padding: 8px 24px 8px 16px;
+
+  .text-left {
+    word-break: break-word;
+  }
+}
+
+.modal-body {
+  padding: 38px 40px 38px 52px;
+}
+
+.icon-unit {
+  width: 8px;
+  height: 8px;
+}
+
+.status-text {
+  width: 120px;
+  min-width: 120px;
+}
+
+.status-icon {
+  margin-top: -4px;
+}
+
+.mt-22 {
+  margin-top: 22px;
+}
+
+.consultation-icon {
+  margin-left: 2px;
+}
+
+.lang-en {
+  .status-text {
+    width: 164px;
+    min-width: 164px;
+  }
+}

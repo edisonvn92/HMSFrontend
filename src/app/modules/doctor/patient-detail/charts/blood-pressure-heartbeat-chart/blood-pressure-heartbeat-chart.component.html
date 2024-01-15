@@ -1,0 +1,40 @@
+<div appClickOutside (clickOutside)="showPopup = false">
+  <div class="chart-title d-flex justify-content-between">
+    <div class="d-flex">
+      <div class="title-icon">
+        <img src="./assets/images/icon_heartbeat_title.svg" alt="icon" />
+      </div>
+      <div class="mr-10 title">
+        {{ 'chart.blood pressure and pulse' | translate }}
+      </div>
+      <div class="cursor-pointer" (click)="toggleChart()" [hidden]="!showChart">
+        <div class="icon icon-hide-chart"></div>
+      </div>
+      <div class="cursor-pointer" (click)="toggleChart()" [hidden]="showChart">
+        <div class="icon icon-show-chart"></div>
+      </div>
+    </div>
+    <div class="d-flex align-items-center">
+      <div class="text-normal">
+        {{ 'chart.blood pressure target' | translate }}
+      </div>
+      <div class="div-icon-setting cursor-pointer mr-20" (click)="openBloodPressureTarget.emit()">
+        <div class="icon-setting-1"></div>
+      </div>
+      <div class="cursor-pointer text-blue-210 detail" (click)="openHomeBloodPressureHistory.emit()">
+        {{ 'detail' | translate }}>
+      </div>
+    </div>
+  </div>
+  <div class="position-relative">
+    <app-daily-vital-popup *ngIf="showPopup" [data]="clickedData" [popupPosition]="popupPosition">
+    </app-daily-vital-popup>
+  </div>
+
+  <div
+    id="bloodPressurePulseChartBody"
+    class="chart-body mr-0"
+    [class.no-hospital-visit]="!showHospitalVisit"
+    [class.chart-hidden]="!showChart"
+  ></div>
+</div>

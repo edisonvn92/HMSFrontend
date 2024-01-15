@@ -1,0 +1,42 @@
+<table class="table hospital-table" id="table-content">
+  <thead>
+    <tr>
+      <th class="no" scope="col">{{ 'no' | translate }}</th>
+      <th class="order" scope="col">{{ 'order' | translate }}</th>
+      <th class="column-checkbox" scope="col">
+        <div class="checkbox-wrap">
+          <input [id]="'check-all-' + id" type="checkbox" (click)="onCheckAll()" [checked]="isCheckAll" />
+        </div>
+      </th>
+      <th scope="col">{{ 'component name' | translate }}</th>
+    </tr>
+  </thead>
+  <tbody [attr.noData]="'there is no data' | translate">
+    <tr *ngFor="let component of components; let i = index">
+      <td class="no">
+        {{ i + 1 }}
+      </td>
+      <td class="order">
+        <div class="d-flex">
+          <div class="icon-wrapper cursor-pointer" (click)="orderComponent(i, true)">
+            <div class="icon icon-rose"></div>
+          </div>
+          <div class="icon-wrapper cursor-pointer" (click)="orderComponent(i)">
+            <div class="icon icon-reduction"></div>
+          </div>
+        </div>
+      </td>
+      <td class="column-checkbox">
+        <div class="checkbox-wrap">
+          <input
+            [id]="component.component_id"
+            type="checkbox"
+            (click)="onActiveComponent(i)"
+            [checked]="component.isActive"
+          />
+        </div>
+      </td>
+      <td>{{ component.component_name }}</td>
+    </tr>
+  </tbody>
+</table>

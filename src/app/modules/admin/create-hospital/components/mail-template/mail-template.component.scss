@@ -1,0 +1,62 @@
+@import 'src/app/styles/variable';
+
+.title {
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: 40px;
+}
+
+.tab {
+  height: 32px;
+  width: fit-content;
+
+  margin-right: 32px;
+  cursor: pointer !important;
+  text-align: center;
+  color: $black-300;
+  margin-top: 16px;
+
+  &.active {
+    border-bottom: 2px solid $blue-500;
+    color: $blue-500;
+  }
+
+  &:hover {
+    opacity: 95%;
+  }
+}
+
+textarea {
+  resize: none;
+  font-size: 14px;
+}
+
+.form-label {
+  width: 190px;
+  margin-right: 18px;
+  margin-left: 40px;
+}
+
+.form-control {
+  font-size: 14px;
+  width: calc(100% - 248px);
+
+  &:disabled {
+    background-color: $gray-200;
+  }
+}
+
+input {
+  font-size: 14px;
+  height: 32px;
+}
+
+.mail {
+  border-top: 1px dashed $gray-200;
+  padding-top: 16px;
+  margin-left: 1.25rem;
+
+  &.first-child {
+    border-top: none;
+  }
+}

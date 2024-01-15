@@ -1,0 +1,122 @@
+{
+  "patientList": {
+    "data": [
+      {
+        "patient_id": "A001",
+        "patient_full_name": "Name patient 1",
+        "patient_gender": 1,
+        "age": 50,
+        "patient_birthday": "2021-09-09 10:20:11",
+        "patient_risk_score": "",
+        "group_name": "group 1",
+        "patient_start_period_of_use": "2021-09-09 10:20:11",
+        "patient_end_period_of_use": "2021-10-09 10:20:11"
+      },
+      {
+        "patient_id": "A002",
+        "patient_full_name": "Name patient 2",
+        "patient_gender": 1,
+        "age": 50,
+        "patient_birthday": "2021-09-09 10:20:11",
+        "patient_risk_score": "",
+        "group_name": "group 1",
+        "patient_start_period_of_use": "2021-09-09 10:20:11",
+        "patient_end_period_of_use": "2021-10-09 10:20:11"
+      },
+      {
+        "patient_id": "A003",
+        "patient_full_name": "Name patient 3",
+        "patient_gender": 0,
+        "age": 50,
+        "patient_birthday": "2021-09-09 10:20:11",
+        "patient_risk_score": "",
+        "group_name": "group 1",
+        "patient_start_period_of_use": "2021-09-09 10:20:11",
+        "patient_end_period_of_use": "2021-10-09 10:20:11"
+      },
+      {
+        "patient_id": "A004",
+        "patient_full_name": "Name patient 4",
+        "patient_gender": 1,
+        "patient_birthday": "2021-09-09 10:20:11",
+        "patient_risk_score": "",
+        "group_name": "group 1",
+        "patient_start_period_of_use": "2021-09-09 10:20:11",
+        "patient_end_period_of_use": "2021-10-09 10:20:11"
+      },
+      {
+        "patient_id": "A005",
+        "patient_full_name": "Name patient 5",
+        "patient_gender": 0,
+        "patient_birthday": "2021-09-09 10:20:11",
+        "patient_risk_score": "",
+        "group_name": "group 1",
+        "patient_start_period_of_use": "",
+        "patient_end_period_of_use": "2021-10-09 10:20:11"
+      },
+      {
+        "patient_id": "A006",
+        "patient_full_name": "Name patient 6",
+        "patient_gender": 0,
+        "patient_birthday": "2021-09-09 10:20:11",
+        "patient_risk_score": "",
+        "group_name": "group 1",
+        "patient_start_period_of_use": "2021-09-09 10:20:11",
+        "patient_end_period_of_use": ""
+      },
+      {
+        "patient_id": "A07",
+        "patient_full_name": "Name patient 7",
+        "patient_gender": 0,
+        "patient_birthday": "2021-09-09 10:20:11",
+        "patient_risk_score": "",
+        "group_name": "group 1",
+        "patient_start_period_of_use": "2021-09-09 10:20:11",
+        "patient_end_period_of_use": ""
+      },
+      {
+        "patient_id": "A008",
+        "patient_full_name": "Name patient 8",
+        "patient_gender": 0,
+        "patient_birthday": "2021-09-09 10:20:11",
+        "patient_risk_score": "4.0",
+        "group_name": "group 1",
+        "patient_start_period_of_use": "",
+        "patient_end_period_of_use": "2021-10-09 10:20:11"
+      }
+    ],
+    "current_page": 1,
+    "last_page": 1,
+    "per_page": 20,
+    "from": 1,
+    "to": 2,
+    "total": 2000
+  },
+  "originalFields": {
+    "patient_code": {
+      "field": "patient_code",
+      "isSort": false,
+      "sortType": ""
+    },
+    "patient_full_name": {
+      "field": "patient_full_name",
+      "isSort": false,
+      "sortType": ""
+    },
+    "patient_gender": {
+      "field": "patient_gender",
+      "isSort": false,
+      "sortType": ""
+    },
+    "patient_birthday": {
+      "field": "patient_birthday",
+      "isSort": false,
+      "sortType": ""
+    },
+    "period": {
+      "field": "period",
+      "isSort": false,
+      "sortType": ""
+    }
+  }
+}

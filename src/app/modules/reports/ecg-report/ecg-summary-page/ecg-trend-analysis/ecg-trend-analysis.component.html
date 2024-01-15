@@ -1,0 +1,76 @@
+<div class="section-header mt-6mm">
+  <span class="header-text">{{ 'trend analysis' | translate }}</span>
+  <div class="separate-line"></div>
+</div>
+
+<div class="trend-analysis mt-5mm">
+  <div class="comment-row" [class.ja-lang]="language === 'ja'">
+    <div class="left-side">
+      <div class="fs-11pt">[ {{ 'trend by day of week' | translate }} ]</div>
+      <div class="text-justify mt-3mm" *ngIf="textCode2 === 10">
+        {{
+          'ecg record text.afib tendency shown'
+            | translate: { day: 'full day text.' + getDayOfWeek(maxCountDay) | translate }
+        }}
+      </div>
+      <div class="text-justify mt-3mm" *ngIf="textCode2 === 11">
+        {{ 'ecg record text.afib tendency not shown' | translate }}
+      </div>
+      <div class="text-justify mt-3mm" *ngIf="textCode2 === 12">
+        {{ 'ecg record text.not enough data' | translate }}
+      </div>
+    </div>
+
+    <div class="right-side">
+      <div class="fs-11pt">[ {{ 'trend by subjective symptoms' | translate }} ]</div>
+      <div class="text-justify mt-3mm">
+        {{
+          (maxSymptomShown.count > 0
+            ? maxSymptomShown.afib_count > 0
+              ? 'ecg record text.has symptom with afib'
+              : 'ecg record text.has symptom no afib'
+            : 'ecg record text.no symptom'
+          )
+            | translate
+              : {
+                  symptomName: maxSymptomShown.name,
+                  symptomCount: maxSymptomShown.count,
+                  afibCount: maxSymptomShown.afib_count
+                }
+        }}
+      </div>
+    </div>
+  </div>
+
+  <div class="chart-row" [class.ja-lang]="language === 'ja'">
+    <div class="left-side">
+      <div class="mt-5mm fs-11pt">{{ 'record' | translate }} [ {{ 'times' | translate }} ]</div>
+      <div id="trendByDayOfWeek"></div>
+    </div>
+
+    <div class="right-side">
+      <div class="mt-5mm fs-11pt">{{ 'record' | translate }} [ {{ 'times' | translate }} ]</div>
+      <div id="trendBySymptom"></div>
+    </div>
+  </div>
+</div>
+<div id="trendMonthsDiv" class="d-flex" [class]="language === 'ja' ? ' mt-4mm' : ''">
+  <div class="text-side">
+    <div class="fs-11pt">[{{ 'trends over the last 12 months' | translate }}]</div>
+    <div class="mt-3mm">{{ 'ecg record text.12 month record text' | translate }}</div>
+  </div>
+  <div class="graph-side">
+    <div class="fs-11pt">{{ 'record' | translate }} [ {{ 'times' | translate }} ]</div>
+    <div id="trendIn12Month"></div>
+  </div>
+</div>
+<div class="d-flex justify-content-end legend-div mt-8mm">
+  <div class="icon-unit normal"></div>
+  <span class="legend-text">{{ 'normal sinus rhythm' | translate }}</span>
+  <div class="icon-unit danger"></div>
+  <span class="legend-text">{{ 'afib possible' | translate }}</span>
+  <div class="icon-unit abnormal"></div>
+  <span class="legend-text"> {{ 'tachycardia' | translate }}{{ '/' | translate }}{{ 'bradycardia' | translate }} </span>
+  <div class="icon-unit unclassified"></div>
+  <span class="legend-text">{{ 'cannot be classified' | translate }}</span>
+</div>

@@ -1,0 +1,17 @@
+<div *ngIf="star" class="d-flex align-items-center">
+  <div class="review-left">
+    <img [src]="'assets/images/icon_review' + star + '.svg'" alt="smile" class="smile" />
+  </div>
+  <div class="review-right">
+    <div class="text-small text-blue-600">{{ 'patient detail.level of achievement' | translate }}</div>
+    <div class="d-flex">
+      <img src="assets/images/icon_star.svg" alt="star" class="star" *ngFor="let i of starArr" />
+    </div>
+  </div>
+</div>
+<ng-template [ngIf]="!star">
+  <div class="text-small text-blue-600 text-center">
+    {{ 'patient detail.level of achievement' | translate }}
+  </div>
+  <img src="assets/images/icon_review_null.svg" alt="?" class="review-not-complete" />
+</ng-template>

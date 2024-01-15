@@ -1,0 +1,113 @@
+<ng-container *ngIf="isRegistrationScreen">
+  <div class="font-weight-500 fs-24 mb-3">{{ 'registration form' | translate }}</div>
+  <form [formGroup]="patientForm">
+    <div class="text-normal text-left">
+      {{ 'please enter your user information in the blank.' | translate }}
+    </div>
+    <div class="mb-3 text-normal text-left">
+      {{ 'if there are any entered items, please check that the contents are correct before registering.' | translate }}
+    </div>
+    <ul class="invalid mb-3 text-normal text-left text-black-300" *ngIf="isError">
+      <li *ngIf="patientForm.controls.patient_full_name.errors?.required">
+        {{ 'validator.required' | translate: { field: 'name (kanji)' | translate } }}
+      </li>
+      <li *ngIf="patientForm.controls.patient_birthday.errors?.required">
+        {{ 'validator.required' | translate: { field: 'date of birth' | translate } }}
+      </li>
+    </ul>
+
+    <div class="d-flex text-left flex-wrap">
+      <div class="div-input">
+        <label for="patient-name" class="text-no-wrap mb-1 text-normal">
+          {{ 'name (kanji)' | translate }} <span class="required">*</span>:
+        </label>
+        <input
+          type="text"
+          id="patient-name"
+          formControlName="patient_full_name"
+          class="form-control first-row-input"
+          maxlength="50"
+          placeholder="{{ 'please enter one character between the first and last name' | translate }} "
+          appTransformSpace
+        />
+      </div>
+    </div>
+
+    <div class="d-flex text-left mb-3 flex-wrap">
+      <div class="div-input div-left">
+        <label class="form-label mb-1 text-right text-normal">
+          {{ 'sex' | translate }} <span class="required">*</span>:
+        </label>
+        <div ngbDropdown #sexDropdown class="select-box">
+          <button
+            type="button"
+            class="btn btn-outline-secondary text-black-300 second-row-input d-flex align-items-center disabled-ignore"
+            id="dropdownBasic2"
+            ngbDropdownToggle
+          >
+            <div class="text text-black-300 text-truncate text-normal">
+              {{ (patientForm.controls.patient_gender.value === sex.FEMALE ? 'Female' : 'Male') | translate }}
+            </div>
+            <i
+              class="fas my-auto icon icon-select ml-auto opacity-25 text-black-300"
+              [class]="ngbSexDropdown?.isOpen() ? 'icon-arrow-up' : 'icon-arrow-down'"
+            ></i>
+          </button>
+          <div class="w-244 p-0" ngbDropdownMenu aria-labelledby="dropdownBasic2">
+            <div
+              *ngFor="let item of genders"
+              class="d-flex align-items-start m-0 select-item cursor-pointer"
+              (click)="selectedItem(item.value)"
+              [class.active]="item.value === patientForm.controls.patient_gender.value"
+            >
+              {{ item.text | translate }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="div-input div-left">
+        <label for="patient-birthday" class="text-no-wrap mb-1 text-normal">
+          {{ 'date of birth' | translate }} <span class="required">*</span>:
+        </label>
+        <app-custom-datepicker
+          id="patient-birthday"
+          class="w-246"
+          inputClass="w-246 h-32 text-normal"
+          [minDate]="minDate"
+          [maxDate]="maxDate"
+          [hasIcon]="true"
+          [date]="patientForm.controls.patient_birthday.value"
+          [format]="sharedService.isJa() ? 'y年MM月DD日' : 'D MMM y'"
+          (dateChange)="onDateChange($event)"
+          [placeholder]="'date of birth' | translate"
+        ></app-custom-datepicker>
+      </div>
+    </div>
+    <div class="text-left mb-3 email-address">
+      <label class="text-no-wrap mb-1 text-normal"> {{ 'email address' | translate }} : </label>
+      <div>{{ patientForm.controls.patient_email.value }}</div>
+    </div>
+
+    <div class="d-flex align-items-center">
+      <div class="div-checkbox d-flex">
+        <input type="checkbox" formControlName="isAgreePolicy" id="is-agree" class="mr-10" value="" />
+      </div>
+      <label for="is-agree" class="text-normal text-black-300 cursor-pointer text-left">
+        {{ 'i agree to receive sale and marketing communications from OMRON HEALTHCARE.' | translate }}
+      </label>
+    </div>
+    <div class="d-flex form-actions">
+      <button
+        type="button"
+        (click)="onCancelClicked()"
+        class="btn btn-outline-secondary text-black-300 ml-auto mr-2 text-normal"
+      >
+        {{ 'button.Cancel' | translate }}
+      </button>
+      <button type="submit" (click)="onConfirmClicked()" class="btn btn-primary bg-blue-300 text-normal">
+        {{ 'button.confirm' | translate }}
+      </button>
+    </div>
+  </form>
+</ng-container>

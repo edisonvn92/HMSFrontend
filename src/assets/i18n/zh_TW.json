@@ -1,0 +1,22 @@
+{
+  "month": "月",
+  "app day text": {
+    "monday": "週一",
+    "tuesday": "週二",
+    "wednesday": "週三",
+    "thursday": "週四",
+    "friday": "週五",
+    "saturday": "週六",
+    "sunday": "週日"
+  },
+  "patient app terms of service and privacy policy": "HMS軟體使用條款與隱私政策",
+  "patient app terms of service and privacy policy introduce": "HMS軟體（以下以「本軟體」稱之）為基於本公司應用程式OMRON connect衍生提供之服務。本軟體之使用條款以及與使用本軟體有關之個人資料使用隱私權政策將以OMRON connect的使用條款為準(應用程式及雲端備份服務)，請於同意該條款的前提下使用本軟體。",
+  "OMRON connect Terms of Use": "OMRON connect 使用條款",
+  "OMRON CONNECT Privacy Statement": "OMRON CONNECT 隱私權聲明",
+  "patient app terms of service and privacy policy introduce addition": "本軟體基於由OMRON connect追加取得之「使用者資訊」以及「使用者資訊」將額外單獨用於以下用途。",
+  "customer information to be additionally acquired": "追加取得之「使用者資訊」",
+  "medication information, physical condition information (including memos)": "用藥資訊、身體狀況資訊（含附註資訊）",
+  "handling contents unique to this application": "本軟體額外單獨取得之內容將（含自OMRON connect取得之「使用者資訊」）",
+  "we will provide it to medical professionals such as doctors": "提供給醫師等醫療從業人員（您指定希望我們提供閱讀權限者）。",
+  "used for the purpose of remote monitoring and medical treatment of hypertension": "提供該醫療從業人員進行高血壓遠距監測。"
+}

@@ -1,0 +1,87 @@
+{
+  "userList": {
+    "data": [
+      {
+        "hcp_id": "3b489ef0-1211-42f4-be68-c09f4f5c2339",
+        "hcp_code": "UHSD22",
+        "hcp_cognito_username": "doctor_test+22",
+        "hcp_full_name": "Doctor Hospital KP01",
+        "hcp_cognito_phone": "0901333596",
+        "hcp_last_login": "2021-09-09 10:20:11",
+        "hcp_start_period_of_use": "2021-09-09 10:20:11",
+        "hcp_end_period_of_use": "2021-10-09 10:20:11",
+        "role_name": "Doctor",
+        "groups": [
+          {
+            "group_id": 1,
+            "group_name": "Group 1"
+          }
+        ]
+      },
+      {
+        "hcp_id": "3b489ef0-1211-42f4-be68-c09f4f5c2339",
+        "hcp_code": "UHSD22",
+        "hcp_cognito_username": "doctor_test+22",
+        "hcp_full_name": "Doctor Hospital KP01",
+        "hcp_cognito_phone": "0901333596",
+        "hcp_last_login": "2021-09-09 10:20:11",
+        "hcp_start_period_of_use": "2021-09-09 10:20:11",
+        "hcp_end_period_of_use": "2021-10-09 10:20:11",
+        "role_name": "Doctor",
+        "groups": [
+          {
+            "group_id": 1,
+            "group_name": "Group 1"
+          },
+          {
+            "group_id": 2,
+            "group_name": "Group 2"
+          }
+        ]
+      }
+    ],
+    "current_page": 1,
+    "last_page": 1,
+    "per_page": 20,
+    "from": 1,
+    "to": 2,
+    "total": 2000
+  },
+  "originalFields": {
+    "hcp_code": {
+      "field": "hcp_code",
+      "isSort": false,
+      "sortType": ""
+    },
+    "hcp_cognito_username": {
+      "field": "hcp_cognito_username",
+      "isSort": false,
+      "sortType": ""
+    },
+    "hcp_full_name": {
+      "field": "hcp_full_name",
+      "isSort": false,
+      "sortType": ""
+    },
+    "hcp_cognito_phone": {
+      "field": "hcp_cognito_phone",
+      "isSort": false,
+      "sortType": ""
+    },
+    "hcp_last_login": {
+      "field": "hcp_last_login",
+      "isSort": false,
+      "sortType": ""
+    },
+    "role_name": {
+      "field": "role_name",
+      "isSort": false,
+      "sortType": ""
+    },
+    "hcp_start_period_of_use": {
+      "field": "hcp_start_period_of_use",
+      "isSort": false,
+      "sortType": ""
+    }
+  }
+}

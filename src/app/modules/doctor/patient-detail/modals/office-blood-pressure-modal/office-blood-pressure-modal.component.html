@@ -1,0 +1,121 @@
+<form [formGroup]="groupForm">
+  <div class="blood-pressure-target-container">
+    <div class="modal-header">
+      <div class="modal-title text-medium font-weight-500 text-black-300" id="modal-basic-title">
+        {{ 'office blood pressure registration' | translate }}
+      </div>
+    </div>
+    <ng-template [ngIf]="true">
+      <div class="modal-body">
+        <ul class="invalid mb-2 text-normal text-black-300" *ngIf="submitted && (groupForm.invalid || serverErr)">
+          <li *ngIf="sysField.errors || (groupForm.errors && groupForm.errors.has_lower_value)">
+            {{ 'validator.invalid' | translate: { field: 'SYS' } }}
+          </li>
+          <li *ngIf="diaField.errors">
+            {{ 'validator.invalid' | translate: { field: 'DIA' } }}
+          </li>
+          <li *ngIf="pulseField.errors">
+            {{ 'validator.invalid' | translate: { field: 'Pulse' } }}
+          </li>
+          <li *ngIf="serverErr">{{ errMess | translate }}</li>
+        </ul>
+        <div class="input-group justify-content-between border-top-solid">
+          <div class="w-187">
+            <label for="sys" class="form-label my-auto m-0 text-normal">
+              {{ 'date-JP' | translate }}
+            </label>
+          </div>
+          <span class="text-normal">
+            {{ currentTime | date: (sharedService.isJa() ? 'yyyy年MM月dd日' : 'd MMM YYYY') }}
+          </span>
+        </div>
+        <div class="input-group justify-content-between border-top-solid border-bot-dash mb-2">
+          <div class="w-187">
+            <label for="sys" class="form-label my-auto m-0 text-normal">
+              {{ 'time' | translate }}
+            </label>
+          </div>
+          <span class="text-normal">{{ currentTime | date: 'HH:mm' }}</span>
+        </div>
+        <div class="input-group border-top-dash">
+          <div class="w-187 my-auto">
+            <label for="sys" class="form-label my-auto text-normal">
+              {{ 'office sys' | translate }}
+            </label>
+          </div>
+          <input
+            type="number"
+            class="form-control"
+            formControlName="sys"
+            id="sys"
+            [min]="minSys"
+            [max]="maxSys"
+            appOnlyNumber
+            [integer]="true"
+          />
+          <div class="text-small unit text-right d-flex align-items-center">mmHg</div>
+        </div>
+        <div class="input-group border-top-solid">
+          <div class="w-187 my-auto">
+            <label for="dia" class="form-label my-auto text-normal">
+              {{ 'office dia' | translate }}
+            </label>
+          </div>
+          <input
+            type="number"
+            class="form-control"
+            formControlName="dia"
+            id="dia"
+            [min]="minDia"
+            [max]="maxDia"
+            appOnlyNumber
+            [integer]="true"
+          />
+          <div class="text-small unit text-right d-flex align-items-center">mmHg</div>
+        </div>
+        <div class="input-group border-top-solid">
+          <div class="w-187 my-auto">
+            <label for="pulse" class="form-label my-auto text-normal">
+              {{ 'pulse rate' | translate }}
+            </label>
+          </div>
+          <input
+            type="number"
+            class="form-control"
+            formControlName="pulse"
+            id="pulse"
+            [min]="minPulse"
+            [max]="maxPulse"
+            appOnlyNumber
+            [integer]="true"
+          />
+          <div class="text-small unit text-right d-flex align-items-center">bpm</div>
+        </div>
+        <div class="input-group border-top-solid justify-content-between" *ngIf="standardizedComponent">
+          <div class="w-187">
+            <label for="standardized" class="form-label my-auto m-0 text-normal">
+              {{ 'standardized' | translate }}
+            </label>
+          </div>
+          <input
+            type="checkbox"
+            id="check-all-group"
+            class="mr-1 my-auto"
+            [checked]="standardized"
+            [class.active]="standardized"
+            (click)="onChangeCheckbox()"
+            value=""
+          />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn bg-white text-normal" (click)="clickedClose()">
+          {{ 'button.Cancel' | translate }}
+        </button>
+        <button type="submit" class="btn bg-white text-blue-500 text-normal left-border" (click)="submitClicked()">
+          {{ 'button.save' | translate }}
+        </button>
+      </div>
+    </ng-template>
+  </div>
+</form>

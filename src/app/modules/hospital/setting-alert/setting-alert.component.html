@@ -1,0 +1,332 @@
+<form class="setting-alert" [formGroup]="settingForm" *ngIf="this.countAlertType; else notSettingAlertFunction">
+  <div class="setting-alert-container">
+    <div class="setting-alert-title font-weight-500">
+      <div>{{ 'alert settings' | translate }}</div>
+    </div>
+    <div class="text-gray-800 text-small">{{ 'you can set up to two alerts for each indicator.' | translate }}</div>
+    <ul class="invalid mt-24 mb-0 text-normal text-black-300" *ngIf="isError">
+      <li
+        *ngIf="
+          settingForm.controls.hospital_threshold_alert_weight1_days.errors?.required ||
+          settingForm.controls.hospital_threshold_alert_weight1_ratio.errors?.required ||
+          settingForm.controls.hospital_threshold_alert_weight1_ratio.errors?.min ||
+          settingForm.controls.hospital_threshold_alert_weight1_ratio.errors?.max ||
+          settingForm.controls.hospital_threshold_alert_weight1_ratio.errors?.pattern ||
+          settingForm.controls.hospital_threshold_alert_weight1_days.errors?.min ||
+          settingForm.controls.hospital_threshold_alert_weight1_days.errors?.max
+        "
+      >
+        {{ 'validator.invalid' | translate: { field: 'weight alert :field' | translate: { field: 1 } } }}
+      </li>
+      <li
+        *ngIf="
+          settingForm.controls.hospital_threshold_alert_weight2_days.errors?.required ||
+          settingForm.controls.hospital_threshold_alert_weight2_ratio.errors?.required ||
+          settingForm.controls.hospital_threshold_alert_weight2_ratio.errors?.min ||
+          settingForm.controls.hospital_threshold_alert_weight2_ratio.errors?.max ||
+          settingForm.controls.hospital_threshold_alert_weight2_ratio.errors?.pattern ||
+          settingForm.controls.hospital_threshold_alert_weight2_days.errors?.min ||
+          settingForm.controls.hospital_threshold_alert_weight2_days.errors?.max
+        "
+      >
+        {{ 'validator.invalid' | translate: { field: 'weight alert :field' | translate: { field: 2 } } }}
+      </li>
+      <li
+        *ngIf="
+          settingForm.controls.hospital_threshold_alert_af1_times.errors?.required ||
+          settingForm.controls.hospital_threshold_alert_af1_days.errors?.required ||
+          settingForm.controls.hospital_threshold_alert_af1_times.errors?.min ||
+          settingForm.controls.hospital_threshold_alert_af1_times.errors?.max ||
+          settingForm.controls.hospital_threshold_alert_af1_days.errors?.min ||
+          settingForm.controls.hospital_threshold_alert_af1_days.errors?.max
+        "
+      >
+        {{ 'validator.invalid' | translate: { field: 'AF alert :field' | translate: { field: 1 } } }}
+      </li>
+      <li
+        *ngIf="
+          settingForm.controls.hospital_threshold_alert_af2_times.errors?.required ||
+          settingForm.controls.hospital_threshold_alert_af2_times.errors?.min ||
+          settingForm.controls.hospital_threshold_alert_af2_times.errors?.max
+        "
+      >
+        {{ 'validator.invalid' | translate: { field: 'AF alert :field' | translate: { field: 2 } } }}
+      </li>
+      <li
+        *ngIf="
+          settingForm.controls.hospital_threshold_alert_high_bp_dia.errors?.required ||
+          settingForm.controls.hospital_threshold_alert_high_bp_dia.errors?.min ||
+          settingForm.controls.hospital_threshold_alert_high_bp_dia.errors?.max ||
+          settingForm.controls.hospital_threshold_alert_high_bp_sys.errors?.required ||
+          settingForm.controls.hospital_threshold_alert_high_bp_sys.errors?.min ||
+          settingForm.controls.hospital_threshold_alert_high_bp_sys.errors?.max ||
+          bpSmallerErr.includes(bloodPressureLevel.high)
+        "
+      >
+        {{ 'validator.invalid' | translate: { field: 'overpriced alert' | translate } }}
+      </li>
+      <li
+        *ngIf="
+          settingForm.controls.hospital_threshold_alert_low_bp_sys.errors?.required ||
+          settingForm.controls.hospital_threshold_alert_low_bp_sys.errors?.min ||
+          settingForm.controls.hospital_threshold_alert_low_bp_sys.errors?.max ||
+          settingForm.controls.hospital_threshold_alert_low_bp_dia.errors?.required ||
+          settingForm.controls.hospital_threshold_alert_low_bp_dia.errors?.min ||
+          settingForm.controls.hospital_threshold_alert_low_bp_dia.errors?.max ||
+          bpSmallerErr.includes(bloodPressureLevel.low)
+        "
+      >
+        {{ 'validator.invalid' | translate: { field: 'low alert' | translate } }}
+      </li>
+      <li
+        *ngIf="
+          settingForm.controls.hospital_threshold_alert_ihb1_times.errors?.required ||
+          settingForm.controls.hospital_threshold_alert_ihb1_days.errors?.required ||
+          settingForm.controls.hospital_threshold_alert_ihb1_times.errors?.min ||
+          settingForm.controls.hospital_threshold_alert_ihb1_times.errors?.max ||
+          settingForm.controls.hospital_threshold_alert_ihb1_days.errors?.min ||
+          settingForm.controls.hospital_threshold_alert_ihb1_days.errors?.max
+        "
+      >
+        {{ 'validator.invalid' | translate: { field: 'IHB alert :field' | translate: { field: 1 } } }}
+      </li>
+      <li
+        *ngIf="
+          settingForm.controls.hospital_threshold_alert_ihb2_times.errors?.required ||
+          settingForm.controls.hospital_threshold_alert_ihb2_times.errors?.min ||
+          settingForm.controls.hospital_threshold_alert_ihb2_times.errors?.max
+        "
+      >
+        {{ 'validator.invalid' | translate: { field: 'IHB alert :field' | translate: { field: 2 } } }}
+      </li>
+    </ul>
+    <div class="row setting-alert-content" [class.en-language]="!sharedService.isJa()">
+      <!-- Weight alert -->
+      <div class="col-6 alert-item" *ngIf="hospitalSetting?.ALERT?.WEIGHT?.hospital_setting_function_status">
+        <div class="main-label">{{ 'weight alert' | translate }}</div>
+        <div class="alert-item-content">
+          <div class="sub-label">
+            {{ 'alert' | translate: { field: '1' } }}
+          </div>
+          <div class="d-flex align-items-center">
+            <input
+              type="checkbox"
+              id="weight1-alert"
+              class="mr-3"
+              formControlName="hospital_threshold_alert_weight1_status"
+            />
+            <input
+              type="number"
+              class="mr-10 form-control first-input"
+              formControlName="hospital_threshold_alert_weight1_days"
+              appOnlyNumber
+              [integer]="true"
+              [attr.disabled]="settingForm.controls.hospital_threshold_alert_weight1_status.value ? null : true"
+            />
+            <div class="first-text">{{ 'after in days' | translate }}</div>
+            <input
+              type="number"
+              class="mr-10 form-control second-input"
+              appOnlyNumber
+              formControlName="hospital_threshold_alert_weight1_ratio"
+              [attr.disabled]="settingForm.controls.hospital_threshold_alert_weight1_status.value ? null : true"
+            />
+            <div class="second-text">{{ 'increased by more than kg' | translate }}</div>
+          </div>
+          <div class="sub-label">{{ 'alert' | translate: { field: '2' } }}</div>
+          <div class="d-flex align-items-center">
+            <input
+              type="checkbox"
+              id="weight2-alert"
+              class="mr-3"
+              formControlName="hospital_threshold_alert_weight2_status"
+            />
+            <input
+              type="number"
+              class="mr-10 form-control first-input"
+              appOnlyNumber
+              [integer]="true"
+              formControlName="hospital_threshold_alert_weight2_days"
+              [attr.disabled]="settingForm.controls.hospital_threshold_alert_weight2_status.value ? null : true"
+            />
+            <div class="first-text">{{ 'after in days' | translate }}</div>
+            <input
+              type="number"
+              class="mr-10 form-control second-input"
+              appOnlyNumber
+              formControlName="hospital_threshold_alert_weight2_ratio"
+              [attr.disabled]="settingForm.controls.hospital_threshold_alert_weight2_status.value ? null : true"
+            />
+            <div class="second-text">{{ 'increased by more than kg' | translate }}</div>
+          </div>
+        </div>
+      </div>
+      <!-- BP alert -->
+      <div class="col-6 alert-item" *ngIf="hospitalSetting?.ALERT?.BP?.hospital_setting_function_status">
+        <div class="main-label">{{ 'blood pressure alert' | translate }}</div>
+        <div class="alert-item-content">
+          <div class="sub-label">
+            {{ 'overpriced alert' | translate }}
+          </div>
+          <div class="d-flex align-items-center">
+            <input
+              type="checkbox"
+              id="high-bp-alert"
+              class="mr-3"
+              formControlName="hospital_threshold_alert_high_bp_status"
+            />
+            {{ 'systolic blood pressure' | translate }}
+            <input
+              type="number"
+              class="ml-12 mr-12 form-control"
+              appOnlyNumber
+              [integer]="true"
+              formControlName="hospital_threshold_alert_high_bp_sys"
+              [attr.disabled]="settingForm.controls.hospital_threshold_alert_high_bp_status.value ? null : true"
+            />
+            {{ 'diastolic blood pressure' | translate }}
+            <input
+              type="number"
+              class="ml-12 mr-2 form-control"
+              appOnlyNumber
+              [integer]="true"
+              formControlName="hospital_threshold_alert_high_bp_dia"
+              [attr.disabled]="settingForm.controls.hospital_threshold_alert_high_bp_status.value ? null : true"
+            />
+            {{ 'mmHg or more' | translate }}
+          </div>
+          <div class="sub-label">{{ 'low alert' | translate }}</div>
+          <div class="d-flex align-items-center">
+            <input
+              type="checkbox"
+              id="low-bp-alert"
+              class="mr-3"
+              formControlName="hospital_threshold_alert_low_bp_status"
+            />
+            {{ 'systolic blood pressure' | translate }}
+            <input
+              type="number"
+              class="ml-12 mr-12 form-control"
+              appOnlyNumber
+              [integer]="true"
+              formControlName="hospital_threshold_alert_low_bp_sys"
+              [attr.disabled]="settingForm.controls.hospital_threshold_alert_low_bp_status.value ? null : true"
+            />
+            {{ 'diastolic blood pressure' | translate }}
+            <input
+              type="number"
+              class="mr-7 ml-12 form-control"
+              appOnlyNumber
+              [integer]="true"
+              formControlName="hospital_threshold_alert_low_bp_dia"
+              [attr.disabled]="settingForm.controls.hospital_threshold_alert_low_bp_status.value ? null : true"
+            />
+            {{ 'mmHg or less' | translate }}
+          </div>
+        </div>
+      </div>
+      <!-- AF alert -->
+      <div class="col-6 alert-item" *ngIf="hospitalSetting?.ALERT?.AF?.hospital_setting_function_status">
+        <div class="main-label">{{ 'AF alert' | translate }}</div>
+        <div class="alert-item-content">
+          <div class="sub-label">
+            {{ 'alert' | translate: { field: '1' } }}
+          </div>
+          <div class="d-flex align-items-center">
+            <input type="checkbox" id="af1-alert" class="mr-3" formControlName="hospital_threshold_alert_af1_status" />
+            <input
+              type="number"
+              class="mr-10 form-control first-input"
+              appOnlyNumber
+              [integer]="true"
+              formControlName="hospital_threshold_alert_af1_days"
+              [attr.disabled]="settingForm.controls.hospital_threshold_alert_af1_status.value ? null : true"
+            />
+            <div class="first-text">{{ 'day' | translate }}</div>
+            <input
+              type="number"
+              class="mr-10 form-control second-input"
+              appOnlyNumber
+              [integer]="true"
+              formControlName="hospital_threshold_alert_af1_times"
+              [attr.disabled]="settingForm.controls.hospital_threshold_alert_af1_status.value ? null : true"
+            />
+            <div class="second-text">{{ 'at the time of detection' | translate }}</div>
+          </div>
+          <div class="sub-label">{{ 'alert' | translate: { field: '2' } }}</div>
+          <div class="d-flex align-items-center">
+            <input type="checkbox" id="af2-alert" class="mr-3" formControlName="hospital_threshold_alert_af2_status" />
+            <input
+              type="number"
+              class="mr-10 form-control first-input"
+              appOnlyNumber
+              [integer]="true"
+              formControlName="hospital_threshold_alert_af2_times"
+              [attr.disabled]="settingForm.controls.hospital_threshold_alert_af2_status.value ? null : true"
+            />
+            <div class="first-text">{{ 'at the time of continuous detection' | translate }}</div>
+          </div>
+        </div>
+      </div>
+      <!-- IHB alert -->
+      <div class="col-6 alert-item" *ngIf="hospitalSetting?.ALERT?.IHB?.hospital_setting_function_status">
+        <div class="main-label">{{ 'irregular heartbeat alert' | translate }}</div>
+        <div class="alert-item-content">
+          <div class="sub-label">{{ 'alert' | translate: { field: '1' } }}</div>
+          <div class="d-flex align-items-center">
+            <input
+              type="checkbox"
+              id="ihb-1-alert"
+              class="mr-3"
+              formControlName="hospital_threshold_alert_ihb1_status"
+            />
+            <input
+              type="number"
+              class="mr-10 form-control first-input"
+              appOnlyNumber
+              [integer]="true"
+              formControlName="hospital_threshold_alert_ihb1_days"
+              [attr.disabled]="settingForm.controls.hospital_threshold_alert_ihb1_status.value ? null : true"
+            />
+            <div class="first-text">{{ 'day' | translate }}</div>
+            <input
+              type="number"
+              class="mr-10 form-control second-input"
+              appOnlyNumber
+              [integer]="true"
+              formControlName="hospital_threshold_alert_ihb1_times"
+              [attr.disabled]="settingForm.controls.hospital_threshold_alert_ihb1_status.value ? null : true"
+            />
+            <div class="second-text">{{ 'at the time of detection' | translate }}</div>
+          </div>
+          <div class="sub-label">{{ 'alert' | translate: { field: '2' } }}</div>
+          <div class="d-flex align-items-center">
+            <input
+              type="checkbox"
+              id="ihb-2-alert"
+              class="mr-3"
+              formControlName="hospital_threshold_alert_ihb2_status"
+            />
+            <input
+              type="number"
+              class="mr-10 form-control first-input"
+              appOnlyNumber
+              [integer]="true"
+              formControlName="hospital_threshold_alert_ihb2_times"
+              [attr.disabled]="settingForm.controls.hospital_threshold_alert_ihb2_status.value ? null : true"
+            />
+            <div class="first-text">{{ 'at the time of continuous detection' | translate }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary bg-blue-500 btn-keep text-normal ml-3 mt-24" (click)="onSubmit()">
+      {{ 'button.save' | translate }}
+    </button>
+  </div>
+</form>
+<ng-template #notSettingAlertFunction>
+  <div class="no-setting-alert">
+    {{ 'in order to use this function, please set the alert usage settings' | translate }}
+  </div>
+</ng-template>

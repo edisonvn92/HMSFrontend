@@ -1,0 +1,25 @@
+<div class="patient-detail-component">
+  <div class="d-flex justify-content-between align-items-center">
+    <div class="left-title">{{ 'patient detail.temperature' | translate }}</div>
+    <div class="text-small text-gray-190">
+      {{ showDate() ? (showDate() | translate) : '----/--/--' }}
+    </div>
+  </div>
+  <div class="d-flex justify-content-between content">
+    <div class="icon-temperature icon"></div>
+    <div class="text-right">
+      <div>
+        <span class="text-small mr-7">{{ 'patient detail.latest' | translate }}</span>
+        <span class="primary-value"
+          >{{ patient?.vital_temperature_body ? fixNumber(patient?.vital_temperature_body) + '°C' : '-' }}
+        </span>
+      </div>
+      <div class="text-right mt--4">
+        <span class="text-small">{{ 'patient detail.7 days average' | translate }}</span>
+        <span class="text-normal unit"
+          >{{ patient?.vital_temperature_body_7days ? fixNumber(patient?.vital_temperature_body_7days) + '°C' : '-' }}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

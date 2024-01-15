@@ -1,0 +1,68 @@
+@import 'src/app/styles/variable';
+
+.ngb-dp-navigation-chevron {
+  background-color: black;
+}
+
+.form-group.hidden {
+  width: 0;
+  margin: 0;
+  border: none;
+  padding: 0;
+}
+
+.custom-day {
+  text-align: center;
+  padding: 6px;
+  display: inline-block;
+  height: 2rem;
+  width: 2rem;
+  font-size: 14px;
+
+  &.focused {
+    background-color: #e6e6e6;
+  }
+
+  &.range,
+  &:hover {
+    background-image: linear-gradient(180deg, #08c, #04c);
+    color: white;
+  }
+
+  &.faded {
+    background-image: linear-gradient(180deg, #eee, #eee);
+    color: black;
+  }
+}
+
+.form-control {
+  color: $black-300;
+}
+
+.form-control[readonly] {
+  background-color: #fff;
+}
+
+.form-control:disabled {
+  background-color: $gray-150;
+  opacity: 1;
+  cursor: not-allowed;
+}
+
+.icon-calendar-1 {
+  background-image: url('../../../../assets/images/icon_calendar.svg');
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: right 11px center;
+}
+
+.icon-calendar-2 {
+  background-image: url('../../../../assets/images/icon_calendar_0.svg');
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: right 11px center;
+}
+
+.form-group {
+  margin-bottom: 0 !important;
+}

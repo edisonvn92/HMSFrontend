@@ -1,0 +1,49 @@
+@import 'src/app/styles/variable';
+
+.modal-body {
+  padding: 1rem 0;
+}
+
+.history-modal {
+  .list {
+    max-height: 415px;
+
+    .header-content {
+      margin: auto 40px;
+    }
+
+    .date {
+      width: 50%;
+    }
+
+    .blood-pressure {
+      width: 130px;
+      min-width: 130px;
+      padding-top: 0;
+      padding-bottom: 0;
+
+      .sys-side,
+      .dia-side {
+        width: 22px;
+      }
+    }
+
+    .pulse {
+      width: 25%;
+    }
+
+    .history-content {
+      .month {
+        margin: 9px 40px 0 40px;
+      }
+
+      .content {
+        margin: auto 40px;
+      }
+    }
+  }
+
+  .pagination-history {
+    margin-right: 32px;
+  }
+}

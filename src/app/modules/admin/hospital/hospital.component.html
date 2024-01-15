@@ -1,0 +1,180 @@
+<div class="hospital-container">
+  <div class="hospital-content">
+    <form [formGroup]="searchForm">
+      <div class="d-flex align-items-center search-hospital pb-3">
+        <div class="input-group hospital-search">
+          <div>{{ 'ID' | translate }}</div>
+          <input
+            type="text"
+            class="form-control search-input mt-2 text-normal bg-white"
+            formControlName="idSearch"
+            placeholder="{{ 'please enter' | translate }}"
+            name="textSearch"
+            (keyup.enter)="findRecords(true)"
+            [disabled]="isSearching"
+          />
+        </div>
+        <div class="input-group hospital-search">
+          <div>{{ 'office name' | translate }}</div>
+          <input
+            type="text"
+            class="form-control search-input mt-2 text-normal bg-white"
+            formControlName="nameSearch"
+            placeholder="{{ 'please enter' | translate }}"
+            name="textSearch"
+            (keyup.enter)="findRecords(true)"
+            [disabled]="isSearching"
+          />
+        </div>
+        <div class="input-group hospital-search">
+          <div>{{ 'address' | translate }}</div>
+          <input
+            type="text"
+            class="form-control search-input mt-2 text-normal bg-white"
+            placeholder="{{ 'please enter' | translate }}"
+            formControlName="addressSearch"
+            name="textSearch"
+            (keyup.enter)="findRecords(true)"
+            [disabled]="isSearching"
+          />
+        </div>
+        <div>
+          {{ 'created date' | translate }}
+          <div class="d-flex mt-2">
+            <app-custom-datepicker
+              id="start-date"
+              [hasIcon]="true"
+              [maxDate]="currentDate"
+              [date]="searchingStartDate"
+              inputClass="w-160 h-32 text-normal"
+              [placeholder]="'select date' | translate"
+              format="yyyy年MM月DD日"
+              (dateChange)="onChooseDate($event)"
+            ></app-custom-datepicker>
+            <app-custom-datepicker
+              id="end-date"
+              [hasIcon]="true"
+              [placeholder]="'select date' | translate"
+              class="ml-10"
+              [maxDate]="currentDate"
+              [date]="searchingEndDate"
+              inputClass="w-160 h-32 text-normal"
+              format="yyyy年MM月DD日"
+              (dateChange)="onChooseDate($event, 'end')"
+            ></app-custom-datepicker>
+          </div>
+        </div>
+        <div class="ml-auto d-flex mt-auto">
+          <button
+            type="button"
+            class="btn btn-outline-secondary d-flex text-black-300 text-normal"
+            (click)="resetSearchClicked()"
+          >
+            {{ 'button.reset' | translate }}
+          </button>
+          <button type="submit" class="btn btn-primary d-flex ml-2 bg-blue-500 text-normal" (click)="findRecords(true)">
+            {{ 'button.search' | translate }}
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <table class="table hospital-table" id="table-content">
+      <thead>
+        <tr>
+          <th scope="col" class="hospital-code">
+            <div>
+              <app-label-column-table
+                [active]="tableFields['hospital_code'].isSort"
+                [sortType]="tableFields['hospital_code'].sortType"
+                [label]="'ID' | translate"
+                [labelId]="'hospital_code'"
+                (sortEvent)="sortBy($event)"
+                [spaceBetween]="true"
+                [classSort]="'ml-0'"
+              >
+              </app-label-column-table>
+            </div>
+          </th>
+          <th scope="col">
+            <div>
+              <app-label-column-table
+                [active]="tableFields['hospital_name'].isSort"
+                [sortType]="tableFields['hospital_name'].sortType"
+                [label]="'medical institution name' | translate"
+                [labelId]="'hospital_name'"
+                (sortEvent)="sortBy($event)"
+                [spaceBetween]="true"
+                [classSort]="'ml-0'"
+              >
+              </app-label-column-table>
+            </div>
+          </th>
+          <th scope="col">
+            <div>
+              <app-label-column-table
+                [active]="tableFields['hospital_address'].isSort"
+                [sortType]="tableFields['hospital_address'].sortType"
+                [label]="'address' | translate"
+                [labelId]="'hospital_address'"
+                (sortEvent)="sortBy($event)"
+                [spaceBetween]="true"
+                [classSort]="'ml-0'"
+              >
+              </app-label-column-table>
+            </div>
+          </th>
+          <th scope="col" class="created-at">
+            <div>
+              <app-label-column-table
+                [active]="tableFields['created_at'].isSort"
+                [sortType]="tableFields['created_at'].sortType"
+                [label]="'created date and time' | translate"
+                [labelId]="'created_at'"
+                (sortEvent)="sortBy($event)"
+                [spaceBetween]="true"
+                [classSort]="'ml-0'"
+              >
+              </app-label-column-table>
+            </div>
+          </th>
+          <th scope="col" class="text-center action">{{ 'actions' | translate }}</th>
+        </tr>
+      </thead>
+      <tbody [attr.noData]="'there is no data' | translate">
+        <tr *ngFor="let hospital of hospitalList.data">
+          <td class="hospital-code">
+            {{ hospital.hospital_code }}
+          </td>
+          <td class="break-space">{{ hospital.hospital_name }}</td>
+          <td class="break-space">{{ hospital.hospital_address }}</td>
+          <td class="text-right created-at">{{ hospital.created_at | date: 'yyyy.MM.dd HH:mm' }}</td>
+          <td class="text-center action">
+            <span (click)="onCreateHospital(hospital.hospital_id)" class="text-blue-500 underline-hover cursor-pointer">
+              {{ 'edit' | translate }}
+            </span>
+            |
+            <span class="text-red-200 underline-hover cursor-pointer" (click)="deleteClicked(hospital)">
+              {{ 'delete' | translate }}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="d-flex mt-2">
+      <button type="button" class="btn btn-primary d-flex bg-blue-500 text-normal" (click)="onCreateHospital()">
+        <div class="icon my-auto mr-2 icon-plus morning-2"></div>
+        {{ 'add new' | translate }}
+      </button>
+      <app-paginator
+        *ngIf="hospitalList.total"
+        class="paginator ml-auto my-auto"
+        [collectionSize]="hospitalList.total"
+        (pageChange)="findRecords(false, $event)"
+        [pageSize]="hospitalList.per_page"
+        [perPage]="hospitalList.per_page"
+        [page]="param.page"
+      ></app-paginator>
+    </div>
+  </div>
+</div>

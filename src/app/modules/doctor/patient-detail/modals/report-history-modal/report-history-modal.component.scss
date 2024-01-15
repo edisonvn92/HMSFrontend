@@ -1,0 +1,42 @@
+.history-modal {
+  .list {
+    .output-date-and-time {
+      width: 40%;
+      min-width: 130px;
+    }
+
+    .target-month {
+      width: 30%;
+      min-width: 70px;
+    }
+
+    .file {
+      width: 30%;
+      display: flex;
+      justify-content: center;
+
+      .icon-up-down {
+        padding-bottom: 4px;
+      }
+    }
+
+    .header {
+      border-top: unset;
+      padding: 10px 0 16px 0;
+    }
+
+    .history-content {
+      .content {
+        margin: auto 40px;
+      }
+
+      .column-history {
+        height: 37px;
+      }
+    }
+  }
+
+  .custom-modal-body {
+    padding: 1rem 0;
+  }
+}

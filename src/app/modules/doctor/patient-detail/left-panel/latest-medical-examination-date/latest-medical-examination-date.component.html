@@ -1,0 +1,22 @@
+<div class="patient-detail-component">
+  <div class="d-flex justify-content-between align-items-center">
+    <div class="left-title">{{ 'consultation day' | translate }}</div>
+    <div *ngIf="isToday(); else notToday">
+      <div class="text-red-100 cursor-pointer underline-hover" (click)="openMedical.emit(false)">
+        {{ ('button.delete' | translate) + ' >' }}
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-between align-items-center content">
+    <div class="icon-hospital icon"></div>
+    <div class="primary-value">
+      {{ showDate() ? (showDate() | translate) : '----/--/--' }}
+    </div>
+  </div>
+</div>
+<ng-template #notToday>
+  <div class="text-blue-210 cursor-pointer underline-hover" (click)="openMedical.emit(true)">
+    {{ ('button.register' | translate) + ' >' }}
+  </div>
+</ng-template>

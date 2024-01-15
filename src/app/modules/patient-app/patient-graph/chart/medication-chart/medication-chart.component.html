@@ -1,0 +1,12 @@
+<div class="chart-wrap">
+  <div id="medication-chart" class="chart-body mr-0"></div>
+  <app-event-modal
+    *ngIf="showPopup && popupHtml"
+    [popupHtml]="popupHtml"
+    [popupIndex]="popupIndex"
+    [popupLocate]="popupLocate"
+    (mouseenter)="changeInside()"
+    (mouseleave)="changeInside(false)"
+  >
+  </app-event-modal>
+</div>

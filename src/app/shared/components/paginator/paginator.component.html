@@ -1,0 +1,38 @@
+<div class="d-flex ml-auto" [ngClass]="className">
+  <ngb-pagination
+    [(page)]="page"
+    [pageSize]="pageSize"
+    [collectionSize]="collectionSize"
+    [rotate]="true"
+    [ellipses]="false"
+    [maxSize]="5"
+    (pageChange)="pageChange.emit({page, perPage})"
+    [hidden]="collectionSize <= pageSize"
+  >
+    <ng-template ngbPaginationPrevious><div class="icon icon-arrow-left"></div></ng-template>
+    <ng-template ngbPaginationNext><div class="icon icon-arrow-right"></div></ng-template>
+  </ngb-pagination>
+
+  <ng-template [ngIf]="hasCollectionSize">
+    <div ngbDropdown class="align-items-center i mr-51">
+      <button class="btn btn-outline-secondary per-page d-flex" id="dropdownBasic2" ngbDropdownToggle>
+        <div class="text text-black-400 align-items-center d-flex text-truncate text-normal">{{ perPage }}</div>
+        <div
+          class="fas ml-auto icon-select opacity-25"
+          [class]="ngbDropdown?.isOpen() ? 'icon-arrow-up' : 'icon-arrow-down'"
+        ></div>
+      </button>
+      <div class="select" ngbDropdownMenu aria-labelledby="dropdownBasic2">
+        <div
+          *ngFor="let item of listPerPage"
+          class="d-flex align-items-start text-normal cursor-pointer m-0 select-item"
+          (click)="changePerPage(item)"
+        >
+          {{ item }}
+        </div>
+      </div>
+    </div>
+
+    <div class="ml-2 d-flex text align-items-center">{{ 'items' | translate }}</div>
+  </ng-template>
+</div>

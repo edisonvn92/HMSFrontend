@@ -1,0 +1,11 @@
+<div class="hospital-home">
+  <div>
+    {{ 'the URL of Account registration Site of user' | translate }}
+  </div>
+  <div>
+    {{ registerSiteLink }}
+  </div>
+  <div class="copy-clipboard pb-0 cursor-pointer text-blue-500" ngxClipboard [cbContent]="registerSiteLink">
+    {{ 'copy to clipboard' | translate }}
+  </div>
+</div>

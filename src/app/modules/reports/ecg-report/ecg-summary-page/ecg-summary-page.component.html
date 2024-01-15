@@ -1,0 +1,28 @@
+<div class="page portrait">
+  <app-ecg-page-header
+    [pageNumber]="1"
+    [totalPage]="totalPage"
+    [patient]="patient"
+    [language]="language"
+    [recordDate]="recordDate"
+    [endDate]="endDate"
+  >
+  </app-ecg-page-header>
+  <app-ecg-record-result
+    [dataThisMonth]="dataThisMonth"
+    [dataPreviousMonth]="dataPreviousMonth"
+    [data1Month]="data1Month"
+    [language]="language"
+    [endDate]="endDate"
+  >
+  </app-ecg-record-result>
+  <app-ecg-trend-analysis
+    [data12Month]="data12Month"
+    [dataByDay]="dataByDay"
+    [dataBySymptom]="dataBySymptom"
+    [language]="language"
+    [textCodeChart2]="textCodeChart2"
+    [endDate]="endDate"
+  >
+  </app-ecg-trend-analysis>
+</div>

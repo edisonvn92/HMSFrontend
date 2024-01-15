@@ -1,0 +1,87 @@
+<ul class="invalid text-normal text-black-300" *ngIf="isError">
+  <li *ngIf="error.hospital_setting_sys_ranking_high?.required">
+    {{ 'validator.required' | translate: { field: 'sys rank high' | translate } }}
+  </li>
+  <li *ngIf="error.hospital_setting_sys_ranking_medium_high?.required">
+    {{ 'validator.required' | translate: { field: 'sys rank medium high' | translate } }}
+  </li>
+  <li *ngIf="error.hospital_setting_sys_ranking_medium?.required">
+    {{ 'validator.required' | translate: { field: 'sys rank medium' | translate } }}
+  </li>
+  <li *ngIf="error.hospital_setting_sys_ranking_low?.required">
+    {{ 'validator.required' | translate: { field: 'sys rank low' | translate } }}
+  </li>
+  <li *ngIf="error.hospital_setting_dia_ranking_high?.required">
+    {{ 'validator.required' | translate: { field: 'dia rank high' | translate } }}
+  </li>
+  <li *ngIf="error.hospital_setting_dia_ranking_medium_high?.required">
+    {{ 'validator.required' | translate: { field: 'dia rank medium high' | translate } }}
+  </li>
+  <li *ngIf="error.hospital_setting_dia_ranking_medium?.required">
+    {{ 'validator.required' | translate: { field: 'dia rank medium' | translate } }}
+  </li>
+  <li *ngIf="error.hospital_setting_dia_ranking_low?.required">
+    {{ 'validator.required' | translate: { field: 'dia rank low' | translate } }}
+  </li>
+  <li *ngIf="error.pattern">
+    {{ 'validator.ranking invalid' | translate }}
+  </li>
+</ul>
+
+<div class="align-items-center mt-1 d-flex">
+  <label class="form-label text-right text-normal">
+    <span class="mr-1 required">*</span>{{ 'sys rank low' | translate }}:
+  </label>
+  <input class="form-control" [(ngModel)]="setting.hospital_setting_sys_ranking_low" type="text" />
+  <div class="color bg-green-100"></div>
+</div>
+<div class="align-items-center mt-1 d-flex">
+  <label class="form-label text-right text-normal">
+    <span class="mr-1 required">*</span>{{ 'sys rank medium' | translate }}:
+  </label>
+  <input class="form-control" [(ngModel)]="setting.hospital_setting_sys_ranking_medium" type="text" />
+  <div class="color bg-yellow-100"></div>
+</div>
+<div class="align-items-center mt-1 d-flex">
+  <label class="form-label text-right text-normal">
+    <span class="mr-1 required">*</span>{{ 'sys rank medium high' | translate }}:
+  </label>
+  <input class="form-control" [(ngModel)]="setting.hospital_setting_sys_ranking_medium_high" type="text" />
+  <div class="color bg-orange-100"></div>
+</div>
+<div class="align-items-center mt-1 d-flex">
+  <label class="form-label text-right text-normal">
+    <span class="mr-1 required">*</span>{{ 'sys rank high' | translate }}:
+  </label>
+  <input class="form-control" [(ngModel)]="setting.hospital_setting_sys_ranking_high" type="text" />
+  <div class="color bg-pink-100"></div>
+</div>
+
+<div class="align-items-center mt-40 d-flex">
+  <label class="form-label text-right text-normal">
+    <span class="mr-1 required">*</span>{{ 'dia rank low' | translate }}:
+  </label>
+  <input class="form-control" [(ngModel)]="setting.hospital_setting_dia_ranking_low" type="text" />
+  <div class="color bg-green-100"></div>
+</div>
+<div class="align-items-center mt-1 d-flex">
+  <label class="form-label text-right text-normal">
+    <span class="mr-1 required">*</span>{{ 'dia rank medium' | translate }}:
+  </label>
+  <input class="form-control" [(ngModel)]="setting.hospital_setting_dia_ranking_medium" type="text" />
+  <div class="color bg-yellow-100"></div>
+</div>
+<div class="align-items-center mt-1 d-flex">
+  <label class="form-label text-right text-normal">
+    <span class="mr-1 required">*</span>{{ 'dia rank medium high' | translate }}:
+  </label>
+  <input class="form-control" [(ngModel)]="setting.hospital_setting_dia_ranking_medium_high" type="text" />
+  <div class="color bg-orange-100"></div>
+</div>
+<div class="align-items-center mt-1 d-flex">
+  <label class="form-label text-right text-normal">
+    <span class="mr-1 required">*</span>{{ 'dia rank high' | translate }}:
+  </label>
+  <input class="form-control" [(ngModel)]="setting.hospital_setting_dia_ranking_high" type="text" />
+  <div class="color bg-pink-100"></div>
+</div>

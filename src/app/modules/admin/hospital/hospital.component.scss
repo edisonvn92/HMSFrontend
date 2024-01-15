@@ -1,0 +1,42 @@
+.hospital-content {
+  padding: 24px;
+  height: calc(100vh - 48px);
+}
+
+tbody {
+  max-height: calc(100vh - 270px);
+  height: calc(100vh - 270px);
+}
+
+.icon {
+  width: 12px;
+  height: 12px;
+}
+
+.hospital-search {
+  width: 200px;
+  height: 61px;
+  flex: none;
+  margin-right: 51px;
+
+  .search-input {
+    width: 200px;
+    height: 32px;
+  }
+}
+
+.table {
+  margin-bottom: 18px;
+
+  .hospital-code {
+    width: 250px;
+  }
+
+  .action {
+    width: 150px;
+  }
+
+  .created-at {
+    width: 170px;
+  }
+}

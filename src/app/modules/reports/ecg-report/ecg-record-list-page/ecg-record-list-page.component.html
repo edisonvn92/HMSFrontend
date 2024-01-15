@@ -1,0 +1,109 @@
+<div class="page portrait">
+  <app-ecg-page-header
+    [pageNumber]="2"
+    [totalPage]="totalPage"
+    [patient]="patient"
+    [language]="language"
+    [recordDate]="recordDate"
+    [endDate]="endDate"
+    [pageNumber]="pageNumber"
+  >
+  </app-ecg-page-header>
+  <div class="section-header mt-7mm">
+    <span class="header-text">{{ 'record list' | translate }}</span>
+    <div class="separate-line"></div>
+  </div>
+  <table class="record-table mt-6mm" [class]="language === 'ja' ? 'ja-lang' : ''">
+    <thead>
+      <tr>
+        <td class="order-col"></td>
+        <td class="date-col">{{ 'record time' | translate }}</td>
+        <td class="result-col">{{ 'analysis result' | translate }}</td>
+        <td class="heart-rate-col">{{ 'heart rate' | translate }} [bpm]</td>
+        <td class="symptom-col">{{ 'patient detail.subjective symptoms' | translate }}</td>
+        <td class="intensity-col">{{ 'exercise intensity' | translate }}</td>
+        <td class="memo-col">{{ 'memo' | translate }}</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let record of recordList">
+        <td class="order-col">{{ record.order }}</td>
+        <td class="date-col">
+          <div class="d-flex">
+            <div class="left-side">{{ getDateText(record.vital_heart_beat_ldatetime) }}</div>
+            <div class="right-side">{{ getHourText(record.vital_heart_beat_ldatetime) }}</div>
+          </div>
+        </td>
+        <td
+          class="result-col"
+          [ngClass]="
+            record.vital_heart_beat_analysis === ecgResultConstant.AFIB_POSSIBLE
+              ? 'text-afib'
+              : record.vital_heart_beat_analysis === ecgResultConstant.TACHYCARDIA ||
+                record.vital_heart_beat_analysis === ecgResultConstant.BRADYCARDIA
+              ? 'text-pink-150'
+              : ''
+          "
+        >
+          {{ getResultText(record.vital_heart_beat_analysis) | translate }}
+        </td>
+        <td class="heart-rate-col">{{ record.vital_heart_beat_value }}</td>
+        <td class="symptom-col">
+          <div
+            class="d-flex"
+            *ngIf="record.vital_heart_beat_shinden_symptom && record.vital_heart_beat_shinden_symptom.length > 0"
+          >
+            <span *ngIf="record.vital_heart_beat_shinden_symptom.includes(heartSubjectiveSymptoms.NONE)">{{
+              'none' | translate
+            }}</span>
+            <div class="img-icon-div" *ngFor="let symptom of record.symptomIconList">
+              <img [src]="'./assets/images/' + symptom + '.svg'" />
+            </div>
+          </div>
+
+          <span
+            *ngIf="!record.vital_heart_beat_shinden_symptom || record.vital_heart_beat_shinden_symptom.length === 0"
+          >
+            {{ '-' | translate }}</span
+          >
+        </td>
+        <td class="intensity-col">
+          <span>{{ getIntensityText(record.vital_heart_beat_shinden_exercise) | translate }}</span>
+        </td>
+        <td class="memo-col">
+          <div>{{ getMemoText(record.vital_heart_beat_shinden_memo) }}</div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-end legend-div mt-7mm">
+    <div class="img-icon-div">
+      <img src="./assets/images/icon_others.svg" />
+    </div>
+    <span class="legend-text">{{ 'others' | translate }}</span>
+    <div class="img-icon-div ml-6mm">
+      <img src="./assets/images/icon_chest_pain.svg" />
+    </div>
+    <span class="legend-text">{{ 'chest pain' | translate }}</span>
+    <div class="img-icon-div ml-6mm">
+      <img src="./assets/images/icon_dizzy.svg" />
+    </div>
+    <span class="legend-text">{{ 'dizzy' | translate }}</span>
+    <div class="img-icon-div ml-6mm">
+      <img src="./assets/images/icon_malaise.svg" />
+    </div>
+    <span class="legend-text">{{ 'malaise' | translate }} </span>
+    <div class="img-icon-div ml-6mm">
+      <img src="./assets/images/icon_nausea.svg" />
+    </div>
+    <span class="legend-text">{{ 'nausea' | translate }}</span>
+    <div class="img-icon-div ml-6mm">
+      <img src="./assets/images/icon_palpitations.svg" />
+    </div>
+    <span class="legend-text">{{ 'palpitations' | translate }}</span>
+    <div class="img-icon-div ml-6mm">
+      <img src="./assets/images/icon_shortness_of_breath.svg" />
+    </div>
+    <span class="legend-text">{{ 'shortness of breath' | translate }}</span>
+  </div>
+</div>

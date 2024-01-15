@@ -1,0 +1,75 @@
+@import 'src/app/styles/variable';
+
+:host {
+  color: $black-300;
+}
+
+.form-label {
+  width: 150px;
+}
+
+.modal-body {
+  padding: 21px 42px;
+}
+
+.form-control {
+  width: 328px;
+  height: 32px;
+  color: black;
+  border: 1px solid $gray-200;
+}
+
+.form-control:focus {
+  color: black;
+}
+
+.modal-header {
+  height: 40px;
+  padding: 8px 24px;
+}
+
+.modal-footer {
+  height: 52px;
+  padding: 10px 16px;
+  > * {
+    margin: 0;
+  }
+  .btn-close {
+    border-color: $gray-200;
+  }
+}
+
+.form-label {
+  width: 80px;
+}
+
+.invalid {
+  width: 416px;
+}
+
+.modal-header {
+  border-bottom: 1px solid $gray-100;
+}
+
+.modal-footer {
+  border-top: 1px solid $gray-100;
+}
+
+.form-control {
+  font-size: 14px;
+}
+
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: $black-500;
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: $black-500;
+}
+
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: $black-500;
+}

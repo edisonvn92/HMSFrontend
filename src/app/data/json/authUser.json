@@ -1,0 +1,39 @@
+{
+  "hcp_cognito_username": "toanlv",
+  "hcp_full_name": "Le Van Toan",
+  "groups": [
+    {
+      "group_id": 1,
+      "group_name": "group 1"
+    },
+    {
+      "group_id": 2,
+      "group_name": "group 2"
+    },
+    {
+      "group_id": 3,
+      "group_name": "group 3"
+    },
+    {
+      "group_id": 4,
+      "group_name": "group 4"
+    },
+    {
+      "group_id": 5,
+      "group_name": "group 5"
+    },
+    {
+      "group_id": 6,
+      "group_name": "group 6"
+    },
+    {
+      "group_id": 7,
+      "group_name": "group 7 long text 5asdasdasdsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  ],
+  "roles": ["hospital"],
+  "hospital": {
+    "hospital_name": "OHQ123 ABC Hospital",
+    "hospital_address": "Address Hospital Test"
+  }
+}

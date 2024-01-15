@@ -1,0 +1,86 @@
+<div class="page landscape">
+  <div id="page-header" class="d-flex justify-content-between">
+    <div class="fs-9pt left-side">ID: {{ patientId }}</div>
+    <div class="fs-14pt">{{ 'summary report' | translate }}</div>
+    <div class="fs-9pt right-side">
+      {{ 'target period' | translate }}: {{ getTimeFormat(startDate) }} - {{ getTimeFormat(endDate) }}
+    </div>
+  </div>
+  <div id="page-content">
+    <div class="left-content">
+      <div class="chart-title text-center">
+        {{ 'average blood pressure (by day of the week)' | translate }}
+      </div>
+
+      <div class="unit text-gray-190 text-right mr-15">[mmHg]</div>
+      <div id="bp-by-day-of-week" class="chart-content"></div>
+    </div>
+    <div class="right-content">
+      <div class="note">
+        {{ 'average blood pressure (by day of the week) chart legend' | translate }}
+      </div>
+      <div class="first-legend">
+        <div>{{ 'upper row' | translate }}: {{ 'maximum blood pressure' | translate }}</div>
+        <div>{{ 'lower row' | translate }}: {{ 'minimum blood pressure' | translate }}</div>
+      </div>
+      <div class="second-legend">
+        <div class="legend-row">
+          <div class="morning-legend legend"></div>
+          <div>{{ 'patient.morning blood pressure' | translate }}</div>
+        </div>
+        <div class="legend-row">
+          <div class="evening-legend legend"></div>
+          <div>{{ 'patient.evening blood pressure' | translate }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="page-footer">
+    <div class="d-flex justify-content-between">
+      <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center icon-time">
+          <img class="img-morning mr-2" src="./assets/images/icon_morning1.svg" />
+        </div>
+        <div class="note">
+          {{ 'blood pressure / pulse when waking up (morning)' | translate }}
+          <span class="dot">{{ '...' | translate }}</span>
+          <span>
+            {{
+              'blood pressure and pulse rate measured during the time period'
+                | translate
+                  : {
+                      startTime: hospitalSetting.hospital_setting_start_morning.substring(0, 5),
+                      endTime: hospitalSetting.hospital_setting_end_morning.substring(0, 5)
+                    }
+            }}
+          </span>
+        </div>
+      </div>
+      <div class="fs-8pt text-gray-190">
+        {{ 'output date and time' | translate }}: {{ getTimeFormat(outputDateTime, 'YYYY/MM/DD HH:mm') }}
+      </div>
+    </div>
+    <div class="d-flex justify-content-between">
+      <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center icon-time">
+          <img class="img-evening mr-2" src="./assets/images/icon_evening.svg" />
+        </div>
+        <div class="note">
+          {{ 'blood pressure / pulse when going to bed (night)' | translate }}
+          <span class="dot">{{ '...' | translate }}</span>
+          <span>
+            {{
+              'blood pressure and pulse rate measured during the time period'
+                | translate
+                  : {
+                      startTime: hospitalSetting.hospital_setting_start_evening.substring(0, 5),
+                      endTime: hospitalSetting.hospital_setting_end_evening.substring(0, 5)
+                    }
+            }}
+          </span>
+        </div>
+      </div>
+      <div class="fs-7pt text-gray-190">{{ page }}/{{ totalPage }} {{ 'page' | translate }}</div>
+    </div>
+  </div>
+</div>

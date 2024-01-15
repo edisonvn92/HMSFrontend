@@ -1,0 +1,68 @@
+<form autocomplete="off">
+  <div class="mail-container">
+    <div class="modal-header no-focus" tabindex="0" ngbAutoFocus>
+      <div class="modal-title text-medium font-weight-500 text-left" id="modal-basic-title">
+        {{ 'mail details' | translate }}
+      </div>
+      <button
+        type="button"
+        class="btn btn-outline-secondary text-normal text-black-300 btn-close"
+        (click)="clickedClose()"
+      >
+        {{ 'button.Close' | translate }}
+      </button>
+    </div>
+    <div class="modal-body" [class.en-language]="!sharedService.isJa()">
+      <div class="align-items-center content-item">
+        <label class="form-label d-flex text-normal">
+          {{ 'destination' | translate }}
+        </label>
+        <div class="d-flex content-right">
+          <div>
+            {{
+              joinName(
+                patient.patient.patient_first_name,
+                patient.patient.patient_middle_name,
+                patient.patient.patient_last_name
+              )
+            }}
+          </div>
+          <div [class.ml-3]="patient?.patient.patient_full_name">
+            {{ patient.patient.patient_email }}
+          </div>
+        </div>
+      </div>
+      <div class="align-items-center content-item">
+        <label for="subject" class="form-label d-flex text-normal">
+          {{ 'subject' | translate }}
+        </label>
+        <div class="content-right">
+          <input
+            type="text"
+            class="form-control"
+            [placeholder]="'subject' | translate"
+            [value]="subject"
+            id="subject"
+            disabled
+          />
+        </div>
+      </div>
+      <div class="content-item">
+        <label for="letter-body" class="form-label d-flex text-normal">
+          {{ 'letter body' | translate }}
+        </label>
+        <div class="content-right">
+          <textarea
+            disabled
+            class="form-control"
+            rows="5"
+            id="letter-body"
+            [placeholder]="'letter body' | translate"
+            [value]="message"
+          >
+          </textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

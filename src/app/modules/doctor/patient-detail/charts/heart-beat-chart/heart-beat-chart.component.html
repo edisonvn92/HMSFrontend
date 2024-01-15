@@ -1,0 +1,25 @@
+<div class="chart-title d-flex justify-content-between align-items-center">
+  <div class="d-flex">
+    <div class="title-icon">
+      <img src="./assets/images/icon_heart_beat_chart.svg" alt="icon" />
+    </div>
+    <div class="mr-10 title">
+      {{ 'heartbeat ECG' | translate }}
+    </div>
+    <div class="cursor-pointer" (click)="toggleChart()" [hidden]="!showChart">
+      <div class="icon icon-hide-chart"></div>
+    </div>
+    <div class="cursor-pointer" (click)="toggleChart()" [hidden]="showChart">
+      <div class="icon icon-show-chart"></div>
+    </div>
+  </div>
+  <div class="cursor-pointer text-blue-210 detail" (click)="openHeartBeatHistory.emit()">
+    {{ 'detail' | translate }}>
+  </div>
+</div>
+<div
+  id="heart-beat-chart"
+  class="chart-body"
+  [class.chart-en]="!sharedService.isJa()"
+  [class.chart-hidden]="!showChart"
+></div>

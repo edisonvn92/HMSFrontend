@@ -1,0 +1,50 @@
+@import 'src/app/styles/variable';
+
+.setting-time {
+  margin: 0px 64px 32px 64px;
+  padding: 12px 0;
+  font-size: 16px;
+  border-bottom: 1px solid $gray-200;
+  width: 320px;
+}
+
+label {
+  margin: 0px 64px 0px 14px;
+  width: 100px;
+  text-align: right;
+}
+
+.invalid {
+  margin: 0px 64px 32px 64px;
+  width: 400px;
+  padding-right: 4px;
+}
+
+.lang-en {
+  &.invalid {
+    width: 433px;
+  }
+}
+
+.icon {
+  width: 14px;
+  height: 14px;
+  mask-size: cover;
+}
+
+input {
+  width: 148px;
+}
+
+.btn-keep {
+  margin-top: 32px;
+}
+
+input {
+  background-image: url('../../../../assets/images/clock.svg');
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position-y: center;
+  background-position-x: 90%;
+  font-size: 14px;
+}

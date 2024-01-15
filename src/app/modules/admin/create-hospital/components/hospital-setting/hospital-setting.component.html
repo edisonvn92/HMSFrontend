@@ -1,0 +1,130 @@
+<div>
+  <div class="title">{{ 'system usage settings' | translate }}</div>
+  <div class="checkbox-group">
+    <div class="checkbox" *ngFor="let type of setting.system_settings">
+      <div class="d-flex align-items-center">
+        <input
+          type="checkbox"
+          [id]="'system-usage-' + type.id"
+          class="mr-1 ml-20"
+          [checked]="hospitalSetting?.hospital_setting && hospitalSetting.hospital_setting[type.key]"
+          (click)="hospitalSetting.hospital_setting[type.key] = !hospitalSetting.hospital_setting[type.key] ? 1 : 0"
+        />
+      </div>
+      <label [for]="'system-usage-' + type.id" class="text-no-wrap mr-1 text-normal text-black-300">
+        {{ type.text | translate }}
+      </label>
+    </div>
+  </div>
+
+  <div class="title">{{ 'function usage settings' | translate }}</div>
+  <div class="checkbox-group">
+    <div class="checkbox" *ngFor="let type of setting.function_settings">
+      <div class="d-flex align-items-center">
+        <input
+          type="checkbox"
+          [id]="type.id"
+          class="mr-1 ml-20"
+          [checked]="hospitalSetting?.hospital_setting && hospitalSetting.hospital_setting[type.key]"
+          (click)="onChangeSetting(type.key)"
+        />
+      </div>
+      <label [for]="type.id" class="text-no-wrap mr-1 text-normal text-black-300">
+        {{ type.text | translate }}
+      </label>
+    </div>
+  </div>
+
+  <div class="title">{{ 'help type settings' | translate }}</div>
+  <div class="radio-group">
+    <div class="radio" *ngFor="let type of setting.help_types">
+      <div class="d-flex align-items-center">
+        <input
+          type="radio"
+          [id]="'help-type-' + type.id"
+          class="mr-1 ml-20"
+          value=""
+          [checked]="hospitalSetting?.hospital_setting?.hospital_setting_help_type === type.id"
+          (click)="hospitalSetting.hospital_setting.hospital_setting_help_type = type.id"
+        />
+      </div>
+      <label [for]="'help-type-' + type.id" class="text-no-wrap mr-1 text-normal text-black-300">
+        {{ type.text | translate }}
+      </label>
+    </div>
+  </div>
+
+  <div class="title">{{ 'bp icon display threshold setting' | translate }}</div>
+  <div class="radio-group">
+    <div class="radio" *ngFor="let type of setting.bp_icon">
+      <div class="d-flex align-items-center">
+        <input
+          type="radio"
+          [id]="'bp-icon-' + type.id"
+          class="mr-1 ml-20"
+          [checked]="hospitalSetting?.hospital_setting?.hospital_setting_threshold_bp === type.id"
+          (click)="hospitalSetting.hospital_setting.hospital_setting_threshold_bp = type.id"
+        />
+      </div>
+      <label [for]="'bp-icon-' + type.id" class="text-no-wrap mr-1 text-normal text-black-300">
+        {{ type.text | translate }}
+      </label>
+    </div>
+  </div>
+
+  <div class="title">{{ 'alert detection range' | translate }}</div>
+  <div class="checkbox-group">
+    <div class="checkbox" *ngFor="let type of setting.alert">
+      <div class="d-flex align-items-center">
+        <input
+          type="checkbox"
+          [id]="type.id"
+          class="mr-1 ml-20"
+          value=""
+          [checked]="checkSettingFunction(type.key)"
+          (click)="onSettingFunction(type.key)"
+        />
+      </div>
+      <label [for]="type.id" class="text-no-wrap mr-1 text-normal text-black-300">
+        {{ type.text | translate }}
+      </label>
+    </div>
+  </div>
+
+  <div class="title">{{ 'bp calculation type setting' | translate }}</div>
+  <div class="radio-group">
+    <div class="radio" *ngFor="let type of setting.bp_calculation_type">
+      <div class="d-flex align-items-center">
+        <input
+          type="radio"
+          [id]="'bp-calculation-type-' + type.id"
+          class="mr-1 ml-20"
+          [checked]="hospitalSetting?.hospital_setting?.hospital_setting_bp_avg_calculation_type === type.id"
+          (click)="hospitalSetting.hospital_setting.hospital_setting_bp_avg_calculation_type = type.id"
+        />
+      </div>
+      <label [for]="'bp-calculation-type-' + type.id" class="text-no-wrap mr-1 text-normal text-black-300">
+        {{ type.text | translate }}
+      </label>
+    </div>
+  </div>
+
+  <div id="setting-time" class="title">{{ 'morning / night time zone setting' | translate }}</div>
+  <div class="form-container">
+    <app-setting-time #time [setting]="settingTime"></app-setting-time>
+  </div>
+
+  <div id="setting-ranking" class="title d-flex align-items-center">
+    {{ 'bp ranking color condition setting' | translate }}
+  </div>
+  <div class="form-container">
+    <button
+      (click)="resetRankingClicked()"
+      type="button"
+      class="btn btn-primary button-reset text-white bg-blue-500 btn-close text-normal"
+    >
+      {{ 'button.use default settings' | translate }}
+    </button>
+    <app-setting-ranking #rank [setting]="settingRank"></app-setting-ranking>
+  </div>
+</div>

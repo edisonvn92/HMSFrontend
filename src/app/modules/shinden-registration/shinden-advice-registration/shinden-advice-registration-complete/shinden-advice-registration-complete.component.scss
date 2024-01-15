@@ -1,0 +1,28 @@
+.registration-complete-content {
+  text-align: center;
+
+  .content-div {
+    height: 500px;
+  }
+
+  img {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .registration-complete-content {
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .content-div {
+      height: auto;
+    }
+
+    .btn {
+      width: 100% !important;
+    }
+  }
+}

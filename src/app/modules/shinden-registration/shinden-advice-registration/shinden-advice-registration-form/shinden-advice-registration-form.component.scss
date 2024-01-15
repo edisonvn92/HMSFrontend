@@ -1,0 +1,10 @@
+.registration-info-content {
+  width: 800px;
+  margin: auto;
+}
+
+@media only screen and (max-width: 800px) {
+  .registration-info-content {
+    width: auto;
+  }
+}

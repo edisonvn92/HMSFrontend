@@ -1,0 +1,99 @@
+<ul class="invalid text-normal text-black-300" [class.lang-en]="!sharedService.isJa()" *ngIf="dayErr || nightErr">
+  <li *ngIf="dayErr === 'invalid'">
+    {{ 'validator.day time zone invalid' | translate }}
+  </li>
+  <li *ngIf="dayErr === 'between'">
+    {{
+      'validator.between'
+        | translate
+          : {
+              field: 'morning time zone' | translate,
+              value1: hospitalSetting.hospital_setting_time.min_morning,
+              value2: hospitalSetting.hospital_setting_time.max_morning
+            }
+    }}
+  </li>
+  <li *ngIf="nightErr === 'invalid'">
+    {{ 'validator.night time zone invalid' | translate }}
+  </li>
+  <li *ngIf="nightErr === 'between'">
+    {{
+      'validator.between'
+        | translate
+          : {
+              field: 'night time zone' | translate,
+              value1: hospitalSetting.hospital_setting_time.min_evening,
+              value2: convertNightTime(hospitalSetting.hospital_setting_time.max_evening)
+            }
+    }}
+  </li>
+</ul>
+
+<div class="align-items-center mb-1 d-flex">
+  <div class="title-morning">{{ 'start time' | translate }}</div>
+  <div class="title-evening">{{ 'end time' | translate }}</div>
+</div>
+
+<div class="align-items-center mb-1 d-flex">
+  <label class="form-label text-right text-normal">
+    <span class="mr-1 required">*</span>{{ 'morning time zone' | translate }}:
+  </label>
+  <input
+    class="form-control py-2 pr-0 border mr-2 h-32 app-trim-ignore"
+    [textMask]="{
+      mask: mask,
+      keepCharPositions: true,
+      placeholderChar: '-'
+    }"
+    [(ngModel)]="setting.hospital_setting_start_morning"
+    (ngModelChange)="normalizeText('hospital_setting_start_morning')"
+    (paste)="onPaste($event, 'hospital_setting_start_morning')"
+    type="text"
+    placeholder="--:--:--"
+  />
+  <input
+    class="form-control icon-clock py-2 pr-0 border ml-2 h-32 app-trim-ignore"
+    [textMask]="{
+      mask: mask,
+      keepCharPositions: true,
+      placeholderChar: '-'
+    }"
+    [(ngModel)]="setting.hospital_setting_end_morning"
+    (ngModelChange)="normalizeText('hospital_setting_end_morning')"
+    (paste)="onPaste($event, 'hospital_setting_end_morning')"
+    type="text"
+    placeholder="--:--:--"
+  />
+</div>
+
+<div class="align-items-center d-flex">
+  <label class="form-label text-right text-normal">
+    <span class="mr-1 required">*</span>{{ 'night time zone' | translate }}:
+  </label>
+  <input
+    class="form-control py-2 pr-0 mr-2 border h-32 app-trim-ignore"
+    [textMask]="{
+      mask: mask,
+      keepCharPositions: true,
+      placeholderChar: '-'
+    }"
+    [(ngModel)]="setting.hospital_setting_start_evening"
+    (ngModelChange)="normalizeText('hospital_setting_start_evening')"
+    (paste)="onPaste($event, 'hospital_setting_start_evening')"
+    type="text"
+    placeholder="--:--:--"
+  />
+  <input
+    class="form-control py-2 pr-0 ml-2 border h-32 app-trim-ignore"
+    [textMask]="{
+      mask: mask,
+      keepCharPositions: true,
+      placeholderChar: '-'
+    }"
+    [(ngModel)]="setting.hospital_setting_end_evening"
+    (ngModelChange)="normalizeText('hospital_setting_end_evening')"
+    (paste)="onPaste($event, 'hospital_setting_end_evening')"
+    type="text"
+    placeholder="--:--:--"
+  />
+</div>

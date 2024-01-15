@@ -1,0 +1,22 @@
+<div class="chart-title d-flex justify-content-between align-items-center">
+  <div class="d-flex">
+    <div class="title-icon">
+      <img src="./assets/images/icon_book.svg" />
+    </div>
+    <div class="mr-10 title">
+      {{ 'hypertension app memo' | translate }}
+    </div>
+    <div class="cursor-pointer" (click)="toggleChart()" [hidden]="!showChart">
+      <div class="icon icon-hide-chart"></div>
+    </div>
+    <div class="cursor-pointer" (click)="toggleChart()" [hidden]="showChart">
+      <div class="icon icon-show-chart"></div>
+    </div>
+  </div>
+</div>
+<div
+  id="diary-chart"
+  class="chart-body"
+  [class.chart-hidden]="!showChart"
+  [class.en-language]="!sharedService.isJa()"
+></div>

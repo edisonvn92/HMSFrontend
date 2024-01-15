@@ -1,0 +1,354 @@
+{
+  "hospital_dashboards": [
+    {
+      "hospital_dashboard_id": 29,
+      "hospital_dashboard_order": 1,
+      "components": {
+        "component_id": 28,
+        "component_code": "LP01",
+        "component_description": null,
+        "component_type": 2
+      }
+    },
+    {
+      "hospital_dashboard_id": 30,
+      "hospital_dashboard_order": 2,
+      "components": {
+        "component_id": 29,
+        "component_code": "LP02",
+        "component_description": null,
+        "component_type": 2
+      }
+    },
+    {
+      "hospital_dashboard_id": 31,
+      "hospital_dashboard_order": 3,
+      "components": {
+        "component_id": 30,
+        "component_code": "LP03",
+        "component_description": null,
+        "component_type": 2
+      }
+    },
+    {
+      "hospital_dashboard_id": 32,
+      "hospital_dashboard_order": 4,
+      "components": {
+        "component_id": 31,
+        "component_code": "LP04",
+        "component_description": null,
+        "component_type": 2
+      }
+    },
+    {
+      "hospital_dashboard_id": 33,
+      "hospital_dashboard_order": 5,
+      "components": {
+        "component_id": 32,
+        "component_code": "LP05",
+        "component_description": null,
+        "component_type": 2
+      }
+    },
+    {
+      "hospital_dashboard_id": 34,
+      "hospital_dashboard_order": 6,
+      "components": {
+        "component_id": 33,
+        "component_code": "LP06",
+        "component_description": null,
+        "component_type": 2
+      }
+    },
+    {
+      "hospital_dashboard_id": 35,
+      "hospital_dashboard_order": 7,
+      "components": {
+        "component_id": 34,
+        "component_code": "LP07",
+        "component_description": null,
+        "component_type": 2
+      }
+    },
+    {
+      "hospital_dashboard_id": 36,
+      "hospital_dashboard_order": 8,
+      "components": {
+        "component_id": 35,
+        "component_code": "LP08",
+        "component_description": null,
+        "component_type": 2
+      }
+    },
+    {
+      "hospital_dashboard_id": 37,
+      "hospital_dashboard_order": 9,
+      "components": {
+        "component_id": 36,
+        "component_code": "LP09",
+        "component_description": null,
+        "component_type": 2
+      }
+    },
+    {
+      "hospital_dashboard_id": 38,
+      "hospital_dashboard_order": 10,
+      "components": {
+        "component_id": 37,
+        "component_code": "LP10",
+        "component_description": null,
+        "component_type": 2
+      }
+    },
+    {
+      "hospital_dashboard_id": 39,
+      "hospital_dashboard_order": 11,
+      "components": {
+        "component_id": 38,
+        "component_code": "LP11",
+        "component_description": null,
+        "component_type": 2
+      }
+    },
+    {
+      "hospital_dashboard_id": 40,
+      "hospital_dashboard_order": 12,
+      "components": {
+        "component_id": 39,
+        "component_code": "LP12",
+        "component_description": null,
+        "component_type": 2
+      }
+    },
+    {
+      "hospital_dashboard_id": 41,
+      "hospital_dashboard_order": 13,
+      "components": {
+        "component_id": 54,
+        "component_code": "LP13",
+        "component_description": null,
+        "component_type": 2
+      }
+    },
+    {
+      "hospital_dashboard_id": 42,
+      "hospital_dashboard_order": 14,
+      "components": {
+        "component_id": 55,
+        "component_code": "LP14",
+        "component_description": null,
+        "component_type": 2
+      }
+    },
+    {
+      "hospital_dashboard_id": 43,
+      "hospital_dashboard_order": 15,
+      "components": {
+        "component_id": 56,
+        "component_code": "LP15",
+        "component_description": null,
+        "component_type": 2
+      }
+    },
+    {
+      "hospital_dashboard_id": 44,
+      "hospital_dashboard_order": 1,
+      "components": {
+        "component_id": 40,
+        "component_code": "RP01",
+        "component_description": null,
+        "component_type": 3
+      }
+    },
+    {
+      "hospital_dashboard_id": 45,
+      "hospital_dashboard_order": 2,
+      "components": {
+        "component_id": 41,
+        "component_code": "RP02",
+        "component_description": null,
+        "component_type": 3
+      }
+    },
+    {
+      "hospital_dashboard_id": 46,
+      "hospital_dashboard_order": 3,
+      "components": {
+        "component_id": 42,
+        "component_code": "RP03",
+        "component_description": null,
+        "component_type": 3
+      }
+    },
+    {
+      "hospital_dashboard_id": 47,
+      "hospital_dashboard_order": 4,
+      "components": {
+        "component_id": 43,
+        "component_code": "RP04",
+        "component_description": null,
+        "component_type": 3
+      }
+    },
+    {
+      "hospital_dashboard_id": 48,
+      "hospital_dashboard_order": 5,
+      "components": {
+        "component_id": 44,
+        "component_code": "RP05",
+        "component_description": null,
+        "component_type": 3
+      }
+    },
+    {
+      "hospital_dashboard_id": 49,
+      "hospital_dashboard_order": 6,
+      "components": {
+        "component_id": 45,
+        "component_code": "RP06",
+        "component_description": null,
+        "component_type": 3
+      }
+    },
+    {
+      "hospital_dashboard_id": 50,
+      "hospital_dashboard_order": 7,
+      "components": {
+        "component_id": 46,
+        "component_code": "RP07",
+        "component_description": null,
+        "component_type": 3
+      }
+    },
+    {
+      "hospital_dashboard_id": 51,
+      "hospital_dashboard_order": 8,
+      "components": {
+        "component_id": 47,
+        "component_code": "RP08",
+        "component_description": null,
+        "component_type": 3
+      }
+    },
+    {
+      "hospital_dashboard_id": 52,
+      "hospital_dashboard_order": 9,
+      "components": {
+        "component_id": 48,
+        "component_code": "RP09",
+        "component_description": null,
+        "component_type": 3
+      }
+    },
+    {
+      "hospital_dashboard_id": 53,
+      "hospital_dashboard_order": 10,
+      "components": {
+        "component_id": 49,
+        "component_code": "RP10",
+        "component_description": null,
+        "component_type": 3
+      }
+    },
+    {
+      "hospital_dashboard_id": 54,
+      "hospital_dashboard_order": 11,
+      "components": {
+        "component_id": 50,
+        "component_code": "RP11",
+        "component_description": null,
+        "component_type": 3
+      }
+    },
+    {
+      "hospital_dashboard_id": 55,
+      "hospital_dashboard_order": 12,
+      "components": {
+        "component_id": 51,
+        "component_code": "RP12",
+        "component_description": null,
+        "component_type": 3
+      }
+    },
+    {
+      "hospital_dashboard_id": 56,
+      "hospital_dashboard_order": 13,
+      "components": {
+        "component_id": 52,
+        "component_code": "RP13",
+        "component_description": null,
+        "component_type": 3
+      }
+    },
+    {
+      "hospital_dashboard_id": 57,
+      "hospital_dashboard_order": 14,
+      "components": {
+        "component_id": 53,
+        "component_code": "RP14",
+        "component_description": null,
+        "component_type": 3
+      }
+    },
+    {
+      "dashboard_group_id": 3,
+      "dashboard_group_component_order": 1,
+      "components": {
+        "component_id": 9,
+        "component_code": "L09",
+        "component_name": "測定数(7日 )",
+        "component_type": 1
+      }
+    },
+    {
+      "dashboard_group_id": 3,
+      "dashboard_group_component_order": 2,
+      "components": {
+        "component_id": 17,
+        "component_code": "L17",
+        "component_name": "確認状況(自身)",
+        "component_type": 1
+      }
+    },
+    {
+      "dashboard_group_id": 3,
+      "dashboard_group_component_order": 3,
+      "components": {
+        "component_id": 13,
+        "component_code": "L13",
+        "component_name": "目標血圧",
+        "component_type": 1
+      }
+    },
+    {
+      "dashboard_group_id": 3,
+      "dashboard_group_component_order": 4,
+      "components": {
+        "component_id": 18,
+        "component_code": "L18",
+        "component_name": "確認状況(他)",
+        "component_type": 1
+      }
+    },
+    {
+      "dashboard_group_id": 3,
+      "dashboard_group_component_order": 5,
+      "components": {
+        "component_id": 11,
+        "component_code": "L11",
+        "component_name": "体重増減",
+        "component_type": 1
+      }
+    },
+    {
+      "dashboard_group_id": 3,
+      "dashboard_group_component_order": 6,
+      "components": {
+        "component_id": 19,
+        "component_code": "L19",
+        "component_name": "年齢",
+        "component_type": 1
+      }
+    }
+  ]
+}

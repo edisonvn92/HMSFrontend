@@ -1,0 +1,20 @@
+<div class="page-header" [class.ja-lang]="language === 'ja'">
+  <div class="left-side">
+    <div class="page-title">
+      <h1>{{ 'ECG monthly report' | translate }}</h1>
+      <span>({{ pageNumber }}/{{ totalPage }})</span>
+    </div>
+    <div class="fs-17pt">
+      {{ 'record of :monthYear' | translate: { monthYear: recordMonthText } }}
+    </div>
+  </div>
+
+  <div class="right-side">
+    <div class="fs-11pt">{{ 'created date' | translate }}： {{ getDateText(this.recordDate) }}</div>
+    <div>
+      {{ patientFullName }} | {{ getDateText(patient.patient_birthday) }} （
+      {{ ':age years old' | translate: { age: patientAge } }} ） |
+      {{ (patientGender ? 'Male' : 'Female') | translate }}
+    </div>
+  </div>
+</div>

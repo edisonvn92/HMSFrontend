@@ -1,0 +1,412 @@
+@import 'src/styles';
+
+:host {
+  ::ng-deep {
+    .tooltip-nyha {
+      .tooltip-inner {
+        min-width: 304px;
+        padding: 5px 6px;
+
+        .activity,
+        .exercise-intensity,
+        .classification {
+          border-bottom: 1px solid $gray-130;
+          padding: 5px 5px 5px 0;
+        }
+
+        .activity {
+          width: 125px;
+        }
+
+        .exercise-intensity {
+          width: 77px;
+        }
+
+        .classification {
+          width: 70px;
+        }
+
+        .h-activity {
+          line-height: 32px;
+        }
+
+        .tooltip-note {
+          font-size: 10px;
+          line-height: 15px;
+          margin-top: 10px;
+          margin-bottom: 5px;
+        }
+      }
+    }
+
+    .tooltip-nyha-en {
+      .tooltip-inner {
+        .activity {
+          width: 130px;
+        }
+
+        .exercise-intensity {
+          width: 110px;
+        }
+
+        .classification {
+          width: 125px;
+        }
+
+        .h-activity {
+          line-height: 20px;
+        }
+      }
+    }
+  }
+}
+
+.doctor-content-header {
+  .search-group {
+    width: 272px;
+    border-radius: 4px;
+    margin-right: 24px;
+
+    input {
+      height: 32px;
+      border-right: none;
+      border-color: $gray-500;
+      color: $black-300;
+    }
+
+    .input-group-append {
+      height: 32px;
+
+      .input-group-text {
+        width: 30px;
+        padding: 0 6px;
+        border-color: $gray-500;
+        background-color: $gray-170;
+      }
+    }
+  }
+
+  .group-user {
+    width: 40px;
+    height: 22px;
+  }
+}
+
+.patient-content {
+  padding: 24px;
+
+  .table-custom {
+    color: $black-300;
+
+    thead {
+      tr {
+        background-color: white;
+
+        th {
+          vertical-align: top;
+          border-top: none;
+          border-bottom-color: $gray-700;
+          font-weight: normal;
+          padding: 4px 8px;
+        }
+      }
+    }
+
+    tbody {
+      max-height: calc(100vh - 222px);
+      height: calc(100vh - 222px);
+      tr {
+        cursor: pointer;
+        min-height: 40px;
+      }
+    }
+
+    td {
+      vertical-align: middle;
+      border-top-color: $gray-700;
+    }
+
+    .patient-id {
+      width: 100px;
+    }
+
+    .patient-name {
+      width: 140px;
+    }
+
+    .sex {
+      width: 65px;
+    }
+
+    .blood-pressure-7days {
+      width: 85px;
+    }
+
+    .morning-blood-pressure,
+    .evening-blood-pressure {
+      width: 120px;
+    }
+
+    .pulse-7days {
+      width: 65px;
+    }
+
+    .ihb {
+      width: 105px;
+
+      .ihb-value {
+        display: flex;
+        justify-content: center;
+
+        .img-heart {
+          width: 20px;
+        }
+
+        .ihb-total {
+          width: 60px;
+        }
+      }
+    }
+
+    .ihb-rate {
+      width: 115px;
+    }
+
+    .measurement-rate {
+      width: 85px;
+    }
+
+    .weight-7days {
+      width: 90px;
+    }
+
+    .weight-ratio {
+      width: 90px;
+    }
+    .has-memo {
+      width: 90px;
+
+      img {
+        height: 18px;
+      }
+    }
+
+    .blood-pressure-target {
+      width: 100px;
+    }
+
+    .risk-score {
+      width: 100px;
+      .risk-level {
+        height: 32px;
+        line-height: 32px;
+        width: 32px;
+        border-radius: 4px;
+      }
+    }
+
+    .completion-level {
+      &:not(th) {
+        background-color: $red-700;
+
+        &.complete {
+          background-color: $green-400;
+        }
+      }
+    }
+
+    .last-measurement {
+      width: 105px;
+    }
+
+    .vital-bp-date {
+      width: 115px;
+    }
+
+    .confirm-status-ldate {
+      width: 137px;
+    }
+
+    .confirm-status-other {
+      width: 127px;
+    }
+
+    .completion-level {
+      width: 115px;
+    }
+
+    .age {
+      width: 65px;
+    }
+
+    .morning-pulse,
+    .evening-pulse {
+      width: 100px;
+    }
+
+    .morning-heart-beat,
+    .evening-heart-beat {
+      width: 115px;
+    }
+
+    .heart-beat {
+      width: 130px;
+    }
+
+    .af {
+      width: 60px;
+    }
+
+    .nyha {
+      width: 125px;
+
+      .nyha-value {
+        width: 33px;
+        text-align: left;
+      }
+
+      .nyha-level {
+        width: 37px;
+      }
+    }
+
+    .final-medical-treatment,
+    .exceeding-threshold,
+    .last-update {
+      width: 105px;
+    }
+
+    .medication-rate {
+      width: 85px;
+    }
+
+    .side-effects {
+      width: 85px;
+    }
+
+    .sys,
+    .dia {
+      width: 40px;
+      height: 32px;
+      border-radius: 16px;
+      line-height: 32px;
+    }
+
+    .check-alert {
+      width: 97px;
+    }
+  }
+
+  .table-en {
+    .blood-pressure-7days {
+      width: 135px;
+    }
+
+    .side-effects {
+      width: 120px;
+    }
+
+    .morning-blood-pressure,
+    .evening-blood-pressure {
+      width: 125px;
+    }
+
+    .pulse-7days {
+      width: 65px;
+    }
+
+    .ihb {
+      width: 175px;
+    }
+
+    .ihb-rate {
+      width: 85px;
+    }
+
+    .medication-rate {
+      width: 110px;
+    }
+
+    .final-medical-treatment {
+      width: 130px;
+    }
+
+    .exceeding-threshold {
+      width: 95px;
+    }
+
+    .completion-level {
+      width: 105px;
+    }
+
+    .measurement-rate {
+      width: 170px;
+    }
+
+    .weight-7days {
+      width: 125px;
+    }
+
+    .weight-ratio {
+      width: 115px;
+    }
+
+    .has-memo {
+      width: 110px;
+    }
+
+    .blood-pressure-target {
+      width: 100px;
+    }
+
+    .risk-score {
+      width: 110px;
+    }
+
+    .last-measurement {
+      width: 155px;
+    }
+
+    .vital-bp-date {
+      width: 125px;
+    }
+
+    .confirm-status-ldate {
+      width: 120px;
+    }
+
+    .confirm-status-other {
+      width: 127px;
+    }
+
+    .morning-pulse,
+    .evening-pulse {
+      width: 135px;
+    }
+
+    .morning-heart-beat,
+    .evening-heart-beat {
+      width: 168px;
+    }
+
+    .heart-beat {
+      width: 165px;
+    }
+
+    .nyha {
+      width: 160px;
+    }
+
+    .last-update {
+      width: 115px;
+    }
+
+    .check-alert {
+      width: 110px;
+    }
+  }
+}
+
+.table {
+  margin-bottom: 22px;
+}

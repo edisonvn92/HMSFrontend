@@ -1,0 +1,32 @@
+@import 'src/app/styles/variable';
+.patient-content-header {
+  height: 48px;
+  width: 100%;
+  padding: 16px;
+  border-bottom: 0.5px solid $gray-530;
+}
+
+.patient-container {
+  width: 85%;
+  margin: 32px auto;
+  text-align: center;
+  word-break: break-word;
+}
+
+.registration-top-title {
+  font-size: 30px;
+  font-weight: 500;
+  padding-bottom: 16px;
+
+  .line {
+    border-bottom: 1px solid $gray-520;
+    width: 75%;
+    max-width: 800px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .registration-top-title {
+    font-size: 26px;
+  }
+}

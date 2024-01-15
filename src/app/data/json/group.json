@@ -1,0 +1,82 @@
+{
+  "groupDetail": {
+    "group_id": 1,
+    "group_default": 1,
+    "dr_nurse": [
+      {
+        "hcp_code": "hcp01",
+        "hcp_cognito_username": "hongtt1",
+        "hcp_full_name": "tong hong",
+        "hcp_cognito_phone": "0123456",
+        "role": 2
+      },
+      {
+        "hcp_code": "hcp02",
+        "hcp_cognito_username": "hongtt2",
+        "hcp_full_name": "tong hong",
+        "hcp_cognito_phone": "0123456",
+        "role": 3
+      },
+      {
+        "hcp_code": "hcp03",
+        "hcp_cognito_username": "hongtt3",
+        "hcp_full_name": "tong hong",
+        "hcp_cognito_phone": "0123456",
+        "role": 2
+      },
+      {
+        "hcp_code": "hcp04",
+        "hcp_cognito_username": "hongtt4",
+        "hcp_full_name": "tong hong",
+        "hcp_cognito_phone": "0123456",
+        "role": 2
+      },
+      {
+        "hcp_code": "hcp05",
+        "hcp_cognito_username": "hongtt5",
+        "hcp_full_name": "tong hong",
+        "hcp_cognito_phone": "0123456",
+        "role": 3
+      },
+      {
+        "hcp_code": "hcp06",
+        "hcp_cognito_username": "hongtt6",
+        "hcp_full_name": "tong hong",
+        "hcp_cognito_phone": "0123456",
+        "role": 2
+      },
+      {
+        "hcp_code": "hcp07",
+        "hcp_cognito_username": "hongtt7",
+        "hcp_full_name": "tong hong",
+        "hcp_cognito_phone": "0123456",
+        "role": 3
+      },
+      {
+        "hcp_code": "hcp08",
+        "hcp_cognito_username": "hongtt8",
+        "hcp_full_name": "tong hong",
+        "hcp_cognito_phone": "0123456",
+        "role": 2
+      }
+    ],
+    "patient": [
+      {
+        "patient_code": "patient01",
+        "patient_full_name": "patient full name",
+        "patient_birthday": "1999-09-09",
+        "patient_gender": "1"
+      }
+    ],
+    "other_groups": [
+      {
+        "group_id": 2,
+        "group_name": "group 2"
+      },
+      {
+        "group_id": 3,
+        "group_name": "group 3"
+      }
+    ]
+  }
+}

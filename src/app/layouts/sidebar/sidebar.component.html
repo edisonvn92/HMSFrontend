@@ -1,0 +1,92 @@
+<nav id="sidebar" [class.active]="sharedService.closeSidebar">
+  <div class="d-flex justify-content-between sidebar-header">
+    <img src="./assets/images/omron.svg" alt="omron" (click)="showAppVersion()" />
+    <img
+      src="./assets/images/icon_bars_solid.svg"
+      alt="bars"
+      class="bars-solid"
+      [class.ml-95]="sharedService.closeSidebar"
+      (click)="clickToggle(true)"
+    />
+  </div>
+
+  <ul class="list-unstyled menu-list">
+    <li
+      [class.d-none]="
+        (!sharedService.hospitalSetting?.hospital_setting?.hospital_setting_alert_function && item.isAlert) ||
+        (!sharedService.hospitalSetting?.hospital_setting?.hospital_setting_shinden_report && item.isAnalysisRequest)
+      "
+      *ngFor="let item of menuList"
+    >
+      <a
+        class="nav-link"
+        [routerLink]="item.path"
+        routerLinkActive="active"
+        [hidden]="
+          (!sharedService.hospitalSetting?.hospital_setting?.hospital_setting_alert_function && item.isAlert) ||
+          (!sharedService.hospitalSetting?.hospital_setting?.hospital_setting_shinden_report && item.isAnalysisRequest)
+        "
+      >
+        <img
+          [src]="'assets/images/' + item.icon"
+          alt="icon"
+          [className]="'mr-10 ' + (item.class || '') + (sharedService.closeSidebar ? ' ml-178' : '')"
+          [ngStyle]="{ height: item.iconStyle.height + 'px', width: item.iconStyle.width + 'px' }"
+        />
+        <div class="has-alert" [hidden]="!(sharedService.closeSidebar && showRedCircle(item))"></div>
+        <div class="menu-name">{{ item.name | translate }}</div>
+        <div
+          class="alert-number text-small text-white text-center bg-red-100"
+          *ngIf="!sharedService.closeSidebar && showRedCircle(item)"
+        >
+          {{ getTotal(item) }}
+        </div>
+      </a>
+    </li>
+    <li
+      *ngIf="hospitalSettingList && hospitalSettingList.length > 0"
+      class="menu-hospital-setting"
+      (click)="sharedService.closeSidebar ? clickToggle() : ''"
+    >
+      <div
+        class="cursor-pointer text-normal navbar-toggler navbar-toggler-right hospital-setting"
+        (click)="navbarCollapsed = !navbarCollapsed"
+        [attr.aria-expanded]="!navbarCollapsed"
+        aria-controls="navbarContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <img
+          src="assets/images/icon_setting.svg"
+          alt="icon"
+          class="mr-10 icon-setting"
+          [class.ml-178]="sharedService.closeSidebar"
+        />
+        <div class="menu-name setting-name">{{ 'setting' | translate }}</div>
+        <img
+          class="icon-up-down"
+          [src]="navbarCollapsed ? 'assets/images/icon_menu_down.svg' : 'assets/images/icon_menu_up.svg'"
+          alt="icon"
+        />
+      </div>
+      <div class="navbar-collapse" [ngbCollapse]="navbarCollapsed" id="navbarContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item" routerLinkActive="setting-active" *ngFor="let item of hospitalSettingList">
+            <a class="nav-link" [routerLink]="item.path">
+              {{ item.name | translate }}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+
+  <ul class="list-unstyled logout mb-0">
+    <li>
+      <a class="nav-link" (click)="logout()">
+        <img src="assets/images/icon_logout.svg" alt="icon" class="mr-10" [class.ml-178]="sharedService.closeSidebar" />
+        <div class="menu-name">{{ 'logout' | translate }}</div>
+      </a>
+    </li>
+  </ul>
+</nav>

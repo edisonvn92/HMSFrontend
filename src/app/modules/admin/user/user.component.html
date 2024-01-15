@@ -1,0 +1,222 @@
+<div class="user-name">
+  <div class="user-content">
+    <form [formGroup]="searchForm">
+      <div
+        class="d-flex align-items-end input-user search-user justify-content-between"
+        [ngClass]="sharedService.closeSidebar ? 'close-sidebar' : ''"
+      >
+        <div class="d-flex">
+          <div ngbDropdown #hospitalDropdown class="align-items-center mr-51">
+            {{ 'affiliated medical institution' | translate }}
+            <button
+              type="button"
+              class="btn btn-outline-secondary search-input d-flex mt-2 align-items-center"
+              id="dropdownBasic2"
+              ngbDropdownToggle
+            >
+              <div class="text text-black-400 text-truncate text-normal">{{ hospitalSearchName }}</div>
+              <i
+                class="fas ml-auto my-auto icon opacity-25"
+                [class]="ngbHospitalDropdown?.isOpen() ? 'icon-arrow-up' : 'icon-arrow-down'"
+              ></i>
+            </button>
+            <div class="select" ngbDropdownMenu aria-labelledby="dropdownBasic2">
+              <div
+                class="d-flex align-items-start m-0 text-normal cursor-pointer select-item"
+                (click)="selectedItemSearch()"
+              >
+                --
+              </div>
+              <div
+                *ngFor="let item of hospitalList"
+                class="d-flex align-items-start text-normal break-space cursor-pointer m-0 select-item"
+                (click)="selectedItemSearch(item.hospital_id, item.hospital_name)"
+              >
+                {{ item.hospital_name }}
+              </div>
+            </div>
+          </div>
+          <div class="mb-3 mr-51">
+            {{ 'user id' | translate }}
+            <input
+              type="text"
+              class="form-control search-input user-id text-normal mt-2 bg-white"
+              placeholder="{{ 'please enter' | translate }}"
+              (keyup.enter)="findRecords(true)"
+              formControlName="idSearch"
+              [disabled]="isSearching"
+            />
+          </div>
+          <div class="mb-3 mr-51">
+            {{ "user's name" | translate }}
+            <input
+              type="text"
+              class="form-control search-input search-input user-id text-normal mt-2 bg-white"
+              placeholder="{{ 'please enter' | translate }}"
+              (keyup.enter)="findRecords(true)"
+              formControlName="nameSearch"
+              [disabled]="isSearching"
+            />
+          </div>
+          <div class="mb-3 mr-51">
+            {{ 'tel' | translate }}
+            <input
+              type="text"
+              class="form-control search-input user-id text-normal mt-2 bg-white"
+              placeholder="{{ 'please enter' | translate }}"
+              formControlName="telSearch"
+              (keyup.enter)="findRecords(true)"
+              [disabled]="isSearching"
+            />
+          </div>
+          <div class="mb-3 mr-51">
+            {{ 'created date' | translate }}
+            <div class="d-flex">
+              <app-custom-datepicker
+                id="start-date"
+                [hasIcon]="true"
+                [placeholder]="'select date' | translate"
+                class="mt-2"
+                [maxDate]="currentDate"
+                [date]="searchingStartDate"
+                inputClass="w-160 h-32 text-normal"
+                [format]="sharedService.isJa() ? 'yyyy年MM月DD日' : 'D MMM y'"
+                (dateChange)="onChooseStartDate($event)"
+              ></app-custom-datepicker>
+              <app-custom-datepicker
+                id="end-date"
+                [hasIcon]="true"
+                class="ml-10 mt-2"
+                [placeholder]="'select date' | translate"
+                [maxDate]="currentDate"
+                [date]="searchingEndDate"
+                inputClass="w-160 h-32 text-normal"
+                [format]="sharedService.isJa() ? 'yyyy年MM月DD日' : 'D MMM y'"
+                (dateChange)="onChooseEndDate($event)"
+              ></app-custom-datepicker>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex ml-auto mb-3">
+          <button
+            type="button"
+            class="btn btn-outline-secondary d-flex text-black-300 text-normal"
+            (click)="resetSearchClicked()"
+          >
+            {{ 'button.reset' | translate }}
+          </button>
+          <button type="submit" class="btn btn-primary d-flex ml-2 bg-blue-500 text-normal" (click)="findRecords(true)">
+            {{ 'button.search' | translate }}
+          </button>
+        </div>
+      </div>
+    </form>
+    <table class="table hospital-table" id="table-content">
+      <thead>
+        <tr>
+          <th scope="col" class="hospital-name">
+            <app-label-column-table
+              [active]="tableFields['hospital_name'].isSort"
+              [sortType]="tableFields['hospital_name'].sortType"
+              [spaceBetween]="true"
+              [classSort]="'ml-0'"
+              [label]="'affiliated medical institution name' | translate"
+              [labelId]="'hospital_name'"
+              (sortEvent)="sortBy($event)"
+            >
+            </app-label-column-table>
+          </th>
+          <th scope="col" class="login-id">
+            <div>
+              <app-label-column-table
+                [active]="tableFields['hcp_cognito_username'].isSort"
+                [sortType]="tableFields['hcp_cognito_username'].sortType"
+                [spaceBetween]="true"
+                [classSort]="'ml-0'"
+                [label]="'user id' | translate"
+                [labelId]="'hcp_cognito_username'"
+                (sortEvent)="sortBy($event)"
+              >
+              </app-label-column-table>
+            </div>
+          </th>
+          <th scope="col" class="full-name">
+            <div>
+              <app-label-column-table
+                [active]="tableFields['hcp_full_name'].isSort"
+                [sortType]="tableFields['hcp_full_name'].sortType"
+                [spaceBetween]="true"
+                [classSort]="'ml-0'"
+                [label]="'user\'s name' | translate"
+                [labelId]="'hcp_full_name'"
+                (sortEvent)="sortBy($event)"
+              >
+              </app-label-column-table>
+            </div>
+          </th>
+          <th scope="col" class="phone-number">
+            <div>
+              <app-label-column-table
+                [active]="tableFields['hcp_cognito_phone'].isSort"
+                [sortType]="tableFields['hcp_cognito_phone'].sortType"
+                [spaceBetween]="true"
+                [classSort]="'ml-0'"
+                [label]="'tel' | translate"
+                [labelId]="'hcp_cognito_phone'"
+                (sortEvent)="sortBy($event)"
+              >
+              </app-label-column-table>
+            </div>
+          </th>
+          <th scope="col" class="created-date">
+            <div>
+              <app-label-column-table
+                [active]="tableFields['created_at'].isSort"
+                [sortType]="tableFields['created_at'].sortType"
+                [spaceBetween]="true"
+                [classSort]="'ml-0'"
+                [label]="'created date and time' | translate"
+                [labelId]="'created_at'"
+                (sortEvent)="sortBy($event)"
+              >
+              </app-label-column-table>
+            </div>
+          </th>
+          <th scope="col" class="action-list">{{ 'actions' | translate }}</th>
+        </tr>
+      </thead>
+      <tbody [attr.noData]="'there is no data' | translate">
+        <tr *ngFor="let user of userList?.data">
+          <td class="hospital-name break-space">{{ user.hospital.hospital_name }}</td>
+          <td class="login-id">{{ user.hcp_cognito_username }}</td>
+          <td class="full-name">{{ user.hcp_full_name }}</td>
+          <td class="phone-number">{{ user.hcp_cognito_phone }}</td>
+          <td class="created-date">
+            {{ user.created_at | date: (sharedService.isJa() ? 'yyyy.MM.dd HH:mm' : 'd MMM y HH:mm') }}
+          </td>
+
+          <td class="action-list">
+            <span class="text-blue-500 underline-hover cursor-pointer" (click)="updateClicked(user.hcp_id)">
+              {{ 'edit' | translate }}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="d-flex mt-2">
+      <button type="button" class="btn btn-primary d-flex bg-blue-500 text-normal" (click)="createUser()">
+        <div class="icon my-auto mr-2 icon-plus morning-2"></div>
+        {{ 'create new' | translate }}
+      </button>
+      <app-paginator
+        *ngIf="userList.total"
+        class="paginator ml-auto my-auto"
+        [collectionSize]="userList.total"
+        (pageChange)="findRecords(false, false, $event)"
+        [pageSize]="userList.per_page"
+        [perPage]="userList.per_page"
+        [page]="param.page"
+      ></app-paginator>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,210 @@
+<div class="detail-latest-alert-modal no-focus" tabindex="0" ngbAutoFocus>
+  <div class="modal-body">
+    <div class="title font-weight-500" *ngIf="!isDetail">
+      <img src="assets/images/ic_circle_danger_red.svg" alt="alert" class="mt--5" />
+      <span class="text-medium pl-5px text-red-100">{{ 'patient detail.alert' | translate }}</span>
+    </div>
+    <div class="title font-weight-500" *ngIf="isDetail">
+      <span class="text-medium">{{ 'alert confirmation history' | translate }}</span>
+    </div>
+    <div class="content">
+      <div
+        class="d-flex"
+        *ngIf="
+          sharedService.hospitalSetting?.hospital_setting_functions?.ALERT?.WEIGHT?.hospital_setting_function_status &&
+          dataChild.alert_history_weights.length
+        "
+      >
+        <div class="left">
+          {{ 'weight gain' | translate }}
+        </div>
+        <div class="right">
+          <div *ngFor="let item of dataChild.alert_history_weights">
+            <div class="d-flex right-content">
+              <div
+                class="has-alert"
+                [class.bg-white]="item?.alert_new_status === alertNewStatus.SEEN || isDetail"
+              ></div>
+              <div class="content-item weight-content">
+                <div class="datetime">
+                  {{
+                    item?.alert_history_weight_vital_utc_time
+                      ? (item?.alert_history_weight_vital_utc_time
+                        | date: (sharedService.isJa() ? 'yyyy/MM/dd HH:mm' : 'd MMM y HH:mm'))
+                      : '----/--/-- --:--'
+                  }}
+                </div>
+                <div class="weight">
+                  <span *ngIf="item?.alert_history_weight_ratio && item?.alert_history_weight_ratio !== '--'">
+                    {{
+                      item.alert_history_weight_ratio > 0
+                        ? '+' + fixNumber(item.alert_history_weight_ratio)
+                        : fixNumber(item.alert_history_weight_ratio)
+                    }}
+                  </span>
+                </div>
+                <div class="unit" [hidden]="!item?.alert_history_weight_ratio">
+                  kg / {{ item?.alert_history_weight_days | dash }}
+                  <span [class.pl-3px]="!sharedService.isJa()">
+                    {{ getPluralNoun('day', 'days', item?.alert_history_weight_days, 'days') }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="d-flex sub-content"
+        *ngIf="
+          sharedService.hospitalSetting?.hospital_setting_functions?.ALERT?.BP?.hospital_setting_function_status &&
+          dataChild.alert_history_bps.length
+        "
+      >
+        <div class="left">{{ 'abnormal blood pressure' | translate }}</div>
+        <div class="right">
+          <div *ngFor="let item of dataChild.alert_history_bps">
+            <div class="d-flex right-content">
+              <div
+                class="has-alert"
+                [class.bg-white]="item?.alert_new_status === alertNewStatus.SEEN || isDetail"
+              ></div>
+
+              <div class="content-item">
+                <div class="datetime">
+                  {{
+                    item?.alert_history_bp_vital_utc_time
+                      ? (item?.alert_history_bp_vital_utc_time
+                        | date: (sharedService.isJa() ? 'yyyy/MM/dd HH:mm' : 'd MMM y HH:mm'))
+                      : '----/--/-- --:--'
+                  }}
+                </div>
+                <div>{{ item.alert_history_bp_sys | dash }}/{{ item.alert_history_bp_dia | dash }}</div>
+                <div class="unit">mmHg</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="d-flex sub-content"
+        *ngIf="
+          sharedService.hospitalSetting?.hospital_setting_functions?.ALERT?.AF?.hospital_setting_function_status &&
+          dataChild.alert_history_afs.length
+        "
+      >
+        <div class="left">{{ 'AF detection' | translate }}</div>
+        <div class="right">
+          <div *ngFor="let item of dataChild.alert_history_afs">
+            <div class="d-flex right-content">
+              <div
+                class="has-alert"
+                [class.bg-white]="item?.alert_new_status === alertNewStatus.SEEN || isDetail"
+              ></div>
+              <div class="content-item af-content">
+                <div class="datetime">
+                  {{
+                    item?.alert_history_af_vital_utc_time
+                      ? (item?.alert_history_af_vital_utc_time
+                        | date: (sharedService.isJa() ? 'yyyy/MM/dd HH:mm' : 'd MMM y HH:mm'))
+                      : '----/--/-- --:--'
+                  }}
+                </div>
+                <div>{{ item?.alert_history_af_times | dash }}</div>
+                <div class="unit" *ngIf="item?.alert_history_af_type === alertType.TYPE1">
+                  {{ 'time detection' | translate }} / {{ item?.alert_history_af_days }}
+                  {{ getPluralNoun('day', 'days', item?.alert_history_af_days, 'Day') }}
+                </div>
+                <div class="unit" *ngIf="item?.alert_history_af_type === alertType.TYPE2">
+                  {{ 'continuous detection' | translate }}
+                </div>
+                <div class="unit" *ngIf="!item?.alert_history_af_days && !item?.alert_history_af_times">
+                  {{ 'time detection' | translate }} / - {{ 'Day' | translate }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="d-flex sub-content"
+        *ngIf="
+          sharedService.hospitalSetting?.hospital_setting_functions?.ALERT?.IHB?.hospital_setting_function_status &&
+          dataChild.alert_history_ihbs.length
+        "
+      >
+        <div class="left">{{ 'irregular pulse wave' | translate }}</div>
+        <div class="right">
+          <div *ngFor="let item of dataChild.alert_history_ihbs">
+            <div class="d-flex right-content">
+              <div
+                class="has-alert"
+                [class.bg-white]="item?.alert_new_status === alertNewStatus.SEEN || isDetail"
+              ></div>
+              <div class="content-item ihb-content">
+                <div class="datetime">
+                  {{
+                    item?.alert_history_ihb_vital_utc_time
+                      ? (item?.alert_history_ihb_vital_utc_time
+                        | date: (sharedService.isJa() ? 'yyyy/MM/dd HH:mm' : 'd MMM y HH:mm'))
+                      : '----/--/-- --:--'
+                  }}
+                </div>
+                <div>{{ item?.alert_history_ihb_times | dash }}</div>
+                <div class="unit" *ngIf="item?.alert_history_ihb_type === alertType.TYPE1">
+                  {{ 'time detection' | translate }} / {{ item?.alert_history_ihb_days }}
+                  {{ getPluralNoun('day', 'days', item?.alert_history_ihb_days, 'Day') }}
+                </div>
+                <div class="unit" *ngIf="item?.alert_history_ihb_type === alertType.TYPE2">
+                  {{ 'continuous detection' | translate }}
+                </div>
+                <div class="unit" *ngIf="!item?.alert_history_ihb_days && !item?.alert_history_ihb_times">
+                  {{ 'time detection' | translate }} / - {{ 'Day' | translate }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex sub-content">
+        <div class="left">{{ 'memo' | translate }}</div>
+        <div class="right">
+          <textarea [readOnly]="isDetail" class="form-control memo" rows="4" [(ngModel)]="memo" maxlength="99">
+          </textarea>
+        </div>
+      </div>
+    </div>
+    <div class="action-list" *ngIf="!isDetail">
+      <button
+        type="button"
+        class="btn text-normal btn-outline-secondary text-black-300 btn-close"
+        (click)="clickedClose()"
+      >
+        {{ 'button.Close' | translate }}
+      </button>
+      <button
+        type="button"
+        class="btn btn-danger bg-red-100 text-normal text-white btn-leave-in-list"
+        (click)="confirmClicked()"
+      >
+        {{ 'leave in the alert list' | translate }}
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary bg-blue-210 text-normal text-white btn-confirm"
+        (click)="leaveListClicked()"
+      >
+        {{ 'confirmed' | translate }}
+      </button>
+    </div>
+  </div>
+  <div
+    class="modal-footer justify-content-center btn-close-hover text-normal"
+    (click)="clickedClose()"
+    *ngIf="isDetail"
+  >
+    <button type="button" class="btn">
+      {{ 'button.Close' | translate }}
+    </button>
+  </div>
+</div>

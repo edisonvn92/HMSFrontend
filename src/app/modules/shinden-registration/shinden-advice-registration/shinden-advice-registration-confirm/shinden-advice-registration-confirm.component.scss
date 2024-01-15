@@ -1,0 +1,27 @@
+.registration-info-content {
+  width: 800px;
+  margin: auto;
+}
+
+.content-div {
+  height: 500px;
+}
+
+@media only screen and (max-width: 800px) {
+  .registration-info-content {
+    width: auto;
+  }
+
+  .content-div {
+    height: auto;
+  }
+
+  .button-group {
+    flex-direction: column;
+
+    .btn {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+  }
+}

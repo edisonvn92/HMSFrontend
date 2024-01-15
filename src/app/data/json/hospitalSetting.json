@@ -1,0 +1,28 @@
+{
+  "hospital_setting_ranking": {
+    "hospital_setting_dia_ranking_high": "x >= 100",
+    "hospital_setting_dia_ranking_medium_high": "x >= 90 && x < 100",
+    "hospital_setting_dia_ranking_medium": "x >= 80 && x < 90",
+    "hospital_setting_dia_ranking_low": "x < 80",
+    "hospital_setting_sys_ranking_high": "x >= 160 || x < 90",
+    "hospital_setting_sys_ranking_medium_high": "(x >= 140 && x < 160) || x < 100",
+    "hospital_setting_sys_ranking_medium": "(x >= 130 && x < 140) || x < 110",
+    "hospital_setting_sys_ranking_low": "x < 130"
+  },
+  "hospital_setting_time": {
+    "min_morning": "05:00:00",
+    "max_morning": "11:00:00",
+    "min_evening": "17:00:00",
+    "max_evening": "26:59:59"
+  },
+  "default_hospital_setting_time": {
+    "hospital_setting_end_evening": "02:59:59",
+    "hospital_setting_end_morning": "11:00:00",
+    "hospital_setting_start_evening": "17:00:00",
+    "hospital_setting_start_morning": "05:00:00"
+  },
+  "default_hospital_setting_bp": {
+    "dia_goal": 80,
+    "sys_goal": 130
+  }
+}

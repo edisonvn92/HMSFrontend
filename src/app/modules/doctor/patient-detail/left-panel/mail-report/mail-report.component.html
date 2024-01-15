@@ -1,0 +1,34 @@
+<div class="patient-detail-component d-flex flex-column" [class.en-language]="!sharedService.isJa()">
+  <div class="mb-3 d-flex justify-content-between" *ngIf="hospitalCodeList.includes(componentCode.MAILER)">
+    <button (click)="openMailer()" class="btn">
+      <img src="./assets/images/ic_mail_blue.svg" alt="mail" />
+      {{ 'email' | translate }}
+    </button>
+    <div class="d-flex">
+      <div class="d-flex align-items-center">
+        {{ 'last boot date' | translate }}:
+        {{
+          showDate(patient?.patient_email_utc_time)
+            ? (showDate(patient?.patient_email_utc_time) | translate)
+            : '----/--/--'
+        }}
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-between" *ngIf="hospitalCodeList.includes(componentCode.REPORT)">
+    <button class="btn" (click)="downloadReport()">
+      <img src="./assets/images/ic_report_blue.svg" alt="report" />
+      {{ 'report' | translate }}
+    </button>
+    <div class="d-flex">
+      <div class="d-flex align-items-center">
+        {{ 'last output date' | translate }}:
+        {{
+          showDate(patient?.patient_report_utc_time)
+            ? (showDate(patient?.patient_report_utc_time) | translate)
+            : '----/--/--'
+        }}
+      </div>
+    </div>
+  </div>
+</div>

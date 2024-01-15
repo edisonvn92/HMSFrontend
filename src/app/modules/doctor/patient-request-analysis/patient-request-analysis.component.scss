@@ -1,0 +1,154 @@
+@import 'src/app/styles/variable';
+
+:host {
+  ::ng-deep {
+    color: $black-300;
+  }
+}
+
+.patient-request-analysis-contaniner {
+  z-index: 50;
+}
+
+.doctor-content-header {
+  .search-group {
+    width: 272px;
+    border-radius: 4px;
+    margin-right: 24px;
+
+    input {
+      height: 32px;
+      border-right: none;
+      border-color: $gray-500;
+      color: $black-300;
+    }
+
+    .input-group-append {
+      height: 32px;
+
+      .input-group-text {
+        width: 30px;
+        padding: 0 6px;
+        border-color: $gray-500;
+        background-color: $gray-170;
+      }
+    }
+  }
+}
+
+.analysis-content {
+  padding: 24px;
+
+  .table-custom {
+    color: $black-300;
+    margin-bottom: 22px;
+
+    thead {
+      tr {
+        background-color: white;
+
+        th {
+          vertical-align: top;
+          border-top: none;
+          border-bottom-color: $gray-700;
+          font-weight: 400;
+        }
+      }
+    }
+
+    tbody {
+      max-height: calc(100vh - 190px);
+      height: calc(100vh - 190px);
+
+      tr {
+        min-height: 40px;
+      }
+    }
+
+    td {
+      vertical-align: middle;
+      border-top-color: $gray-700;
+    }
+
+    .status {
+      width: 170px;
+
+      .status-circle {
+        width: 10px;
+        height: 10px;
+
+        &.show {
+          border-radius: 50%;
+          background: red;
+        }
+      }
+    }
+
+    .application-date-and-time {
+      width: 120px;
+    }
+
+    .analysis-period {
+      width: 200px;
+    }
+
+    .name {
+      width: 160px;
+    }
+
+    .age {
+      width: 80px;
+    }
+
+    .email-address {
+      width: 200px;
+    }
+
+    .electrocardiogram {
+      width: 110px;
+    }
+
+    .electrocardiogram-times {
+      width: 110px;
+    }
+
+    .af {
+      width: 95px;
+    }
+
+    .message-content {
+      width: 107px;
+    }
+
+    .mail-confirm {
+      width: 120px;
+    }
+
+    .payment-status {
+      width: 140px;
+    }
+
+    &.en-language {
+      tbody {
+        max-height: calc(100vh - 215px);
+        height: calc(100vh - 215px);
+      }
+
+      .status {
+        width: 185px;
+      }
+
+      .application-date-and-time {
+        width: 145px;
+      }
+
+      .electrocardiogram {
+        width: 155px;
+      }
+
+      .electrocardiogram-times {
+        width: 200px;
+      }
+    }
+  }
+}

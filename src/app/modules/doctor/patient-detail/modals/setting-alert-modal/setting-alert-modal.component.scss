@@ -1,0 +1,66 @@
+@import 'src/app/styles/variable';
+
+:host {
+  color: $black-300;
+}
+
+.setting-alert {
+  .modal-body {
+    padding: 24px 38px 0 38px;
+    font-size: 14px;
+  }
+
+  .setting-alert-title {
+    padding: 0 0 12px 0;
+    font-size: 16px;
+  }
+
+  .line {
+    width: 386px;
+    height: 1px;
+    background-color: $gray-200;
+    margin-bottom: 24px;
+  }
+
+  .setting-alert-content {
+    margin-bottom: 18px;
+
+    .div-checkbox {
+      width: 16px;
+      height: 16px;
+      margin-right: 16px;
+    }
+  }
+
+  .form-control {
+    width: 80px;
+    height: 32px;
+    font-size: 14px;
+  }
+
+  input {
+    &:disabled {
+      background-color: $gray-150;
+    }
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+
+  input[type='checkbox'] {
+    width: 16px;
+    height: 16px;
+  }
+
+  .modal-footer {
+    padding: 9px 16px;
+  }
+}

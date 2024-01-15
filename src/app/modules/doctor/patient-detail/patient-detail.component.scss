@@ -1,0 +1,249 @@
+@import 'src/styles';
+
+.patient-detail-wrapper {
+  display: block;
+
+  .doctor-content-header {
+    height: 72px;
+
+    .border-gray-900 {
+      border-right: 1px solid $gray-900;
+      height: 14px;
+    }
+
+    .basic-info {
+      margin-left: 30px;
+
+      .setting-action {
+        .icon-user-setting {
+          margin-left: 6px;
+          width: 20px;
+          height: 20px;
+
+          &:hover {
+            background-color: $blue-430;
+          }
+        }
+
+        .btn-confirm {
+          margin-left: 15px;
+          height: 24px;
+          padding: 0 15px;
+        }
+
+        .btn-see-history {
+          margin-left: 8px;
+          height: 24px;
+          padding: 0 9px;
+
+          .see-history {
+            margin-left: 5px;
+          }
+        }
+      }
+    }
+  }
+
+  .patient-detail-container {
+    max-height: calc(100vh - 72px);
+    height: calc(100vh - 72px);
+    word-break: break-word;
+    overflow: auto;
+
+    .w-100-percent {
+      width: 100%;
+    }
+
+    .left-panel {
+      width: 320px;
+      min-width: 320px;
+      padding-top: 16px;
+      padding-bottom: 16px;
+
+      .icon-omron {
+        width: 32px;
+        display: flex;
+        height: 27px;
+        align-items: center;
+        justify-content: center;
+        margin-left: 9px;
+        cursor: pointer;
+        background-color: $blue-100;
+
+        &:hover {
+          background-color: $blue-300;
+        }
+
+        img {
+          width: 15px;
+        }
+      }
+
+      .basic-calendar {
+        padding: 8px 7px 0 7px;
+
+        .basic-content {
+          margin-left: 7px;
+
+          .btn-back {
+            height: 24px;
+          }
+        }
+      }
+
+      .calendar {
+        margin-bottom: 8px;
+      }
+
+      :not(.calendar) {
+        margin: 0 auto;
+      }
+    }
+  }
+
+  .right-panel {
+    width: 100%;
+    margin: 0 12px 10px 0;
+    min-height: calc(100vh - 208px);
+
+    .right-panel-top {
+      position: sticky;
+      background-color: white;
+      z-index: 10;
+      top: 0;
+      padding: 16px 0;
+    }
+
+    #choose-period-box {
+      margin-left: 100px;
+
+      #choose-period-group {
+        background-color: $gray-120;
+        margin: 3px;
+        border-radius: 10px;
+        height: 32px;
+        width: 196px;
+
+        label {
+          margin: 3px 3px;
+          border-radius: 8px;
+          width: 60px;
+          height: 25px;
+          padding: 0px;
+          font-size: 14px;
+          align-items: center;
+          display: flex;
+          justify-content: center;
+          color: $black-300;
+
+          &:hover:not(:active):not(:disabled) {
+            border: 1px solid $black;
+            background-color: white;
+          }
+
+          &:active {
+            background-color: white;
+          }
+
+          &:focus {
+            box-shadow: none;
+          }
+        }
+
+        .active {
+          background-color: white;
+          border: 1px solid white !important;
+        }
+
+        .focus {
+          box-shadow: none;
+        }
+
+        .disabled {
+          pointer-events: none;
+        }
+
+        hr {
+          border: none;
+          border-left: 2px solid #d4d4d4;
+          height: 20px;
+          width: 1px;
+          margin: auto;
+        }
+      }
+    }
+
+    .btn-close-panel {
+      height: 24px;
+      width: 24px;
+      padding-left: 2px;
+      padding-right: 2px;
+    }
+
+    .button-previous {
+      height: 24px;
+      padding-right: 1px;
+    }
+
+    .button-next {
+      height: 24px;
+    }
+
+    .btn-disable {
+      .icon-next-month {
+        background-color: $gray-300;
+      }
+
+      &:hover {
+        border: none;
+      }
+    }
+
+    .btn-today {
+      height: 24px;
+      padding: 0 8px;
+      top: 0;
+      left: 0;
+
+      .today {
+        padding-left: 6px;
+      }
+    }
+
+    .chart-panel {
+      margin-left: 30px;
+    }
+
+    &.panel-close {
+      .right-panel-top {
+        width: calc(100% - 228px);
+      }
+
+      .chart-panel {
+        margin-left: 40px;
+      }
+    }
+
+    .message-history {
+      .message-history-icon {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        height: 60px;
+        width: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        z-index: 1000;
+        background-color: $blue-500;
+        box-shadow: 0px 17.0829px 25.6243px rgba(0, 0, 0, 0.2);
+
+        img {
+          height: 32px;
+          width: 32px;
+        }
+      }
+    }
+  }
+}

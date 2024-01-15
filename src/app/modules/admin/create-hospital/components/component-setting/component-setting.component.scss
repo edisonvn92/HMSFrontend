@@ -1,0 +1,21 @@
+@import 'src/app/styles/variable';
+
+* {
+  color: $black-300;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: 40px;
+}
+
+.component-table {
+  margin-left: 248px;
+
+  .title {
+    font-weight: 400;
+    font-size: 14px;
+    margin-top: 40px;
+  }
+}

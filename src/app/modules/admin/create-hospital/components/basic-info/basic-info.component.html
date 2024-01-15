@@ -1,0 +1,66 @@
+<form [formGroup]="hospitalForm">
+  <div class="title">{{ 'medical institution basic information' | translate }}</div>
+  <ul
+    class="invalid mb-3 text-normal text-black-300"
+    *ngIf="
+      error ||
+      (isError &&
+        (hospitalForm.controls.hospital_code.errors?.required ||
+          hospitalForm.controls.hospital_code?.errors?.pattern ||
+          hospitalForm.controls.hospital_name.errors?.required))
+    "
+  >
+    <li *ngIf="hospitalForm.controls.hospital_code.errors?.required">
+      {{ 'validator.required' | translate: { field: 'medical institution id' | translate } }}
+    </li>
+    <li class="pl-2" *ngIf="hospitalForm.controls.hospital_code?.errors?.pattern">
+      {{ 'validator.login id pattern' | translate }}
+    </li>
+    <li *ngIf="hospitalForm.controls.hospital_name.errors?.required">
+      {{ 'validator.required' | translate: { field: 'office name' | translate } }}
+    </li>
+    <li *ngIf="error">
+      {{ 'errMsg.' + error | translate }}
+    </li>
+  </ul>
+  <div class="mb-3 d-flex align-items-center">
+    <label for="hospital-id" class="form-label text-right text-normal">
+      <span class="mr-1 required">*</span>{{ 'medical institution id' | translate }} :
+    </label>
+    <input
+      type="name"
+      maxlength="50"
+      formControlName="hospital_code"
+      class="form-control hospital-id"
+      id="hospital-id"
+    />
+  </div>
+
+  <div class="mb-3 d-flex align-items-center">
+    <label for="name" class="form-label text-right text-normal">
+      <span class="mr-1 required">*</span>{{ 'office name' | translate }} :
+    </label>
+    <input type="name" maxlength="255" formControlName="hospital_name" class="form-control" id="name" />
+  </div>
+
+  <div class="mb-3 d-flex align-items-center">
+    <label for="address" class="form-label text-right text-normal"> {{ 'address' | translate }} : </label>
+    <input type="name" maxlength="255" formControlName="hospital_address" class="form-control" id="address" />
+  </div>
+  <div class="title">{{ 'default group setting' | translate }}</div>
+  <ul
+    class="invalid mb-3 text-normal text-black-300"
+    *ngIf="(isError || error) && hospitalForm.controls.default_group.errors?.required"
+  >
+    <li *ngIf="hospitalForm.controls.default_group.errors?.required">
+      {{ 'validator.required' | translate: { field: 'default group name' | translate } }}
+    </li>
+  </ul>
+  <div class="d-flex align-items-center">
+    <label for="default-group" class="form-label text-right text-normal">
+      <span class="mr-1 required">*</span>{{ 'default group name' | translate }} :
+    </label>
+    <input type="name" maxlength="255" formControlName="default_group" class="form-control" id="default-group" />
+  </div>
+  <button #submitButton type="submit" class="d-none"></button>
+</form>

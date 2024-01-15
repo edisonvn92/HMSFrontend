@@ -1,0 +1,6 @@
+<div class="d-flex main-container">
+  <app-sidebar [menuList]="doctorMenuList"></app-sidebar>
+  <div class="main-content" [class.close-sidebar]="sharedService.closeSidebar">
+    <router-outlet></router-outlet>
+  </div>
+</div>

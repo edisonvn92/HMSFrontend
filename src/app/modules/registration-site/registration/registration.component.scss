@@ -1,0 +1,16 @@
+.registration-info-content {
+  width: 800px;
+  margin: 0 auto;
+}
+
+.div-checkbox {
+  width: 16px;
+  height: 16px;
+  margin-right: 10px;
+}
+
+@media only screen and (max-width: 955px) {
+  .registration-info-content {
+    width: auto;
+  }
+}

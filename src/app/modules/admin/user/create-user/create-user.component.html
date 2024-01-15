@@ -1,0 +1,227 @@
+<form [formGroup]="userForm" autocomplete="off">
+  <div class="create-user-container">
+    <div class="modal-header">
+      <div class="modal-title text-medium text-black-300 font-weight-500 text-left" id="modal-basic-title">
+        {{ (isCreate ? 'add user' : 'edit user') | translate }}
+      </div>
+      <button type="button" class="close none-outline btn-close" aria-label="Close" (click)="clickedClose()">
+        <div class="icon-close btn-icon-close"></div>
+      </button>
+    </div>
+    <ng-template [ngIf]="!errMess">
+      <div class="modal-body">
+        <ul class="invalid mb-3 text-normal text-black-300" *ngIf="isError">
+          <li *ngIf="userForm.controls.hcp_cognito_username?.errors?.required">
+            {{ 'validator.required' | translate: { field: 'id' | translate } }}
+          </li>
+          <li [class.px-2]="sharedService.isJa()" *ngIf="userForm.controls.hcp_cognito_username?.errors?.minlength">
+            {{ 'validator.minLength' | translate: { field: 'id' | translate, length: 4 } }}
+          </li>
+          <li *ngIf="userForm.controls.hospital_id?.errors?.required">
+            {{ 'validator.required' | translate: { field: 'hospital' | translate } }}
+          </li>
+          <li
+            [class.px-2]="sharedService.isJa()"
+            *ngIf="
+              !userForm.controls.hcp_cognito_username?.errors?.minlength &&
+              userForm.controls.hcp_cognito_username?.errors?.pattern
+            "
+          >
+            {{ 'validator.login id pattern' | translate }}
+          </li>
+          <li *ngIf="userForm.controls.hcp_first_name.errors?.required">
+            {{ 'validator.required' | translate: { field: 'name' | translate } }}
+          </li>
+          <li
+            [class.px-2]="sharedService.isJa()"
+            *ngIf="
+              userForm.controls.hcp_cognito_phone?.errors?.pattern ||
+              userForm.controls.hcp_cognito_phone?.errors?.minlength ||
+              userForm.controls.hcp_cognito_phone?.errors?.maxlength
+            "
+          >
+            {{ 'validator.phonePattern' | translate }}
+          </li>
+          <li *ngIf="userForm.controls.hcp_cognito_email.errors?.required">
+            {{ 'validator.required' | translate: { field: 'email address' | translate } }}
+          </li>
+          <li [class.px-2]="sharedService.isJa()" *ngIf="userForm.controls.hcp_cognito_email.errors?.email">
+            {{ 'validator.invalid' | translate: { field: 'email address' | translate } }}
+          </li>
+          <li *ngIf="userForm.controls.password?.errors?.required">
+            {{ 'validator.required' | translate: { field: 'password' | translate } }}
+          </li>
+          <li [class.px-2]="sharedService.isJa()" *ngIf="userForm.controls.password?.errors?.minlength">
+            {{ 'validator.minLength' | translate: { field: 'password' | translate, length: 8 } }}
+          </li>
+          <li
+            [class.px-2]="sharedService.isJa()"
+            *ngIf="
+              !userForm.controls.password?.errors?.minlength &&
+              userForm.controls.password?.errors?.password_valid_character
+            "
+          >
+            {{ 'validator.passwordInvalidCharacter' | translate: { field: 'password' | translate } }}
+          </li>
+          <li
+            [class.px-2]="sharedService.isJa()"
+            *ngIf="
+              !userForm.controls.password?.errors?.minlength &&
+              !userForm.controls.password?.errors?.password_valid_character &&
+              userForm.controls.password?.errors?.password_rules
+            "
+          >
+            {{ 'validator.passwordFormat' | translate: { field: 'password' | translate } }}
+          </li>
+          <li [class.px-2]="sharedService.isJa()" *ngIf="userForm.errors?.password_mismatch">
+            {{
+              'validator.passwordMismatch'
+                | translate: { field1: 'password' | translate, field2: 'confirm password' | translate }
+            }}
+          </li>
+          <li *ngIf="userForm.controls.password_confirmation?.errors?.required">
+            {{ 'validator.required' | translate: { field: 'confirm password' | translate } }}
+          </li>
+          <li [class.px-2]="sharedService.isJa()" *ngIf="validationErr">
+            {{ 'errMsg.' + validationErr | translate }}
+          </li>
+        </ul>
+
+        <div class="mb-3 d-flex align-items-center">
+          <label for="login-id" class="form-label d-flex justify-content-end text-normal">
+            <span class="mr-1 required">*</span>
+            {{ 'id' | translate }} :
+          </label>
+          <input
+            type="text"
+            class="form-control ml-20 w-468"
+            maxlength="50"
+            [placeholder]="'enter within :field characters' | translate: { field: 50 }"
+            formControlName="hcp_cognito_username"
+            id="login-id"
+          />
+        </div>
+        <div class="mb-3 d-flex align-items-center">
+          <label class="form-label d-flex justify-content-end text-normal">
+            <span class="mr-1 required">*</span>
+            {{ 'affiliated medical institution' | translate }} :
+          </label>
+          <div ngbDropdown #hospitalDropdown class="d-inline-block ml-20 select-box">
+            <button type="button" class="btn btn-outline-secondary w-468 d-flex align-items-center" ngbDropdownToggle>
+              <div class="text text-black-300 text-normal text-truncate">
+                {{ currentHospital.hospital_name }}
+              </div>
+              <i
+                class="fas ml-auto opacity-25 my-auto icon ml-2 text-black-300"
+                [class]="ngbHospitalDropdown?.isOpen() ? 'icon-arrow-up' : 'icon-arrow-down'"
+              ></i>
+            </button>
+            <div class="hospital-select" ngbDropdownMenu aria-labelledby="dropdownBasic2">
+              <div
+                *ngFor="let item of hospitalWithoutAdminList"
+                [class.active]="userForm.controls.hospital_id.value === item.hospital_id"
+                class="d-flex pl-2 cursor-pointer align-items-start cursor-pointer break-space w-468 m-0 select-item"
+                (click)="onSelectedHospitalClicked(item)"
+              >
+                {{ item.hospital_name | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mb-3 d-flex align-items-center">
+          <label for="name" class="form-label d-flex justify-content-end text-normal">
+            <span class="mr-1 required">*</span>
+            {{ 'name' | translate }} :
+          </label>
+          <input
+            type="text"
+            class="form-control ml-20 w-468"
+            maxlength="50"
+            formControlName="hcp_full_name"
+            [placeholder]="'enter within :field characters' | translate: { field: 50 }"
+            id="name"
+            appTransformSpace
+          />
+        </div>
+        <div class="mb-3 d-flex align-items-center">
+          <label for="tel" class="form-label d-flex justify-content-end text-normal"> {{ 'tel' | translate }} : </label>
+          <input
+            type="text"
+            class="form-control ml-20 w-468"
+            appOnlyNumber
+            [phoneNumber]="true"
+            maxlength="50"
+            [placeholder]="'enter within :field characters' | translate: { field: 50 }"
+            formControlName="hcp_cognito_phone"
+            id="tel"
+          />
+        </div>
+        <div class="mb-3 d-flex align-items-center">
+          <label for="tel" class="form-label d-flex justify-content-end text-normal">
+            <span class="mr-1 required">*</span>
+            {{ 'email address' | translate }} :
+          </label>
+          <input
+            type="text"
+            class="form-control ml-20 w-468"
+            placeholder="Test123@gmail.com"
+            formControlName="hcp_cognito_email"
+            id="email"
+          />
+        </div>
+        <div class="mb-3 d-flex align-items-center">
+          <label for="password" class="form-label d-flex justify-content-end text-normal">
+            <span class="mr-1 required" *ngIf="isCreate">*</span>
+            {{ 'initial password' | translate }} :
+          </label>
+          <input
+            type="password"
+            class="form-control ml-20 w-468"
+            maxlength="100"
+            [placeholder]="'enter within :field characters' | translate: { field: 100 }"
+            formControlName="password"
+            id="password"
+            autocomplete="new-password"
+          />
+        </div>
+        <div class="mb-3 d-flex align-items-center">
+          <label for="confirm-password" class="form-label text-no-wrap d-flex justify-content-end text-normal">
+            <span class="mr-1 required" *ngIf="isCreate">*</span>
+            {{ 'password confirmation' | translate }} :
+          </label>
+          <input
+            type="password"
+            class="form-control ml-20 w-468"
+            maxlength="100"
+            [placeholder]="'enter within :field characters' | translate: { field: 100 }"
+            formControlName="password_confirmation"
+            id="confirm-password"
+            autocomplete="new-password"
+          />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-outline-secondary btn-close text-black-300 text-normal mr-2"
+          (click)="clickedClose()"
+        >
+          {{ 'button.Close' | translate }}
+        </button>
+        <button type="submit" (click)="submitClicked()" class="btn btn-primary bg-blue-500 btn-close text-normal">
+          {{ (isCreate ? 'add new' : 'button.save') | translate }}
+        </button>
+      </div>
+    </ng-template>
+    <ng-template [ngIf]="errMess">
+      <div class="modal-body text-break px-24">
+        <div class="error">{{ ':field does not exist' | translate: { field: 'hcp' | translate } }}</div>
+      </div>
+      <div (click)="clickedClose()" class="modal-footer cursor-pointer justify-content-center">
+        <div class="btn-close text-large text-black-300">
+          {{ 'button.Close' | translate }}
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</form>

@@ -1,0 +1,317 @@
+<div class="patient-detail-wrapper" [class.sidebar-close]="sharedService.closeSidebar">
+  <div class="doctor-content-header">
+    <app-user-login [arrIcon]="arrIcon"></app-user-login>
+    <div class="basic-info d-flex align-items-center" *ngIf="patient">
+      <div class="fs-24">
+        {{ joinName(patient.patient_first_name, patient.patient_middle_name, patient.patient_last_name) | dash }}
+      </div>
+      <div class="border-gray-900 mx-2"></div>
+      <div>{{ patient.patient_code }}</div>
+      <div class="border-gray-900 mx-2"></div>
+      <div>
+        <span>{{
+          patient.patient_birthday
+            ? (patient.patient_birthday | date: (sharedService.isJa() ? 'yyyy年MM月dd日' : 'd MMM y'))
+            : sharedService.isJa()
+            ? '----年--月--日'
+            : '-- --- ----'
+        }}</span>
+        / <span>{{ patient.patient_age | dash }}</span>
+        <span [class.pl-5px]="!sharedService.isJa()">{{ 'age' | translate }}</span> /
+        <span>{{ patient.patient_gender | gender | translate }}</span>
+        <span [hidden]="!sharedService.isJa()">{{ 'gender' | translate }}</span>
+      </div>
+      <div class="border-gray-900 mx-2"></div>
+      <div class="d-flex setting-action">
+        <div class="icon-user-setting cursor-pointer" (click)="editProfile()"></div>
+        <button
+          type="button"
+          class="btn bg-blue-500 text-normal text-white btn-confirm"
+          (click)="showConfirmExaminationDate()"
+          *ngIf="hospitalSetting?.hospital_setting?.hospital_setting_confirm_log === 1"
+        >
+          {{ 'button.confirm' | translate }}
+        </button>
+        <button
+          type="button"
+          class="btn d-flex bg-gray-150 text-normal text-black-300 btn-see-history"
+          (click)="showRankingHistory()"
+        >
+          <img src="./assets/images/icon_see_history.svg" alt="prev" />
+          <span class="see-history">{{ 'patient detail.see history' | translate }}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="patient-detail-container d-flex">
+    <div class="d-flex w-100-percent h-fit-content">
+      <div class="left-panel bottom-left-panel bg-gray-140" [hidden]="closeLeftPanel">
+        <div class="flex-column pb-20" [class.d-flex]="!closeLeftPanel">
+          <app-calendar
+            class="calendar"
+            [style.order]="hospitalOrder[componentCode.CALENDAR]"
+            *ngIf="hospitalCodeList.includes(componentCode.CALENDAR)"
+            [hospitalThresholdBp]="hospitalSetting.hospital_threshold_bp"
+            [target]="bloodPressureTarget"
+          >
+          </app-calendar>
+          <app-latest-alert
+            [style.order]="hospitalOrder[componentCode.LATEST_ALERT]"
+            *ngIf="hospitalCodeList.includes(componentCode.LATEST_ALERT)"
+            [patientId]="patientId"
+          ></app-latest-alert>
+          <app-evening-home-blood-pressure
+            [style.order]="hospitalOrder[componentCode.HOME_EVENING_BLOOD_PRESSURE_7_DAYS]"
+            *ngIf="hospitalCodeList.includes(componentCode.HOME_EVENING_BLOOD_PRESSURE_7_DAYS)"
+            [patient]="patient"
+          >
+          </app-evening-home-blood-pressure>
+          <app-temperature
+            [style.order]="hospitalOrder[componentCode.BODY_TEMPERATURE]"
+            *ngIf="hospitalCodeList.includes(componentCode.BODY_TEMPERATURE)"
+            [patient]="patient"
+          ></app-temperature>
+          <app-body-weight
+            [style.order]="hospitalOrder[componentCode.BODY_WEIGHT_RATIO]"
+            *ngIf="hospitalCodeList.includes(componentCode.BODY_WEIGHT_RATIO)"
+            [patient]="patient"
+          >
+          </app-body-weight>
+          <app-morning-home-blood-pressure
+            [style.order]="hospitalOrder[componentCode.HOME_MORNING_BLOOD_PRESSURE_7_DAYS]"
+            *ngIf="hospitalCodeList.includes(componentCode.HOME_MORNING_BLOOD_PRESSURE_7_DAYS)"
+            [patient]="patient"
+          >
+          </app-morning-home-blood-pressure>
+          <app-heart-beat
+            [style.order]="hospitalOrder[componentCode.LATEST_MORNING_HEART_RATE]"
+            *ngIf="hospitalCodeList.includes(componentCode.LATEST_MORNING_HEART_RATE)"
+            [patient]="patient"
+          >
+          </app-heart-beat>
+          <app-latest-morning-blood-pressure
+            [style.order]="hospitalOrder[componentCode.LATEST_MORNING_BLOOD_PRESSURE]"
+            *ngIf="hospitalCodeList.includes(componentCode.LATEST_MORNING_BLOOD_PRESSURE)"
+            [patient]="patient"
+          >
+          </app-latest-morning-blood-pressure>
+          <app-step-count
+            [style.order]="hospitalOrder[componentCode.STEP_COUNT_YESTERDAY]"
+            *ngIf="hospitalCodeList.includes(componentCode.STEP_COUNT_YESTERDAY)"
+            [patient]="patient"
+          >
+          </app-step-count>
+          <app-latest-office-blood-pressure
+            [style.order]="hospitalOrder[componentCode.LATEST_OFFICE_BLOOD_PRESSURE]"
+            *ngIf="hospitalCodeList.includes(componentCode.LATEST_OFFICE_BLOOD_PRESSURE)"
+            [patient]="patient"
+            (openOfficeBloodPressure)="openOfficeBloodPressureModal()"
+            (openOfficeBloodPressureHistory)="openOfficeBloodPressureHistoryModal()"
+          >
+          </app-latest-office-blood-pressure>
+          <app-blood-pressure-target
+            [style.order]="hospitalOrder[componentCode.BLOOD_PRESSURE_GOAL]"
+            *ngIf="hospitalCodeList.includes(componentCode.BLOOD_PRESSURE_GOAL)"
+            [patient]="patient"
+            (openBloodPressureTarget)="openBloodPressureTarget()"
+          >
+          </app-blood-pressure-target>
+          <app-latest-medical-examination-date
+            [style.order]="hospitalOrder[componentCode.LATEST_EXAMINATION_DATE]"
+            *ngIf="hospitalCodeList.includes(componentCode.LATEST_EXAMINATION_DATE)"
+            [patient]="patient"
+            (openMedical)="openMedicalLogic($event)"
+          >
+          </app-latest-medical-examination-date>
+          <app-minimun-mets
+            [style.order]="hospitalOrder[componentCode.MIN_METS]"
+            *ngIf="hospitalCodeList.includes(componentCode.MIN_METS)"
+            [patient]="patient"
+          >
+          </app-minimun-mets>
+          <app-mail-report
+            [style.order]="
+              hospitalOrder[componentCode.MAILER]
+                ? hospitalOrder[componentCode.MAILER]
+                : hospitalOrder[componentCode.REPORT]
+            "
+            *ngIf="hospitalCodeList.includes(componentCode.MAILER) || hospitalCodeList.includes(componentCode.REPORT)"
+            [patient]="patient"
+            [hospitalCodeList]="hospitalCodeList"
+            (mailReportSuccess)="handleMailReportSuccess()"
+            [patientId]="patientId"
+          ></app-mail-report>
+          <app-heart-beat-report
+            [style.order]="hospitalOrder[componentCode.HEART_BEAT_REPORT]"
+            *ngIf="hospitalCodeList.includes(componentCode.HEART_BEAT_REPORT)"
+            [patient]="patient"
+            [patientId]="patientId"
+            (shindenDownloadReportSuccess)="handleShindenDownloadReportSuccess()"
+          ></app-heart-beat-report>
+        </div>
+      </div>
+      <div class="right-panel" [class.panel-close]="closeLeftPanel">
+        <div class="right-panel-top">
+          <button
+            type="button"
+            class="btn d-flex bg-blue-420 text-normal align-items-center btn-close-panel justify-content-center ml-3"
+            (click)="clickToggleLeftPanel()"
+          >
+            <img [src]="'./assets/images/' + (closeLeftPanel ? 'icon_next_month_1.svg' : 'icon_prev_month_1.svg')" />
+          </button>
+          <div class="d-flex align-items-center justify-content-center">
+            <button
+              type="button"
+              class="btn d-flex bg-blue-420 text-normal text-white btn-today mr-auto ml-60"
+              (click)="moveBackToToday()"
+            >
+              <img src="./assets/images/icon_today.svg" alt="day" />
+              <span class="today">{{ 'patient detail.today' | translate }}</span>
+            </button>
+            <div class="d-flex align-items-center">
+              <div class="button-previous cursor-pointer" (click)="clickPrevPeriod()">
+                <div class="icon icon-prev-month"></div>
+              </div>
+              <div class="text-large text-black-100 active-month mx-5">
+                {{ rightSideStartDate | date: (sharedService.isJa() ? 'yyyy年MM月dd日' : 'd MMM y') }} -
+                {{ rightSideEndDate | date: (sharedService.isJa() ? 'yyyy年MM月dd日' : 'd MMM y') }}
+              </div>
+              <div
+                class="button-next"
+                [ngClass]="disableNextButton ? ['btn-disable'] : ['cursor-pointer']"
+                (click)="clickNextPeriod()"
+              >
+                <div class="icon icon-next-month"></div>
+              </div>
+            </div>
+            <div id="choose-period-box" class="mr-auto">
+              <div
+                class="btn-group btn-group-toggle"
+                ngbRadioGroup
+                name="radioBasic"
+                id="choose-period-group"
+                [(ngModel)]="chartPeriod"
+                (change)="onChangePeriod()"
+              >
+                <label ngbButtonLabel>
+                  <input ngbButton type="radio" class="custom-radio-ignore" [value]="periodOptions.PERIOD_2W" />
+                  {{ ':week w' | translate: { week: 2 } }}
+                </label>
+                <hr *ngIf="chartPeriod === periodOptions.PERIOD_12W" />
+                <label ngbButtonLabel>
+                  <input ngbButton type="radio" class="custom-radio-ignore" [value]="periodOptions.PERIOD_4W" />
+                  {{ ':week w' | translate: { week: 4 } }}
+                </label>
+                <hr *ngIf="chartPeriod === periodOptions.PERIOD_2W" />
+                <label ngbButtonLabel>
+                  <input ngbButton type="radio" class="custom-radio-ignore" [value]="periodOptions.PERIOD_12W" />
+                  {{ ':week w' | translate: { week: 12 } }}
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="chart-panel d-flex flex-column flex-order">
+          <app-blood-pressure-heartbeat-chart
+            [style.order]="hospitalOrder[componentCode.BLOOD_PRESSURE_PULSE_GRAPH]"
+            *ngIf="hospitalCodeList.includes(componentCode.BLOOD_PRESSURE_PULSE_GRAPH)"
+            [startDate]="rightSideStartDate"
+            [endDate]="rightSideEndDate"
+            [patient]="bloodPressureChartData"
+            [bloodPressureTarget]="bloodPressureTarget"
+            [showHospitalVisit]="hospitalCodeList.includes(componentCode.HOSPITAL_VISIT)"
+            (openBloodPressureTarget)="openBloodPressureTarget()"
+            (openHomeBloodPressureHistory)="showHomeBloodPressureHistory()"
+          >
+          </app-blood-pressure-heartbeat-chart>
+          <app-body-weight-chart
+            [style.order]="hospitalOrder[componentCode.WEIGHT_GRAPH]"
+            *ngIf="hospitalCodeList.includes(componentCode.WEIGHT_GRAPH)"
+            [startDate]="rightSideStartDate"
+            [endDate]="rightSideEndDate"
+            [patient]="bodyWeightChartData"
+            [hospitalSetting]="sharedService.hospitalSetting"
+            (openBodyWeightHistory)="showBodyWeightHistory()"
+          ></app-body-weight-chart>
+          <app-step-count-chart
+            [style.order]="hospitalOrder[componentCode.STEP_COUNT_GRAPH]"
+            *ngIf="hospitalCodeList.includes(componentCode.STEP_COUNT_GRAPH)"
+            [startDate]="rightSideStartDate"
+            [endDate]="rightSideEndDate"
+            [patient]="patientChartData"
+            (openStepCountHistory)="showStepCountHistory()"
+          ></app-step-count-chart>
+          <app-temperature-body-chart
+            [style.order]="hospitalOrder[componentCode.BODY_TEMPERATURE_GRAPH]"
+            *ngIf="hospitalCodeList.includes(componentCode.BODY_TEMPERATURE_GRAPH)"
+            [startDate]="rightSideStartDate"
+            [endDate]="rightSideEndDate"
+            [patient]="bodyTemperatureChartData"
+            (openTemperatureHistory)="showTemperatureHistory()"
+          ></app-temperature-body-chart>
+          <app-bp-medication-chart
+            [style.order]="hospitalOrder[componentCode.BLOOD_PRESSURE_MEDICATION_GRAPH]"
+            *ngIf="hospitalCodeList.includes(componentCode.BLOOD_PRESSURE_MEDICATION_GRAPH)"
+            [startDate]="rightSideStartDate"
+            [endDate]="rightSideEndDate"
+            [patient]="heartBeatDrugChartData"
+            [prescriptions]="prescriptions"
+            (openPrescription)="showPrescription()"
+          ></app-bp-medication-chart>
+          <!--          <app-diary-chart-->
+          <!--            [style.order]="hospitalOrder[componentCode.DIARY_GRAPH]"-->
+          <!--            *ngIf="hospitalCodeList.includes(componentCode.DIARY_GRAPH)"-->
+          <!--            [startDate]="rightSideStartDate"-->
+          <!--            [endDate]="rightSideEndDate"-->
+          <!--            [patient]="patientDiaryData"-->
+          <!--          ></app-diary-chart>-->
+          <app-alert-chart
+            [style.order]="hospitalOrder[componentCode.ALERT_GRAPH]"
+            *ngIf="hospitalCodeList.includes(componentCode.ALERT_GRAPH) && countAlertType"
+            [startDate]="rightSideStartDate"
+            [endDate]="rightSideEndDate"
+            [patient]="alertChartData"
+            (updateAlertChart)="updateAlertChart($event)"
+            [hospitalSetting]="sharedService.hospitalSetting"
+          ></app-alert-chart>
+          <app-heart-beat-chart
+            [style.order]="hospitalOrder[componentCode.HEARTBEAT_GRAPH]"
+            *ngIf="hospitalCodeList.includes(componentCode.HEARTBEAT_GRAPH)"
+            [startDate]="rightSideStartDate"
+            [endDate]="rightSideEndDate"
+            [patient]="heartBeatChartData"
+            [hospitalSetting]="sharedService.hospitalSetting"
+            (openHeartBeatHistory)="showHeartBeatHistory()"
+          ></app-heart-beat-chart>
+          <!--          <app-review-heart-failure-->
+          <!--            [style.order]="hospitalOrder[componentCode.REVIEW_GRAPH]"-->
+          <!--            *ngIf="hospitalCodeList.includes(componentCode.REVIEW_GRAPH)"-->
+          <!--            [startDate]="rightSideStartDate"-->
+          <!--            [endDate]="rightSideEndDate"-->
+          <!--            [patient]="estimatedNYHAChartData"-->
+          <!--          ></app-review-heart-failure>-->
+          <app-mail-chart
+            [style.order]="hospitalOrder[componentCode.OTHER_GRAPH]"
+            *ngIf="hospitalCodeList.includes(componentCode.OTHER_GRAPH)"
+            [startDate]="rightSideStartDate"
+            [endDate]="rightSideEndDate"
+            [patient]="patientOtherChartData"
+            [patientCode]="patient?.patient_code"
+            [patientID]="patientId"
+            [hospitalOrder]="hospitalOrder"
+          ></app-mail-chart>
+        </div>
+        <div class="message-history" *ngIf="hospitalCodeList.includes(componentCode.PATIENT_MESSAGE)">
+          <app-message-history-modal [patientId]="patientId" *ngIf="isShowMessageHistory"></app-message-history-modal>
+          <div class="message-history-icon cursor-pointer" (click)="showMessageHistory()">
+            <img
+              [src]="'./assets/images/' + (isShowMessageHistory ? 'icon_x.svg' : 'icon_message.svg')"
+              alt="message"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

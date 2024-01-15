@@ -1,0 +1,32 @@
+<div class="registration-top-content">
+  <div *ngIf="hospital && !hospital.hospital_setting?.hospital_setting_patient_register_web" class="invalid">
+    {{ 'patient registration web is off' | translate }}
+  </div>
+  <ng-container *ngIf="hospital?.hospital_setting?.hospital_setting_patient_register_web">
+    <div *ngIf="!this.sharedService.isJa()" class="font-weight-500 fs-24 mt-2">
+      {{ 'welcome to OMRON HMS' | translate }}
+    </div>
+    <div class="mt-3 fs-20 font-weight-500">{{ 'home blood pressure monitoring system' | translate }}</div>
+
+    <div class="text-medium mt-128 font-weight-500">
+      {{
+        'the home monitoring system provided by OMRON is a service that shares measurement records at home to the clinic via an app.'
+          | translate
+      }}
+    </div>
+    <div class="text-medium font-weight-500">
+      {{ 'use the OMRON connect app to create a cloud account and then proceed with registration.' | translate }}
+    </div>
+    <div class="text-medium font-weight-500">
+      {{ 'the next screen will require you to sign in to your account.' | translate }}
+    </div>
+    <button
+      type="button"
+      (click)="onRegisterClicked()"
+      *ngIf="hospital"
+      class="btn btn-primary mt-3 bg-blue-300 btn-close text-normal"
+    >
+      {{ 'button.start usage registration' | translate }}
+    </button>
+  </ng-container>
+</div>

@@ -1,0 +1,92 @@
+<div class="popup" [ngStyle]="{ left: getPopupPosition() }">
+  <div class="text-center border-bottom pb-1 text-medium">
+    {{ currentDate | date: (sharedService.isJa() ? 'yyyy年MM月dd日' : 'd MMM YYYY') }}
+  </div>
+  <div class="list">
+    <div class="d-flex header border-bottom">
+      <div class="box-title text-blue-600 text-left"></div>
+      <div class="blood-pressure text-center">
+        {{ 'patient.blood pressure' | translate }}
+        <p class="text-blue-410 text-small">mmHg</p>
+      </div>
+      <div class="pulse-rate text-center">
+        {{ 'pulse rate' | translate }}
+        <p class="text-blue-410 text-small">bpm</p>
+      </div>
+      <div class="measurement-state text-center">{{ 'measurement status' | translate }}</div>
+    </div>
+    <div class="box-content border-bottom">
+      <div class="d-flex align-items-center content text-normal">
+        <div class="box-title text-blue-600 text-left">{{ 'morning' | translate }}</div>
+        <div class="blood-pressure text-center">
+          {{ data.patient_stat_sys_morning | dash }}
+          <span class="text-gray-350"> / </span>
+          {{ data.patient_stat_dia_morning | dash }}
+        </div>
+        <div class="pulse-rate text-center">
+          {{ data.patient_stat_pulse_morning | dash }}
+        </div>
+        <div class="measurement-state">
+          <img class="state-icon" *ngIf="data.patient_stat_ihb_morning" src="./assets/images/icon_heart.svg" />
+          <img class="empty-icon" *ngIf="!data.patient_stat_ihb_morning" src="./assets/images/icon_dot_1.svg" />
+
+          <img class="state-icon" *ngIf="data.patient_stat_body_motion_morning" src="./assets/images/icon_body.svg" />
+          <img class="empty-icon" *ngIf="!data.patient_stat_body_motion_morning" src="./assets/images/icon_dot_1.svg" />
+
+          <img
+            class="state-icon"
+            *ngIf="data.patient_stat_tight_fit_morning === 0"
+            src="./assets/images/cuff_winding.svg"
+          />
+          <img
+            class="empty-icon"
+            *ngIf="data.patient_stat_tight_fit_morning !== 0"
+            src="./assets/images/icon_dot_1.svg"
+          />
+        </div>
+      </div>
+
+      <div class="d-flex align-items-center content text-normal">
+        <div class="box-title text-blue-600 text-left">{{ 'evening' | translate }}</div>
+        <div class="blood-pressure text-center">
+          {{ data.patient_stat_sys_evening | dash }}
+          <span class="text-gray-350"> / </span>
+          {{ data.patient_stat_dia_evening | dash }}
+        </div>
+        <div class="pulse-rate text-center">
+          {{ data.patient_stat_pulse_evening | dash }}
+        </div>
+        <div class="measurement-state">
+          <img class="state-icon" *ngIf="data.patient_stat_ihb_evening" src="./assets/images/icon_heart.svg" />
+          <img class="empty-icon" *ngIf="!data.patient_stat_ihb_evening" src="./assets/images/icon_dot_1.svg" />
+
+          <img class="state-icon" *ngIf="data.patient_stat_body_motion_evening" src="./assets/images/icon_body.svg" />
+          <img class="empty-icon" *ngIf="!data.patient_stat_body_motion_evening" src="./assets/images/icon_dot_1.svg" />
+
+          <img
+            class="state-icon"
+            *ngIf="data.patient_stat_tight_fit_evening === 0"
+            src="./assets/images/cuff_winding.svg"
+          />
+          <img
+            class="empty-icon"
+            *ngIf="data.patient_stat_tight_fit_evening !== 0"
+            src="./assets/images/icon_dot_1.svg"
+          />
+        </div>
+      </div>
+
+      <div class="d-flex align-items-center content text-normal">
+        <div class="box-title text-blue-600 text-left">{{ 'examination room' | translate }}</div>
+        <div class="blood-pressure text-center">
+          {{ data.vital_office_systolic | dash }}
+          <span class="text-gray-350"> / </span>
+          {{ data.vital_office_diastolic | dash }}
+        </div>
+        <div class="pulse-rate text-center">
+          {{ data.vital_office_pulse | dash }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

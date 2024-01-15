@@ -1,0 +1,45 @@
+@import 'src/app/styles/variable';
+
+.modal-body {
+  padding: 1rem 0;
+}
+
+.history-modal {
+  .list {
+    .date {
+      width: 55%;
+    }
+
+    .step {
+      width: 45%;
+    }
+
+    .history-content {
+      .month {
+        margin: 9px 49px 0 49px;
+      }
+
+      .content {
+        margin: auto 49px;
+
+        .weekday {
+          margin-right: 0;
+        }
+      }
+    }
+
+    &.en-language {
+      .date {
+        width: 65%;
+      }
+
+      .step {
+        width: 35%;
+      }
+    }
+  }
+
+  .pagination-history {
+    margin-right: 46px;
+  }
+}

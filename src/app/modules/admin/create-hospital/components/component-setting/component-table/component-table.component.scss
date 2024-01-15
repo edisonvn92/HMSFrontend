@@ -1,0 +1,46 @@
+@import 'src/app/styles/variable';
+
+.no,
+.order,
+.column-checkbox {
+  width: 100px;
+}
+
+.icon-rose,
+.icon-reduction {
+  width: 15px;
+  height: 18px;
+}
+
+.icon-wrapper {
+  border-radius: 4px;
+  padding: 2px;
+
+  &:hover {
+    background-color: $gray-210;
+  }
+}
+
+tbody {
+  min-height: 150px;
+  max-height: 365px;
+  overflow: auto;
+}
+
+.table thead th {
+  border-bottom: 1px solid $gray-230;
+}
+
+tr,
+th,
+td {
+  height: 40px;
+  padding: 0 0.75rem;
+  vertical-align: inherit !important;
+}
+
+.checkbox-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

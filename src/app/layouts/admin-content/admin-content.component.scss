@@ -1,0 +1,38 @@
+@import 'src/app/styles/variable';
+
+.user-info {
+  .icon-setting-1 {
+    width: 24px;
+    height: 22px;
+  }
+
+  .username {
+    margin-right: 8px;
+    margin-left: 24px;
+    max-width: 200px;
+  }
+
+  .setting-icon-wrapper {
+    border-radius: 4px;
+
+    &:hover {
+      background-color: $gray-210;
+    }
+  }
+
+  .setting-icon-wrapper {
+    padding: 2px;
+
+    &::after {
+      display: none;
+    }
+  }
+}
+
+.dropdown-menu {
+  width: 150px;
+}
+
+.show > .dropdown-toggle {
+  background-color: white !important;
+}

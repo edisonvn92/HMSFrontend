@@ -1,0 +1,16 @@
+@import 'src/app/styles/variable';
+
+.modal-body {
+  padding: 24px 16px;
+
+  textarea {
+    height: 140px;
+    resize: none;
+
+    &:disabled {
+      background-color: white;
+      cursor: auto;
+      border-color: $gray-200;
+    }
+  }
+}

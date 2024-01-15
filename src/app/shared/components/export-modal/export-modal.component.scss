@@ -1,0 +1,21 @@
+.export-modal-container {
+  .modal-header {
+    padding: 8px 26px 8px 24px;
+  }
+
+  .modal-body {
+    padding-left: 38px;
+
+    .option-div {
+      padding-left: 24px;
+    }
+  }
+  .modal-footer {
+    padding: 8px 16px;
+  }
+}
+
+.div-checkbox {
+  display: flex;
+  align-items: center;
+}

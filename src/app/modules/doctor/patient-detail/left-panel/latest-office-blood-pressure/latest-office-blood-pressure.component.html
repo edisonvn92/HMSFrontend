@@ -1,0 +1,36 @@
+<div class="patient-detail-component">
+  <div class="d-flex justify-content-between align-items-center mt--4">
+    <div class="d-flex justify-content-between align-items-center div-left">
+      <div class="left-title">{{ 'patient detail.last office blood pressure' | translate }}</div>
+      <div class="div-icon-setting cursor-pointer" (click)="openOfficeBloodPressure.emit()">
+        <div class="icon-setting-1"></div>
+      </div>
+      <div
+        class="office-history bg-gray-150 cursor-pointer"
+        (click)="openOfficeBloodPressureHistory.emit()"
+        [ngClass]="sharedService.isJa() ? '' : 'office-history-en'"
+      >
+        <img src="./assets/images/icon_next.svg" alt="icon" />
+        <span class="history">{{ 'patient detail.history' | translate }}</span>
+      </div>
+    </div>
+    <div class="text-small text-gray-190 div-right text-right">
+      {{ showDate() ? (showDate() | translate) : '----/--/--' }}
+    </div>
+  </div>
+  <div class="d-flex justify-content-between content">
+    <div class="icon-treatment icon"></div>
+    <div>
+      <div>
+        <span class="primary-value">
+          {{ patient?.vital_office_systolic | dash }} / {{ patient?.vital_office_diastolic | dash }}
+        </span>
+        <span class="text-small unit">mmHg</span>
+      </div>
+      <div class="text-right mt--4">
+        <span class="text-normal">{{ patient?.vital_office_pulse | dash }}</span>
+        <span class="text-small unit">bpm</span>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="patient-detail-component">
+  <div class="d-flex justify-content-between align-items-center">
+    <div class="left-title">{{ 'patient detail.home morning blood pressure' | translate }}</div>
+    <div class="text-small text-gray-190">{{ 'patient detail.average for the last 7 days' | translate }}</div>
+  </div>
+  <div class="d-flex justify-content-between content">
+    <div [ngClass]="sharedService.isJa() ? 'icon-morning-avg-ja icon' : 'icon-morning-avg-en icon'"></div>
+    <div>
+      <div>
+        <span class="primary-value"
+          >{{ patient?.patient_stat_7days_sys_morning | dash }} /
+          {{ patient?.patient_stat_7days_dia_morning | dash }}</span
+        >
+        <span class="text-small unit">mmHg</span>
+      </div>
+      <div class="text-right mt--4">
+        <span class="text-normal">{{ patient?.patient_stat_7days_pulse_morning | dash }}</span>
+        <span class="text-small unit">bpm</span>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,68 @@
+@import 'src/app/styles/variable';
+
+.modal-header {
+  justify-content: center;
+  border: none;
+}
+
+.modal-body {
+  padding-top: 0;
+  padding-bottom: 0;
+
+  .w-187 {
+    width: 187px;
+  }
+
+  div.input-group {
+    display: flex;
+    padding-top: 15px;
+    padding-bottom: 15px;
+
+    input {
+      width: 90px;
+      max-width: 90px;
+      height: 32px;
+      margin-right: 16px;
+      border-radius: 0;
+      padding-right: 0;
+      font-size: 14px;
+
+      &:focus {
+        box-shadow: none;
+      }
+    }
+
+    .unit {
+      margin-top: 3px;
+      width: 40px;
+    }
+  }
+
+  .border-top-solid {
+    border-top: 1px solid $gray-100;
+  }
+
+  .border-top-dash {
+    border-top: 1px dashed $gray-100;
+  }
+
+  .border-bot-dash {
+    border-bottom: 1px dashed $gray-100;
+  }
+}
+
+.modal-footer {
+  justify-content: center;
+  padding: 0;
+
+  button {
+    height: 50px;
+    width: 50%;
+    margin: 0;
+    border-radius: 0;
+  }
+
+  .left-border {
+    border-left: 1px solid $gray-100;
+  }
+}

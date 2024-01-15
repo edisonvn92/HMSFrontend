@@ -1,0 +1,29 @@
+<div class="registration-info-content">
+  <div class="content-div">
+    <div class="font-weight-bold error fs-20 mb-3" *ngIf="isError">
+      {{ 'email address registration is not completed' | translate }}
+    </div>
+    <div class="font-weight-bold fs-20 mb-3" *ngIf="!isError">
+      {{ 'ecg advice registration.confirm title' | translate }}
+    </div>
+    <div class="mb-3">
+      {{ 'ecg advice registration.confirm description 1' | translate }}
+    </div>
+    <div class="mb-2">{{ 'destination email address' | translate }}</div>
+    <div class="mb-3">{{ this.patientEmail }}</div>
+    <div class="mb-3">{{ 'ecg advice registration.confirm description 2' | translate }}</div>
+    <div class="mb-2">{{ 'registration mail title' | translate }}</div>
+    <div class="mb-3">{{ 'information on account registration procedure' | translate }}</div>
+    <div class="mb-3">{{ 'ecg advice registration.confirm description 3' | translate }}</div>
+  </div>
+
+  <div class="d-flex button-group">
+    <button type="submit" (click)="onSendEmailClicked()" class="btn btn-primary ml-auto mr-2 bg-blue-300 text-normal">
+      {{ 'send a confirmation email' | translate }}
+    </button>
+
+    <button type="submit" (click)="onFinishClicked()" class="btn btn-primary bg-blue-300 text-normal">
+      {{ 'registration completed' | translate }}
+    </button>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<app-ecg-summary-page
+  [totalPage]="totalPage"
+  [data12Month]="data12Month"
+  [data1Month]="data1Month"
+  [dataByDay]="dataByDay"
+  [dataBySymptom]="dataBySymptom"
+  [language]="language"
+  [patient]="patient"
+  [recordDate]="recordDate"
+  [textCodeChart2]="textCodeChart2"
+  [endDate]="endDate"
+>
+</app-ecg-summary-page>
+<app-ecg-record-list-page
+  *ngFor="let list of recordList; let i = index"
+  [totalPage]="totalPage"
+  [recordList]="list"
+  [patient]="patient"
+  [language]="language"
+  [recordDate]="recordDate"
+  [endDate]="endDate"
+  [pageNumber]="i + 2"
+>
+</app-ecg-record-list-page>

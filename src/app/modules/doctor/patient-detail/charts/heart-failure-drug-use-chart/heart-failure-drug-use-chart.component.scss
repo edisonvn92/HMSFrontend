@@ -1,0 +1,14 @@
+.chart-title {
+  margin-bottom: 5px;
+}
+
+#heart-failure-drug-use-chart {
+  height: 175px;
+  margin-left: -10px;
+}
+
+.chart-en {
+  &#heart-failure-drug-use-chart {
+    margin-left: -48px;
+  }
+}

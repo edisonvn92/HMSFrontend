@@ -1,0 +1,46 @@
+.medicine-content {
+  padding: 24px;
+  height: calc(100vh - 48px);
+}
+
+tbody {
+  max-height: calc(100vh - 290px);
+  height: calc(100vh - 290px);
+}
+
+.icon {
+  width: 12px;
+  height: 12px;
+}
+
+.medicine-search {
+  width: 200px;
+  height: 61px;
+  flex: none;
+  margin-right: 51px;
+
+  .search-input {
+    width: 200px;
+    height: 32px;
+  }
+}
+
+.table {
+  margin-bottom: 18px;
+
+  .note {
+    width: 700px;
+  }
+
+  .id {
+    width: 150px;
+  }
+
+  .action {
+    width: 150px;
+  }
+
+  .created-at {
+    width: 170px;
+  }
+}

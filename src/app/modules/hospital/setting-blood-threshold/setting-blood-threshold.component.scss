@@ -1,0 +1,43 @@
+@import 'src/app/styles/variable';
+
+.setting-threshold {
+  padding: 0px 64px 32px 64px;
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+
+  .setting-threshold-title {
+    margin: 0px 64px 32px 0px;
+    padding: 12px 0;
+    font-size: 16px;
+    border-bottom: 1px solid $gray-200;
+    width: 320px;
+  }
+
+  .blood-pressure-icon-text {
+    width: 60px;
+    margin-right: 100px;
+    margin-left: 8px;
+  }
+
+  .text-low-goal {
+    margin-left: 125px;
+  }
+
+  .text-sys {
+    margin-left: 334px;
+    margin-right: 239px;
+  }
+
+  .form-control {
+    font-size: 14px;
+  }
+
+  .invalid {
+    width: 760px;
+    padding-right: 4px;
+  }
+
+  .btn-save {
+    margin-left: 35px;
+  }
+}

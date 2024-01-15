@@ -1,0 +1,32 @@
+@import 'src/app/styles/variable';
+
+.patient-detail-component {
+  padding: 9px 11px 8px 11px;
+
+  .btn {
+    border: 1px solid $blue-520;
+    border-radius: 2px;
+    font-size: 14px;
+    height: 24px;
+    padding: 5px 6px;
+    display: flex;
+    align-items: center;
+
+    .icon-up-down {
+      margin-left: -4px;
+      margin-right: 4px;
+    }
+  }
+
+  .content {
+    padding-top: 16px;
+    font-weight: 500;
+  }
+}
+
+.en-patient-detail-component {
+  padding: 9px 7px 8px 7px;
+  .btn {
+    padding: 5px 5px;
+  }
+}

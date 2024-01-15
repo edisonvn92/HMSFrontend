@@ -1,0 +1,17 @@
+<div class="registration-info-content">
+  <app-shinden-advice-register-form [hidden]="showingScreen !== 'form'" (nextClicked)="onNextClicked($event)">
+  </app-shinden-advice-register-form>
+  <app-patient-analysis-note
+    *ngIf="patient"
+    [patient]="patient"
+    [hidden]="showingScreen !== 'note'"
+    (confirmClicked)="onConfirmClicked($event)"
+    (cancelClicked)="onReturnClicked()"
+  >
+  </app-patient-analysis-note>
+  <app-shinden-advice-register-confirm-data
+    [patient]="patient"
+    [hidden]="showingScreen !== 'confirm'"
+    (backClicked)="onReturnClicked()"
+  ></app-shinden-advice-register-confirm-data>
+</div>

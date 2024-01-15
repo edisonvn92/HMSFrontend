@@ -1,0 +1,232 @@
+<ng-container
+  *ngIf="!sharedService.hospitalSetting?.hospital_setting?.hospital_setting_shinden_report; else analysisContent"
+>
+  <div class="doctor-content-header d-flex justify-content-between align-items-center">
+    <div></div>
+    <app-user-login></app-user-login>
+  </div>
+</ng-container>
+<ng-template #analysisContent>
+  <div class="doctor-content-header d-flex justify-content-between align-items-center">
+    <div class="d-flex align-items-center">
+      <form class="input-group search-group" (ngSubmit)="searchPatient()">
+        <input
+          type="text"
+          class="form-control text-normal bg-white"
+          placeholder="{{ 'ID, name search' | translate }}"
+          [(ngModel)]="textSearch"
+          name="textSearch"
+          [disabled]="isSearching"
+        />
+        <div class="input-group-append cursor-pointer bg-gray-170" (click)="searchPatient()">
+          <img class="input-group-text" src="./assets/images/icon_search.svg" alt="user" />
+        </div>
+      </form>
+    </div>
+    <app-user-login [latestDataSync]="latestDataSync"></app-user-login>
+  </div>
+
+  <div class="analysis-content">
+    <table class="table table-custom" id="table-content" [class.en-language]="!sharedService.isJa()">
+      <thead>
+        <tr>
+          <th scope="col" [class]="column.class_name" *ngFor="let column of tableColumns">
+            <app-label-column-table
+              *ngIf="column.is_sort"
+              [active]="tableFields[column.key].isSort"
+              [sortType]="tableFields[column.key].sortType"
+              [label]="column.label"
+              [labelId]="column.key"
+              [classSort]="column.class_sort"
+              (sortEvent)="sortBy($event)"
+            >
+            </app-label-column-table>
+            <ng-container *ngIf="!column.is_sort">
+              {{ column.label | translate }}
+            </ng-container>
+          </th>
+        </tr>
+      </thead>
+      <tbody [attr.noData]="'there is no data' | translate">
+        <tr *ngFor="let patient of patientList.data">
+          <td class="status">
+            <div class="d-flex align-items-center">
+              <div
+                class="status-circle mr-10"
+                [class.show]="patient?.patient_analysis_status"
+                [ngClass]="
+                  patient?.patient_analysis_status === paymentStatus.UNPAID
+                    ? ''
+                    : patient?.patient_analysis_status === paymentStatus.COMPLETE
+                    ? ' bg-green-500'
+                    : ' bg-red-800'
+                "
+              ></div>
+              <div class="status-content">
+                <div *ngIf="patient?.patient_analysis_status === paymentStatus.COMPLETE">
+                  {{ 'completed' | translate }}
+                </div>
+                <div *ngIf="patient?.patient_analysis_status !== paymentStatus.COMPLETE">
+                  <div *ngIf="patient?.patient_analysis_status === paymentStatus.UNPAID">
+                    {{ 'unpaid(request)' | translate }}
+                  </div>
+                  <div *ngIf="patient?.patient_analysis_status === paymentStatus.PAID_INCOMPLETE">
+                    {{ 'paid(incomplete)' | translate }}
+                  </div>
+                  <div class="unit text-small">
+                    <span *ngIf="!sharedService.isJa()">{{ 'passed' | translate }}: </span>
+                    <span *ngIf="patient?.patient_analysis_status === paymentStatus.PAID_INCOMPLETE">
+                      {{ calcTime(patient.patient_analysis_confirm_at, now) }}
+                    </span>
+                    <span *ngIf="patient?.patient_analysis_status === paymentStatus.UNPAID">
+                      {{ calcTime(patient.patient_analysis_end_at, now) }}
+                    </span>
+                    <span *ngIf="sharedService.isJa()"> {{ 'passed' | translate }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="application-date-and-time">
+            <ng-container *ngIf="patient.patient_analysis_end_ldatetime">
+              <div>
+                {{
+                  patient.patient_analysis_end_ldatetime
+                    | date: (sharedService.isJa() ? 'yyyy/MM/dd' : 'd MMM y'):'+0000'
+                }}
+              </div>
+              <div class="text-small">
+                {{ patient.patient_analysis_end_ldatetime | date: 'HH:mm:ss':'+0000' }}
+              </div>
+            </ng-container>
+          </td>
+          <td class="payment-status">
+            <div class="status-content">
+              <div *ngIf="patient?.patient_analysis_payments?.length">
+                <div>
+                  {{
+                    patient.patient_analysis_payments && patient.patient_analysis_payments.length
+                      ? patient.patient_analysis_payments[0].created_by
+                      : ''
+                  }}
+                </div>
+                <div>
+                  {{
+                    patient.patient_analysis_payments && patient.patient_analysis_payments.length
+                      ? (patient.patient_analysis_payments[0].created_at
+                        | date: (sharedService.isJa() ? 'yyyy/MM/dd' : 'd MMM y'))
+                      : ''
+                  }}
+                </div>
+                <div class="text-small">
+                  {{
+                    patient.patient_analysis_payments && patient.patient_analysis_payments.length
+                      ? (patient.patient_analysis_payments[0].created_at | date: 'HH:mm:ss')
+                      : ''
+                  }}
+                </div>
+              </div>
+              <div
+                *ngIf="patient?.patient_analysis_status === paymentStatus.UNPAID"
+                class="text-blue-210 underline-hover cursor-pointer"
+                (click)="confirmPayment(patient)"
+              >
+                {{ 'payment confirmation' | translate }} >
+              </div>
+              <div
+                *ngIf="patient?.patient_analysis_status === paymentStatus.PAID_INCOMPLETE"
+                class="text-red-200 underline-hover cursor-pointer"
+                (click)="confirmPayment(patient, true)"
+              >
+                {{ 'revocation' | translate }} >
+              </div>
+            </div>
+          </td>
+          <td class="analysis-period">
+            {{
+              patient?.patient_analysis_start_ldatetime
+                | date: (sharedService.isJa() ? 'yyyy/MM/dd' : 'd MMM y'):'+0000'
+            }}
+            ~
+            {{
+              patient?.patient_analysis_end_ldatetime | date: (sharedService.isJa() ? 'yyyy/MM/dd' : 'd MMM y'):'+0000'
+            }}
+          </td>
+          <td class="name underline-hover cursor-pointer" (click)="redirectPatientDetail(patient.patient_id)">
+            {{ patient.patient.patient_full_name }}
+          </td>
+          <td class="age">
+            {{ getYearDiff(patient?.patient?.patient_birthday, now) }}
+          </td>
+          <td class="email-address">
+            {{ patient?.patient?.patient_email }}
+          </td>
+          <td
+            class="text-blue-210 electrocardiogram underline-hover cursor-pointer"
+            (click)="requestAnalysisDetail(patient)"
+          >
+            <div>{{ 'ecg view' | translate }} ></div>
+          </td>
+          <td class="electrocardiogram-times">
+            {{ patient?.patient?.vital_heart_beat_count | dash }}
+          </td>
+          <td class="af">
+            {{ patient?.patient?.vital_heart_beat_count_af | dash }}
+          </td>
+          <td class="message-content">
+            <div
+              *ngIf="patient?.patient_analysis_note"
+              class="cursor-pointer text-blue-500 underline-hover"
+              (click)="openMessage(patient!.patient_analysis_note)"
+            >
+              <span *ngIf="!sharedService.isJa()">{{ 'message' | translate }}</span>
+              <span *ngIf="sharedService.isJa()">{{ 'can be' | translate }}</span>
+            </div>
+            <div *ngIf="!patient?.patient_analysis_note">
+              {{ 'none' | translate }}
+            </div>
+          </td>
+          <td
+            class="text-blue-210 mail-confirm underline-hover"
+            [class.disabled]="!patient?.patient?.patient_email || !patient?.patient_analysis_status"
+          >
+            <div
+              *ngIf="patient?.patient_email_utc_time"
+              class="cursor-pointer"
+              (click)="shindenEmail(patient, false, patient?.patient?.patient_email)"
+            >
+              <div>{{ patient?.patient_email_utc_time | date: (sharedService.isJa() ? 'yyyy/MM/dd' : 'd MMM y') }}</div>
+              <div class="text-small">{{ patient?.patient_email_utc_time | date: 'HH:mm' }} ></div>
+            </div>
+            <div
+              *ngIf="!patient?.patient_email_utc_time"
+              class="cursor-pointer"
+              (click)="shindenEmail(patient, true, patient?.patient?.patient_email)"
+            >
+              {{ 'mail' | translate }} >
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="d-flex mt-2">
+      <app-paginator
+        *ngIf="patientList.total"
+        class="paginator ml-auto"
+        [page]="bodyRequest.page"
+        [collectionSize]="patientList.total"
+        (pageChange)="pageChange($event)"
+        [pageSize]="patientList.per_page"
+        [perPage]="patientList.per_page"
+      ></app-paginator>
+    </div>
+  </div>
+</ng-template>
+
+<app-shinden-mail-form
+  *ngIf="showShindenMailForm"
+  [patient]="clickedPatient"
+  [patientMailList]="patientMailList"
+  (closeModal)="closeModal($event)"
+>
+</app-shinden-mail-form>

@@ -1,0 +1,181 @@
+@import 'src/app/styles/variable';
+
+:host {
+  ::ng-deep {
+    .tooltip-event {
+      top: 36px !important;
+
+      .tooltip-inner {
+        border-radius: 8px;
+
+        .memo-actions {
+          display: flex;
+          flex-wrap: wrap;
+          max-width: 176px;
+        }
+
+        .event {
+          height: 24px;
+          width: 24px;
+          margin-right: 1px;
+        }
+      }
+
+      .arrow {
+        &:before {
+          border-top-color: $black-200 !important;
+        }
+      }
+    }
+  }
+}
+
+.customize-calender {
+  .month {
+    margin-bottom: 7px;
+
+    .button-previous {
+      margin-right: 10px;
+      margin-left: auto;
+      border: 1px solid $gray-140;
+    }
+
+    .button-next {
+      border: 1px solid $gray-140;
+      margin-right: -7px;
+    }
+  }
+
+  .calendar-content {
+    margin: 0 auto;
+    width: 273px;
+
+    .day-list {
+      border: 0.5px solid $gray-240;
+
+      .day {
+        width: 39px;
+      }
+    }
+
+    .day-with-review {
+      border-left: 0.5px solid $gray-240 !important;
+
+      .with-review {
+        height: 60px;
+        border-bottom: 0.5px solid $gray-240;
+
+        .review-content {
+          border: 0.5px solid #e6e6e6;
+          height: 40px;
+          width: 80px;
+          border-radius: 2px;
+          background-color: white;
+          margin-top: 8px;
+          margin-left: 8px;
+          padding: 4px 6px;
+
+          .review-left {
+            margin-right: 5px;
+
+            .smile {
+              width: 25px;
+              height: 25px;
+            }
+          }
+
+          .review-right {
+            .star {
+              width: 9px;
+              height: 9px;
+            }
+          }
+
+          .review-not-complete {
+            width: 9px;
+            height: 14px;
+            margin-top: -9px;
+            margin-left: 29px;
+          }
+        }
+      }
+
+      .day-content {
+        border-bottom: 0.5px solid $gray-240;
+        border-top: 0.5px solid $gray-240;
+      }
+    }
+
+    .day-content-list {
+      flex-wrap: wrap;
+    }
+
+    .day-content {
+      width: 39px;
+      height: 60px;
+      border-bottom: 0.5px solid $gray-240;
+      border-right: 0.5px solid $gray-240;
+      text-align: center;
+      position: relative;
+
+      .day-less-10 {
+        padding-left: 4px !important;
+        padding-right: 4px !important;
+      }
+
+      .number-day {
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: $black-600;
+
+        span {
+          padding: 1px;
+        }
+      }
+
+      .medicine {
+        position: absolute;
+        top: 7px;
+      }
+
+      .action {
+        position: absolute;
+        width: 30px;
+        height: 14px;
+        left: 4px;
+      }
+
+      .morning-action {
+        top: 23px;
+      }
+
+      .evening-action {
+        top: 39px;
+      }
+    }
+
+    .active-day {
+      border: 1px solid $blue-190;
+
+      .number-day {
+        span {
+          color: white;
+          background-color: $blue-100;
+        }
+      }
+    }
+
+    .border-left {
+      border-left: 0.5px solid $gray-240 !important;
+    }
+
+    .border-right {
+      border-right: 0.5px solid $gray-240 !important;
+    }
+
+    .day-first-row {
+      border-top: none !important;
+    }
+  }
+}

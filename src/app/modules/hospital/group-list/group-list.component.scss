@@ -1,0 +1,28 @@
+.group-content {
+  padding: 24px;
+  height: calc(100vh - 48px);
+}
+
+tbody {
+  max-height: calc(100vh - 235px);
+  height: calc(100vh - 235px);
+}
+
+.icon {
+  width: 12px;
+  height: 12px;
+}
+
+.w-400 {
+  width: 400px;
+}
+
+.group-search {
+  width: 185px;
+  height: 32px;
+  flex: none;
+}
+
+.table {
+  margin-bottom: 18px;
+}

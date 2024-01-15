@@ -1,0 +1,290 @@
+<div class="section-header mt-7mm">
+  <span class="header-text">{{ 'recording result' | translate }}</span>
+  <div class="separate-line fs-11pt">（{{ 'excluding errors' | translate }}）</div>
+</div>
+<div class="d-flex justify-content-between">
+  <div id="pieChartDiv"></div>
+  <div class="summary-div">
+    <table>
+      <thead>
+        <tr>
+          <td class="type-col">
+            {{ 'record type' | translate }}
+          </td>
+          <td class="trend-col">{{ 'trend' | translate }}</td>
+          <td class="freq-col">{{ 'frequency' | translate }}</td>
+          <td class="ratio-col">{{ 'ratio' | translate }}</td>
+          <td class="last-month-ratio-col">{{ 'last month ratio' | translate }}</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="type-col">
+            <img class="legend-icon" src="./assets/images/icon_circle_blue.svg" />
+            {{ 'normal sinus rhythm' | translate }}
+          </td>
+          <td class="trend-col">
+            <img
+              class="legend-icon"
+              src="./assets/images/icon_arr_up_blue.svg"
+              *ngIf="
+                percentageResult.thisMonth[ECGDataResult.NORMAL] > percentageResult.previousMonth[ECGDataResult.NORMAL]
+              "
+            />
+            <img
+              class="legend-icon"
+              src="./assets/images/icon_arr_down_pink.svg"
+              *ngIf="
+                percentageResult.thisMonth[ECGDataResult.NORMAL] < percentageResult.previousMonth[ECGDataResult.NORMAL]
+              "
+            />
+            <img
+              class="legend-icon-2"
+              src="./assets/images/icon_arrow_next_gray.svg"
+              *ngIf="
+                percentageResult.thisMonth[ECGDataResult.NORMAL] ===
+                percentageResult.previousMonth[ECGDataResult.NORMAL]
+              "
+            />
+          </td>
+          <td class="freq-col">
+            <div class="number-div">{{ thisMonthList[ECGDataResult.NORMAL] }}</div>
+          </td>
+          <td class="ratio-col">
+            <div class="number-div">{{ percentageResult.thisMonth[ECGDataResult.NORMAL] }}</div>
+            <div class="percent-div" *ngIf="percentageResult.thisMonth[ECGDataResult.NORMAL] !== undefined">%</div>
+          </td>
+          <td class="last-month-ratio-col">
+            <div class="number-div">{{ percentageResult.previousMonth[ECGDataResult.NORMAL] }}</div>
+            <div class="percent-div" *ngIf="percentageResult.previousMonth[ECGDataResult.NORMAL] !== undefined">%</div>
+          </td>
+        </tr>
+        <tr>
+          <td class="type-col">
+            <img class="legend-icon" src="./assets/images/icon_triangle_up_pink_1.svg" />
+            {{ 'afib possible' | translate }}
+          </td>
+          <td class="trend-col">
+            <img
+              class="legend-icon"
+              src="./assets/images/icon_arr_up_pink.svg"
+              *ngIf="
+                percentageResult.thisMonth[ECGDataResult.AFIB_POSSIBLE] >
+                percentageResult.previousMonth[ECGDataResult.AFIB_POSSIBLE]
+              "
+            />
+            <img
+              class="legend-icon"
+              src="./assets/images/icon_arr_down_blue.svg"
+              *ngIf="
+                percentageResult.thisMonth[ECGDataResult.AFIB_POSSIBLE] <
+                percentageResult.previousMonth[ECGDataResult.AFIB_POSSIBLE]
+              "
+            />
+            <img
+              class="legend-icon-2"
+              src="./assets/images/icon_arrow_next_gray.svg"
+              *ngIf="
+                percentageResult.thisMonth[ECGDataResult.AFIB_POSSIBLE] ===
+                percentageResult.previousMonth[ECGDataResult.AFIB_POSSIBLE]
+              "
+            />
+          </td>
+          <td class="freq-col">
+            <div class="number-div">{{ thisMonthList[ECGDataResult.AFIB_POSSIBLE] }}</div>
+          </td>
+          <td class="ratio-col">
+            <div class="number-div">{{ percentageResult.thisMonth[ECGDataResult.AFIB_POSSIBLE] }}</div>
+            <div class="percent-div" *ngIf="percentageResult.thisMonth[ECGDataResult.AFIB_POSSIBLE] !== undefined">
+              %
+            </div>
+          </td>
+          <td class="last-month-ratio-col">
+            <div class="number-div">{{ percentageResult.previousMonth[ECGDataResult.AFIB_POSSIBLE] }}</div>
+            <div class="percent-div" *ngIf="percentageResult.previousMonth[ECGDataResult.AFIB_POSSIBLE] !== undefined">
+              %
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="type-col">
+            <img class="legend-icon" src="./assets/images/icon_triangle_up_pink_2.svg" />
+            {{ 'tachycardia' | translate }}
+          </td>
+          <td class="trend-col">
+            <img
+              class="legend-icon"
+              src="./assets/images/icon_arr_up_pink.svg"
+              *ngIf="
+                percentageResult.thisMonth[ECGDataResult.TACHYCARDIA] >
+                percentageResult.previousMonth[ECGDataResult.TACHYCARDIA]
+              "
+            />
+            <img
+              class="legend-icon"
+              src="./assets/images/icon_arr_down_blue.svg"
+              *ngIf="
+                percentageResult.thisMonth[ECGDataResult.TACHYCARDIA] <
+                percentageResult.previousMonth[ECGDataResult.TACHYCARDIA]
+              "
+            />
+            <img
+              class="legend-icon-2"
+              src="./assets/images/icon_arrow_next_gray.svg"
+              *ngIf="
+                percentageResult.thisMonth[ECGDataResult.TACHYCARDIA] ===
+                percentageResult.previousMonth[ECGDataResult.TACHYCARDIA]
+              "
+            />
+          </td>
+          <td class="freq-col">
+            <div class="number-div">{{ thisMonthList[ECGDataResult.TACHYCARDIA] }}</div>
+          </td>
+          <td class="ratio-col">
+            <div class="number-div">{{ percentageResult.thisMonth[ECGDataResult.TACHYCARDIA] }}</div>
+            <div class="percent-div" *ngIf="percentageResult.thisMonth[ECGDataResult.TACHYCARDIA] !== undefined">%</div>
+          </td>
+          <td class="last-month-ratio-col">
+            <div class="number-div">{{ percentageResult.previousMonth[ECGDataResult.TACHYCARDIA] }}</div>
+            <div class="percent-div" *ngIf="percentageResult.previousMonth[ECGDataResult.TACHYCARDIA] !== undefined">
+              %
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="type-col">
+            <img class="legend-icon" src="./assets/images/icon_triangle_down_pink_2.svg" />
+            {{ 'bradycardia' | translate }}
+          </td>
+          <td class="trend-col">
+            <img
+              class="legend-icon"
+              src="./assets/images/icon_arr_up_pink.svg"
+              *ngIf="
+                percentageResult.thisMonth[ECGDataResult.BRADYCARDIA] >
+                percentageResult.previousMonth[ECGDataResult.BRADYCARDIA]
+              "
+            />
+            <img
+              class="legend-icon"
+              src="./assets/images/icon_arr_down_blue.svg"
+              *ngIf="
+                percentageResult.thisMonth[ECGDataResult.BRADYCARDIA] <
+                percentageResult.previousMonth[ECGDataResult.BRADYCARDIA]
+              "
+            />
+            <img
+              class="legend-icon-2"
+              src="./assets/images/icon_arrow_next_gray.svg"
+              *ngIf="
+                percentageResult.thisMonth[ECGDataResult.BRADYCARDIA] ===
+                percentageResult.previousMonth[ECGDataResult.BRADYCARDIA]
+              "
+            />
+          </td>
+          <td class="freq-col">
+            <div class="number-div">{{ thisMonthList[ECGDataResult.BRADYCARDIA] }}</div>
+          </td>
+          <td class="ratio-col">
+            <div class="number-div">{{ percentageResult.thisMonth[ECGDataResult.BRADYCARDIA] }}</div>
+            <div class="percent-div" *ngIf="percentageResult.thisMonth[ECGDataResult.BRADYCARDIA] !== undefined">%</div>
+          </td>
+          <td class="last-month-ratio-col">
+            <div class="number-div">{{ percentageResult.previousMonth[ECGDataResult.BRADYCARDIA] }}</div>
+            <div class="percent-div" *ngIf="percentageResult.previousMonth[ECGDataResult.BRADYCARDIA] !== undefined">
+              %
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="type-col">
+            <img class="legend-icon" src="./assets/images/icon_square_gray.svg" />
+            {{ 'cannot be classified' | translate }}
+          </td>
+          <td class="trend-col">
+            <img
+              class="legend-icon"
+              src="./assets/images/icon_arr_up_pink.svg"
+              *ngIf="
+                percentageResult.thisMonth[ECGDataResult.UNCLASSIFIED] >
+                percentageResult.previousMonth[ECGDataResult.UNCLASSIFIED]
+              "
+            />
+            <img
+              class="legend-icon"
+              src="./assets/images/icon_arr_down_blue.svg"
+              *ngIf="
+                percentageResult.thisMonth[ECGDataResult.UNCLASSIFIED] <
+                percentageResult.previousMonth[ECGDataResult.UNCLASSIFIED]
+              "
+            />
+            <img
+              class="legend-icon-2"
+              src="./assets/images/icon_arrow_next_gray.svg"
+              *ngIf="
+                percentageResult.thisMonth[ECGDataResult.UNCLASSIFIED] ===
+                percentageResult.previousMonth[ECGDataResult.UNCLASSIFIED]
+              "
+            />
+          </td>
+          <td class="freq-col">
+            <div class="number-div">{{ thisMonthList[ECGDataResult.UNCLASSIFIED] }}</div>
+          </td>
+          <td class="ratio-col">
+            <div class="number-div">{{ percentageResult.thisMonth[ECGDataResult.UNCLASSIFIED] }}</div>
+            <div class="percent-div" *ngIf="percentageResult.thisMonth[ECGDataResult.UNCLASSIFIED] !== undefined">
+              %
+            </div>
+          </td>
+          <td class="last-month-ratio-col">
+            <div class="number-div">{{ percentageResult.previousMonth[ECGDataResult.UNCLASSIFIED] }}</div>
+            <div class="percent-div" *ngIf="percentageResult.previousMonth[ECGDataResult.UNCLASSIFIED] !== undefined">
+              %
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="detail-div">
+  <div class="text-justify">
+    <div>
+      <span>
+        {{
+          'ecg record text.:month has recorded ECG :times times'
+            | translate: { month: recordMonthText, times: totalCountThisMonth }
+        }}
+      </span>
+      <span class="text-pre-wrap">
+        {{
+          (totalCountThisMonth >= totalCountThreshold
+            ? 'ecg record text.total same or larger than threshold'
+            : 'ecg record text.total smaller than threshold'
+          ) | translate
+        }}
+      </span>
+    </div>
+    <div>
+      <span>
+        {{
+          (thisMonthList[ECGDataResult.AFIB_POSSIBLE] >= 1 ? 'ecg record text.has afib' : 'ecg record text.no Afib')
+            | translate: { times: thisMonthList[ECGDataResult.AFIB_POSSIBLE] }
+        }}
+      </span>
+    </div>
+    <div *ngIf="thisMonthList[ECGDataResult.TACHYCARDIA] > 1">
+      {{ 'ecg record text.has tachy' | translate: { times: thisMonthList[ECGDataResult.TACHYCARDIA] } }}
+    </div>
+    <div *ngIf="thisMonthList[ECGDataResult.BRADYCARDIA] > 1">
+      {{ 'ecg record text.has brady' | translate: { times: thisMonthList[ECGDataResult.BRADYCARDIA] } }}
+    </div>
+    <div *ngIf="thisMonthList[ECGDataResult.UNCLASSIFIED] > 1">
+      {{ 'ecg record text.has unclassified' | translate: { times: thisMonthList[ECGDataResult.UNCLASSIFIED] } }}
+    </div>
+    <div>{{ 'ecg record text.afib warning' | translate }}</div>
+  </div>
+
+  <div class="mt-6mm fs-11pt">{{ 'heart rate' | translate }} [bpm]</div>
+  <div id="heartRateChartDiv"></div>
+</div>

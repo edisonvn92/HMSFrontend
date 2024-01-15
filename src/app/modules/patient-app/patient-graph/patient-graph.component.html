@@ -1,0 +1,10 @@
+<div class="graph-container" appSwipe (swipe)="onSwipe($event)">
+  <app-bp-chart
+    [diaGoal]="diaGoal"
+    [sysGoal]="sysGoal"
+    [chartData]="chartData"
+    [startDate]="startDate"
+    [endDate]="endDate"
+  ></app-bp-chart>
+  <app-medication-chart [chartData]="chartData" [startDate]="startDate" [endDate]="endDate"></app-medication-chart>
+</div>

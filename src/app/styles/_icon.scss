@@ -1,0 +1,202 @@
+.icon {
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: content;
+  -webkit-mask-size: contain;
+  padding: auto;
+}
+
+.icon-plus {
+  mask-image: url('../../assets/images/icon_plus.svg');
+  background-color: white;
+}
+
+.icon-warning {
+  mask-image: url('../../assets/images/icon_warning_circle.svg');
+  background-color: $warning;
+}
+
+.icon-search {
+  mask-image: url('../../assets/images/icon_search.svg');
+  background-color: white;
+}
+
+.icon-up {
+  mask-image: url('../../assets/images/icon_up.svg');
+  background-color: black;
+}
+
+.icon-down {
+  mask-image: url('../../assets/images/icon_down.svg');
+  background-color: black;
+}
+
+.icon-morning {
+  mask-image: url('../../assets/images/icon_morning1.svg');
+  background-color: $black-300;
+}
+
+.icon-step-count {
+  mask-image: url('../../assets/images/icon_step_count1.svg');
+  background-color: $black-300;
+}
+
+.icon-evening-avg-en {
+  mask-image: url('../../assets/images/icon_evening_avg_en.svg');
+  background-color: $black-300;
+}
+
+.icon-evening-avg-ja {
+  mask-image: url('../../assets/images/icon_evening_avg_ja.svg');
+  background-color: $black-300;
+}
+
+.icon-temperature {
+  mask-image: url('../../assets/images/icon_temperature.svg');
+  background-color: $black-300;
+}
+
+.icon-body-weight {
+  mask-image: url('../../assets/images/icon_body_weight1.svg');
+  background-color: $black-300;
+}
+
+.icon-arrow-up {
+  mask-image: url('../../assets/images/icon_arrow_up.svg');
+  background-color: black;
+}
+
+.icon-arrow-down {
+  mask-image: url('../../assets/images/icon_arrow_down.svg');
+  background-color: black;
+}
+
+.icon-arrow-left {
+  mask-image: url('../../assets/images/icon_arrow_left.svg');
+  background-color: black;
+}
+
+.icon-arrow-right {
+  mask-image: url('../../assets/images/icon_arrow_right.svg');
+  background-color: black;
+}
+
+.icon-heart-beat {
+  mask-image: url('../../assets/images/icon_heart_beat1.svg');
+  background-color: $black-300;
+}
+
+.icon-blood-pressure {
+  mask-image: url('../../assets/images/icon_blood_pressure1.svg');
+  background-color: $black-300;
+}
+
+.icon-target {
+  mask-image: url('../../assets/images/icon_target1.svg');
+  background-color: $black-300;
+}
+
+.icon-treatment {
+  mask-image: url('../../assets/images/icon_treatment1.svg');
+  background-color: $black-300;
+}
+
+.icon-setting-1 {
+  mask-image: url('../../assets/images/icon_setting1.svg');
+  background-color: $black-300;
+}
+
+.icon-user-setting {
+  mask-image: url('../../assets/images/icon_user_setting.svg');
+  background-color: $blue-160;
+}
+
+.icon-nyha {
+  mask-image: url('../../assets/images/icon_nyha.svg');
+  background-color: $black-300;
+}
+
+.icon-eye-open {
+  mask-image: url('../../assets/images/akar-icons_eye-open.svg');
+  background-color: $black-300;
+}
+
+.icon-eye-slashed {
+  mask-image: url('../../assets/images/akar-icons_eye-slashed.svg');
+  background-color: $black-300;
+}
+
+.clock {
+  mask-image: url('../../assets/images/clock.svg');
+  background-color: $black-300;
+}
+
+.icon-prev-month {
+  mask-image: url('../../assets/images/icon_prev_month.svg');
+  background-color: $gray-540;
+}
+
+.icon-next-month {
+  mask-image: url('../../assets/images/icon_next_month.svg');
+  background-color: $gray-540;
+}
+
+.icon-close {
+  mask-image: url('../../assets/images/icon_close.svg');
+  background-color: $black-700;
+}
+
+.icon-help-2 {
+  mask-image: url('../../assets/images/icon_help2.svg');
+  background-color: $black-300;
+}
+
+.icon-export {
+  mask-image: url('../../assets/images/ic_export.svg');
+  background-color: $black-300;
+}
+
+.icon-reload {
+  mask-image: url('../../assets/images/icon_reload.svg');
+  background-color: $black-300;
+}
+
+.icon-show-chart {
+  mask-image: url('../../assets/images/icon_hide_chart.svg');
+  background-color: $gray-190;
+}
+
+.icon-hide-chart {
+  mask-image: url('../../assets/images/icon_show_chart.svg');
+  background-color: $gray-190;
+}
+
+.icon-morning-avg-en {
+  mask-image: url('../../assets/images/icon_morning_avg_en.svg');
+  background-color: $black-300;
+}
+
+.icon-morning-avg-ja {
+  mask-image: url('../../assets/images/icon_morning_avg_ja.svg');
+  background-color: $black-300;
+}
+
+.icon-hospital {
+  mask-image: url('../../assets/images/icon_hospital.svg');
+  background-color: $black-300;
+}
+
+.icon-back {
+  mask-image: url('../../assets/images/icon_back_list.svg');
+  background-color: $gray-190;
+}
+
+.icon-rose {
+  mask-image: url('../../assets/images/icon_arrow_up_2.svg');
+  background-color: $black-300;
+}
+
+.icon-reduction {
+  mask-image: url('../../assets/images/icon_arrow_down_2.svg');
+  background-color: $black-300;
+}

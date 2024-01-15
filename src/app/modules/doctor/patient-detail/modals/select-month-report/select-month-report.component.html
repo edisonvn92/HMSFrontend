@@ -1,0 +1,56 @@
+<div class="history-modal">
+  <div class="modal-header">
+    <div class="title">{{ 'please select the month to output the report' | translate }}</div>
+  </div>
+  <div class="modal-body">
+    <div>
+      <div
+        ngbDropdown
+        #selectmonthreportDropdown
+        class="d-flex justify-content-sm-around align-items-center mb-3 select-box"
+      >
+        <button
+          type="button"
+          class="btn btn-outline-secondary w-100 d-flex align-items-center disabled-ignore"
+          id="dropdownBasic2"
+          ngbDropdownToggle
+        >
+          <div class="text text-black-300 text-normal">
+            {{
+              patientReportEndDate
+                ? (patientReportEndDate | date: (sharedService.isJa() ? 'yyyy年MM月' : 'MMM y'))
+                : ('select the target month' | translate)
+            }}
+          </div>
+          <i
+            class="fas my-auto icon ml-auto opacity-25 text-black-300"
+            [class]="ngbSelectMonthReportDropdown?.isOpen() ? 'icon-arrow-up' : 'icon-arrow-down'"
+          ></i>
+        </button>
+        <div class="group-select w-100" ngbDropdownMenu aria-labelledby="dropdownBasic2">
+          <div
+            *ngFor="let item of dataMonths"
+            [class.active]="patientReportMonth === item.vital_heart_beat_month"
+            class="d-flex align-items-start m-0 select-item cursor-pointer"
+            (click)="selectedItem(item)"
+          >
+            {{ item.vital_heart_beat_month | date: (sharedService.isJa() ? 'yyyy年MM月' : 'MMM y') }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn bg-white text-normal" (click)="clickedClose()">
+      {{ 'button.Cancel' | translate }}
+    </button>
+    <button
+      type="submit"
+      class="btn bg-white text-blue-500 text-normal left-border"
+      [disabled]="!patientReportEndDate"
+      (click)="shindenDownloadReport(patientReportEndDate)"
+    >
+      {{ 'button.output' | translate }}
+    </button>
+  </div>
+</div>

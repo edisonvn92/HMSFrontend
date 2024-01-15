@@ -1,0 +1,42 @@
+@import 'src/app/styles/variable';
+
+:host {
+  padding: 32px 24px 24px 24px;
+  color: $black-300;
+}
+
+.form-control {
+  height: 32px;
+  font-size: 14px;
+}
+
+.form-footer {
+  justify-content: center;
+  display: flex;
+  margin-top: 48px;
+}
+
+.invalid {
+  padding: 5px 0px 5px 32px;
+}
+
+.icon-unconfirm {
+  height: 16px;
+  width: 17px;
+}
+
+input:disabled {
+  background-color: $gray-150;
+}
+
+.lang-select {
+  max-height: 200px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0;
+}
+
+.icon {
+  height: 8px;
+  width: 11px;
+}

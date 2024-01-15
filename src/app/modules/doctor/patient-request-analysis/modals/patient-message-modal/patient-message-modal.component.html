@@ -1,0 +1,26 @@
+<div class="message-container">
+  <div class="modal-header no-focus" tabindex="0" ngbAutoFocus>
+    <div class="modal-title text-medium font-weight-500 text-left" id="modal-basic-title">
+      {{ 'message' | translate }}
+    </div>
+    <button
+      type="button"
+      class="btn btn-outline-secondary text-normal text-black-300 btn-close"
+      (click)="clickedClose()"
+    >
+      {{ 'button.Close' | translate }}
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="align-items-center content-item">
+      <textarea
+        disabled
+        class="form-control text-normal"
+        id="letter-body"
+        [placeholder]="'letter body' | translate"
+        [value]="message"
+      >
+      </textarea>
+    </div>
+  </div>
+</div>

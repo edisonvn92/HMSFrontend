@@ -1,0 +1,23 @@
+.modal-header {
+  min-height: 40px;
+  padding: 8px 24px 8px 16px;
+
+  .text-left {
+    word-break: break-word;
+  }
+}
+
+.btn-close {
+  width: 52px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+}
+
+tbody {
+  height: 20vh;
+}
+
+.btn-close-hover {
+  height: 65px;
+}

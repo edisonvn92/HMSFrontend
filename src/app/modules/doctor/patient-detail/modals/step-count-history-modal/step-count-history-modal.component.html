@@ -1,0 +1,53 @@
+<div class="history-modal">
+  <div class="modal-body">
+    <div>
+      <div class="title">{{ 'step history' | translate }}</div>
+      <div class="list" id="history-content" [class.en-language]="!sharedService.isJa()">
+        <div class="header">
+          <div class="header-content">
+            <div class="date" [class.pl-30]="sharedService.isJa()">{{ 'measurement date and time' | translate }}</div>
+            <div class="step text-center">{{ 'patient detail.step count' | translate }}</div>
+          </div>
+        </div>
+        <div
+          *ngIf="stepCountHistory && stepCountHistory.data && stepCountHistory.data.length > 0"
+          class="history-content"
+        >
+          <div *ngFor="let item of stepCountHistory.data">
+            <div class="month" *ngIf="item.is_start_month">
+              {{ item.user_stat_ldate | date: (sharedService.isJa() ? 'yyyy年MM月' : 'MMM y') }}
+            </div>
+            <div class="d-flex align-items-center content text-normal">
+              <div class="date text-left">
+                {{ item.user_stat_ldate | date: (sharedService.isJa() ? 'MM月dd日' : 'd MMM') }}
+                <span class="weekday" [hidden]="!item.user_stat_ldate"
+                  >({{ getWeekday(item.user_stat_ldate) | translate }})</span
+                >
+              </div>
+              <div class="step text-center">
+                {{ item.user_stat_step_count ? (item.user_stat_step_count | number) : '-' }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="stepCountHistory.data.length === 0" class="no-data">{{ 'there is no data' | translate }}</div>
+      </div>
+      <div class="pagination-history" *ngIf="stepCountHistory && stepCountHistory.total > stepCountHistory.data.length">
+        <app-paginator
+          class="paginator ml-auto my-auto"
+          [page]="bodyRequest.page"
+          [collectionSize]="stepCountHistory.total"
+          (pageChange)="pageChange($event)"
+          [pageSize]="stepCountHistory.per_page"
+          [hasCollectionSize]="false"
+          [className]="'history-pagination'"
+        ></app-paginator>
+      </div>
+    </div>
+  </div>
+  <div ngbAutoFocus tabindex="0" class="modal-footer no-focus" (click)="clickedClose()">
+    <button type="button" class="btn">
+      {{ 'button.Close' | translate }}
+    </button>
+  </div>
+</div>

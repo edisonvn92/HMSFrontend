@@ -1,0 +1,138 @@
+@import 'src/app/styles/variable';
+
+:host {
+  color: $black-300;
+}
+
+.detail-latest-alert-modal {
+  .modal-body {
+    padding: 16px 24px 18px 24px;
+  }
+
+  .content {
+    margin-top: 24px;
+
+    .left {
+      font-size: 16px;
+      font-weight: 500;
+      width: 105px;
+      padding-top: 3px;
+    }
+
+    .right {
+      width: calc(100% - 105px);
+      max-height: 92px;
+      overflow-y: auto;
+
+      .has-alert {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: $red-100;
+        margin-right: 8px;
+        margin-top: 12px;
+      }
+
+      .right-content {
+        .content-item {
+          margin-top: 4px;
+          margin-bottom: 4px;
+          font-size: 14px;
+          display: flex;
+
+          .datetime {
+            color: $gray-800;
+            width: 123px;
+          }
+
+          .unit {
+            padding-left: 4px;
+            font-size: 12px;
+            padding-top: 2px;
+          }
+
+          .weight {
+            width: 35px;
+            text-align: left;
+          }
+
+          &.af-content,
+          &.ihb-content,
+          &.weight-content {
+            .unit {
+              text-transform: lowercase;
+            }
+          }
+        }
+      }
+    }
+
+    .sub-content {
+      margin-top: 5px;
+    }
+
+    textarea {
+      width: 308px;
+      border: 1px solid $gray-390;
+      color: $black-300;
+      font-size: 12px;
+      height: 91px;
+      line-height: 20px;
+      resize: none;
+      overflow: auto;
+      padding-left: 15px;
+
+      &:focus {
+        box-shadow: none;
+      }
+    }
+  }
+
+  .action-list {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    margin-bottom: 6px;
+
+    .btn-close {
+      background-color: white;
+      border-color: $gray-380;
+      padding: 5px 19px;
+
+      &:hover {
+        background-color: $gray-210;
+      }
+    }
+
+    .btn-leave-in-list {
+      padding: 5px 19px;
+      background-color: $red-100;
+    }
+
+    .btn-confirm {
+      padding: 5px 26px;
+    }
+  }
+
+  .modal-footer {
+    border-top: 1px solid $gray-100;
+    margin-top: 15px;
+    cursor: pointer;
+
+    &.btn-close-hover {
+      height: 46px;
+    }
+  }
+
+  .form-control[readonly] {
+    background-color: white;
+  }
+
+  div::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  textarea::-webkit-scrollbar {
+    width: 4px;
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "hospitalDashboards": [
+    {
+      "components": { "component_code": "L01", "component_type": 1 },
+      "hospital_dashboard_order": 0
+    },
+    {
+      "components": { "component_code": "L02", "component_type": 1 },
+      "hospital_dashboard_order": 1
+    },
+    {
+      "components": { "component_code": "L03", "component_type": 1 },
+      "hospital_dashboard_order": 3
+    },
+    {
+      "components": { "component_code": "L04", "component_type": 1 },
+      "hospital_dashboard_order": 4
+    },
+    {
+      "components": { "component_code": "L05", "component_type": 1 },
+      "hospital_dashboard_order": 5
+    },
+    {
+      "components": { "component_code": "L06", "component_type": 1 },
+      "hospital_dashboard_order": 6
+    },
+    {
+      "components": { "component_code": "L07", "component_type": 1 },
+      "hospital_dashboard_order": 7
+    },
+    {
+      "components": { "component_code": "L08", "component_type": 1 },
+      "hospital_dashboard_order": 8
+    },
+    {
+      "components": { "component_code": "L09", "component_type": 1 },
+      "hospital_dashboard_order": 9
+    },
+    {
+      "components": { "component_code": "L10", "component_type": 1 },
+      "hospital_dashboard_order": 10
+    },
+    {
+      "components": { "component_code": "L11", "component_type": 1 },
+      "hospital_dashboard_order": 11
+    },
+    {
+      "components": { "component_code": "L12", "component_type": 1 },
+      "hospital_dashboard_order": 12
+    },
+    {
+      "components": { "component_code": "L13", "component_type": 1 },
+      "hospital_dashboard_order": 13
+    },
+    {
+      "components": { "component_code": "L14", "component_type": 1 },
+      "hospital_dashboard_order": 14
+    },
+    {
+      "components": { "component_code": "L15", "component_type": 1 },
+      "hospital_dashboard_order": 15
+    },
+    {
+      "components": { "component_code": "L16", "component_type": 1 },
+      "hospital_dashboard_order": 16
+    },
+    {
+      "components": { "component_code": "L17", "component_type": 1 },
+      "hospital_dashboard_order": 17
+    },
+    {
+      "components": { "component_code": "L18", "component_type": 1 },
+      "hospital_dashboard_order": 18
+    },
+    {
+      "components": { "component_code": "L19", "component_type": 1 },
+      "hospital_dashboard_order": 19
+    },
+    {
+      "components": { "component_code": "L20", "component_type": 1 },
+      "hospital_dashboard_order": 20
+    },
+    {
+      "components": { "component_code": "L21", "component_type": 1 },
+      "hospital_dashboard_order": 21
+    },
+    {
+      "components": { "component_code": "L22", "component_type": 1 },
+      "hospital_dashboard_order": 22
+    },
+    {
+      "components": { "component_code": "L23", "component_type": 1 },
+      "hospital_dashboard_order": 23
+    },
+    {
+      "components": { "component_code": "L24", "component_type": 1 },
+      "hospital_dashboard_order": 24
+    },
+    {
+      "components": { "component_code": "L25", "component_type": 1 },
+      "hospital_dashboard_order": 25
+    },
+    {
+      "components": { "component_code": "L26", "component_type": 1 },
+      "hospital_dashboard_order": 26
+    },
+    {
+      "components": { "component_code": "L27", "component_type": 1 },
+      "hospital_dashboard_order": 27
+    },
+    {
+      "components": { "component_code": "L28", "component_type": 1 },
+      "hospital_dashboard_order": 28
+    }
+  ]
+}

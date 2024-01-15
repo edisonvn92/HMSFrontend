@@ -1,0 +1,25 @@
+@import 'src/app/styles/variable';
+
+:host {
+  color: $black-300;
+}
+
+.modal-header {
+  height: 40px;
+  padding: 8px 24px;
+  border-bottom-color: $gray-100;
+}
+
+.user-group-content {
+  max-height: 231px;
+  overflow-y: auto;
+
+  .group-item {
+    padding: 8px;
+    border-bottom: 1px solid $gray-370;
+
+    .group-name {
+      word-break: break-word;
+    }
+  }
+}

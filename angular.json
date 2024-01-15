@@ -1,0 +1,262 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": false,
+    "defaultCollection": "@angular-eslint/schematics"
+  },
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "myapp": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        },
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/myapp",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets",
+              "src/firebase-messaging-sw.js",
+              "src/manifest.json",
+              "src/manifest.webmanifest"
+            ],
+            "styles": ["src/styles.scss", "./node_modules/bootstrap/dist/css/bootstrap.css"],
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/styles"]
+            },
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "crypto-js",
+              "@aws-sdk/eventstream-marshaller",
+              "buffer",
+              "js-cookie",
+              "@aws-crypto",
+              "zen-observable",
+              "@aws-sdk/util-utf8-node",
+              "@aws-crypto/sha256-js",
+              "@aws-sdk/util-buffer-from",
+              "@aws-sdk/smithy-client",
+              "@aws-sdk/middleware-serde",
+              "@aws-sdk/middleware-user-agent",
+              "@aws-sdk/middleware-retry",
+              "@aws-sdk/middleware-signing",
+              "@aws-sdk/middleware-content-length",
+              "@aws-sdk/middleware-host-header",
+              "@aws-sdk/config-resolver",
+              "@aws-sdk/s3-request-presigner",
+              "@aws-sdk/util-format-url",
+              "@aws-sdk/util-create-request",
+              "@aws-sdk/property-provider",
+              "axios",
+              "@aws-sdk/fetch-http-handler",
+              "@aws-sdk/protocol-http",
+              "@aws-sdk/querystring-builder",
+              "@aws-sdk/util-utf8-browser",
+              "@aws-sdk/url-parser-browser",
+              "@aws-crypto/sha256-browser",
+              "@aws-sdk/url-parser-node",
+              "@aws-sdk/util-uri-escape",
+              "@aws-sdk/middleware-sdk-s3",
+              "@aws-sdk/middleware-bucket-endpoint",
+              "@aws-sdk/querystring-parser",
+              "@aws-sdk/middleware-apply-body-checksum",
+              "@aws-sdk/middleware-ssec",
+              "@aws-sdk/middleware-expect-continue",
+              "fast-xml-parser",
+              "@aws-sdk/xml-builder",
+              "@aws-sdk/md5-js",
+              "@aws-sdk/hash-blob-browser",
+              "@aws-sdk/eventstream-serde-browser",
+              "@aws-sdk/middleware-location-constraint",
+              "uuid",
+              "@aws-sdk/credential-provider-cognito-identity",
+              "@aws-sdk/eventstream-serde-config-resolver",
+              "@aws-sdk/client-s3",
+              "@aws-sdk/client-pinpoint",
+              "ulid",
+              "zen-push",
+              "lodash",
+              "@aws-amplify/core",
+              "@aws-amplify/analytics",
+              "@aws-amplify/ui-components",
+              "angular2-text-mask",
+              "isomorphic-unfetch",
+              "xlsx",
+              "pdfmake/build/pdfmake.js",
+              "raf",
+              "core-js/modules/web.dom-collections.iterator",
+              "core-js/modules/web.dom-collections.for-each",
+              "core-js/modules/es.symbol.iterator",
+              "core-js/modules/es.symbol.description",
+              "core-js/modules/es.symbol",
+              "core-js/modules/es.string.trim",
+              "core-js/modules/es.string.starts-with",
+              "core-js/modules/es.string.split",
+              "core-js/modules/es.string.replace",
+              "core-js/modules/es.string.match",
+              "core-js/modules/es.string.iterator",
+              "core-js/modules/es.string.includes",
+              "core-js/modules/es.regexp.to-string",
+              "core-js/modules/es.regexp.exec",
+              "core-js/modules/es.reflect.get-prototype-of",
+              "core-js/modules/es.reflect.delete-property",
+              "core-js/modules/es.reflect.construct",
+              "core-js/modules/es.reflect.apply",
+              "core-js/modules/es.promise",
+              "core-js/modules/es.object.to-string",
+              "core-js/modules/es.object.keys",
+              "core-js/modules/es.object.get-own-property-descriptors",
+              "core-js/modules/es.object.get-own-property-descriptor",
+              "core-js/modules/es.number.constructor",
+              "core-js/modules/es.map",
+              "core-js/modules/es.function.name",
+              "core-js/modules/es.array.some",
+              "core-js/modules/es.array.slice",
+              "core-js/modules/es.array.reverse",
+              "core-js/modules/es.array.reduce",
+              "core-js/modules/es.array.map",
+              "core-js/modules/es.array.join",
+              "core-js/modules/es.array.iterator",
+              "core-js/modules/es.array.index-of",
+              "core-js/modules/es.array.includes",
+              "core-js/modules/es.array.from",
+              "core-js/modules/es.array.for-each",
+              "core-js/modules/es.array.filter",
+              "core-js/modules/es.array.fill",
+              "core-js/modules/es.array.every",
+              "core-js/modules/es.array.concat"
+            ],
+            "serviceWorker": true,
+            "ngswConfigPath": "ngsw-config.json"
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "10mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "200kb",
+                  "maximumError": "1mb"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "staging": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "10mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "200kb",
+                  "maximumError": "1mb"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "10mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "200kb",
+                  "maximumError": "1mb"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "default": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "myapp:build:production"
+            },
+            "development": {
+              "browserTarget": "myapp:build:development"
+            },
+            "staging": {
+              "browserTarget": "myapp:build:staging"
+            },
+            "default": {
+              "browserTarget": "myapp:build:default"
+            }
+          },
+          "defaultConfiguration": "default"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "myapp:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets",
+              "src/firebase-messaging-sw.js",
+              "src/manifest.json",
+              "src/manifest.webmanifest"
+            ],
+            "styles": ["src/styles.scss", "./node_modules/bootstrap/dist/css/bootstrap.css"],
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/styles"]
+            },
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "myapp"
+}

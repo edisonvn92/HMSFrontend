@@ -1,0 +1,64 @@
+<div class="history-modal">
+  <div class="modal-body custom-modal-body">
+    <div>
+      <div class="list" id="history-content" [class.en-language]="!sharedService.isJa()">
+        <div class="header">
+          <div class="header-content">
+            <div class="output-date-and-time text-center">
+              {{ 'output date and time' | translate }}
+            </div>
+            <div class="target-month text-center" [class.text-pre-line]="!sharedService.isJa()">
+              {{ 'target month' | translate }}
+            </div>
+            <div class="file text-center" [class.text-pre-line]="!sharedService.isJa()">
+              {{ 'file' | translate }}
+            </div>
+          </div>
+        </div>
+        <div
+          *ngIf="heartBeatReportHistory && heartBeatReportHistory.data && heartBeatReportHistory.data.length > 0"
+          class="history-content"
+        >
+          <div *ngFor="let item of heartBeatReportHistory.data">
+            <div class="d-flex align-items-center content text-normal column-history">
+              <div class="output-date-and-time d-flex justify-content-between">
+                {{ item.created_at | date: (sharedService.isJa() ? 'yyyy年MM月dd日 HH時mm分' : 'd MMM y HH:mm') }}
+              </div>
+              <div class="target-month text-center">
+                {{
+                  item.patient_report.patient_report_end_date | date: (sharedService.isJa() ? 'yyyy年MM月' : 'MMM y')
+                }}
+              </div>
+              <div class="file cursor-pointer text-blue-500">
+                <div (click)="shindenDownloadReport(item)">
+                  <img class="icon-up-down" [src]="'assets/images/icon_download.svg'" alt="icon" />
+                  {{ 'download' | translate }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="heartBeatReportHistory.data.length === 0" class="no-data">{{ 'there is no data' | translate }}</div>
+      </div>
+      <div
+        class="pagination-history"
+        *ngIf="heartBeatReportHistory && heartBeatReportHistory.total > heartBeatReportHistory.data.length"
+      >
+        <app-paginator
+          class="paginator ml-auto my-auto"
+          [page]="bodyRequest.page"
+          [collectionSize]="heartBeatReportHistory.total"
+          (pageChange)="pageChange($event)"
+          [pageSize]="heartBeatReportHistory.per_page"
+          [hasCollectionSize]="false"
+          [className]="'history-pagination'"
+        ></app-paginator>
+      </div>
+    </div>
+  </div>
+  <div ngbAutoFocus tabindex="0" class="modal-footer no-focus" (click)="clickedClose()">
+    <button type="button" class="btn">
+      {{ 'button.close' | translate }}
+    </button>
+  </div>
+</div>

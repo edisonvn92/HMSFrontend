@@ -1,0 +1,79 @@
+@import 'src/app/styles/variable';
+
+:host {
+  color: $black-300;
+}
+
+.body-medical {
+  margin: 32px 32px 24px 32px;
+  min-height: 170px;
+
+  &.height-en {
+    min-height: 190px;
+  }
+
+  .name {
+    margin-bottom: 8px;
+  }
+
+  .title {
+    margin-top: 8px;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .content {
+    margin-top: 8px;
+    font-size: 14px;
+    display: flex;
+    align-items: flex-start;
+
+    .left {
+      margin-right: 15px;
+      min-width: 42px;
+    }
+
+    .right {
+      word-break: break-word;
+    }
+  }
+
+  .content-en {
+    .left {
+      min-width: 112px;
+    }
+  }
+
+  .action {
+    margin-top: 28px;
+    font-size: 14px;
+
+    .btn-close {
+      padding: 5px 16px;
+      border-radius: 2px;
+      border-color: $gray-200;
+      background: $white;
+      color: $black-300;
+
+      &:hover {
+        background-color: $gray-210;
+      }
+    }
+
+    .btn-delete {
+      padding: 5px 16px;
+      margin-left: 8px;
+      border-radius: 2px;
+      background: $red-200;
+      color: $white;
+    }
+
+    .btn-register {
+      padding: 5px 16px;
+      margin-left: 8px;
+      border-radius: 2px;
+      background: $blue-210;
+      color: $white;
+    }
+  }
+}

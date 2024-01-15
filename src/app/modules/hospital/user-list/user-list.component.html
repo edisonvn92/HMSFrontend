@@ -1,0 +1,252 @@
+<div class="user-name">
+  <div class="user-content">
+    <form [formGroup]="searchForm">
+      <div class="d-flex align-items-end input-user search-user">
+        <div class="mb-3 mr-51">
+          {{ 'id' | translate }}
+          <input
+            type="text"
+            class="form-control search-input user-id bg-white text-normal mt-2"
+            placeholder="{{ 'please enter' | translate }}"
+            formControlName="idSearch"
+            [disabled]="isSearching"
+          />
+        </div>
+        <div class="mb-3 mr-51">
+          {{ 'tel' | translate }}
+          <input
+            type="text"
+            class="form-control search-input user-id bg-white text-normal mt-2"
+            placeholder="{{ 'please enter' | translate }}"
+            formControlName="telSearch"
+            [disabled]="isSearching"
+          />
+        </div>
+        <div ngbDropdown #groupDropdown class="mb-3 mr-51">
+          {{ 'Group' | translate }}
+          <button
+            type="button"
+            class="btn btn-outline-secondary search-input group d-flex mt-2 align-items-center"
+            id="dropdownBasic2"
+            ngbDropdownToggle
+          >
+            <div class="text text-black-400 text-truncate text-normal">{{ selectedGroup.group_name }}</div>
+            <i
+              class="fas ml-auto my-auto icon opacity-25 text-black-300"
+              [class]="ngbGroupDropdown?.isOpen() ? 'icon-arrow-up' : 'icon-arrow-down'"
+            ></i>
+          </button>
+          <div class="select" ngbDropdownMenu aria-labelledby="dropdownBasic2">
+            <div
+              class="d-flex align-items-start m-0 cursor-pointer text-normal select-item"
+              (click)="selectedItemSearch(false)"
+            >
+              --
+            </div>
+            <div
+              *ngFor="let item of groupList"
+              (click)="selectedItemSearch(false, item)"
+              class="d-flex text-normal cursor-pointer align-items-start break-space m-0 select-item"
+            >
+              {{ item.group_name }}
+            </div>
+          </div>
+        </div>
+        <div class="mb-3 mr-51">
+          {{ 'name' | translate }}
+          <input
+            type="text"
+            class="form-control search-input search-input user-id text-normal mt-2"
+            placeholder="{{ 'please enter' | translate }}"
+            formControlName="nameSearch"
+          />
+        </div>
+        <div ngbDropdown #roleDropdown class="mb-3 mr-51">
+          {{ 'role' | translate }}
+          <button
+            type="button"
+            class="btn btn-outline-secondary search-input d-flex mt-2 align-items-center"
+            id="dropdownBasic2"
+            ngbDropdownToggle
+          >
+            <div class="text text-black-400 text-normal">{{ selectedRole.role_name | translate }}</div>
+            <i
+              class="fas ml-auto my-auto icon opacity-25 text-black-300"
+              [class]="ngbRoleDropdown?.isOpen() ? 'icon-arrow-up' : 'icon-arrow-down'"
+            ></i>
+          </button>
+          <div class="select" ngbDropdownMenu aria-labelledby="dropdownBasic2">
+            <div
+              class="d-flex align-items-start m-0 cursor-pointer text-normal select-item"
+              (click)="selectedItemSearch(true)"
+            >
+              --
+            </div>
+            <div
+              *ngFor="let item of roles"
+              (click)="selectedItemSearch(true, item)"
+              class="d-flex align-items-start cursor-pointer text-normal text-truncate m-0 select-item"
+            >
+              {{ item.role_name | translate }}
+            </div>
+          </div>
+        </div>
+        <div class="d-flex ml-auto mb-3">
+          <button
+            type="button"
+            class="btn btn-outline-secondary d-flex text-black-300 text-normal"
+            (click)="resetSearchClicked()"
+          >
+            {{ 'button.reset' | translate }}
+          </button>
+          <button type="submit" class="btn btn-primary d-flex ml-2 bg-blue-500 text-normal" (click)="findRecords(true)">
+            {{ 'button.search' | translate }}
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <table
+      class="table hospital-table"
+      id="table-content"
+      [ngClass]="sharedService.closeSidebar ? 'close-sidebar' : ''"
+    >
+      <thead>
+        <tr>
+          <th scope="col" class="group-name">
+            {{ 'Group' | translate }}
+          </th>
+          <th scope="col" class="login-id">
+            <div>
+              <app-label-column-table
+                [active]="tableFields['hcp_cognito_username'].isSort"
+                [sortType]="tableFields['hcp_cognito_username'].sortType"
+                [label]="'id' | translate"
+                [labelId]="'hcp_cognito_username'"
+                (sortEvent)="sortBy($event)"
+              >
+              </app-label-column-table>
+            </div>
+          </th>
+          <th scope="col" class="full-name">
+            <div>
+              <app-label-column-table
+                [active]="tableFields['hcp_full_name'].isSort"
+                [sortType]="tableFields['hcp_full_name'].sortType"
+                [label]="'name'"
+                [labelId]="'hcp_full_name'"
+                (sortEvent)="sortBy($event)"
+              >
+              </app-label-column-table>
+            </div>
+          </th>
+          <th scope="col" class="phone-number">
+            <div>
+              <app-label-column-table
+                [active]="tableFields['hcp_cognito_phone'].isSort"
+                [sortType]="tableFields['hcp_cognito_phone'].sortType"
+                [label]="'tel' | translate"
+                [labelId]="'hcp_cognito_phone'"
+                (sortEvent)="sortBy($event)"
+              >
+              </app-label-column-table>
+            </div>
+          </th>
+          <th scope="col" class="role-name">
+            <div>
+              <app-label-column-table
+                [active]="tableFields['role_name'].isSort"
+                [sortType]="tableFields['role_name'].sortType"
+                [label]="'role' | translate"
+                [labelId]="'role_name'"
+                (sortEvent)="sortBy($event)"
+              >
+              </app-label-column-table>
+            </div>
+          </th>
+          <th scope="col" class="last-login">
+            <div>
+              <app-label-column-table
+                [active]="tableFields['hcp_last_login'].isSort"
+                [sortType]="tableFields['hcp_last_login'].sortType"
+                [label]="'last login' | translate"
+                [labelId]="'hcp_last_login'"
+                (sortEvent)="sortBy($event)"
+              >
+              </app-label-column-table>
+            </div>
+          </th>
+          <th scope="col" class="period-of-use">
+            <div>
+              <app-label-column-table
+                [active]="tableFields['hcp_start_period_of_use'].isSort"
+                [sortType]="tableFields['hcp_start_period_of_use'].sortType"
+                [label]="'period of use' | translate"
+                [labelId]="'hcp_start_period_of_use'"
+                (sortEvent)="sortBy($event)"
+              >
+              </app-label-column-table>
+            </div>
+          </th>
+          <th scope="col" class="action-list">{{ 'actions' | translate }}</th>
+        </tr>
+      </thead>
+      <tbody [attr.noData]="'there is no data' | translate">
+        <tr *ngFor="let user of userList?.data">
+          <td class="group-name">
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="break-space">{{ user.groups[0]?.group_name }}</div>
+              <div *ngIf="user.groups.length > 1" class="cursor-pointer ml-10" (click)="openGroupList(user)">
+                <img class="ml-3" src="./assets/images/icon_dot.svg" class="icon-dot-3" />
+              </div>
+            </div>
+          </td>
+          <td class="login-id">{{ user.hcp_cognito_username }}</td>
+          <td class="full-name">{{ user.hcp_full_name }}</td>
+          <td class="phone-number">{{ user.hcp_cognito_phone }}</td>
+          <td class="role-name">{{ user.role_name | translate }}</td>
+          <td class="last-login">
+            {{
+              (user.hcp_last_login | date: (sharedService.isJa() ? 'y.MM.dd HH:mm' : 'd MMM y HH:mm')) ||
+                '----.--.-- --:--'
+            }}
+          </td>
+          <td class="period-of-use">
+            {{ (user.hcp_start_period_of_use | date: (sharedService.isJa() ? 'y.MM.dd' : 'd MMM y')) || '----.--.--' }}
+            -
+            {{ (user.hcp_end_period_of_use | date: (sharedService.isJa() ? 'y.MM.dd' : 'd MMM y')) || '----.--.--' }}
+          </td>
+
+          <td class="action-list">
+            <span class="text-blue-500 underline-hover cursor-pointer" (click)="createClicked(user)">
+              {{ 'edit' | translate }}
+            </span>
+            |
+            <span
+              class="text-red-200 underline-hover cursor-pointer"
+              [class.disabled]="user.hcp_none_delete || user.hcp_id === currentUser.hcp_id"
+              (click)="deleteClicked(user)"
+            >
+              {{ 'delete' | translate }}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="d-flex mt-2">
+      <button type="button" class="btn btn-primary d-flex bg-blue-500 text-normal" (click)="createClicked()">
+        <div class="icon my-auto mr-2 icon-plus morning-2"></div>
+        {{ 'add new' | translate }}
+      </button>
+      <app-paginator
+        *ngIf="userList.total"
+        class="paginator ml-auto my-auto"
+        [collectionSize]="userList.total"
+        (pageChange)="findRecords(false, $event)"
+        [pageSize]="userList.per_page"
+        [page]="param.page"
+        [perPage]="userList.per_page"
+      ></app-paginator>
+    </div>
+  </div>
+</div>

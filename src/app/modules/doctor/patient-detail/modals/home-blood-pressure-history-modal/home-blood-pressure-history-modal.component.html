@@ -1,0 +1,84 @@
+<div class="history-modal">
+  <div class="modal-body">
+    <div>
+      <div class="title">{{ 'home blood pressure history' | translate }}</div>
+      <div class="list" id="history-content" [class.en-language]="!sharedService.isJa()">
+        <div class="header">
+          <div class="header-content">
+            <div class="date">{{ 'measurement date and time' | translate }}</div>
+            <div class="blood-pressure text-center">
+              {{ 'patient.blood pressure' | translate }}
+              <div class="unit">mmHg</div>
+            </div>
+            <div class="pulse-rate text-center" [class.text-pre-line]="!sharedService.isJa()">
+              {{ 'pulse \n rate' | translate }}
+              <div class="unit">bpm</div>
+            </div>
+            <div class="measurement-state text-center" [class.text-pre-line]="!sharedService.isJa()">
+              {{ 'measurement \n state' | translate }}
+            </div>
+          </div>
+        </div>
+        <div
+          *ngIf="bloodPressureHistory && bloodPressureHistory.data && bloodPressureHistory.data.length > 0"
+          class="history-content"
+        >
+          <div *ngFor="let item of bloodPressureHistory.data">
+            <div class="month" *ngIf="item.is_start_month">
+              {{ item.vital_bp_ldatetime | date: (sharedService.isJa() ? 'yyyy年MM月' : 'MMM y'):'+0000' }}
+            </div>
+            <div class="d-flex align-items-center content text-normal">
+              <div class="date text-left datetime">
+                <div class="date-month">
+                  {{ item.vital_bp_ldatetime | date: (sharedService.isJa() ? 'MM月dd日' : 'd MMM'):'+0000' }}
+                </div>
+                <div class="weekday" [hidden]="!item.vital_bp_ldatetime">
+                  ({{ getWeekday(item.vital_bp_ldatetime) | translate }})
+                </div>
+                <div>{{ item.vital_bp_ldatetime | date: 'HH:mm':'+0000' }}</div>
+              </div>
+              <div class="blood-pressure d-flex justify-content-between">
+                <div class="sys-side">{{ item.vital_bp_systolic | dash }}</div>
+                <div>/</div>
+                <div class="dia-side">{{ item.vital_bp_diastolic | dash }}</div>
+              </div>
+              <div class="pulse-rate text-center">
+                {{ item.vital_bp_pulse | dash }}
+              </div>
+              <div class="measurement-state">
+                <img class="state-icon" *ngIf="item.vital_bp_ihb" src="./assets/images/icon_heart.svg" />
+                <img class="empty-icon" *ngIf="!item.vital_bp_ihb" src="./assets/images/icon_dot_1.svg" />
+
+                <img class="state-icon" *ngIf="item.vital_bp_body_motion" src="./assets/images/icon_body.svg" />
+                <img class="empty-icon" *ngIf="!item.vital_bp_body_motion" src="./assets/images/icon_dot_1.svg" />
+
+                <img class="state-icon" *ngIf="item.vital_bp_tight_fit === 0" src="./assets/images/cuff_winding.svg" />
+                <img class="empty-icon" *ngIf="item.vital_bp_tight_fit !== 0" src="./assets/images/icon_dot_1.svg" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="bloodPressureHistory.data.length === 0" class="no-data">{{ 'there is no data' | translate }}</div>
+      </div>
+      <div
+        class="pagination-history"
+        *ngIf="bloodPressureHistory && bloodPressureHistory.total > bloodPressureHistory.data.length"
+      >
+        <app-paginator
+          class="paginator ml-auto my-auto"
+          [page]="bodyRequest.page"
+          [collectionSize]="bloodPressureHistory.total"
+          (pageChange)="pageChange($event)"
+          [pageSize]="bloodPressureHistory.per_page"
+          [hasCollectionSize]="false"
+          [className]="'history-pagination'"
+        ></app-paginator>
+      </div>
+    </div>
+  </div>
+  <div ngbAutoFocus tabindex="0" class="modal-footer no-focus" (click)="clickedClose()">
+    <button type="button" class="btn">
+      {{ 'button.Close' | translate }}
+    </button>
+  </div>
+</div>

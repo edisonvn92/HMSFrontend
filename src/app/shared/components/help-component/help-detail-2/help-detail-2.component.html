@@ -1,0 +1,66 @@
+<div class="modal-header">
+  <div class="modal-title font-weight-500 text-medium text-left" id="modal-basic-title">
+    {{ 'help' | translate }}
+  </div>
+  <button type="button" class="close none-outline" aria-label="Close" (click)="clickedClose()">
+    <div class="icon-close btn-icon-close"></div>
+  </button>
+</div>
+
+<div class="modal-body text-break" [class.lang-en]="!sharedService.isJa()">
+  <div class="text-blue-700 mb-2">{{ 'blood pressure measurement' | translate }}</div>
+  <div class="d-flex mt-1">
+    <img src="./assets/images/blood_pressure_chart_1.svg" alt="" class="mr-3 ml-10" />
+    <div class="mt-15">
+      <div class="d-flex align-items-center">
+        <div class="icon-unit bg-blue-420 mr-2"></div>
+        <div class="" [class.w-112]="!sharedService.isJa()">
+          {{ 'morning' | translate }}
+        </div>
+      </div>
+      <div class="d-flex align-items-center">
+        <div class="icon-unit bg-blue-100 mr-2"></div>
+        <div class="" [class.w-112]="!sharedService.isJa()">
+          {{ 'evening' | translate }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-blue-700 mb-2 mt-3">
+    {{ 'measurement status' | translate }}
+  </div>
+  <div *ngFor="let status of measurementStatus; let i = index" class="ml-10 status-wrap" [class.first-child]="i === 0">
+    <img [src]="status.icon" alt="" class="mr-3 status-icon" />
+    <div class="status-text">{{ status.text1 | translate }}</div>
+    <div class="text-small">{{ status.text2 | translate }}</div>
+  </div>
+
+  <div class="text-blue-700 mt-3 mb-2">
+    {{ 'action memo' | translate }}
+  </div>
+  <div class="d-flex mt-2 memo-wrap">
+    <div
+      class="memo-item"
+      *ngFor="let status of lifeImprovements; let i = index"
+      [class.border-bottom]="status?.border_bottom"
+      [class.border-left]="status?.border_left"
+    >
+      <div class="d-flex justify-content-center"><img [src]="status.icon" alt="" /></div>
+      <div class="text-no-break text-center text-blue-600">{{ status.text | translate }}</div>
+    </div>
+  </div>
+
+  <div class="mt-3 d-flex">
+    <div
+      *ngFor="let item of other; let i = index"
+      class="d-flex align-items-center"
+      [class]="i === 0 ? 'ml-2' : 'ml-30'"
+    >
+      <img [src]="item.icon" alt="" class="mr-2" />
+      <div class="text-no-break">
+        {{ item.text | translate }}
+      </div>
+    </div>
+  </div>
+</div>

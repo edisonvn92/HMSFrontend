@@ -1,0 +1,29 @@
+<div class="patient-detail-component">
+  <div class="d-flex justify-content-between align-items-center">
+    <div class="left-title">{{ 'patient detail.symptoms / NYHA' | translate }}</div>
+    <div class="text-small text-gray-190">
+      {{ showDate() ? (showDate() | translate) : '----/--/--' }}
+    </div>
+  </div>
+  <div class="d-flex justify-content-between align-items-end content">
+    <div class="icon-nyha icon"></div>
+    <div>
+      <span class="primary-value">
+        {{
+          patient && patient.patient_review_mets !== null && patient.patient_review_mets !== undefined
+            ? reviewMets[patient.patient_review_mets].value
+            : '-'
+        }}
+      </span>
+      <span class="text-small unit">METs</span>
+    </div>
+    <div>
+      <span class="primary-value">{{
+        patient && patient.patient_review_mets !== null && patient.patient_review_mets !== undefined
+          ? reviewMets[patient.patient_review_mets].level
+          : '-'
+      }}</span>
+      <span class="text-small unit">{{ 'patient detail.level' | translate }}</span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,85 @@
+<div class="history-modal">
+  <div class="modal-body">
+    <div>
+      <div class="title">{{ 'ranking history' | translate }}</div>
+      <div class="list" id="history-content">
+        <div class="header">
+          <div class="header-content">
+            <div class="date pl-35">{{ 'date-JP' | translate }}</div>
+            <div class="rank text-center">{{ 'rank' | translate }}</div>
+            <div class="ihb text-center">{{ 'average blood pressure' | translate }}</div>
+          </div>
+        </div>
+        <div *ngIf="rankingHistory && rankingHistory.data && rankingHistory.data.length > 0" class="history-content">
+          <div *ngFor="let item of rankingHistory.data">
+            <div class="month" *ngIf="item.is_start_month">
+              {{ item.patient_stat_ldate | date: (sharedService.isJa() ? 'yyyy年MM月' : 'MMM y') }}
+            </div>
+            <div class="d-flex align-items-center content text-normal">
+              <div class="date text-left">
+                {{ item.patient_stat_ldate | date: (sharedService.isJa() ? 'MM月dd日' : 'd MMM') }}
+                <span class="weekday" [hidden]="!item.patient_stat_ldate"
+                  >({{ getWeekday(item.patient_stat_ldate) | translate }})</span
+                >
+              </div>
+              <div class="rank text-center">
+                <div class="d-flex justify-content-center align-items-center">
+                  <div
+                    *ngIf="item.patient_stat_sys && item.patient_stat_dia"
+                    class="risk-level text-center"
+                    [ngClass]="
+                      getBackgroundColorFollowLevel(getRiskLevel(item.patient_stat_sys, item.patient_stat_dia))
+                    "
+                  >
+                    {{ getRiskLevel(item.patient_stat_sys, item.patient_stat_dia) }}
+                  </div>
+                  <ng-template [ngIf]="!item.patient_stat_sys || !item.patient_stat_dia">-</ng-template>
+                </div>
+              </div>
+              <div class="ihb text-center">
+                <div class="d-flex justify-content-center align-items-center">
+                  <div
+                    [className]="
+                      item.patient_stat_sys
+                        ? getBackgroundColorFollowLevel(getSysBloodPressureFollowLevel(item.patient_stat_sys)) + ' sys'
+                        : ''
+                    "
+                  >
+                    {{ item?.patient_stat_sys | dash }}
+                  </div>
+                  <div class="mx-5px">/</div>
+                  <div
+                    [className]="
+                      item.patient_stat_dia
+                        ? getBackgroundColorFollowLevel(getDiaBloodPressureFollowLevel(item.patient_stat_dia)) + ' dia'
+                        : ''
+                    "
+                  >
+                    {{ item?.patient_stat_dia | dash }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="rankingHistory.data.length === 0" class="no-data">{{ 'there is no data' | translate }}</div>
+      </div>
+      <div class="pagination-history" *ngIf="rankingHistory && rankingHistory.total > rankingHistory.data.length">
+        <app-paginator
+          class="paginator ml-auto my-auto"
+          [page]="bodyRequest.page"
+          [collectionSize]="rankingHistory.total"
+          (pageChange)="pageChange($event)"
+          [pageSize]="rankingHistory.per_page"
+          [hasCollectionSize]="false"
+          [className]="'history-pagination'"
+        ></app-paginator>
+      </div>
+    </div>
+  </div>
+  <div ngbAutoFocus tabindex="0" class="modal-footer no-focus" (click)="clickedClose()">
+    <button type="button" class="btn">
+      {{ 'button.Close' | translate }}
+    </button>
+  </div>
+</div>

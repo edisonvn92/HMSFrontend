@@ -1,0 +1,142 @@
+/* start style for history modal */
+.history-modal {
+  .title {
+    font-size: 16px;
+    font-weight: 400;
+    margin-top: 4px;
+    margin-bottom: 20px;
+    color: $black-300;
+    text-align: center;
+  }
+
+  .list {
+    max-height: 385px; // value change follow screen
+    overflow-y: auto;
+    color: $black-300;
+
+    .header {
+      border-top: 1px solid $gray-310;
+      border-bottom: 1px solid $gray-310;
+      padding: 10px 0;
+      color: $black-300;
+      font-size: 14px;
+      position: sticky;
+      top: 0;
+      background-color: white;
+      z-index: 10;
+
+      .header-content {
+        display: flex;
+        margin: auto 49px;
+        font-weight: 500;
+      }
+
+      .unit {
+        font-size: 12px;
+        color: $blue-410;
+        margin-top: 7px;
+      }
+    }
+
+    .history-content {
+      padding-top: 10px;
+
+      .content {
+        color: $black-300;
+        margin: auto 42px;
+        padding-top: 6px;
+        padding-bottom: 5px;
+        border-bottom: 1px solid $gray-370;
+
+        .date {
+          margin-bottom: 3px;
+        }
+
+        .weekday {
+          margin-left: 7px;
+          margin-right: 10px;
+        }
+
+        .datetime {
+          display: flex;
+          justify-content: flex-start;
+        }
+      }
+
+      .month {
+        margin: 9px 42px 0 42px;
+        color: $blue-410;
+        font-size: 14px;
+        border-bottom: 1px solid $gray-370;
+        padding-bottom: 9px;
+        font-weight: 500;
+      }
+    }
+
+    .no-data {
+      text-align: center;
+      margin-top: 16px;
+      font-size: 18px;
+      color: $gray-400;
+    }
+
+    &.en-language {
+      .date-month {
+        width: 48px;
+      }
+
+      .weekday {
+        width: 50px;
+        margin-right: 0 !important;
+      }
+    }
+  }
+
+  .pagination-history {
+    display: flex;
+    margin-right: 39px;
+    margin-top: 15px;
+  }
+
+  .modal-footer {
+    color: $black-300 !important;
+    font-size: 14px;
+    padding: 0;
+    justify-content: center;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $gray-210;
+    }
+
+    button {
+      width: 100%;
+      border-radius: 0 0 8px 8px;
+      border: none;
+      height: 48px;
+      margin: 0 auto;
+      color: $black-300;
+      font-size: 14px;
+    }
+  }
+}
+
+.no-focus {
+  outline: none;
+  outline-color: transparent !important;
+
+  &:focus-visible {
+    outline: none;
+  }
+
+  &.focus {
+    outline: none;
+  }
+}
+
+.modal-backdrop {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* end style for history modal */

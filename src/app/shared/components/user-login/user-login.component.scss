@@ -1,0 +1,64 @@
+@import 'src/app/styles/variable';
+
+.user-info {
+  img,
+  .icon-help-2 {
+    width: 27px;
+    height: 27px;
+  }
+
+  .icon-export {
+    width: 18px;
+    height: 18px;
+  }
+
+  .icon-reload {
+    width: 24px;
+    height: 22px;
+    margin: 2px;
+  }
+
+  .icon-setting-1 {
+    width: 24px;
+    height: 22px;
+  }
+
+  .icon-back {
+    width: 21px;
+    height: 18px;
+  }
+
+  .username {
+    margin-right: 8px;
+    margin-left: 24px;
+    max-width: 200px;
+  }
+
+  .back-icon-wrapper,
+  .help-icon-wrapper,
+  .reload-icon-wrapper,
+  .setting-icon-wrapper {
+    border-radius: 4px;
+
+    &:hover {
+      background-color: $gray-210;
+    }
+  }
+
+  .setting-icon-wrapper {
+    padding: 2px;
+
+    &::after {
+      display: none;
+    }
+  }
+}
+
+.dropdown-menu {
+  width: 150px;
+  transform: translate(-132px, 26px) !important;
+}
+
+.show > .dropdown-toggle {
+  background-color: white !important;
+}

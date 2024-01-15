@@ -1,0 +1,28 @@
+<div class="confirm-modal-container">
+  <div class="dialog-body align-items-start">
+    <div class="font-weight-500" *ngIf="!isCancel">
+      {{
+        'do you want to register the payment confirmation of :name?'
+          | translate: { name: patient.patient.patient_full_name }
+      }}
+    </div>
+    <div class="font-weight-500" *ngIf="isCancel">
+      {{ 'do you want to revoke the deposit of :name?' | translate: { name: patient.patient.patient_full_name } }}
+    </div>
+  </div>
+  <div ngbAutoFocus tabindex="0" class="dialog-actions no-focus">
+    <button
+      type="button"
+      class="btn btn-outline-secondary text-black-300 btn-close text-normal mr-5"
+      (click)="clickedClose()"
+    >
+      {{ 'button.Cancel' | translate }}
+    </button>
+    <button *ngIf="!isCancel" type="button" class="btn btn-primary bg-blue-500 text-normal" (click)="clickedCSubmit()">
+      {{ 'confirm record' | translate }}
+    </button>
+    <button *ngIf="isCancel" type="button" class="btn btn-danger bg-red-200 text-normal" (click)="clickedCSubmit()">
+      {{ 'revocation' | translate }}
+    </button>
+  </div>
+</div>

@@ -1,0 +1,386 @@
+<div class="latest-alert-container" *ngIf="countAlertType">
+  <div class="d-flex justify-content-between">
+    <div>
+      <img src="assets/images/ic_circle_danger_red.svg" alt="alert" class="mt--5" />
+      <span class="text-medium pl-5px text-red-100 font-weight-500">{{ 'patient detail.alert' | translate }}</span>
+    </div>
+    <button
+      type="button"
+      class="btn text-normal btn-setting"
+      *ngIf="sharedService.hospitalSetting?.hospital_setting?.hospital_setting_alert_function"
+      (click)="openAlertSetting()"
+    >
+      {{ 'setting' | translate }}
+    </button>
+  </div>
+  <div class="alert-content">
+    <div class="latest-alert" [class.en-language]="!sharedService.isJa()">
+      <div class="left" [style.height]="redVerticalBarHeight + 'px'"></div>
+      <div class="right">
+        <!--        <div class="alert-item">-->
+        <!--          <div class="alert-item-left">-->
+        <!--            <div class="latest-alert-datetime">-->
+        <!--              {{-->
+        <!--                detailAlert?.alert_new_status_updated_at-->
+        <!--                  ? (detailAlert?.alert_new_status_updated_at-->
+        <!--                    | date: (sharedService.isJa() ? 'yyyy/MM/dd HH:mm' : 'd MMM y HH:mm'))-->
+        <!--                  : '----/--/-- --:--'-->
+        <!--              }}-->
+        <!--            </div>-->
+        <!--            <div class="alert-item-content">-->
+        <!--              <div class="alert-title">-->
+        <!--                {{ 'patient.confirmation status' | translate }}-->
+        <!--              </div>-->
+
+        <!--              <div class="alert-value">-->
+        <!--                <div class="unit">-->
+        <!--                  <span *ngIf="!detailAlert?.alert_new_status"> {{ 'no alert' | translate }}</span>-->
+        <!--                  <span *ngIf="detailAlert?.alert_new_status === alertNewStatus.SEEN">-->
+        <!--                    {{ 'button.hold' | translate }}-->
+        <!--                  </span>-->
+        <!--                  <span *ngIf="detailAlert?.alert_new_status === alertNewStatus.UNSEEN">{{-->
+        <!--                    'unconfirmed' | translate-->
+        <!--                  }}</span>-->
+        <!--                </div>-->
+        <!--              </div>-->
+        <!--            </div>-->
+        <!--          </div>-->
+        <!--          <div class="alert-item-right">-->
+        <!--            <div class="has-alert bg-white"></div>-->
+        <!--          </div>-->
+        <!--        </div>-->
+        <div
+          class="alert-item"
+          *ngIf="
+            sharedService.hospitalSetting?.hospital_setting_functions?.ALERT?.WEIGHT?.hospital_setting_function_status
+          "
+        >
+          <div class="alert-item-left">
+            <div class="latest-alert-datetime">
+              {{
+                detailAlert.alert_history_weights[getIndexArray('alert_history_weights', 'weight')]
+                  ?.alert_history_weight_vital_utc_time
+                  ? (detailAlert.alert_history_weights[getIndexArray('alert_history_weights', 'weight')]
+                      ?.alert_history_weight_vital_utc_time
+                    | date: (sharedService.isJa() ? 'yyyy/MM/dd HH:mm' : 'd MMM y HH:mm'))
+                  : '----/--/-- --:--'
+              }}
+            </div>
+            <div class="alert-item-content">
+              <div class="alert-title">{{ 'weight gain' | translate }}</div>
+              <div class="alert-value">
+                <div class="value">
+                  <span
+                    *ngIf="
+                      detailAlert.alert_history_weights[getIndexArray('alert_history_weights', 'weight')]
+                        ?.alert_history_weight_ratio &&
+                      detailAlert.alert_history_weights[getIndexArray('alert_history_weights', 'weight')]
+                        ?.alert_history_weight_ratio !== '--'
+                    "
+                  >
+                    {{
+                      detailAlert.alert_history_weights[getIndexArray('alert_history_weights', 'weight')]
+                        ?.alert_history_weight_ratio > 0
+                        ? '+' +
+                          fixNumber(
+                            detailAlert.alert_history_weights[getIndexArray('alert_history_weights', 'weight')]
+                              ?.alert_history_weight_ratio
+                          )
+                        : fixNumber(
+                            detailAlert.alert_history_weights[getIndexArray('alert_history_weights', 'weight')]
+                              ?.alert_history_weight_ratio
+                          )
+                    }}</span
+                  >
+                  <span *ngIf="!detailAlert.alert_history_weights.length"> - </span>
+                  <span
+                    *ngIf="
+                      detailAlert.alert_history_weights[getIndexArray('alert_history_weights', 'weight')]
+                        ?.alert_history_weight_ratio === '--'
+                    "
+                    >--</span
+                  >
+                </div>
+                <div
+                  class="unit"
+                  [hidden]="
+                    detailAlert.alert_history_weights.length &&
+                    !detailAlert.alert_history_weights[getIndexArray('alert_history_weights', 'weight')]
+                      ?.alert_history_weight_ratio
+                  "
+                >
+                  kg /
+                  {{
+                    detailAlert.alert_history_weights[getIndexArray('alert_history_weights', 'weight')]
+                      ?.alert_history_weight_days | dash
+                  }}
+                  <span [class.pl-3px]="!sharedService.isJa()" class="text-lowercase">
+                    {{
+                      getPluralNoun(
+                        'day',
+                        'days',
+                        detailAlert.alert_history_weights[getIndexArray('alert_history_weights', 'weight')]
+                          ?.alert_history_weight_days,
+                        'days'
+                      )
+                    }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="alert-item-right">
+            <div
+              [class.bg-white]="
+                detailAlert.alert_history_weights.length === 0 ||
+                (detailAlert.alert_history_weights.length &&
+                  detailAlert.alert_history_weights[getIndexArray('alert_history_weights', 'weight')]
+                    ?.alert_new_status === alertNewStatus.SEEN)
+              "
+              class="has-alert"
+            ></div>
+          </div>
+        </div>
+        <div
+          class="alert-item"
+          *ngIf="sharedService.hospitalSetting?.hospital_setting_functions?.ALERT?.BP?.hospital_setting_function_status"
+        >
+          <div class="alert-item-left">
+            <div class="latest-alert-datetime">
+              {{
+                detailAlert.alert_history_bps[getIndexArray('alert_history_bps', 'bp')]?.alert_history_bp_vital_utc_time
+                  ? (detailAlert.alert_history_bps[getIndexArray('alert_history_bps', 'bp')]
+                      ?.alert_history_bp_vital_utc_time | date: (sharedService.isJa() ? 'yyyy/MM/dd' : 'd MMM y'))
+                  : '----/--/--'
+              }}
+            </div>
+            <div class="alert-item-content">
+              <div class="alert-title">{{ 'abnormal blood pressure' | translate }}</div>
+              <div class="alert-value">
+                <div class="value">
+                  {{
+                    detailAlert.alert_history_bps[getIndexArray('alert_history_bps', 'bp')]?.alert_history_bp_sys
+                      | dash
+                  }}/{{
+                    detailAlert.alert_history_bps[getIndexArray('alert_history_bps', 'bp')]?.alert_history_bp_dia | dash
+                  }}
+                </div>
+                <div class="unit">mmHg</div>
+              </div>
+            </div>
+          </div>
+          <div class="alert-item-right">
+            <div
+              [class.bg-white]="
+                detailAlert.alert_history_bps.length === 0 ||
+                (detailAlert.alert_history_bps.length &&
+                  detailAlert.alert_history_bps[getIndexArray('alert_history_bps', 'bp')]?.alert_new_status ===
+                    alertNewStatus.SEEN)
+              "
+              class="has-alert"
+            ></div>
+          </div>
+        </div>
+        <div
+          class="alert-item"
+          *ngIf="sharedService.hospitalSetting?.hospital_setting_functions?.ALERT?.AF?.hospital_setting_function_status"
+        >
+          <div class="alert-item-left">
+            <div class="latest-alert-datetime">
+              {{
+                detailAlert.alert_history_afs[getIndexArray('alert_history_afs', 'af')]?.alert_history_af_vital_utc_time
+                  ? (detailAlert.alert_history_afs[getIndexArray('alert_history_afs', 'af')]
+                      ?.alert_history_af_vital_utc_time
+                    | date: (sharedService.isJa() ? 'yyyy/MM/dd HH:mm' : 'd MMM y HH:mm'))
+                  : '----/--/-- --:--'
+              }}
+            </div>
+            <div class="alert-item-content">
+              <div class="alert-title">{{ 'AF detection' | translate }}</div>
+              <div class="alert-value">
+                <div class="value">
+                  <span>
+                    {{
+                      detailAlert.alert_history_afs[getIndexArray('alert_history_afs', 'af')]?.alert_history_af_times
+                        | dash
+                    }}
+                  </span>
+                </div>
+                <div class="unit text-lowercase">
+                  <span
+                    *ngIf="
+                      detailAlert.alert_history_afs[getIndexArray('alert_history_afs', 'af')]?.alert_history_af_type ===
+                      alertType.TYPE1
+                    "
+                  >
+                    {{ 'time detection' | translate }} /
+                    {{
+                      detailAlert.alert_history_afs[getIndexArray('alert_history_afs', 'af')]?.alert_history_af_days
+                        | dash
+                    }}
+                    <span>
+                      {{
+                        getPluralNoun(
+                          'day',
+                          'days',
+                          detailAlert.alert_history_afs[getIndexArray('alert_history_afs', 'af')]
+                            ?.alert_history_af_days,
+                          'Day'
+                        )
+                      }}
+                    </span>
+                  </span>
+                  <span
+                    *ngIf="
+                      detailAlert.alert_history_afs[getIndexArray('alert_history_afs', 'af')]?.alert_history_af_type ===
+                      alertType.TYPE2
+                    "
+                    >{{ 'continuous detection' | translate }}</span
+                  >
+                  <span
+                    *ngIf="
+                      !detailAlert.alert_history_afs[getIndexArray('alert_history_afs', 'af')]
+                        ?.alert_history_af_times &&
+                      !detailAlert.alert_history_afs[getIndexArray('alert_history_afs', 'af')]?.alert_history_af_days
+                    "
+                  >
+                    {{ 'time detection' | translate }} / - {{ 'Day' | translate }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="alert-item-right">
+            <div
+              [class.bg-white]="
+                detailAlert.alert_history_afs.length === 0 ||
+                (detailAlert.alert_history_afs.length &&
+                  detailAlert.alert_history_afs[getIndexArray('alert_history_afs', 'af')]?.alert_new_status ===
+                    alertNewStatus.SEEN)
+              "
+              class="has-alert"
+            ></div>
+          </div>
+        </div>
+        <div
+          class="alert-item"
+          *ngIf="
+            sharedService.hospitalSetting?.hospital_setting_functions?.ALERT?.IHB?.hospital_setting_function_status
+          "
+        >
+          <div class="alert-item-left">
+            <div class="latest-alert-datetime">
+              {{
+                detailAlert.alert_history_ihbs[getIndexArray('alert_history_ihbs', 'ihb')]
+                  ?.alert_history_ihb_vital_utc_time
+                  ? (detailAlert.alert_history_ihbs[getIndexArray('alert_history_ihbs', 'ihb')]
+                      ?.alert_history_ihb_vital_utc_time
+                    | date: (sharedService.isJa() ? 'yyyy/MM/dd HH:mm' : 'd MMM y HH:mm'))
+                  : '----/--/-- --:--'
+              }}
+            </div>
+            <div class="alert-item-content">
+              <div class="alert-title">{{ 'irregular pulse wave' | translate }}</div>
+              <div class="alert-value">
+                <div class="value">
+                  <span>
+                    {{
+                      detailAlert.alert_history_ihbs[getIndexArray('alert_history_ihbs', 'ihb')]
+                        ?.alert_history_ihb_times | dash
+                    }}
+                  </span>
+                </div>
+                <div class="unit text-lowercase">
+                  <span
+                    *ngIf="
+                      detailAlert.alert_history_ihbs[getIndexArray('alert_history_ihbs', 'ihb')]
+                        ?.alert_history_ihb_type === alertType.TYPE1
+                    "
+                  >
+                    {{ 'time detection' | translate }} /
+                    {{
+                      detailAlert.alert_history_ihbs[getIndexArray('alert_history_ihbs', 'ihb')]?.alert_history_ihb_days
+                    }}
+                    <span>
+                      {{
+                        getPluralNoun(
+                          'day',
+                          'days',
+                          detailAlert.alert_history_ihbs[getIndexArray('alert_history_ihbs', 'ihb')]
+                            ?.alert_history_ihb_days,
+                          'Day'
+                        ) | translate
+                      }}
+                    </span>
+                  </span>
+                  <span
+                    *ngIf="
+                      detailAlert.alert_history_ihbs[getIndexArray('alert_history_ihbs', 'ihb')]
+                        ?.alert_history_ihb_type === alertType.TYPE2
+                    "
+                    >{{ 'continuous detection' | translate }}</span
+                  >
+                  <span
+                    *ngIf="
+                      !detailAlert.alert_history_ihbs[getIndexArray('alert_history_ihbs', 'ihb')]
+                        ?.alert_history_ihb_times &&
+                      !detailAlert.alert_history_ihbs[getIndexArray('alert_history_ihbs', 'ihb')]
+                        ?.alert_history_ihb_days
+                    "
+                  >
+                    {{ 'time detection' | translate }} / - {{ 'Day' | translate }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="alert-item-right">
+            <div
+              [class.bg-white]="
+                detailAlert.alert_history_ihbs.length === 0 ||
+                (detailAlert.alert_history_ihbs.length &&
+                  detailAlert.alert_history_ihbs[getIndexArray('alert_history_ihbs', 'ihb')]?.alert_new_status ===
+                    alertNewStatus.SEEN)
+              "
+              class="has-alert"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--    <div-->
+    <!--      class="detail text-right detail-latest-alert"-->
+    <!--      (click)="openLatestAlertDetail()"-->
+    <!--      [class.disabled]="disableDetailButton()"-->
+    <!--    >-->
+    <!--      {{ 'detail' | translate }}>-->
+    <!--    </div>-->
+    <!--    <div class="line"></div>-->
+    <div class="alert-confirmation-history">
+      <!--      <div class="title">{{ 'alert confirmation history' | translate }}</div>-->
+      <!--      <div *ngIf="listAlertCancel?.data && listAlertCancel?.data.length > 0">-->
+      <!--        <div class="date-confirmed-item text-small" *ngFor="let item of listAlertCancel.data">-->
+      <!--          <div class="date text-gray-800">-->
+      <!--            {{ item.alert_history_utc_time | date: (sharedService.isJa() ? 'yyyy/MM/dd HH:mm' : 'd MMM y HH:mm') }}-->
+      <!--          </div>-->
+      <!--          <div class="detail" (click)="openAlertDetail(item)">{{ 'detail' | translate }}></div>-->
+      <!--        </div>-->
+      <!--      </div>-->
+
+      <!--      <div *ngIf="listAlertCancel?.data.length === 0">-->
+      <!--        <div class="date text-gray-800 text-center">{{ 'there is no data' | translate }}</div>-->
+      <!--      </div>-->
+      <!--      <div class="pagination" *ngIf="listAlertCancel.total > listAlertCancel.data.length">-->
+      <!--        <app-paginator-->
+      <!--          class="paginator ml-auto my-auto"-->
+      <!--          [page]="bodyRequest.page"-->
+      <!--          [collectionSize]="listAlertCancel.total"-->
+      <!--          (pageChange)="pageChange($event)"-->
+      <!--          [pageSize]="listAlertCancel.per_page"-->
+      <!--          [hasCollectionSize]="false"-->
+      <!--          [className]="'pagination'"-->
+      <!--        ></app-paginator>-->
+      <!--      </div>-->
+    </div>
+  </div>
+</div>

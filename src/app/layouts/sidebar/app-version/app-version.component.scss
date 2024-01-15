@@ -1,0 +1,21 @@
+@import 'src/app/styles/variable';
+
+.app-version-container {
+  color: $black-300;
+
+  .modal-body {
+    border-bottom: 1px solid $gray-100;
+  }
+
+  .version {
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+
+  .modal-footer {
+    border-top: none;
+    cursor: pointer;
+    justify-content: center;
+    height: 50px;
+  }
+}

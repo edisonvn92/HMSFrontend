@@ -1,0 +1,8 @@
+<div class="registration-info-content">
+  <app-registration-form [hidden]="isConfirm" (confirmClicked)="onConfirmClicked($event)"></app-registration-form>
+  <app-registration-confirm
+    [patient]="patient"
+    [hidden]="!isConfirm"
+    (backClicked)="onConfirmClicked()"
+  ></app-registration-confirm>
+</div>

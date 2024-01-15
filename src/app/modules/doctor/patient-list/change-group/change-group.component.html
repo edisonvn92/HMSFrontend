@@ -1,0 +1,26 @@
+<div class="change-group-container">
+  <div class="modal-header">
+    <div class="modal-title text-medium text-left" id="modal-basic-title">{{ 'target group' | translate }}</div>
+    <button type="button" class="close none-outline btn-close" aria-label="Close" (click)="clickedClose()">
+      <div class="icon-close btn-icon-close"></div>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="change-group-content text-normal">
+      <div
+        class="group-item break-space"
+        *ngFor="let item of groupList; index as i"
+        [class.active]="item.group_id === selectedGroup"
+        [class.last-item]="i === groupList.length - 1"
+        (click)="selectGroup(item.group_id)"
+      >
+        {{ item?.group_name }}
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary btn-close text-normal" (click)="clickedClose()">
+      {{ 'button.Close' | translate }}
+    </button>
+  </div>
+</div>

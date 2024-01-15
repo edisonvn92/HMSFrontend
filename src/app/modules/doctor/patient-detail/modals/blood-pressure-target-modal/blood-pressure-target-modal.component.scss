@@ -1,0 +1,57 @@
+@import 'src/app/styles/variable';
+
+.modal-header {
+  justify-content: center;
+  border-bottom: 1px solid $gray-100;
+}
+
+.modal-body {
+  padding-top: 0;
+  padding-bottom: 0;
+
+  .w-190 {
+    width: 190px;
+  }
+  .border-bot {
+    border-bottom: 1px solid $gray-100;
+  }
+
+  div.input-group {
+    display: flex;
+    padding-top: 16px;
+    padding-bottom: 16px;
+
+    input {
+      width: 90px;
+      height: 32px;
+      margin-right: 16px;
+      border-radius: 0;
+      padding-right: 0;
+      font-size: 14px;
+
+      &:focus {
+        box-shadow: none;
+      }
+    }
+
+    .mt-3px {
+      margin-top: 3px;
+    }
+  }
+}
+
+.modal-footer {
+  justify-content: center;
+  padding: 0;
+  border-top: 1px solid $gray-100;
+  button {
+    height: 50px;
+    width: 50%;
+    margin: 0;
+    border-radius: 0;
+  }
+}
+
+.left-border {
+  border-left: 1px solid $gray-100;
+}

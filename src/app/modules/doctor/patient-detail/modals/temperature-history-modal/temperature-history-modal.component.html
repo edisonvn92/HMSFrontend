@@ -1,0 +1,59 @@
+<div class="history-modal">
+  <div class="modal-body">
+    <div>
+      <div class="title">{{ 'body temperature history' | translate }}</div>
+      <div class="list" id="history-content" [class.en-language]="!sharedService.isJa()">
+        <div class="header">
+          <div class="header-content">
+            <div class="date" [ngClass]="sharedService.isJa() ? ' pl-45' : ' text-pre-line text-center'">
+              {{ 'measurement date \n and time' | translate }}
+            </div>
+            <div class="temperature text-center">{{ 'body temperature (°C)' | translate }}</div>
+          </div>
+        </div>
+        <div
+          *ngIf="temperatureHistory && temperatureHistory.data && temperatureHistory.data.length > 0"
+          class="history-content"
+        >
+          <div *ngFor="let item of temperatureHistory.data">
+            <div class="month" *ngIf="item.is_start_month">
+              {{ item.vital_temperature_utc_time | date: (sharedService.isJa() ? 'yyyy年MM月' : 'MMM y') }}
+            </div>
+            <div class="d-flex align-items-center content text-normal">
+              <div class="date text-left datetime">
+                <div class="date-month">
+                  {{ item.vital_temperature_utc_time | date: (sharedService.isJa() ? 'MM月dd日' : 'd MMM') }}
+                </div>
+                <div class="weekday" [hidden]="!item.vital_temperature_utc_time">
+                  ({{ getWeekday(item.vital_temperature_utc_time) | translate }})
+                </div>
+                <div>{{ item.vital_temperature_utc_time | date: 'HH:mm' }}</div>
+              </div>
+              <div class="temperature text-center">{{ fixNumber(item.vital_temperature_body) | dash }}</div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="temperatureHistory.data.length === 0" class="no-data">{{ 'there is no data' | translate }}</div>
+      </div>
+      <div
+        class="pagination-history"
+        *ngIf="temperatureHistory && temperatureHistory.total > temperatureHistory.data.length"
+      >
+        <app-paginator
+          class="paginator ml-auto my-auto"
+          [page]="bodyRequest.page"
+          [collectionSize]="temperatureHistory.total"
+          (pageChange)="pageChange($event)"
+          [pageSize]="temperatureHistory.per_page"
+          [hasCollectionSize]="false"
+          [className]="'history-pagination'"
+        ></app-paginator>
+      </div>
+    </div>
+  </div>
+  <div ngbAutoFocus tabindex="0" class="modal-footer no-focus" (click)="clickedClose()">
+    <button type="button" class="btn">
+      {{ 'button.Close' | translate }}
+    </button>
+  </div>
+</div>

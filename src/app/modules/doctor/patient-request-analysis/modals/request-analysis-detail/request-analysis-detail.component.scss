@@ -1,0 +1,183 @@
+@import 'src/app/styles/variable';
+
+:host {
+  color: $black-300;
+
+  ::ng-deep {
+    .tooltip-nyha {
+      opacity: 1;
+
+      .arrow:before {
+        border-bottom-color: snow !important;
+        border-left-color: $white;
+      }
+
+      .tooltip-inner {
+        background-color: $white;
+        width: 375px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+        font-size: 14px;
+
+        .header-tooltip-content {
+          border-bottom: 1px solid $gray-310;
+          max-height: 380px;
+          overflow-x: auto;
+          overflow-y: auto;
+
+          .header-tooltip {
+            min-width: 250px;
+            display: flex;
+            align-items: center;
+            border-top: 1px solid $gray-310;
+
+            &.none-symptom {
+              border-top: 1px dashed $gray-720;
+              margin-top: 16px;
+            }
+
+            &.other-symptom {
+              border-bottom: 1px solid $gray-310;
+            }
+
+            .tooltip-icon {
+              width: 15%;
+            }
+
+            .tooltip-title {
+              width: 85%;
+              color: $black-300;
+            }
+
+            .custom-title {
+              width: 85%;
+              padding: 10px 0;
+              white-space: pre-wrap;
+              color: $black-300;
+            }
+          }
+        }
+
+        .text-title {
+          font-size: 14px;
+          color: $black-300;
+        }
+      }
+    }
+
+    .tooltip-custom-memo {
+      .tooltip-inner {
+        max-width: 320px;
+        max-height: 250px;
+        overflow-y: auto;
+        width: auto;
+      }
+    }
+  }
+}
+
+.history-modal {
+  .list {
+    max-height: 542px;
+
+    .record-time {
+      width: 18%;
+      min-width: 130px;
+    }
+
+    .analysis-result {
+      width: 15%;
+      min-width: 70px;
+    }
+
+    .heart-rate {
+      width: 10%;
+      min-width: 70px;
+    }
+
+    .af {
+      width: 10%;
+      min-width: 70px;
+
+      img {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    .subjective-symptoms {
+      width: 13%;
+      min-width: 70px;
+    }
+
+    .exercise-intensity {
+      width: 18%;
+      min-width: 70px;
+    }
+
+    .memo {
+      width: 10%;
+      min-width: 70px;
+    }
+
+    .file {
+      width: 6%;
+      display: flex;
+      justify-content: center;
+
+      .disable {
+        color: $gray-600 !important;
+      }
+    }
+
+    .header {
+      border-top: unset;
+      padding: 10px 0 10px 0;
+      border: unset;
+
+      .header-content {
+        margin: auto 32px;
+        padding-right: 8px;
+      }
+    }
+
+    .header-title {
+      border-top: unset;
+      padding: 0 0 16px 0;
+      border-bottom: 1px solid $gray-310;
+
+      .header-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: auto 32px;
+        padding-top: 1rem;
+
+        .main-title {
+          font-size: 16px;
+          font-weight: 400;
+        }
+
+        .patient {
+          max-width: 590px;
+        }
+      }
+    }
+
+    .request-content {
+      margin: auto 32px;
+      border-bottom: 1px solid $gray-310;
+      overflow-y: auto;
+      max-height: 415px;
+      padding-right: 8px;
+
+      .column-history {
+        height: 40px;
+        border-top: 1px solid $gray-310;
+      }
+    }
+  }
+
+  .custom-modal-body {
+    padding: 0 0 1rem 0;
+  }
+}

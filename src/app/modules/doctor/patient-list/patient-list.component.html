@@ -1,0 +1,1064 @@
+<div class="doctor-content-header d-flex justify-content-between align-items-center">
+  <div class="d-flex align-items-center">
+    <form class="input-group search-group" (ngSubmit)="searchPatient()">
+      <input
+        type="text"
+        class="form-control text-normal bg-white"
+        placeholder="{{ 'ID, name search' | translate }}"
+        [(ngModel)]="textSearch"
+        name="textSearch"
+        [disabled]="isSearching"
+      />
+      <div class="input-group-append cursor-pointer bg-gray-170" (click)="searchPatient()">
+        <img class="input-group-text" src="./assets/images/icon_search.svg" alt="user" />
+      </div>
+    </form>
+    <div class="pr-10">
+      <img
+        class="cursor-pointer group-user"
+        src="./assets/images/icon_group_user.svg"
+        alt="group"
+        (click)="clickGroupName()"
+      />
+    </div>
+    <div
+      [translate]="'there are :param patients'"
+      [translateParams]="{ param: patientList?.total }"
+      class="text-gray-600 mt-10"
+    ></div>
+  </div>
+  <app-user-login [arrIcon]="['export']" [groupId]="selectedGroupId" [latestDataSync]="latestDataSync"></app-user-login>
+</div>
+
+<div class="patient-content">
+  <table class="table table-custom" id="table-content" [class.table-en]="!sharedService.isJa()">
+    <thead>
+      <tr>
+        <ng-container *ngFor="let dashboard of hospitalSetting.hospital_dashboards">
+          <th scope="col" class="patient-id" *ngIf="dashboard.components.component_code === componentCode.PATIENT_CODE">
+            <app-label-column-table
+              [active]="tableFields[componentCode.PATIENT_CODE].isSort"
+              [sortType]="tableFields[componentCode.PATIENT_CODE].sortType"
+              [label]="'ID'"
+              [labelId]="componentCode.PATIENT_CODE"
+              [classSort]="'ml-10'"
+              (sortEvent)="sortBy($event)"
+            >
+            </app-label-column-table>
+          </th>
+          <th scope="col" class="patient-name" *ngIf="dashboard.components.component_code === componentCode.FULL_NAME">
+            <app-label-column-table
+              [active]="tableFields[componentCode.FULL_NAME].isSort"
+              [sortType]="tableFields[componentCode.FULL_NAME].sortType"
+              [label]="'patient.name'"
+              [labelId]="componentCode.FULL_NAME"
+              [classSort]="'ml-10'"
+              (sortEvent)="sortBy($event)"
+            >
+            </app-label-column-table>
+          </th>
+          <th scope="col" class="sex" *ngIf="dashboard.components.component_code === componentCode.GENDER">
+            <app-label-column-table
+              [active]="tableFields[componentCode.GENDER].isSort"
+              [sortType]="tableFields[componentCode.GENDER].sortType"
+              [label]="'patient.sex'"
+              [labelId]="componentCode.GENDER"
+              [textCenter]="true"
+              [classSort]="'ml-5'"
+              (sortEvent)="sortBy($event)"
+            >
+            </app-label-column-table>
+          </th>
+          <th
+            scope="col"
+            class="text-center blood-pressure-7days"
+            *ngIf="dashboard.components.component_code === componentCode.BLOOD_PRESSURE_7_DAYS"
+          >
+            <div
+              tooltipClass="tooltip-custom text-pre"
+              [placement]="getTooltipPlacement(componentCode.BLOOD_PRESSURE_7_DAYS)"
+              ngbTooltip="{{ 'tooltip.blood pressure (average)' | translate }}"
+            >
+              <app-label-column-table
+                [active]="tableFields[componentCode.BLOOD_PRESSURE_7_DAYS].isSort"
+                [sortType]="tableFields[componentCode.BLOOD_PRESSURE_7_DAYS].sortType"
+                [label]="'patient.blood pressure'"
+                [labelId]="componentCode.BLOOD_PRESSURE_7_DAYS"
+                [textCenter]="true"
+                [classSort]="'ml-10'"
+                [unit]="'mmHg'"
+                (sortEvent)="sortBy($event)"
+              ></app-label-column-table>
+            </div>
+          </th>
+          <th
+            scope="col"
+            class="morning-blood-pressure"
+            *ngIf="dashboard.components.component_code === componentCode.MORNING_BLOOD_PRESSURE_7_DAYS"
+          >
+            <div
+              tooltipClass="tooltip-custom text-pre"
+              [placement]="getTooltipPlacement(componentCode.MORNING_BLOOD_PRESSURE_7_DAYS)"
+              ngbTooltip="{{ 'tooltip.morning blood pressure (average)' | translate }}"
+            >
+              <app-label-column-table
+                [active]="tableFields[componentCode.MORNING_BLOOD_PRESSURE_7_DAYS].isSort"
+                [sortType]="tableFields[componentCode.MORNING_BLOOD_PRESSURE_7_DAYS].sortType"
+                [label]="'patient.morning blood pressure'"
+                [labelId]="componentCode.MORNING_BLOOD_PRESSURE_7_DAYS"
+                [textCenter]="true"
+                [classSort]="'ml-5'"
+                [unit]="'mmHg'"
+                (sortEvent)="sortBy($event)"
+              ></app-label-column-table>
+            </div>
+          </th>
+          <th
+            scope="col"
+            class="evening-blood-pressure"
+            *ngIf="dashboard.components.component_code === componentCode.EVENING_PRESSURE_7_DAYS"
+          >
+            <div
+              tooltipClass="tooltip-custom text-pre"
+              [placement]="getTooltipPlacement(componentCode.EVENING_PRESSURE_7_DAYS)"
+              ngbTooltip="{{ 'tooltip.evening blood pressure (average)' | translate }}"
+            >
+              <app-label-column-table
+                [active]="tableFields[componentCode.EVENING_PRESSURE_7_DAYS].isSort"
+                [sortType]="tableFields[componentCode.EVENING_PRESSURE_7_DAYS].sortType"
+                [label]="'patient.evening blood pressure'"
+                [labelId]="componentCode.EVENING_PRESSURE_7_DAYS"
+                [textCenter]="true"
+                [classSort]="'ml-5'"
+                [unit]="'mmHg'"
+                (sortEvent)="sortBy($event)"
+              ></app-label-column-table>
+            </div>
+          </th>
+          <th
+            scope="col"
+            class="text-center pulse-7days"
+            *ngIf="dashboard.components.component_code === componentCode.PULSE_7_DAYS"
+          >
+            <div
+              tooltipClass="tooltip-custom text-pre"
+              [placement]="getTooltipPlacement(componentCode.PULSE_7_DAYS)"
+              ngbTooltip="{{ 'tooltip.pulse (average)' | translate }}"
+            >
+              <app-label-column-table
+                [active]="tableFields[componentCode.PULSE_7_DAYS].isSort"
+                [sortType]="tableFields[componentCode.PULSE_7_DAYS].sortType"
+                [label]="'patient.pulse'"
+                [labelId]="componentCode.PULSE_7_DAYS"
+                [textCenter]="true"
+                [classSort]="'ml-5'"
+                (sortEvent)="sortBy($event)"
+              ></app-label-column-table>
+            </div>
+          </th>
+          <th
+            scope="col"
+            class="text-center ihb"
+            *ngIf="dashboard.components.component_code === componentCode.IRREGULAR_PULSE_WAVE_7_DAYS"
+          >
+            <div
+              tooltipClass="tooltip-custom text-pre"
+              [placement]="getTooltipPlacement(componentCode.IRREGULAR_PULSE_WAVE_7_DAYS)"
+              ngbTooltip="{{ 'tooltip.irregular pulse wave' | translate }}"
+            >
+              <app-label-column-table
+                [active]="tableFields[componentCode.IRREGULAR_PULSE_WAVE_7_DAYS].isSort"
+                [sortType]="tableFields[componentCode.IRREGULAR_PULSE_WAVE_7_DAYS].sortType"
+                [label]="'patient.irregular pulse wave'"
+                [labelId]="componentCode.IRREGULAR_PULSE_WAVE_7_DAYS"
+                [textCenter]="true"
+                [classSort]="'ml-10'"
+                [unit]="'frequency'"
+                (sortEvent)="sortBy($event)"
+              ></app-label-column-table>
+            </div>
+          </th>
+          <th
+            scope="col"
+            class="text-center measurement-rate"
+            *ngIf="dashboard.components.component_code === componentCode.NUMBER_OF_MEASUREMENT"
+          >
+            <div
+              tooltipClass="tooltip-custom text-pre"
+              [placement]="getTooltipPlacement(componentCode.NUMBER_OF_MEASUREMENT)"
+              ngbTooltip="{{ 'tooltip.how many days of blood pressure measurement' | translate }}"
+            >
+              <app-label-column-table
+                [active]="tableFields[componentCode.NUMBER_OF_MEASUREMENT].isSort"
+                [sortType]="tableFields[componentCode.NUMBER_OF_MEASUREMENT].sortType"
+                [label]="'patient.measurement rate'"
+                [labelId]="componentCode.NUMBER_OF_MEASUREMENT"
+                [textCenter]="true"
+                [classSort]="'ml-10'"
+                [unit]="'patient.measurement rate unit'"
+                (sortEvent)="sortBy($event)"
+              ></app-label-column-table>
+            </div>
+          </th>
+          <th
+            scope="col"
+            class="text-center weight-7days"
+            *ngIf="dashboard.components.component_code === componentCode.WEIGHT_AVERAGE_7_DAYS"
+          >
+            <div
+              tooltipClass="tooltip-custom text-pre"
+              [placement]="getTooltipPlacement(componentCode.WEIGHT_AVERAGE_7_DAYS)"
+              ngbTooltip="{{ 'tooltip.weight (average)' | translate }}"
+            >
+              <app-label-column-table
+                [active]="tableFields[componentCode.WEIGHT_AVERAGE_7_DAYS].isSort"
+                [sortType]="tableFields[componentCode.WEIGHT_AVERAGE_7_DAYS].sortType"
+                [label]="'patient.weight 7days'"
+                [labelId]="componentCode.WEIGHT_AVERAGE_7_DAYS"
+                [textCenter]="true"
+                [classSort]="'ml-10'"
+                (sortEvent)="sortBy($event)"
+              ></app-label-column-table>
+            </div>
+          </th>
+          <th
+            scope="col"
+            class="text-center weight-ratio"
+            *ngIf="dashboard.components.component_code === componentCode.WEIGHT_RATIO"
+          >
+            <div
+              tooltipClass="tooltip-custom text-pre"
+              [placement]="getTooltipPlacement(componentCode.WEIGHT_RATIO)"
+              ngbTooltip="{{ 'tooltip.weight Weight gain / loss' | translate }}"
+            >
+              <app-label-column-table
+                [active]="tableFields[componentCode.WEIGHT_RATIO].isSort"
+                [sortType]="tableFields[componentCode.WEIGHT_RATIO].sortType"
+                [label]="'patient.weight ratio'"
+                [labelId]="componentCode.WEIGHT_RATIO"
+                [textCenter]="true"
+                [classSort]="'ml-10'"
+                (sortEvent)="sortBy($event)"
+              ></app-label-column-table>
+            </div>
+          </th>
+          <th
+            scope="col"
+            class="text-center has-memo"
+            *ngIf="dashboard.components.component_code === componentCode.MEMO"
+          >
+            <div
+              tooltipClass="tooltip-custom text-pre"
+              [placement]="getTooltipPlacement(componentCode.MEMO)"
+              ngbTooltip="{{ 'tooltip.do you have a blood pressure notebook memo?' | translate }}"
+            >
+              <app-label-column-table
+                [active]="tableFields[componentCode.MEMO].isSort"
+                [sortType]="tableFields[componentCode.MEMO].sortType"
+                [label]="'patient.has memo'"
+                [labelId]="componentCode.MEMO"
+                [textCenter]="true"
+                [classSort]="'ml-10'"
+                (sortEvent)="sortBy($event)"
+              ></app-label-column-table>
+            </div>
+          </th>
+          <th
+            scope="col"
+            class="text-center blood-pressure-target"
+            *ngIf="dashboard.components.component_code === componentCode.BLOOD_PRESSURE_TARGET"
+          >
+            <div
+              tooltipClass="tooltip-custom text-pre"
+              [placement]="getTooltipPlacement(componentCode.BLOOD_PRESSURE_TARGET)"
+              ngbTooltip="{{ 'tooltip.have been set' | translate }}"
+            >
+              <app-label-column-table
+                [active]="tableFields[componentCode.BLOOD_PRESSURE_TARGET].isSort"
+                [sortType]="tableFields[componentCode.BLOOD_PRESSURE_TARGET].sortType"
+                [label]="'patient.blood pressure target'"
+                [labelId]="componentCode.BLOOD_PRESSURE_TARGET"
+                [textCenter]="true"
+                [classSort]="'ml-10'"
+                (sortEvent)="sortBy($event)"
+              ></app-label-column-table>
+            </div>
+          </th>
+          <th
+            scope="col"
+            class="text-center risk-score"
+            *ngIf="dashboard.components.component_code === componentCode.BLOOD_PRESSURE_RISK"
+          >
+            <div
+              tooltipClass="tooltip-custom text-pre"
+              [placement]="getTooltipPlacement(componentCode.BLOOD_PRESSURE_RISK)"
+              ngbTooltip="{{ 'tooltip.from the guidelines' | translate }}"
+            >
+              <app-label-column-table
+                [active]="tableFields[componentCode.BLOOD_PRESSURE_RISK].isSort"
+                [sortType]="tableFields[componentCode.BLOOD_PRESSURE_RISK].sortType"
+                [label]="'patient.risk score'"
+                [labelId]="componentCode.BLOOD_PRESSURE_RISK"
+                [textCenter]="true"
+                [classSort]="'ml-5'"
+                (sortEvent)="sortBy($event)"
+              ></app-label-column-table>
+            </div>
+          </th>
+          <th
+            scope="col"
+            class="last-measurement"
+            *ngIf="dashboard.components.component_code === componentCode.LAST_MEDICAL_TREATMENT_DAY"
+          >
+            <div
+              tooltipClass="tooltip-custom text-pre"
+              [placement]="getTooltipPlacement(componentCode.LAST_MEDICAL_TREATMENT_DAY)"
+              ngbTooltip="{{ 'tooltip.last medical examination record date' | translate }}"
+            >
+              <app-label-column-table
+                [active]="tableFields[componentCode.LAST_MEDICAL_TREATMENT_DAY].isSort"
+                [sortType]="tableFields[componentCode.LAST_MEDICAL_TREATMENT_DAY].sortType"
+                [label]="'patient.last treatment day'"
+                [labelId]="componentCode.LAST_MEDICAL_TREATMENT_DAY"
+                [textCenter]="true"
+                [classSort]="'ml-5'"
+                (sortEvent)="sortBy($event)"
+              ></app-label-column-table>
+            </div>
+          </th>
+          <th
+            scope="col"
+            class="vital-bp-date"
+            *ngIf="dashboard.components.component_code === componentCode.LAST_BLOOD_PRESSURE_MEASUREMENT"
+          >
+            <div>
+              <app-label-column-table
+                [active]="tableFields[componentCode.LAST_BLOOD_PRESSURE_MEASUREMENT].isSort"
+                [sortType]="tableFields[componentCode.LAST_BLOOD_PRESSURE_MEASUREMENT].sortType"
+                [label]="'patient.final blood pressure measurement'"
+                [labelId]="componentCode.LAST_BLOOD_PRESSURE_MEASUREMENT"
+                [textCenter]="true"
+                [classSort]="'ml-5'"
+                (sortEvent)="sortBy($event)"
+              ></app-label-column-table>
+            </div>
+          </th>
+          <th
+            scope="col"
+            class="confirm-status-ldate"
+            *ngIf="dashboard.components.component_code === componentCode.CONFIRM_STATUS_SELF"
+          >
+            <div
+              tooltipClass="tooltip-custom text-pre"
+              [placement]="getTooltipPlacement(componentCode.CONFIRM_STATUS_SELF)"
+              ngbTooltip="{{ 'tooltip.registered by myself' | translate }}"
+            >
+              <app-label-column-table
+                [active]="tableFields[componentCode.CONFIRM_STATUS_SELF].isSort"
+                [sortType]="tableFields[componentCode.CONFIRM_STATUS_SELF].sortType"
+                [label]="'patient.confirmation status (self)'"
+                [labelId]="componentCode.CONFIRM_STATUS_SELF"
+                [classSort]="'ml-0'"
+                (sortEvent)="sortBy($event)"
+              ></app-label-column-table>
+            </div>
+          </th>
+          <th
+            scope="col"
+            class="text-center confirm-status-other"
+            *ngIf="dashboard.components.component_code === componentCode.CONFIRM_STATUS_OTHER"
+          >
+            <div
+              tooltipClass="tooltip-custom text-pre"
+              [placement]="getTooltipPlacement(componentCode.CONFIRM_STATUS_OTHER)"
+              ngbTooltip="{{ 'tooltip.registered by someone other than yourself' | translate }}"
+            >
+              <app-label-column-table
+                [active]="tableFields[componentCode.CONFIRM_STATUS_OTHER].isSort"
+                [sortType]="tableFields[componentCode.CONFIRM_STATUS_OTHER].sortType"
+                [label]="'patient.confirmation status (other)'"
+                [labelId]="componentCode.CONFIRM_STATUS_OTHER"
+                [textCenter]="true"
+                [classSort]="'ml-0'"
+                (sortEvent)="sortBy($event)"
+              ></app-label-column-table>
+            </div>
+          </th>
+          <th scope="col" class="age" *ngIf="dashboard.components.component_code === componentCode.AGE">
+            <div>
+              <app-label-column-table
+                [active]="tableFields[componentCode.AGE].isSort"
+                [sortType]="tableFields[componentCode.AGE].sortType"
+                [label]="'patient.age'"
+                [labelId]="componentCode.AGE"
+                [textCenter]="true"
+                [classSort]="'ml-5'"
+                (sortEvent)="sortBy($event)"
+              ></app-label-column-table>
+            </div>
+          </th>
+          <th
+            scope="col"
+            class="text-center morning-pulse"
+            *ngIf="dashboard.components.component_code === componentCode.MORNING_PULSE"
+          >
+            <div
+              tooltipClass="tooltip-custom text-pre"
+              [placement]="getTooltipPlacement(componentCode.MORNING_PULSE)"
+              ngbTooltip="{{ 'tooltip.morning pulse (average)' | translate }}"
+            >
+              <app-label-column-table
+                [active]="tableFields[componentCode.MORNING_PULSE].isSort"
+                [sortType]="tableFields[componentCode.MORNING_PULSE].sortType"
+                [label]="'patient.pulse (morning)'"
+                [labelId]="componentCode.MORNING_PULSE"
+                [textCenter]="true"
+                [classSort]="'ml-5'"
+                [unit]="'bpm'"
+                (sortEvent)="sortBy($event)"
+              ></app-label-column-table>
+            </div>
+          </th>
+          <th
+            scope="col"
+            class="text-center evening-pulse"
+            *ngIf="dashboard.components.component_code === componentCode.EVENING_PULSE"
+          >
+            <div
+              tooltipClass="tooltip-custom text-pre"
+              [placement]="getTooltipPlacement(componentCode.EVENING_PULSE)"
+              ngbTooltip="{{ 'tooltip.evening pulse (average)' | translate }}"
+            >
+              <app-label-column-table
+                [active]="tableFields[componentCode.EVENING_PULSE].isSort"
+                [sortType]="tableFields[componentCode.EVENING_PULSE].sortType"
+                [label]="'patient.pulse (evening)'"
+                [labelId]="componentCode.EVENING_PULSE"
+                [textCenter]="true"
+                [classSort]="'ml-5'"
+                [unit]="'bpm'"
+                (sortEvent)="sortBy($event)"
+              ></app-label-column-table>
+            </div>
+          </th>
+          <th
+            scope="col"
+            class="morning-heart-beat"
+            *ngIf="dashboard.components.component_code === componentCode.MORNING_HEAT_RATE"
+          >
+            <div
+              tooltipClass="tooltip-custom text-pre"
+              [placement]="getTooltipPlacement(componentCode.MORNING_HEAT_RATE)"
+              ngbTooltip="{{ 'tooltip.morning heart rate (average)' | translate }}"
+            >
+              <app-label-column-table
+                [active]="tableFields[componentCode.MORNING_HEAT_RATE].isSort"
+                [sortType]="tableFields[componentCode.MORNING_HEAT_RATE].sortType"
+                [label]="'patient.heart rate (morning)'"
+                [labelId]="componentCode.MORNING_HEAT_RATE"
+                [textCenter]="true"
+                [classSort]="'ml-5'"
+                [unit]="'bpm'"
+                (sortEvent)="sortBy($event)"
+              ></app-label-column-table>
+            </div>
+          </th>
+          <th
+            scope="col"
+            class="evening-heart-beat"
+            *ngIf="dashboard.components.component_code === componentCode.EVENING_HEAT_RATE"
+          >
+            <div
+              tooltipClass="tooltip-custom text-pre"
+              [placement]="getTooltipPlacement(componentCode.EVENING_HEAT_RATE)"
+              ngbTooltip="{{ 'tooltip.evening heart rate (average)' | translate }}"
+            >
+              <app-label-column-table
+                [active]="tableFields[componentCode.EVENING_HEAT_RATE].isSort"
+                [sortType]="tableFields[componentCode.EVENING_HEAT_RATE].sortType"
+                [label]="'patient.heart rate (evening)'"
+                [labelId]="componentCode.EVENING_HEAT_RATE"
+                [textCenter]="true"
+                [classSort]="'ml-5'"
+                [unit]="'bpm'"
+                (sortEvent)="sortBy($event)"
+              ></app-label-column-table>
+            </div>
+          </th>
+          <th
+            scope="col"
+            class="heart-beat"
+            *ngIf="dashboard.components.component_code === componentCode.HEAT_RATE_AVERAGE"
+          >
+            <div
+              tooltipClass="tooltip-custom text-pre"
+              [placement]="getTooltipPlacement(componentCode.HEAT_RATE_AVERAGE)"
+              ngbTooltip="{{ 'tooltip.heart rate (average)' | translate }}"
+            >
+              <app-label-column-table
+                [active]="tableFields[componentCode.HEAT_RATE_AVERAGE].isSort"
+                [sortType]="tableFields[componentCode.HEAT_RATE_AVERAGE].sortType"
+                [label]="'patient.heart rate (average)'"
+                [labelId]="componentCode.HEAT_RATE_AVERAGE"
+                [textCenter]="true"
+                [classSort]="'ml-5'"
+                [unit]="'bpm'"
+                (sortEvent)="sortBy($event)"
+              ></app-label-column-table>
+            </div>
+          </th>
+          <th scope="col" class="af" *ngIf="dashboard.components.component_code === componentCode.AF">
+            <div
+              tooltipClass="tooltip-custom"
+              [placement]="getTooltipPlacement(componentCode.AF)"
+              ngbTooltip="{{ 'tooltip.AF detection in the latest morning' | translate }}"
+            >
+              <app-label-column-table
+                [active]="tableFields[componentCode.AF].isSort"
+                [sortType]="tableFields[componentCode.AF].sortType"
+                [label]="'AF'"
+                [labelId]="componentCode.AF"
+                [textCenter]="true"
+                [classSort]="'ml-10'"
+                (sortEvent)="sortBy($event)"
+              ></app-label-column-table>
+            </div>
+          </th>
+          <th scope="col" class="text-center nyha" *ngIf="dashboard.components.component_code === componentCode.NYHA">
+            <div
+              [tooltipClass]="'tooltip-custom tooltip-nyha' + (!sharedService.isJa() ? ' tooltip-nyha-en' : '')"
+              [ngbTooltip]="tipContentNYHA"
+              [placement]="getTooltipPlacement(componentCode.NYHA)"
+            >
+              <app-label-column-table
+                [active]="tableFields[componentCode.NYHA].isSort"
+                [sortType]="tableFields[componentCode.NYHA].sortType"
+                [label]="'patient.minimal symptom appearance'"
+                [labelId]="componentCode.NYHA"
+                [textCenter]="true"
+                (sortEvent)="sortBy($event)"
+              ></app-label-column-table>
+            </div>
+          </th>
+          <th
+            scope="col"
+            class="last-update"
+            *ngIf="dashboard.components.component_code === componentCode.LAST_UPDATED"
+          >
+            <div
+              tooltipClass="tooltip-custom text-pre"
+              [placement]="getTooltipPlacement(componentCode.LAST_UPDATED)"
+              ngbTooltip="{{ 'tooltip.patient data' | translate }}"
+            >
+              <app-label-column-table
+                [active]="tableFields[componentCode.LAST_UPDATED].isSort"
+                [sortType]="tableFields[componentCode.LAST_UPDATED].sortType"
+                [label]="'patient.last updated'"
+                [labelId]="componentCode.LAST_UPDATED"
+                [textCenter]="true"
+                [classSort]="'ml-5'"
+                (sortEvent)="sortBy($event)"
+              ></app-label-column-table>
+            </div>
+          </th>
+          <th
+            scope="col"
+            class="text-center check-alert"
+            *ngIf="dashboard.components.component_code === componentCode.HAS_ALERT"
+          >
+            <app-label-column-table
+              [active]="tableFields[componentCode.HAS_ALERT].isSort"
+              [sortType]="tableFields[componentCode.HAS_ALERT].sortType"
+              [label]="'alert within 24 hours'"
+              [labelId]="componentCode.HAS_ALERT"
+              [textCenter]="true"
+              [classSort]="'ml-10'"
+              (sortEvent)="sortBy($event)"
+            ></app-label-column-table>
+          </th>
+          <th
+            scope="col"
+            class="text-center exceeding-threshold"
+            *ngIf="dashboard.components.component_code === componentCode.EXCEEDING_THRESHOLD"
+          >
+            <app-label-column-table
+              [active]="tableFields[componentCode.EXCEEDING_THRESHOLD].isSort"
+              [sortType]="tableFields[componentCode.EXCEEDING_THRESHOLD].sortType"
+              [label]="'exceeding threshold'"
+              [labelId]="componentCode.EXCEEDING_THRESHOLD"
+              [classSort]="'ml-10'"
+              (sortEvent)="sortBy($event)"
+            >
+            </app-label-column-table>
+          </th>
+          <th
+            scope="col"
+            class="text-center medication-rate"
+            *ngIf="dashboard.components.component_code === componentCode.MEDICATION_RATE"
+          >
+            <app-label-column-table
+              [active]="tableFields[componentCode.MEDICATION_RATE].isSort"
+              [sortType]="tableFields[componentCode.MEDICATION_RATE].sortType"
+              [label]="'medication rate'"
+              [labelId]="componentCode.MEDICATION_RATE"
+              [classSort]="'ml-10'"
+              (sortEvent)="sortBy($event)"
+            >
+            </app-label-column-table>
+          </th>
+          <th
+            scope="col"
+            class="text-center side-effects"
+            *ngIf="dashboard.components.component_code === componentCode.SIDE_EFFECTS"
+          >
+            <app-label-column-table
+              [active]="tableFields[componentCode.SIDE_EFFECTS].isSort"
+              [sortType]="tableFields[componentCode.SIDE_EFFECTS].sortType"
+              [label]="'side effects'"
+              [labelId]="componentCode.SIDE_EFFECTS"
+              [classSort]="'ml-10'"
+              (sortEvent)="sortBy($event)"
+            >
+            </app-label-column-table>
+          </th>
+          <th
+            scope="col"
+            class="text-center final-medical-treatment"
+            *ngIf="dashboard.components.component_code === componentCode.FINAL_MEDICAL_TREATMENT"
+          >
+            <app-label-column-table
+              [active]="tableFields[componentCode.FINAL_MEDICAL_TREATMENT].isSort"
+              [sortType]="tableFields[componentCode.FINAL_MEDICAL_TREATMENT].sortType"
+              [label]="'Final medical treatment'"
+              [labelId]="componentCode.FINAL_MEDICAL_TREATMENT"
+              [classSort]="'ml-10'"
+              (sortEvent)="sortBy($event)"
+            >
+            </app-label-column-table>
+          </th>
+          <th
+            scope="col"
+            class="completion-level"
+            *ngIf="dashboard.components.component_code === componentCode.COMPLETION_LEVEL"
+          >
+            <app-label-column-table
+              [active]="tableFields[componentCode.COMPLETION_LEVEL].isSort"
+              [sortType]="tableFields[componentCode.COMPLETION_LEVEL].sortType"
+              [label]="'722 times'"
+              [labelId]="componentCode.COMPLETION_LEVEL"
+              [classSort]="'ml-10'"
+              (sortEvent)="sortBy($event)"
+            >
+            </app-label-column-table>
+          </th>
+          <th
+            scope="col"
+            class="text-center ihb-rate"
+            *ngIf="dashboard.components.component_code === componentCode.IHB_RATE"
+          >
+            <div
+              tooltipClass="tooltip-custom text-pre"
+              [placement]="getTooltipPlacement(componentCode.IHB_RATE)"
+              ngbTooltip="{{ 'tooltip.irregular pulse wave' | translate }}"
+            >
+              <app-label-column-table
+                [active]="tableFields[componentCode.IHB_RATE].isSort"
+                [sortType]="tableFields[componentCode.IHB_RATE].sortType"
+                [label]="'patient.irregular pulse wave percent'"
+                [labelId]="componentCode.IHB_RATE"
+                [classSort]="'ml-15'"
+                (sortEvent)="sortBy($event)"
+              >
+              </app-label-column-table>
+            </div>
+          </th>
+        </ng-container>
+      </tr>
+    </thead>
+    <tbody [attr.noData]="'there is no data' | translate">
+      <tr *ngFor="let patient of patientList.data" (click)="redirectPatientDetail(patient.patient_id)">
+        <ng-container *ngFor="let dashboard of hospitalSetting.hospital_dashboards">
+          <td scope="row" class="patient-id" *ngIf="dashboard.components.component_code === componentCode.PATIENT_CODE">
+            {{ patient?.patient_code | dash }}
+          </td>
+          <td class="patient-name" *ngIf="dashboard.components.component_code === componentCode.FULL_NAME">
+            {{ joinName(patient.patient_first_name, patient.patient_middle_name, patient.patient_last_name) }}
+          </td>
+          <td class="text-center sex" *ngIf="dashboard.components.component_code === componentCode.GENDER">
+            {{ patient?.patient_gender !== null ? (patient?.patient_gender | gender | translate) : '-' }}
+          </td>
+          <td
+            class="text-center blood-pressure-7days"
+            *ngIf="dashboard.components.component_code === componentCode.BLOOD_PRESSURE_7_DAYS"
+          >
+            {{ patient?.patient_stat_7days_sys | dash }} / {{ patient?.patient_stat_7days_dia | dash }}
+          </td>
+          <td
+            class="morning-blood-pressure"
+            *ngIf="dashboard.components.component_code === componentCode.MORNING_BLOOD_PRESSURE_7_DAYS"
+          >
+            <div class="text-center">
+              <div class="d-flex justify-content-center align-items-center">
+                <div
+                  [className]="
+                    patient.patient_stat_7days_sys_morning
+                      ? getBackgroundColorFollowLevel(
+                          getSysBloodPressureFollowLevel(patient.patient_stat_7days_sys_morning)
+                        ) + ' sys'
+                      : ''
+                  "
+                >
+                  {{ patient?.patient_stat_7days_sys_morning | dash }}
+                </div>
+                <div class="mx-5">/</div>
+                <div
+                  [className]="
+                    patient.patient_stat_7days_dia_morning
+                      ? getBackgroundColorFollowLevel(
+                          getDiaBloodPressureFollowLevel(patient.patient_stat_7days_dia_morning)
+                        ) + ' dia'
+                      : ''
+                  "
+                >
+                  {{ patient?.patient_stat_7days_dia_morning | dash }}
+                </div>
+              </div>
+            </div>
+          </td>
+          <td
+            class="evening-blood-pressure"
+            *ngIf="dashboard.components.component_code === componentCode.EVENING_PRESSURE_7_DAYS"
+          >
+            <div class="text-center">
+              <div class="d-flex justify-content-center align-items-center">
+                <div
+                  [className]="
+                    patient.patient_stat_7days_sys_evening
+                      ? getBackgroundColorFollowLevel(
+                          getSysBloodPressureFollowLevel(patient.patient_stat_7days_sys_evening)
+                        ) + ' sys'
+                      : ''
+                  "
+                >
+                  {{ patient?.patient_stat_7days_sys_evening | dash }}
+                </div>
+                <div class="mx-5">/</div>
+                <div
+                  [className]="
+                    patient.patient_stat_7days_dia_evening
+                      ? getBackgroundColorFollowLevel(
+                          getDiaBloodPressureFollowLevel(patient.patient_stat_7days_dia_evening)
+                        ) + ' dia'
+                      : ''
+                  "
+                >
+                  {{ patient?.patient_stat_7days_dia_evening | dash }}
+                </div>
+              </div>
+            </div>
+          </td>
+          <td
+            class="pulse-7days text-center"
+            *ngIf="dashboard.components.component_code === componentCode.PULSE_7_DAYS"
+          >
+            {{ patient?.patient_stat_7days_pulse | dash }}
+          </td>
+          <td class="ihb" *ngIf="dashboard.components.component_code === componentCode.IRREGULAR_PULSE_WAVE_7_DAYS">
+            <div class="ihb-value">
+              <ng-container>
+                <div class="img-heart">
+                  <img [hidden]="!patient?.user_stat_7days_ihb" src="./assets/images/icon_heart_1.svg" alt="prev" />
+                </div>
+                <div class="ihb-total ml-10">{{ patient?.user_stat_7days_ihb | dash }}</div>
+              </ng-container>
+            </div>
+          </td>
+          <td
+            class="measurement-rate text-center"
+            *ngIf="dashboard.components.component_code === componentCode.NUMBER_OF_MEASUREMENT"
+          >
+            {{ patient?.user_stat_7days_count_measurement | dash }}
+          </td>
+          <td
+            class="text-center weight-7days"
+            *ngIf="dashboard.components.component_code === componentCode.WEIGHT_AVERAGE_7_DAYS"
+          >
+            <ng-template [ngIf]="patient.user_stat_7days_weight">
+              {{ fixNumber(patient.user_stat_7days_weight) }} <span class="text-small">kg</span>
+            </ng-template>
+            <ng-template [ngIf]="!patient.user_stat_7days_weight">-</ng-template>
+          </td>
+          <td
+            class="text-center weight-ratio"
+            *ngIf="dashboard.components.component_code === componentCode.WEIGHT_RATIO"
+          >
+            <ng-template [ngIf]="patient.user_stat_7days_weight_ratio">
+              {{
+                patient.user_stat_7days_weight_ratio > 0
+                  ? '+' + patient.user_stat_7days_weight_ratio
+                  : patient.user_stat_7days_weight_ratio
+              }}
+              <span class="text-small" [hidden]="patient.user_stat_7days_weight_ratio === '--'">kg</span>
+            </ng-template>
+            <ng-template [ngIf]="!patient.user_stat_7days_weight_ratio">{{ 'unmeasured' | translate }}</ng-template>
+          </td>
+          <td class="has-memo" *ngIf="dashboard.components.component_code === componentCode.MEMO">
+            <div class="d-flex justify-content-center">
+              <img [hidden]="!patient.user_stat_7days_memo" src="./assets/images/icon_memo.svg" alt="memo" />
+              <div [hidden]="patient.user_stat_7days_memo">-</div>
+            </div>
+          </td>
+          <td
+            class="text-center blood-pressure-target"
+            *ngIf="dashboard.components.component_code === componentCode.BLOOD_PRESSURE_TARGET"
+          >
+            <div>{{ patient?.patient_sys_goal | dash }} / {{ patient?.patient_dia_goal | dash }}</div>
+          </td>
+          <td class="risk-score" *ngIf="dashboard.components.component_code === componentCode.BLOOD_PRESSURE_RISK">
+            <div class="d-flex justify-content-center align-items-center">
+              <div
+                *ngIf="patient.patient_stat_7days_sys && patient.patient_stat_7days_dia"
+                class="risk-level text-center"
+                [ngClass]="
+                  getBackgroundColorFollowLevel(
+                    getRiskLevel(patient.patient_stat_7days_sys, patient.patient_stat_7days_dia)
+                  )
+                "
+              >
+                {{ getRiskLevel(patient.patient_stat_7days_sys, patient.patient_stat_7days_dia) }}
+              </div>
+              <ng-template [ngIf]="!patient.patient_stat_7days_sys || !patient.patient_stat_7days_dia">-</ng-template>
+            </div>
+          </td>
+          <td
+            class="text-center last-measurement"
+            *ngIf="dashboard.components.component_code === componentCode.LAST_MEDICAL_TREATMENT_DAY"
+          >
+            <div>
+              {{
+                patient.vital_office_utc_time
+                  ? (patient.vital_office_utc_time | date: (sharedService.isJa() ? 'yyyy.MM.dd' : 'd MMM y'))
+                  : '----.--.--'
+              }}
+            </div>
+          </td>
+          <td
+            class="text-center vital-bp-date"
+            *ngIf="dashboard.components.component_code === componentCode.LAST_BLOOD_PRESSURE_MEASUREMENT"
+          >
+            <div>
+              {{
+                patient.vital_bp_ldatetime
+                  ? (patient.vital_bp_ldatetime | date: (sharedService.isJa() ? 'yyyy.MM.dd' : 'd MMM y'):'+0000')
+                  : '----.--.--'
+              }}
+            </div>
+          </td>
+          <td
+            class="confirm-status-ldate"
+            *ngIf="dashboard.components.component_code === componentCode.CONFIRM_STATUS_SELF"
+          >
+            <div>
+              {{
+                patient.my_confirm_utc_time
+                  ? (patient.my_confirm_utc_time | date: (sharedService.isJa() ? 'yyyy.MM.dd' : 'd MMM y'))
+                  : '----.--.--'
+              }}
+            </div>
+            <div class="text-small">
+              {{ patient.my_confirm_utc_time ? (patient.my_confirm_utc_time | date: 'HH:mm') : '--:--' }}
+            </div>
+          </td>
+          <td
+            class="confirm-status-other"
+            *ngIf="dashboard.components.component_code === componentCode.CONFIRM_STATUS_OTHER"
+          >
+            <div class="text-center">
+              <div>
+                {{
+                  patient.other_confirm_utc_time
+                    ? (patient.other_confirm_utc_time | date: (sharedService.isJa() ? 'yyyy.MM.dd' : 'd MMM y'))
+                    : '----.--.--'
+                }}
+              </div>
+              <div class="text-small">
+                <span class="pr-10">
+                  {{ patient.other_confirm_utc_time ? (patient.other_confirm_utc_time | date: 'HH:mm') : '--:--' }}
+                </span>
+                <span class="text-blue-700">
+                  {{ patient.other_name ? patient.other_name : '---' }}
+                </span>
+              </div>
+            </div>
+          </td>
+          <td class="text-center age" *ngIf="dashboard.components.component_code === componentCode.AGE">
+            {{ patient.age | dash }}
+          </td>
+          <td
+            class="text-center morning-pulse"
+            *ngIf="dashboard.components.component_code === componentCode.MORNING_PULSE"
+          >
+            {{ patient.patient_stat_7days_pulse_morning | dash }}
+          </td>
+          <td
+            class="text-center evening-pulse"
+            *ngIf="dashboard.components.component_code === componentCode.EVENING_PULSE"
+          >
+            {{ patient.patient_stat_7days_pulse_evening | dash }}
+          </td>
+          <td
+            class="text-center morning-heart-beat"
+            *ngIf="dashboard.components.component_code === componentCode.MORNING_HEAT_RATE"
+          >
+            {{ patient.patient_stat_7days_heart_beat_morning | dash }}
+          </td>
+          <td
+            class="text-center evening-heart-beat"
+            *ngIf="dashboard.components.component_code === componentCode.EVENING_HEAT_RATE"
+          >
+            {{ patient.patient_stat_7days_heart_beat_evening | dash }}
+          </td>
+          <td
+            class="text-center heart-beat"
+            *ngIf="dashboard.components.component_code === componentCode.HEAT_RATE_AVERAGE"
+          >
+            {{ patient.patient_stat_7days_heart_beat | dash }}
+          </td>
+          <td class="text-center af" *ngIf="dashboard.components.component_code === componentCode.AF">
+            {{ patient.user_stat_af | dash }}
+          </td>
+          <td class="text-center nyha" *ngIf="dashboard.components.component_code === componentCode.NYHA">
+            <ng-template [ngIf]="patient?.user_stat_7days_mets">
+              <div class="d-flex justify-content-center">
+                <div class="nyha-value">{{ fixNumber(patient?.user_stat_7days_mets) }}</div>
+                <div class="nyha-level d-flex justify-content-between">
+                  <div>(</div>
+                  <div class="value">{{ getLevelNYHA(patient.user_stat_7days_mets) }}</div>
+                  <div>)</div>
+                </div>
+              </div>
+            </ng-template>
+            <ng-template [ngIf]="!patient?.user_stat_7days_mets">-</ng-template>
+          </td>
+          <td
+            class="text-center last-update"
+            *ngIf="dashboard.components.component_code === componentCode.LAST_UPDATED"
+          >
+            <div>
+              {{
+                patient.user_stat_ldate
+                  ? (patient.user_stat_ldate | date: (sharedService.isJa() ? 'yyyy.MM.dd' : 'd MMM y'))
+                  : '----.--.--'
+              }}
+            </div>
+          </td>
+          <td class="check-alert" *ngIf="dashboard.components.component_code === componentCode.HAS_ALERT">
+            <div class="d-flex justify-content-center">
+              <img *ngIf="patient?.is_alert" src="./assets/images/ic_circle_danger_red.svg" alt="prev" />
+              <div *ngIf="!patient?.is_alert">-</div>
+            </div>
+          </td>
+          <td
+            class="text-center exceeding-threshold"
+            *ngIf="dashboard.components.component_code === componentCode.EXCEEDING_THRESHOLD"
+          >
+            {{ patient.patient_stat_7days_over_bp | dash }}
+          </td>
+          <td
+            class="text-center medication-rate"
+            *ngIf="dashboard.components.component_code === componentCode.MEDICATION_RATE"
+          >
+            {{
+              patient.patient_stat_7days_take_medicine || patient.patient_stat_7days_take_medicine === 0
+                ? fixNumber(patient.patient_stat_7days_take_medicine * 100, 0) + ' %'
+                : '-'
+            }}
+          </td>
+          <td
+            class="text-center side-effects"
+            *ngIf="dashboard.components.component_code === componentCode.SIDE_EFFECTS"
+          >
+            {{
+              patient.patient_stat_7days_symptom || patient.patient_stat_7days_symptom === 0
+                ? fixNumber(patient.patient_stat_7days_symptom * 100, 0) + ' %'
+                : '-'
+            }}
+          </td>
+          <td
+            class="text-center final-medical-treatment"
+            *ngIf="dashboard.components.component_code === componentCode.FINAL_MEDICAL_TREATMENT"
+          >
+            {{ patient.vital_office_utc_time ? getDiffDate(patient.vital_office_utc_time, now, 'day') : '-' }}
+          </td>
+          <td
+            class="text-center completion-level"
+            *ngIf="dashboard.components.component_code === componentCode.COMPLETION_LEVEL"
+            [class.complete]="patient.patient_stat_7days_complete_level"
+          >
+            {{ patient.patient_stat_7days_complete_time | dash }}
+          </td>
+          <td class="text-center ihb-rate" *ngIf="dashboard.components.component_code === componentCode.IHB_RATE">
+            {{
+              patient.user_stat_7days_ihb_percent || patient.user_stat_7days_ihb_percent === 0
+                ? fixNumber(patient.user_stat_7days_ihb_percent * 100, 0) + ' %'
+                : '-'
+            }}
+          </td>
+        </ng-container>
+      </tr>
+    </tbody>
+  </table>
+  <div class="d-flex mt-2">
+    <app-paginator
+      *ngIf="patientList.total"
+      class="paginator ml-auto"
+      [page]="bodyRequest.page"
+      [collectionSize]="patientList.total"
+      (pageChange)="pageChange($event)"
+      [pageSize]="patientList.per_page"
+      [perPage]="patientList.per_page"
+    ></app-paginator>
+  </div>
+</div>
+
+<ng-template #tipContentNYHA>
+  <div class="px-10">
+    <div class="d-flex nyha-content text-small">
+      <div class="activity h-activity">
+        <span>{{ 'tooltip.physical activity when symptoms appear' | translate }}</span>
+      </div>
+      <div class="text-center exercise-intensity">
+        <span>METs</span><br />
+        <span>{{ 'tooltip.exercise intensity' | translate }}</span>
+      </div>
+      <div class="text-center classification">
+        <span>{{ 'tooltip.presumed' | translate }}</span
+        ><br />
+        <span>{{ 'tooltip.NYHA classification' | translate }}</span>
+      </div>
+    </div>
+    <div class="d-flex" *ngFor="let item of tooltipNYHAList">
+      <div class="activity">
+        {{ item.activity | translate }}
+      </div>
+      <div class="text-center exercise-intensity">
+        {{ item.exercise_intensity }}
+        <span *ngIf="item.suffix">{{ item.suffix | translate }}</span>
+      </div>
+      <div class="text-center classification">
+        {{ item.classification }}
+      </div>
+    </div>
+    <div class="tooltip-note">
+      <div>
+        {{ 'tooltip.acute / Chronic Heart Failure Clinical Practice Guidelines' | translate }}
+      </div>
+      <div>
+        {{ 'tooltip.japanese Circulation Society / Japanese Heart Failure Association Joint Guidelines' | translate }}
+      </div>
+      <div>
+        {{ 'tooltip.published in March 2018 Created from June 2018 update' | translate }}
+      </div>
+    </div>
+  </div>
+</ng-template>

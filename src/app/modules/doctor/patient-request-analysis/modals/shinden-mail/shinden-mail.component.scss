@@ -1,0 +1,60 @@
+@import 'src/app/styles/variable';
+
+:host {
+  color: $black-300;
+}
+
+.mail-container {
+  .modal-header {
+    height: 64px;
+    border-bottom-color: $gray-310;
+
+    .btn-close {
+      padding: 6px 15px;
+    }
+  }
+
+  .modal-body {
+    padding: 1.5rem 1rem 0 2rem;
+
+    .content-item {
+      margin-bottom: 16px;
+      display: flex;
+      font-size: 14px;
+
+      label {
+        width: calc(100% - 588px);
+      }
+
+      .content-right {
+        width: 588px;
+        word-break: break-all;
+      }
+
+      input {
+        height: 32px;
+      }
+
+      input,
+      textarea {
+        font-size: 14px;
+        color: $black-300;
+        resize: none;
+      }
+
+      .form-control:disabled {
+        background-color: white;
+      }
+    }
+
+    &.en-language {
+      label {
+        width: calc(100% - 560px) !important;
+      }
+
+      .content-right {
+        width: 560px;
+      }
+    }
+  }
+}

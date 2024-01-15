@@ -1,0 +1,262 @@
+{
+  "data": [
+    {
+      "vital_office_utc_time": "2021-12-08T10:49:47.000Z",
+      "alert_history_id": 5600,
+      "alert_history_weights": [
+        {
+          "alert_history_weight_ratio": null,
+          "alert_history_weight_days": 5,
+          "alert_history_weight_type": 2,
+          "alert_history_weight_memo": "11111111111111",
+
+          "alert_history_weight_datetime": "2021-11-08T03:18:07.000Z"
+        },
+        {
+          "alert_history_weight_ratio": 2,
+          "alert_history_weight_days": 5,
+          "alert_history_weight_type": 2,
+          "alert_history_weight_memo": "11111111111111",
+
+          "alert_history_weight_datetime": "2021-11-08T03:18:07.000Z"
+        },
+        {
+          "alert_history_weight_ratio": -1,
+          "alert_history_weight_days": 5,
+          "alert_history_weight_type": 2,
+          "alert_history_weight_memo": "11111111111111",
+
+          "alert_history_weight_datetime": "2021-11-08T03:18:07.000Z"
+        }
+      ],
+      "alert_history_ihbs": [
+        {
+          "alert_history_ihb_times": 2,
+          "alert_history_ihb_days": 10,
+          "alert_history_ihb_type": 2,
+          "alert_history_ihb_memo": 33333,
+          "alert_history_ihb_datetime": "2021-11-07T03:18:05.000Z"
+        },
+        {
+          "alert_history_ihb_times": null,
+          "alert_history_ihb_days": 10,
+          "alert_history_ihb_type": 2,
+          "alert_history_ihb_memo": null,
+          "alert_history_ihb_datetime": "2021-11-07T03:18:05.000Z"
+        },
+        {
+          "alert_history_ihb_times": null,
+          "alert_history_ihb_days": null,
+          "alert_history_ihb_type": 2,
+          "alert_history_ihb_memo": null,
+          "alert_history_ihb_datetime": "2021-11-07T03:18:05.000Z"
+        }
+      ],
+      "alert_history_bps": [
+        {
+          "alert_history_bp_sys": 77,
+          "alert_history_bp_dia": 59,
+          "alert_history_bp_type": 1,
+          "alert_history_bp_memo": null,
+          "alert_history_bp_datetime": "2021-11-08T03:18:00.000Z"
+        },
+        {
+          "alert_history_bp_sys": 77,
+          "alert_history_bp_dia": 59,
+          "alert_history_bp_type": 1,
+          "alert_history_bp_memo": null,
+          "alert_history_bp_datetime": "2021-11-08T03:18:00.000Z"
+        }
+      ],
+      "alert_history_afs": [
+        {
+          "alert_history_af_times": 1,
+          "alert_history_af_days": 7,
+          "alert_history_af_type": 1,
+          "alert_history_af_memo": null,
+          "alert_history_af_datetime": "2021-11-05T03:18:03.000Z"
+        },
+        {
+          "alert_history_af_times": null,
+          "alert_history_af_days": 7,
+          "alert_history_af_type": 1,
+          "alert_history_af_memo": null,
+          "alert_history_af_datetime": "2021-11-05T03:18:03.000Z"
+        },
+        {
+          "alert_history_af_times": null,
+          "alert_history_af_days": null,
+          "alert_history_af_type": 1,
+          "alert_history_af_memo": null,
+          "alert_history_af_datetime": "2021-11-05T03:18:03.000Z"
+        }
+      ]
+    },
+    {
+      "vital_office_utc_time": "2021-11-08T10:49:47.000Z",
+      "alert_history_id": 5600,
+      "alert_history_weights": [
+        {
+          "alert_history_weight_ratio": 2,
+          "alert_history_weight_days": 5,
+          "alert_history_weight_type": 1,
+          "alert_history_weight_memo": null,
+          "alert_history_weight_datetime": "2021-11-08T03:18:07.000Z"
+        }
+      ],
+      "alert_history_ihbs": [
+        {
+          "alert_history_ihb_times": 2,
+          "alert_history_ihb_days": 10,
+          "alert_history_ihb_type": 1,
+          "alert_history_ihb_memo": null,
+          "alert_history_ihb_datetime": "2021-11-07T03:18:05.000Z"
+        }
+      ],
+      "alert_history_bps": [
+        {
+          "alert_history_bp_sys": 77,
+          "alert_history_bp_dia": 59,
+          "alert_history_bp_type": 1,
+          "alert_history_bp_memo": null,
+          "alert_history_bp_datetime": "2021-11-08T03:18:00.000Z"
+        }
+      ],
+      "alert_history_afs": [
+        {
+          "alert_history_af_times": 1,
+          "alert_history_af_days": 7,
+          "alert_history_af_type": 1,
+          "alert_history_af_memo": null,
+          "alert_history_af_datetime": "2021-11-05T03:18:03.000Z"
+        }
+      ]
+    },
+    {
+      "vital_office_utc_time": "2021-11-08T10:49:47.000Z",
+      "alert_history_id": 5600,
+      "alert_history_weights": [
+        {
+          "alert_history_weight_ratio": 2,
+          "alert_history_weight_days": 5,
+          "alert_history_weight_type": 1,
+          "alert_history_weight_memo": null,
+          "alert_history_weight_datetime": "2021-11-08T03:18:07.000Z"
+        }
+      ],
+      "alert_history_ihbs": [
+        {
+          "alert_history_ihb_times": 2,
+          "alert_history_ihb_days": 10,
+          "alert_history_ihb_type": 1,
+          "alert_history_ihb_memo": null,
+          "alert_history_ihb_datetime": "2021-11-07T03:18:05.000Z"
+        }
+      ],
+      "alert_history_bps": [
+        {
+          "alert_history_bp_sys": 77,
+          "alert_history_bp_dia": 59,
+          "alert_history_bp_type": 1,
+          "alert_history_bp_memo": null,
+          "alert_history_bp_datetime": "2021-11-08T03:18:00.000Z"
+        }
+      ],
+      "alert_history_afs": [
+        {
+          "alert_history_af_times": 1,
+          "alert_history_af_days": 7,
+          "alert_history_af_type": 1,
+          "alert_history_af_memo": null,
+          "alert_history_af_datetime": "2021-11-05T03:18:03.000Z"
+        }
+      ]
+    },
+    {
+      "vital_office_utc_time": "2021-11-08T10:49:47.000Z",
+      "alert_history_id": 5600,
+      "alert_history_weights": [
+        {
+          "alert_history_weight_ratio": 2,
+          "alert_history_weight_days": 5,
+          "alert_history_weight_type": 1,
+          "alert_history_weight_memo": null,
+          "alert_history_weight_datetime": "2021-11-08T03:18:07.000Z"
+        }
+      ],
+      "alert_history_ihbs": [
+        {
+          "alert_history_ihb_times": 2,
+          "alert_history_ihb_days": 10,
+          "alert_history_ihb_type": 1,
+          "alert_history_ihb_memo": null,
+          "alert_history_ihb_datetime": "2021-11-07T03:18:05.000Z"
+        }
+      ],
+      "alert_history_bps": [
+        {
+          "alert_history_bp_sys": 77,
+          "alert_history_bp_dia": 59,
+          "alert_history_bp_type": 1,
+          "alert_history_bp_memo": null,
+          "alert_history_bp_datetime": "2021-11-08T03:18:00.000Z"
+        }
+      ],
+      "alert_history_afs": [
+        {
+          "alert_history_af_times": 1,
+          "alert_history_af_days": 7,
+          "alert_history_af_type": 1,
+          "alert_history_af_memo": null,
+          "alert_history_af_datetime": "2021-11-05T03:18:03.000Z"
+        }
+      ]
+    },
+    {
+      "vital_office_utc_time": "2021-11-08T10:49:47.000Z",
+      "alert_history_id": 5600,
+      "alert_history_weights": [
+        {
+          "alert_history_weight_ratio": 2,
+          "alert_history_weight_days": 5,
+          "alert_history_weight_type": 1,
+          "alert_history_weight_memo": null,
+          "alert_history_weight_datetime": "2021-11-08T03:18:07.000Z"
+        }
+      ],
+      "alert_history_ihbs": [
+        {
+          "alert_history_ihb_times": 2,
+          "alert_history_ihb_days": 10,
+          "alert_history_ihb_type": 1,
+          "alert_history_ihb_memo": null,
+          "alert_history_ihb_datetime": "2021-11-07T03:18:05.000Z"
+        }
+      ],
+      "alert_history_bps": [
+        {
+          "alert_history_bp_sys": 77,
+          "alert_history_bp_dia": 59,
+          "alert_history_bp_type": 1,
+          "alert_history_bp_memo": null,
+          "alert_history_bp_datetime": "2021-11-08T03:18:00.000Z"
+        }
+      ],
+      "alert_history_afs": [
+        {
+          "alert_history_af_times": 1,
+          "alert_history_af_days": 7,
+          "alert_history_af_type": 1,
+          "alert_history_af_memo": null,
+          "alert_history_af_datetime": "2021-11-05T03:18:03.000Z"
+        }
+      ]
+    }
+  ],
+  "current_page": 1,
+  "last_page": 6,
+  "per_page": 5,
+  "from": 1,
+  "to": 5,
+  "total": 30
+}

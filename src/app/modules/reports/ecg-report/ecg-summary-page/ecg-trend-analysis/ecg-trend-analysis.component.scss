@@ -1,0 +1,68 @@
+@import '../../ecg-report.component.scss';
+
+.trend-analysis {
+  display: flex;
+  flex-direction: column;
+  height: 97mm;
+
+  .chart-row,
+  .comment-row {
+    width: 100%;
+    display: flex;
+
+    .left-side,
+    .right-side {
+      width: 50%;
+    }
+    .left-side {
+      padding-right: 7mm;
+    }
+
+    .right-side {
+      padding-left: 7mm;
+    }
+
+    &.ja-lang {
+      .left-side {
+        padding-right: 8mm;
+      }
+
+      .right-side {
+        padding-left: 8mm;
+      }
+    }
+  }
+
+  .chart-row {
+    flex-grow: 1;
+
+    .left-side,
+    .right-side {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+
+#trendBySymptom,
+#trendByDayOfWeek {
+  height: fit-content;
+  flex-grow: 1;
+  width: 100%;
+}
+
+#trendIn12Month {
+  height: 43mm;
+}
+
+#trendMonthsDiv {
+  .text-side {
+    width: 60mm;
+    margin-right: 5mm;
+    white-space: pre-wrap;
+  }
+
+  .graph-side {
+    flex-grow: 1;
+  }
+}

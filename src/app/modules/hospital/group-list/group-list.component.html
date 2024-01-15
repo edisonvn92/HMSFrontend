@@ -1,0 +1,163 @@
+<div class="group-name">
+  <div class="group-content">
+    <div class="d-flex align-items-center input-group search-group pb-3">
+      <div class="align-items-center input-group search-group d-flex w-400">
+        {{ 'group.name' | translate }} :
+        <input
+          type="text"
+          class="form-control group-search text-normal ml-2 bg-white"
+          placeholder="{{ 'please enter' | translate }}"
+          [(ngModel)]="textSearch"
+          (keyup.enter)="findRecords(true)"
+          name="textSearch"
+          [disabled]="isSearching"
+        />
+      </div>
+      <button
+        type="button"
+        class="btn btn-outline-secondary d-flex ml-auto text-black-300 text-normal"
+        (click)="resetSearchClicked()"
+      >
+        {{ 'button.reset' | translate }}
+      </button>
+      <button type="button" class="btn btn-primary d-flex ml-2 bg-blue-500 text-normal" (click)="findRecords(true)">
+        {{ 'button.search' | translate }}
+      </button>
+    </div>
+
+    <table class="table hospital-table" id="table-content">
+      <thead>
+        <tr>
+          <th scope="col">
+            <div>
+              <app-label-column-table
+                [active]="tableFields['group_name'].isSort"
+                [sortType]="tableFields['group_name'].sortType"
+                [label]="'group.name' | translate"
+                [labelId]="'group_name'"
+                (sortEvent)="sortBy($event)"
+              >
+              </app-label-column-table>
+            </div>
+          </th>
+          <th scope="col">
+            <div>
+              <app-label-column-table
+                [active]="tableFields['group_id'].isSort"
+                [sortType]="tableFields['group_id'].sortType"
+                [label]="'group.id' | translate"
+                [labelId]="'group_id'"
+                (sortEvent)="sortBy($event)"
+              >
+              </app-label-column-table>
+            </div>
+          </th>
+          <th scope="col">
+            <div>
+              <app-label-column-table
+                [active]="tableFields['group_default'].isSort"
+                [sortType]="tableFields['group_default'].sortType"
+                [label]="'group.default' | translate"
+                [labelId]="'group_default'"
+                (sortEvent)="sortBy($event)"
+              >
+              </app-label-column-table>
+            </div>
+          </th>
+          <th scope="col">
+            <div>
+              <app-label-column-table
+                [active]="tableFields['doctor_number'].isSort"
+                [sortType]="tableFields['doctor_number'].sortType"
+                [label]="'Doctor'"
+                [labelId]="'doctor_number'"
+                (sortEvent)="sortBy($event)"
+              >
+              </app-label-column-table>
+            </div>
+          </th>
+          <th scope="col">
+            <div>
+              <app-label-column-table
+                [active]="tableFields['nurse_number'].isSort"
+                [sortType]="tableFields['nurse_number'].sortType"
+                [label]="'Nurse' | translate"
+                [labelId]="'nurse_number'"
+                (sortEvent)="sortBy($event)"
+              >
+              </app-label-column-table>
+            </div>
+          </th>
+          <th scope="col">
+            <div>
+              <app-label-column-table
+                [active]="tableFields['patient_number'].isSort"
+                [sortType]="tableFields['patient_number'].sortType"
+                [label]="'group.patient' | translate"
+                [labelId]="'patient_number'"
+                (sortEvent)="sortBy($event)"
+              >
+              </app-label-column-table>
+            </div>
+          </th>
+          <th scope="col">
+            <div>
+              <app-label-column-table
+                [active]="tableFields['group_description'].isSort"
+                [sortType]="tableFields['group_description'].sortType"
+                [label]="'description' | translate"
+                [labelId]="'group_description'"
+                (sortEvent)="sortBy($event)"
+              >
+              </app-label-column-table>
+            </div>
+          </th>
+          <th scope="col">{{ 'actions' | translate }}</th>
+        </tr>
+      </thead>
+      <tbody [attr.noData]="'there is no data' | translate">
+        <tr *ngFor="let group of groupList.data">
+          <td>
+            <u class="cursor-pointer text-normal w-fit-content break-space" (click)="onOpenDetailClicked(group)">{{
+              group.group_name
+            }}</u>
+          </td>
+          <td>{{ group.group_id }}</td>
+          <td>{{ group.group_default ? '●' : '' }}</td>
+          <td>{{ group.doctor_number }}</td>
+          <td>{{ group.nurse_number }}</td>
+          <td>{{ group.patient_number }}</td>
+          <td class="break-space">{{ group.group_description }}</td>
+          <td>
+            <span class="text-blue-500 underline-hover cursor-pointer" (click)="createClicked(group.group_id)">
+              {{ 'edit' | translate }}
+            </span>
+            |
+            <span
+              class="text-red-200 underline-hover cursor-pointer"
+              [class.disabled]="!group?.is_can_delete"
+              (click)="deleteClicked(group)"
+            >
+              {{ 'delete' | translate }}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="d-flex mt-2">
+      <button type="button" class="btn btn-primary d-flex bg-blue-500 text-normal" (click)="createClicked()">
+        <div class="icon my-auto mr-2 icon-plus morning-2"></div>
+        {{ 'add new' | translate }}
+      </button>
+      <app-paginator
+        *ngIf="groupList.total"
+        class="paginator ml-auto my-auto"
+        [collectionSize]="groupList.total"
+        (pageChange)="findRecords(false, $event)"
+        [pageSize]="groupList.per_page"
+        [perPage]="groupList.per_page"
+        [page]="param.page"
+      ></app-paginator>
+    </div>
+  </div>
+</div>

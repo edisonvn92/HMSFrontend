@@ -1,0 +1,51 @@
+@import 'src/app/styles/variable';
+
+.modal-body {
+  padding: 1rem 0;
+}
+
+.history-modal {
+  .list {
+    max-height: 390px;
+
+    .header-content {
+      margin: auto 42px;
+    }
+
+    .history-content {
+      max-height: 410px;
+
+      .content {
+        padding-top: 2px;
+        padding-bottom: 2px;
+      }
+    }
+
+    .date {
+      width: 34%;
+    }
+
+    .rank {
+      width: 33%;
+
+      .risk-level {
+        height: 32px;
+        line-height: 32px;
+        width: 32px;
+        border-radius: 4px;
+      }
+    }
+
+    .ihb {
+      width: 33%;
+    }
+
+    .sys,
+    .dia {
+      width: 40px;
+      height: 32px;
+      border-radius: 16px;
+      line-height: 32px;
+    }
+  }
+}

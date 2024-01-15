@@ -1,0 +1,25 @@
+<div class="confirm-examination-date">
+  <div class=".modal-body">
+    <div class="confirm-content">
+      <div class="title text-medium font-weight-500">
+        {{ 'patient detail.record the confirmation date and time' | translate }}
+      </div>
+      <div class="text-normal">
+        {{ now | date: (sharedService.isJa() ? 'YYYY年MM月dd日' : 'd MMM y') }}
+        <span class="ml-10">{{ now | date: 'HH:mm' }}</span>
+      </div>
+    </div>
+  </div>
+  <div ngbAutoFocus tabindex="0" class="modal-footer justify-content-end no-focus">
+    <button
+      type="button"
+      class="btn btn-outline-secondary text-black-300 btn-cancel text-normal"
+      (click)="clickedCancel()"
+    >
+      {{ 'button.Cancel' | translate }}
+    </button>
+    <button type="button" class="btn btn-primary bg-blue-500 btn-record text-normal" (click)="clickedConfirm()">
+      {{ 'button.record' | translate }}
+    </button>
+  </div>
+</div>

@@ -1,0 +1,321 @@
+<form [formGroup]="userForm" autocomplete="off">
+  <div class="create-group-container">
+    <div class="modal-header">
+      <div class="modal-title text-medium text-black-300 font-weight-500 text-left" id="modal-basic-title">
+        {{ (isCreate ? 'add user' : 'edit user') | translate }}
+      </div>
+      <button type="button" class="close none-outline btn-close" aria-label="Close" (click)="clickedClose()">
+        <div class="icon-close btn-icon-close"></div>
+      </button>
+    </div>
+    <ng-template [ngIf]="!errMess">
+      <div class="modal-body">
+        <ul class="invalid mb-3 text-normal text-black-300" *ngIf="isError">
+          <li *ngIf="formErr.group_required">
+            {{ 'validator.group required' | translate }}
+          </li>
+          <li *ngIf="userForm.controls.hcp_cognito_username?.errors?.required">
+            {{ 'validator.required' | translate: { field: 'id' | translate } }}
+          </li>
+          <li [class.px-2]="sharedService.isJa()" *ngIf="userForm.controls.hcp_cognito_username?.errors?.minlength">
+            {{ 'validator.minLength' | translate: { field: 'id' | translate, length: 4 } }}
+          </li>
+          <li
+            [class.px-2]="sharedService.isJa()"
+            *ngIf="
+              !userForm.controls.hcp_cognito_username?.errors?.minlength &&
+              userForm.controls.hcp_cognito_username?.errors?.pattern
+            "
+          >
+            {{ 'validator.login id pattern' | translate }}
+          </li>
+          <li *ngIf="userForm.controls.hcp_first_name.errors?.required">
+            {{ 'validator.required' | translate: { field: 'name' | translate } }}
+          </li>
+          <li
+            [class.px-2]="sharedService.isJa()"
+            *ngIf="
+              userForm.controls.hcp_cognito_phone?.errors?.pattern ||
+              userForm.controls.hcp_cognito_phone?.errors?.minlength ||
+              userForm.controls.hcp_cognito_phone?.errors?.maxlength
+            "
+          >
+            {{ 'validator.phonePattern' | translate }}
+          </li>
+          <li *ngIf="userForm.controls.hcp_cognito_email.errors?.required">
+            {{ 'validator.required' | translate: { field: 'email address' | translate } }}
+          </li>
+          <li [class.px-2]="sharedService.isJa()" *ngIf="userForm.controls.hcp_cognito_email.errors?.email">
+            {{ 'validator.invalid' | translate: { field: 'email address' | translate } }}
+          </li>
+          <li *ngIf="userForm.controls.password?.errors?.required">
+            {{ 'validator.required' | translate: { field: 'password' | translate } }}
+          </li>
+          <li [class.px-2]="sharedService.isJa()" *ngIf="userForm.controls.password?.errors?.minlength">
+            {{ 'validator.minLength' | translate: { field: 'password' | translate, length: 8 } }}
+          </li>
+          <li
+            [class.px-2]="sharedService.isJa()"
+            *ngIf="
+              !userForm.controls.password?.errors?.minlength &&
+              userForm.controls.password?.errors?.password_valid_character
+            "
+          >
+            {{ 'validator.passwordInvalidCharacter' | translate: { field: 'password' | translate } }}
+          </li>
+          <li
+            [class.px-2]="sharedService.isJa()"
+            *ngIf="
+              !userForm.controls.password?.errors?.minlength &&
+              !userForm.controls.password?.errors?.password_valid_character &&
+              userForm.controls.password?.errors?.password_rules
+            "
+          >
+            {{ 'validator.passwordFormat' | translate: { field: 'password' | translate } }}
+          </li>
+          <li [class.px-2]="sharedService.isJa()" *ngIf="userForm.errors?.password_mismatch">
+            {{
+              'validator.passwordMismatch'
+                | translate: { field1: 'password' | translate, field2: 'confirm password' | translate }
+            }}
+          </li>
+          <li *ngIf="userForm.controls.confirmPassword?.errors?.required">
+            {{ 'validator.required' | translate: { field: 'confirm password' | translate } }}
+          </li>
+          <li [class.px-2]="sharedService.isJa()" *ngIf="validationErr">
+            {{ 'errMsg.' + validationErr | translate }}
+          </li>
+        </ul>
+
+        <div class="mb-3 d-flex align-items-center">
+          <label for="login-id" class="form-label d-flex justify-content-end text-normal">
+            <span class="mr-1" class="required">*</span>
+            {{ 'id' | translate }} :
+          </label>
+          <input
+            type="text"
+            class="form-control ml-20 w-468"
+            maxlength="50"
+            [placeholder]="'enter within :field characters' | translate: { field: 50 }"
+            formControlName="hcp_cognito_username"
+            id="login-id"
+          />
+        </div>
+        <div class="mb-3 d-flex align-items-center">
+          <label for="group" class="form-label d-flex justify-content-end text-normal">
+            <span class="mr-1" class="required">*</span>
+            {{ 'Group' | translate }} :
+          </label>
+          <div ngbDropdown #groupDropdown class="d-inline-block ml-20 select-box">
+            <button
+              type="button"
+              class="btn btn-outline-secondary w-468 d-flex justify-content-center align-items-center"
+              ngbDropdownToggle
+            >
+              <div class="text text-black-300 text-truncate text-normal mt-auto">{{ groupSelectedString }}</div>
+              <i
+                class="fas my-auto icon ml-2 text-black-300"
+                [class]="ngbGroupDropdown?.isOpen() ? 'icon-arrow-up' : 'icon-arrow-down'"
+              ></i>
+            </button>
+            <div class="group-select" ngbDropdownMenu aria-labelledby="dropdownBasic2">
+              <label
+                [class.active]="groupSelected.length === groupList.length"
+                class="d-flex align-items-start cursor-pointer w-468 m-0 select-item"
+              >
+                <input
+                  type="checkbox"
+                  id="check-all-group"
+                  class="mr-1 my-auto"
+                  [checked]="groupSelected.length === groupList.length"
+                  [class.active]="groupSelected.length === groupList.length"
+                  (click)="checkAll()"
+                  value=""
+                />
+                {{ 'check all' | translate }}
+              </label>
+              <label
+                *ngFor="let item of groupList; let i = index"
+                [class.active]="isChecked(item)"
+                class="d-flex align-items-start cursor-pointer w-468 m-0 select-item"
+                [class.active]="isChecked(item)"
+              >
+                <div class="pt-1">
+                  <input
+                    type="checkbox"
+                    id="{{ 'group_' + i }}"
+                    [checked]="isChecked(item)"
+                    (click)="onSelectedGroupClicked($event, item)"
+                    class="mr-1"
+                    value=""
+                  />
+                </div>
+                <div class="break-space">{{ item.group_name }}</div>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="mb-3 d-flex align-items-center">
+          <label for="name" class="form-label d-flex justify-content-end text-normal">
+            <span class="mr-1" class="required">*</span>
+            {{ 'name' | translate }} :
+          </label>
+          <input
+            type="text"
+            class="form-control ml-20 w-468"
+            maxlength="50"
+            formControlName="hcp_full_name"
+            [placeholder]="'enter within :field characters' | translate: { field: 50 }"
+            id="name"
+            appTransformSpace
+          />
+        </div>
+        <div class="mb-3 d-flex align-items-center">
+          <label for="tel" class="form-label d-flex justify-content-end text-normal"> {{ 'tel' | translate }} : </label>
+          <input
+            type="text"
+            class="form-control ml-20 w-468"
+            appOnlyNumber
+            [phoneNumber]="true"
+            maxlength="50"
+            [placeholder]="'enter within :field characters' | translate: { field: 50 }"
+            formControlName="hcp_cognito_phone"
+            id="tel"
+          />
+        </div>
+        <div class="mb-3 d-flex align-items-center">
+          <label for="tel" class="form-label d-flex justify-content-end text-normal">
+            <span class="mr-1" class="required">*</span>
+            {{ 'email address' | translate }} :
+          </label>
+          <input
+            type="text"
+            class="form-control ml-20 w-468"
+            placeholder="Test123@gmail.com"
+            formControlName="hcp_cognito_email"
+            id="email"
+          />
+        </div>
+        <div class="mb-3 d-flex align-items-center">
+          <label for="id" class="form-label d-flex justify-content-end text-normal">
+            <span class="mr-1" class="required">*</span>
+            {{ 'role' | translate }} :
+          </label>
+          <div ngbDropdown #roleDropdown class="d-inline-block ml-20 select-box">
+            <button
+              type="button"
+              class="btn btn-outline-secondary w-468 d-flex align-items-center"
+              [disabled]="noRoleSetting"
+              ngbDropdownToggle
+            >
+              <div class="text text-black-300 text-normal">{{ userForm.controls.role_name.value | translate }}</div>
+              <i
+                class="fas ml-auto opacity-25 my-auto icon ml-2 text-black-300"
+                [class]="ngbRoleDropdown?.isOpen() ? 'icon-arrow-up' : 'icon-arrow-down'"
+              ></i>
+            </button>
+            <div class="role-select" ngbDropdownMenu aria-labelledby="dropdownBasic2">
+              <div
+                *ngFor="let item of roles"
+                [class.active]="userForm.controls.role_name.value === item.role_name"
+                class="d-flex pl-2 cursor-pointer align-items-start cursor-pointer text-truncate w-468 m-0 select-item"
+                (click)="onSelectedRoleClicked(item)"
+              >
+                {{ item.role_name | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mb-3 d-flex align-items-center">
+          <label for="period" class="form-label d-flex justify-content-end text-normal">
+            {{ 'period of use' | translate }} :
+          </label>
+          <app-custom-datepicker
+            (click)="setDefaultDate()"
+            class="ml-20 w-160"
+            type="start"
+            [hasIcon]="true"
+            [placeholder]="'select date' | translate"
+            inputClass="w-160 h-32 text-black-300 text-normal"
+            [startDate]="userForm.controls.hcp_start_period_of_use.value"
+            [endDate]="userForm.controls.hcp_end_period_of_use.value"
+            (dateChange)="onDateChange($event, 'start')"
+            [format]="sharedService.isJa() ? 'y.MM.DD' : 'D MMM y'"
+          ></app-custom-datepicker>
+          <span class="mx-3 text-normal d-flex align-items-center">～</span>
+          <app-custom-datepicker
+            (click)="setDefaultDate()"
+            type="end"
+            class="w-160"
+            [hasIcon]="true"
+            [placeholder]="'select date' | translate"
+            inputClass="w-160 h-32  text-black-300 text-normal"
+            [startDate]="userForm.controls.hcp_start_period_of_use.value"
+            [endDate]="userForm.controls.hcp_end_period_of_use.value"
+            (dateChange)="onDateChange($event, 'end')"
+            [format]="sharedService.isJa() ? 'y.MM.DD' : 'D MMM y'"
+          ></app-custom-datepicker>
+          <button
+            type="button"
+            (click)="setDefaultDate(true)"
+            class="btn btn-primary bg-blue-420 btn-close text-normal ml-auto"
+          >
+            {{ 'button.reset' | translate }}
+          </button>
+        </div>
+        <div class="mb-3 d-flex align-items-center">
+          <label for="password" class="form-label d-flex justify-content-end text-normal">
+            <span class="mr-1" *ngIf="isCreate" class="required">*</span>
+            {{ 'password' | translate }} :
+          </label>
+          <input
+            type="password"
+            class="form-control ml-20 w-468"
+            maxlength="100"
+            [placeholder]="'enter within :field characters' | translate: { field: 100 }"
+            formControlName="password"
+            id="password"
+            autocomplete="new-password"
+          />
+        </div>
+        <div class="mb-3 d-flex align-items-center">
+          <label for="confirm-password" class="form-label text-no-wrap d-flex justify-content-end text-normal">
+            <span class="mr-1" *ngIf="isCreate" class="required">*</span>
+            {{ 'confirm password' | translate }} :
+          </label>
+          <input
+            type="password"
+            class="form-control ml-20 w-468"
+            maxlength="100"
+            [placeholder]="'enter within :field characters' | translate: { field: 100 }"
+            formControlName="confirmPassword"
+            id="confirm-password"
+            autocomplete="new-password"
+          />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-outline-secondary btn-close text-black-300 text-normal mr-2"
+          (click)="clickedClose()"
+        >
+          {{ 'button.Close' | translate }}
+        </button>
+        <button type="submit" (click)="submitClicked()" class="btn btn-primary bg-blue-500 btn-close text-normal">
+          {{ (isCreate ? 'add new' : 'button.save') | translate }}
+        </button>
+      </div>
+    </ng-template>
+    <ng-template [ngIf]="errMess">
+      <div class="modal-body text-break px-24">
+        <div class="error">{{ ':field does not exist' | translate: { field: 'hcp' | translate } }}</div>
+      </div>
+      <div (click)="clickedClose()" class="modal-footer cursor-pointer justify-content-center">
+        <div class="btn-close text-large text-black-300">
+          {{ 'button.Close' | translate }}
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</form>

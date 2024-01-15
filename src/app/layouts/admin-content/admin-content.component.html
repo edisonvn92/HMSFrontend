@@ -1,0 +1,23 @@
+<div class="d-flex main-container">
+  <app-sidebar [menuList]="adminMenuList"></app-sidebar>
+  <div class="main-content" [class.close-sidebar]="sharedService.closeSidebar">
+    <div class="doctor-content-header d-flex justify-content-end align-items-center">
+      <div class="d-flex align-items-center justify-content-end user-info">
+        <div class="username text-truncate">
+          {{ joinName(currentUser?.admin_first_name, currentUser?.admin_middle_name, currentUser?.admin_last_name) }}
+        </div>
+        <div ngbDropdown>
+          <div class="setting-icon-wrapper cursor-pointer" ngbDropdownToggle>
+            <div class="icon icon-setting-1"></div>
+          </div>
+          <div ngbDropdownMenu aria-labelledby="userAvatar">
+            <button ngbDropdownItem class="text-normal" (click)="goToChangePassword()">
+              {{ 'change password' | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <router-outlet></router-outlet>
+  </div>
+</div>

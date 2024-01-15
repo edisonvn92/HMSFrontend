@@ -1,0 +1,9 @@
+<div class="d-flex main-container">
+  <app-sidebar [menuList]="hospitalMenuList" [hospitalSettingList]="hospitalSettingList"></app-sidebar>
+  <div class="main-content" [class.close-sidebar]="sharedService.closeSidebar">
+    <div class="doctor-content-header d-flex justify-content-between align-items-center">
+      <app-user-login class="ml-auto"></app-user-login>
+    </div>
+    <router-outlet></router-outlet>
+  </div>
+</div>

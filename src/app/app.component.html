@@ -1,0 +1,7 @@
+<router-outlet></router-outlet>
+<div *ngIf="showLoading" class="loader">
+  <div class="spinner-border">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+<app-toast *ngIf="!isWebView" aria-live="polite" aria-atomic="true"></app-toast>

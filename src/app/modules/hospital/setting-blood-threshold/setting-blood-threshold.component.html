@@ -1,0 +1,97 @@
+<form
+  class="setting-threshold"
+  [formGroup]="settingForm"
+  *ngIf="sharedService.hospitalSetting.hospital_setting?.hospital_setting_threshold_bp"
+>
+  <div class="setting-threshold-title">
+    <div class="font-weight-500">{{ 'blood pressure threshold setting' | translate }}</div>
+  </div>
+  <ul class="invalid mt-24 mb-3 text-normal text-black-300" *ngIf="isError">
+    <li
+      *ngIf="
+        settingForm.controls.hospital_threshold_bp_black_dia.errors?.required ||
+        settingForm.controls.hospital_threshold_bp_black_dia.errors?.min ||
+        settingForm.controls.hospital_threshold_bp_black_dia.errors?.max ||
+        settingForm.controls.hospital_threshold_bp_black_sys.errors?.required ||
+        settingForm.controls.hospital_threshold_bp_black_sys.errors?.min ||
+        settingForm.controls.hospital_threshold_bp_black_sys.errors?.max ||
+        settingForm.controls.hospital_threshold_bp_dark_red_dia.errors?.required ||
+        settingForm.controls.hospital_threshold_bp_dark_red_dia.errors?.min ||
+        settingForm.controls.hospital_threshold_bp_dark_red_dia.errors?.max ||
+        settingForm.controls.hospital_threshold_bp_dark_red_sys.errors?.required ||
+        settingForm.controls.hospital_threshold_bp_dark_red_sys.errors?.min ||
+        settingForm.controls.hospital_threshold_bp_dark_red_sys.errors?.max
+      "
+    >
+      {{ 'input value needs to be between :value1 and :value2.' | translate: { value1: 1, value2: 300 } }}
+    </li>
+    <li *ngIf="error.includes('bpSmaller')">
+      {{ ':field1 value must be less than :field2 value' | translate: { field1: 'DIA', field2: 'SYS' } }}
+    </li>
+    <li *ngIf="error.includes('levelSmaller')">
+      {{ ':field1 value must be less than :field2 value' | translate: { field1: 'Dark red', field2: 'Black' } }}
+    </li>
+  </ul>
+  <div class="d-flex align-items-center mb-1">
+    <div class="text-sys">{{ 'sys' | translate }}</div>
+    <div>{{ 'dia' | translate }}</div>
+  </div>
+  <div class="d-flex align-items-center">
+    <img src="./assets/images/blood_pressure_4.svg" />
+    <div class="blood-pressure-icon-text">{{ 'black' | translate }}</div>
+    <div class="mr-2">{{ 'BP goal' | translate }}</div>
+    +
+    <input
+      type="number"
+      class="ml-20 form-control h-32 w-160"
+      formControlName="hospital_threshold_bp_black_sys"
+      appOnlyNumber
+      [integer]="true"
+    />
+    <div class="mx-20">{{ 'above or' | translate }}</div>
+    <input
+      type="number"
+      class="mr-20 form-control h-32 w-160"
+      appOnlyNumber
+      formControlName="hospital_threshold_bp_black_dia"
+      [integer]="true"
+    />
+    <div>{{ 'above' | translate }}</div>
+  </div>
+  <div class="d-flex align-items-center mt-32">
+    <img src="./assets/images/blood_pressure_5.svg" />
+    <div class="blood-pressure-icon-text">{{ 'dark red' | translate }}</div>
+    <div class="mr-2">{{ 'BP goal' | translate }}</div>
+    +
+    <input
+      type="number"
+      class="ml-20 form-control h-32 w-160"
+      appOnlyNumber
+      formControlName="hospital_threshold_bp_dark_red_sys"
+      [integer]="true"
+    />
+    <div class="mx-20">{{ 'above or' | translate }}</div>
+    <input
+      type="number"
+      class="mr-20 form-control h-32 w-160"
+      appOnlyNumber
+      formControlName="hospital_threshold_bp_dark_red_dia"
+      [integer]="true"
+    />
+    <div>{{ 'above' | translate }}</div>
+  </div>
+  <div class="d-flex align-items-center mt-32">
+    <img src="./assets/images/blood_pressure_6.svg" />
+    <div class="blood-pressure-icon-text">{{ 'light red' | translate }}</div>
+    <div class="text-low-goal">( {{ 'beyond the goal' | translate }} )</div>
+  </div>
+  <div class="d-flex align-items-center mt-32">
+    <img src="./assets/images/blood_pressure_7.svg" />
+    <div class="blood-pressure-icon-text">{{ 'low' | translate }}</div>
+    <div class="text-low-goal">( {{ 'below the goal' | translate }} )</div>
+  </div>
+
+  <button type="submit" (click)="onSubmit()" class="btn btn-primary bg-blue-500 mt-32 btn-save text-normal">
+    {{ 'button.save' | translate }}
+  </button>
+</form>

@@ -1,0 +1,45 @@
+@import 'src/app/styles/variable';
+
+* {
+  color: $black-300;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 16px;
+  margin-top: 16px;
+}
+
+.form-container {
+  margin: 16px 0 8px 40px;
+}
+
+.radio-group {
+  margin-left: 228px;
+  display: flex;
+
+  .radio {
+    display: flex;
+    margin-right: 10px;
+    width: 149px;
+  }
+}
+
+.checkbox-group {
+  margin-left: 228px;
+  display: flex;
+  flex-wrap: wrap;
+
+  .checkbox {
+    display: flex;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    width: 149px;
+  }
+}
+
+.button-reset {
+  margin-bottom: 32px;
+  margin-left: 208px;
+}

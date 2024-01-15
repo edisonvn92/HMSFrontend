@@ -1,0 +1,212 @@
+{
+  "groupList": {
+    "data": [
+      {
+        "group_id": 1,
+        "group_default": 1,
+        "group_name": "group 1",
+        "group_description": "description 1",
+        "doctor_number": 0,
+        "nurse_number": 1,
+        "patient_number": 5
+      },
+      {
+        "group_id": 2,
+        "group_default": 0,
+        "group_name": "group 2",
+        "group_description": "description 2",
+        "doctor_number": 1,
+        "nurse_number": 2,
+        "patient_number": 5
+      },
+      {
+        "group_id": 3,
+        "group_default": 0,
+        "group_name": "group 3",
+        "group_description": "description 3",
+        "doctor_number": 1,
+        "nurse_number": 2,
+        "patient_number": 5
+      },
+      {
+        "group_id": 4,
+        "group_default": 1,
+        "group_name": "group 4",
+        "group_description": "description 4",
+        "doctor_number": 1,
+        "nurse_number": 2,
+        "patient_number": 8
+      },
+
+      {
+        "group_id": 5,
+        "group_default": 0,
+        "group_name": "group 5",
+        "group_description": "description 5",
+        "doctor_number": 0,
+        "nurse_number": 0,
+        "patient_number": 0
+      },
+      {
+        "group_id": 6,
+        "group_default": 0,
+        "group_name": "group 6",
+        "group_description": "description 6",
+        "doctor_number": 1,
+        "nurse_number": 2,
+        "patient_number": 5
+      },
+      {
+        "group_id": 7,
+        "group_default": 0,
+        "group_name": "group 7",
+        "group_description": "description 7",
+        "doctor_number": 1,
+        "nurse_number": 2,
+        "patient_number": 5
+      },
+      {
+        "group_id": 8,
+        "group_default": 0,
+        "group_name": "group 8",
+        "group_description": "description 8",
+        "doctor_number": 1,
+        "nurse_number": 2,
+        "patient_number": 5
+      },
+      {
+        "group_id": 9,
+        "group_default": 0,
+        "group_name": "group 9",
+        "group_description": "description 9",
+        "doctor_number": 1,
+        "nurse_number": 2,
+        "patient_number": 5
+      },
+      {
+        "group_id": 10,
+        "group_default": 0,
+        "group_name": "group 10",
+        "group_description": "description 10",
+        "doctor_number": 1,
+        "nurse_number": 2,
+        "patient_number": 5
+      },
+      {
+        "group_id": 11,
+        "group_default": 0,
+        "group_name": "group 11",
+        "group_description": "description 11",
+        "doctor_number": 1,
+        "nurse_number": 2,
+        "patient_number": 5
+      },
+      {
+        "group_id": 12,
+        "group_default": 0,
+        "group_name": "group 12",
+        "group_description": "description 12",
+        "doctor_number": 1,
+        "nurse_number": 2,
+        "patient_number": 5
+      },
+      {
+        "group_id": 13,
+        "group_default": 0,
+        "group_name": "group 13",
+        "group_description": "description 13",
+        "doctor_number": 1,
+        "nurse_number": 2,
+        "patient_number": 5
+      },
+      {
+        "group_id": 14,
+        "group_default": 0,
+        "group_name": "group 14",
+        "group_description": "description 14",
+        "doctor_number": 1,
+        "nurse_number": 2,
+        "patient_number": 5
+      },
+      {
+        "group_id": 15,
+        "group_default": 0,
+        "group_name": "group 15",
+        "group_description": "description 15",
+        "doctor_number": 1,
+        "nurse_number": 2,
+        "patient_number": 5
+      },
+      {
+        "group_id": 16,
+        "group_default": 0,
+        "group_name": "group 16",
+        "group_description": "description 16",
+        "doctor_number": 1,
+        "nurse_number": 2,
+        "patient_number": 5
+      },
+      {
+        "group_id": 17,
+        "group_default": 0,
+        "group_name": "group 17",
+        "group_description": "description 17",
+        "doctor_number": 1,
+        "nurse_number": 2,
+        "patient_number": 5
+      },
+      {
+        "group_id": 18,
+        "group_default": 0,
+        "group_name": "group 18",
+        "group_description": "description 18",
+        "doctor_number": 1,
+        "nurse_number": 2,
+        "patient_number": 5
+      }
+    ],
+    "current_page": 1,
+    "last_page": 1,
+    "per_page": 20,
+    "from": 1,
+    "to": 2,
+    "total": 2000
+  },
+  "originalFields": {
+    "group_id": {
+      "field": "group_id",
+      "isSort": false,
+      "sortType": ""
+    },
+    "group_default": {
+      "field": "group_default",
+      "isSort": false,
+      "sortType": ""
+    },
+    "group_name": {
+      "field": "group_name",
+      "isSort": false,
+      "sortType": ""
+    },
+    "group_description": {
+      "field": "group_description",
+      "isSort": false,
+      "sortType": ""
+    },
+    "doctor_number": {
+      "field": "doctor_number",
+      "isSort": false,
+      "sortType": ""
+    },
+    "nurse_number": {
+      "field": "nurse_number",
+      "isSort": false,
+      "sortType": ""
+    },
+    "patient_number": {
+      "field": "patient_number",
+      "isSort": false,
+      "sortType": ""
+    }
+  }
+}

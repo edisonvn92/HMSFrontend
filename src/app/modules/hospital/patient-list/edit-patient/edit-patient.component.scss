@@ -1,0 +1,72 @@
+@import 'src/app/styles/variable';
+
+:host {
+  color: $black-300;
+}
+
+*:disabled {
+  cursor: not-allowed;
+  background-color: $gray-150;
+}
+
+.invalid {
+  width: 610px;
+  margin-left: 114px;
+  padding-right: 0;
+}
+
+.modal-header {
+  height: 40px;
+  padding: 8px 24px;
+}
+
+.modal-body {
+  padding: 1rem 53px;
+}
+
+.form-control {
+  height: 32px !important;
+  font-size: 14px;
+  color: $black-300;
+}
+
+.btn:disabled {
+  background-color: $gray-150;
+  opacity: 1;
+
+  &:hover {
+    background-color: $gray-150 !important;
+    opacity: 1;
+  }
+}
+
+.modal-footer {
+  height: 52px;
+  padding: 10px 16px;
+
+  > * {
+    margin: 0;
+  }
+
+  .btn-close {
+    border-color: $gray-200;
+  }
+}
+
+.form-label {
+  width: 208px;
+}
+
+.lang-select,
+.group-select,
+.role-select {
+  max-height: 200px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0;
+}
+
+.icon {
+  height: 8px;
+  width: 11px;
+}

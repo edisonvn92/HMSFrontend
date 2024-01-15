@@ -1,0 +1,25 @@
+@import 'src/app/styles/variable';
+
+.create-hospital-container {
+  padding: 24px 16px 24px 24px;
+  height: calc(100vh - 110px);
+  overflow: auto;
+}
+
+.form-content {
+  margin-right: 224px;
+}
+
+.form-footer {
+  margin-top: -1px;
+  padding: 10px 16px;
+  position: sticky;
+  bottom: 0;
+  background-color: white;
+  z-index: 10;
+
+  .line {
+    border-top: 1px solid $gray-100;
+    margin-bottom: 10px;
+  }
+}

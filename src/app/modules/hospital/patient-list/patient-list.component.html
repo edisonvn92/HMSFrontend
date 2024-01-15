@@ -1,0 +1,225 @@
+<div class="patient-name">
+  <div class="patient-content">
+    <form [formGroup]="searchForm">
+      <div class="d-flex align-items-end input-patient search-patient pb-3">
+        <div class="align-items-center input-patient mr-51">
+          {{ 'patient id' | translate }}
+          <input
+            type="text"
+            class="form-control patient-id text-normal bg-white mt-2"
+            placeholder="{{ 'please enter' | translate }}"
+            formControlName="idSearch"
+            name="textSearch"
+            [disabled]="isSearching"
+          />
+        </div>
+        <div ngbDropdown #groupDropdown class="align-items-center input-patient search-patient mr-51">
+          {{ 'Group' | translate }}
+          <button
+            type="button"
+            class="btn btn-outline-secondary group d-flex mt-2 align-items-center"
+            id="dropdownBasic2"
+            ngbDropdownToggle
+          >
+            <div class="text text-black-400 text-truncate text-normal">{{ selectedGroup.group_name }}</div>
+            <i
+              class="fas ml-auto my-auto icon opacity-25"
+              [class]="ngbGroupDropdown?.isOpen() ? 'icon-arrow-up' : 'icon-arrow-down'"
+            ></i>
+          </button>
+          <div class="select" ngbDropdownMenu aria-labelledby="dropdownBasic2">
+            <div
+              class="d-flex align-items-start m-0 text-normal cursor-pointer select-item"
+              (click)="selectedItemSearch()"
+            >
+              --
+            </div>
+            <div
+              *ngFor="let item of groupList"
+              class="d-flex align-items-start text-normal break-space cursor-pointer m-0 select-item"
+              (click)="selectedItemSearch(false, item)"
+            >
+              {{ item.group_name }}
+            </div>
+          </div>
+        </div>
+        <div class="align-items-center input-patient mr-51">
+          {{ 'name' | translate }}
+          <input
+            type="text"
+            class="form-control patient-id text-normal mt-2"
+            placeholder="{{ 'please enter' | translate }}"
+            formControlName="nameSearch"
+            name="textSearch"
+          />
+        </div>
+        <div ngbDropdown #sexDropdown class="align-items-center input-patient search-patient mr-51">
+          {{ 'sex' | translate }}
+          <button
+            type="button"
+            class="btn btn-outline-secondary sex d-flex mt-2 align-items-center"
+            id="dropdownBasic2"
+            ngbDropdownToggle
+          >
+            <div class="text text-black-400 text-truncate text-normal">{{ selectedGender.text | translate }}</div>
+            <i
+              class="fas ml-auto my-auto icon opacity-25"
+              [class]="ngbSexDropdown?.isOpen() ? 'icon-arrow-up' : 'icon-arrow-down'"
+            ></i>
+          </button>
+          <div class="select" ngbDropdownMenu aria-labelledby="dropdownBasic2">
+            <div
+              class="d-flex align-items-start m-0 text-normal cursor-pointer select-item"
+              (click)="selectedItemSearch(true)"
+            >
+              --
+            </div>
+            <div
+              *ngFor="let item of gender"
+              class="d-flex align-items-start text-normal cursor-pointer m-0 select-item"
+              (click)="selectedItemSearch(true, item)"
+            >
+              {{ item.text | translate }}
+            </div>
+          </div>
+        </div>
+        <button
+          type="button"
+          class="btn btn-outline-secondary d-flex ml-auto text-black-300 text-normal"
+          (click)="resetSearchClicked()"
+        >
+          {{ 'button.reset' | translate }}
+        </button>
+        <button type="submit" class="btn btn-primary d-flex ml-2 bg-blue-500 text-normal" (click)="findRecords(true)">
+          {{ 'button.search' | translate }}
+        </button>
+      </div>
+    </form>
+
+    <table class="table hospital-table" id="table-content">
+      <thead>
+        <tr>
+          <th scope="col">
+            <div>
+              <app-label-column-table
+                [active]="tableFields['patient_code'].isSort"
+                [sortType]="tableFields['patient_code'].sortType"
+                [label]="'patient id' | translate"
+                [labelId]="'patient_code'"
+                (sortEvent)="sortBy($event)"
+              >
+              </app-label-column-table>
+            </div>
+          </th>
+          <th scope="col">{{ 'Group' | translate }}</th>
+          <th scope="col">
+            <div>
+              <app-label-column-table
+                [active]="tableFields['patient_full_name'].isSort"
+                [sortType]="tableFields['patient_full_name'].sortType"
+                [label]="'name' | translate"
+                [labelId]="'patient_full_name'"
+                (sortEvent)="sortBy($event)"
+              >
+              </app-label-column-table>
+            </div>
+          </th>
+          <th scope="col">
+            <div>
+              <app-label-column-table
+                [active]="tableFields['patient_gender'].isSort"
+                [sortType]="tableFields['patient_gender'].sortType"
+                [label]="'sex'"
+                [labelId]="'patient_gender'"
+                (sortEvent)="sortBy($event)"
+              >
+              </app-label-column-table>
+            </div>
+          </th>
+          <th scope="col">
+            <div>
+              <app-label-column-table
+                [active]="tableFields['patient_birthday'].isSort"
+                [sortType]="tableFields['patient_birthday'].sortType"
+                [label]="'date of birth' | translate"
+                [labelId]="'patient_birthday'"
+                (sortEvent)="sortBy($event)"
+              >
+              </app-label-column-table>
+            </div>
+          </th>
+          <th scope="col">
+            <div>
+              <app-label-column-table
+                [active]="tableFields['period'].isSort"
+                [sortType]="tableFields['period'].sortType"
+                [label]="'period of use' | translate"
+                [labelId]="'period'"
+                (sortEvent)="sortBy($event)"
+              >
+              </app-label-column-table>
+            </div>
+          </th>
+          <th scope="col">{{ 'actions' | translate }}</th>
+        </tr>
+      </thead>
+      <tbody [attr.noData]="'there is no data' | translate">
+        <tr *ngFor="let patient of patientList.data">
+          <td>
+            <u class="cursor-pointer w-fit-content" (click)="updateClicked(patient.patient_id)">{{
+              patient.patient_code
+            }}</u>
+          </td>
+          <td>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="break-space">{{ patient.groups[0]?.group_name }}</div>
+              <div *ngIf="patient.groups.length > 1" class="cursor-pointer ml-10" (click)="openGroupList(patient)">
+                <img class="ml-3" src="./assets/images/icon_dot.svg" class="icon-dot-3" />
+              </div>
+            </div>
+          </td>
+          <td>
+            {{ getFullName(patient.patient_first_name, patient.patient_middle_name, patient.patient_last_name) }}
+          </td>
+          <td>
+            {{ patient.patient_gender !== null ? ((patient.patient_gender ? 'male' : 'female') | translate) : '' }}
+          </td>
+          <td>{{ (patient.patient_birthday | date: (sharedService.isJa() ? 'y年MM月dd日' : 'd MMM y')) || '-' }}</td>
+          <td>
+            {{
+              (patient.patient_start_period_of_use | date: (sharedService.isJa() ? 'y.MM.dd' : 'd MMM y')) ||
+                '----.--.--'
+            }}
+            -
+            {{
+              (patient.patient_end_period_of_use | date: (sharedService.isJa() ? 'y.MM.dd' : 'd MMM y')) || '----.--.--'
+            }}
+          </td>
+          <td>
+            <span
+              class="text-blue-500 underline-hover cursor-pointer"
+              (click)="updateClicked(patient.patient_id, true)"
+            >
+              {{ 'edit' | translate }}
+            </span>
+            |
+            <span class="text-red-200 underline-hover cursor-pointer" (click)="deleteClicked(patient)">
+              {{ 'delete' | translate }}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="d-flex mt-2">
+      <app-paginator
+        *ngIf="patientList.total"
+        class="paginator ml-auto my-auto"
+        [collectionSize]="patientList.total"
+        (pageChange)="findRecords(false, $event)"
+        [pageSize]="patientList.per_page"
+        [page]="param.page"
+        [pageSize]="patientList.per_page"
+      ></app-paginator>
+    </div>
+  </div>
+</div>

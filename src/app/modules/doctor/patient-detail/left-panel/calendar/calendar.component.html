@@ -1,0 +1,117 @@
+<div class="customize-calender">
+  <div class="calendar-content">
+    <div class="d-flex month">
+      <div class="fs-19 text-blue-700 active-month">
+        {{ activeMonth | date: (sharedService.isJa() ? 'yyyy年MM月' : 'y MMM') }}
+      </div>
+      <div class="button-previous cursor-pointer" (click)="clickPrevMonth()">
+        <img src="./assets/images/icon_prev_month.svg" />
+      </div>
+      <div class="button-next cursor-pointer" (click)="clickNextMonth()">
+        <img src="./assets/images/icon_next_month.svg" />
+      </div>
+    </div>
+    <div class="d-flex day-list">
+      <div class="text-center day text-small text-gray-250" *ngFor="let day of fullDayOfWeek">
+        {{ day | translate }}
+      </div>
+    </div>
+    <div
+      class="d-flex day-with-review"
+      [class.border-right]="[0, 1, 2, 3, 4].includes(startDayInMonth)"
+      *ngIf="evaluationStatus !== 'not_start'"
+    >
+      <div
+        class="with-review"
+        [style.width]="calcReviewWidth()"
+        [class.border-right]="![0, 1, 2, 3, 4].includes(startDayInMonth)"
+      >
+        <div class="review-content" [hidden]="evaluationStatus === 'not_start'">
+          <div *ngIf="evaluation" class="d-flex align-items-center">
+            <div class="review-left">
+              <img
+                [src]="'assets/images/icon_review' + evaluation.evaluation_level + '.svg'"
+                alt="smile"
+                class="smile"
+              />
+            </div>
+            <div class="review-right">
+              <div class="text-small text-blue-600">{{ 'patient detail.level of achievement' | translate }}</div>
+              <div class="d-flex">
+                <img
+                  src="assets/images/icon_star.svg"
+                  alt="star"
+                  class="star"
+                  *ngFor="let i of range(1, evaluation.evaluation_level, 1)"
+                />
+              </div>
+            </div>
+          </div>
+          <ng-template [ngIf]="evaluationStatus === 'not_complete'">
+            <div class="text-small text-blue-600 text-center">
+              {{ 'patient detail.level of achievement' | translate }}
+            </div>
+            <img src="assets/images/icon_review_null.svg" alt="?" class="review-not-complete" />
+          </ng-template>
+        </div>
+      </div>
+      <div
+        class="day-content day-first-row cursor-pointer"
+        *ngFor="let day of calcStartDayArray(); index as i"
+        [class.active-day]="isToday(day)"
+        tooltipClass="tooltip-custom tooltip-event"
+        [ngbTooltip]="getActionIcon(day).eventList.length > 0 || getActionIcon(day).hasMemo ? tipEvent : ''"
+        placement="top-left"
+        triggers="click"
+      >
+        <div class="number-day">
+          <span [class.day-less-10]="day < 10">{{ day }}</span>
+        </div>
+        <img [src]="'assets/images/' + getActionIcon(day).medicine" alt="medicine" class="medicine" />
+        <img [src]="'assets/images/' + getActionIcon(day).morning" alt="action" class="action morning-action" />
+        <img [src]="'assets/images/' + getActionIcon(day).evening" alt="action" class="action evening-action" />
+        <ng-template #tipEvent>
+          <div class="memo-actions">
+            <img
+              class="event"
+              [src]="'./assets/images/' + event + '.svg'"
+              *ngFor="let event of getActionIcon(day).eventList"
+            />
+            <img class="event" src="./assets/images/icon_memo_calendar.svg" *ngIf="getActionIcon(day).hasMemo" />
+          </div>
+        </ng-template>
+      </div>
+    </div>
+    <div class="d-flex day-content-list">
+      <div
+        class="day-content cursor-pointer"
+        *ngFor="let day of dayList; index as i"
+        [class.border-left]="i % 7 === 0"
+        [class.active-day]="isToday(day)"
+        tooltipClass="tooltip-custom tooltip-event"
+        [ngbTooltip]="getActionIcon(day).eventList.length > 0 || getActionIcon(day).hasMemo ? tipEvent : ''"
+        placement="top-left"
+        triggers="click"
+      >
+        <ng-container *ngIf="day > 0">
+          <div class="number-day">
+            <span [class.day-less-10]="day < 10">{{ day }}</span>
+          </div>
+          <img [src]="'assets/images/' + getActionIcon(day).medicine" alt="medicine" class="medicine" />
+          <img [src]="'assets/images/' + getActionIcon(day).morning" alt="action" class="action morning-action" />
+          <img [src]="'assets/images/' + getActionIcon(day).evening" alt="action" class="action evening-action" />
+        </ng-container>
+        <ng-template #tipEvent>
+          <div class="memo-actions">
+            <img
+              class="event"
+              [src]="'./assets/images/' + event + '.svg'"
+              *ngFor="let event of getActionIcon(day).eventList"
+            />
+            <img class="event" src="./assets/images/icon_memo_calendar.svg" *ngIf="getActionIcon(day).hasMemo" />
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

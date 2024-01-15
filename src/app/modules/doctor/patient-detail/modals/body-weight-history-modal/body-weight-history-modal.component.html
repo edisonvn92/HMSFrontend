@@ -1,0 +1,59 @@
+<div class="history-modal">
+  <div class="modal-body">
+    <div>
+      <div class="title">{{ 'weight history' | translate }}</div>
+      <div class="list" id="history-content" [class.en-language]="!sharedService.isJa()">
+        <div class="header">
+          <div class="header-content">
+            <div class="date" [ngClass]="sharedService.isJa() ? ' pl-45' : ' text-pre-line text-center'">
+              {{ 'measurement date \n and time' | translate }}
+            </div>
+            <div class="weight text-center">{{ 'patient detail.body weight' | translate }} (kg)</div>
+          </div>
+        </div>
+        <div
+          *ngIf="bodyWeightHistory && bodyWeightHistory.data && bodyWeightHistory.data.length > 0"
+          class="history-content"
+        >
+          <div *ngFor="let item of bodyWeightHistory.data">
+            <div class="month" *ngIf="item.is_start_month">
+              {{ item.vital_weight_ldatetime | date: (sharedService.isJa() ? 'yyyy年MM月' : 'MMM y'):'+0000' }}
+            </div>
+            <div class="d-flex align-items-center content text-normal">
+              <div class="date text-left datetime">
+                <div class="date-month">
+                  {{ item.vital_weight_ldatetime | date: (sharedService.isJa() ? 'MM月dd日' : 'd MMM'):'+0000' }}
+                </div>
+                <div class="weekday" [hidden]="!item.vital_weight_ldatetime">
+                  ({{ getWeekday(item.vital_weight_ldatetime) | translate }})
+                </div>
+                <div>{{ item.vital_weight_ldatetime | date: 'HH:mm':'+0000' }}</div>
+              </div>
+              <div class="weight text-center">{{ fixNumber(item.vital_weight_value) | dash }}</div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="bodyWeightHistory.data.length === 0" class="no-data">{{ 'there is no data' | translate }}</div>
+      </div>
+      <div
+        class="pagination-history"
+        *ngIf="bodyWeightHistory && bodyWeightHistory.total > bodyWeightHistory.data.length"
+      >
+        <app-paginator
+          class="paginator ml-auto my-auto"
+          [page]="bodyRequest.page"
+          [collectionSize]="bodyWeightHistory.total"
+          (pageChange)="pageChange($event)"
+          [pageSize]="bodyWeightHistory.per_page"
+          [hasCollectionSize]="false"
+          [className]="'history-pagination'"
+        ></app-paginator>
+      </div>
+    </div>
+  </div>
+  <div ngbAutoFocus tabindex="0" class="modal-footer no-focus" (click)="clickedClose()">
+    <button type="button" class="btn">
+      {{ 'button.Close' | translate }}
+    </button>
+  </div>
+</div>

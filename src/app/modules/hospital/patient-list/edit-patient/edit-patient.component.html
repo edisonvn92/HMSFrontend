@@ -1,0 +1,394 @@
+<form [formGroup]="patientForm">
+  <div class="edit-patient-container">
+    <div class="modal-header">
+      <div class="modal-title text-medium font-weight-500 text-black-300 text-left" id="modal-basic-title">
+        {{ (isEdit ? 'edit patient' : 'patient details') | translate }}
+      </div>
+      <button type="button" class="close none-outline btn-close" aria-label="Close" (click)="clickedClose()">
+        <div class="icon-close btn-icon-close"></div>
+      </button>
+    </div>
+    <ng-template [ngIf]="!errMess">
+      <div class="modal-body">
+        <ul class="invalid mb-3 text-normal text-black-300" *ngIf="isError">
+          <li *ngIf="validationMsg.patientCodeRequired">
+            {{ 'validator.required' | translate: { field: 'patient id' | translate } }}
+          </li>
+          <li [class.px-2]="sharedService.isJa()" *ngIf="patientForm.controls.patient_code?.errors?.pattern">
+            {{ 'validator.login id pattern' | translate }}
+          </li>
+          <li *ngIf="validationMsg.groupRequired">
+            {{ 'validator.group required' | translate }}
+          </li>
+          <li *ngIf="patientForm.controls.patient_first_name.errors?.required">
+            {{ 'validator.required' | translate: { field: 'name' | translate } }}
+          </li>
+          <li *ngIf="validationMsg.genderRequired">
+            {{ 'validator.required' | translate: { field: 'sex' | translate } }}
+          </li>
+          <li *ngIf="validationMsg.birthdayRequired">
+            {{ 'validator.required' | translate: { field: 'date of birth' | translate } }}
+          </li>
+          <li
+            [class.px-2]="sharedService.isJa()"
+            *ngIf="
+              patientForm.controls.patient_phone?.errors?.pattern ||
+              patientForm.controls.patient_phone?.errors?.minlength ||
+              patientForm.controls.patient_phone?.errors?.maxlength
+            "
+          >
+            {{ 'validator.phone pattern format' | translate }}
+          </li>
+          <li [class.px-2]="sharedService.isJa()" *ngIf="validationErr">
+            {{ 'errMsg.' + validationErr | translate }}
+          </li>
+        </ul>
+
+        <div class="mb-3 d-flex align-items-center">
+          <label for="connect-account" class="form-label text-right text-normal">
+            <span class="required">*</span>
+            {{ 'OMRON connect account' | translate }} :
+          </label>
+          <input
+            type="text"
+            [value]="account"
+            class="form-control ml-20 w-495"
+            maxlength="50"
+            id="connect-account"
+            disabled
+          />
+        </div>
+        <div class="mb-3 d-flex align-items-center">
+          <label for="patient-id" class="form-label text-right text-normal">
+            <span class="required">*</span>
+            {{ 'patient id' | translate }} :
+          </label>
+          <input
+            type="checkbox"
+            id="use-ogsc-username"
+            class="mr-1 ml-20"
+            value=""
+            [attr.disabled]="!isEdit ? true : null"
+            [checked]="patientForm.controls.patient_use_ogsc_username.value"
+            (change)="handleCheckbox($event)"
+          />
+          <label for="connect-account" class="text-no-wrap mr-1 text-normal text-black-300 opacity-50">
+            {{ 'use OMRON connect Account' | translate }}
+          </label>
+          <input
+            type="text"
+            class="form-control ml-auto w-205"
+            maxlength="50"
+            [placeholder]="isEdit ? ('patient id' | translate) : ''"
+            id="patient-id"
+            formControlName="patient_code"
+            [attr.disabled]="!isEdit || patientForm.controls.patient_use_ogsc_username.value ? true : null"
+          />
+        </div>
+        <div class="mb-3 d-flex align-items-center">
+          <label for="group" class="form-label text-right text-normal">
+            <span class="required">*</span>
+            {{ 'Group' | translate }} :
+          </label>
+          <div ngbDropdown #groupDropdown class="d-inline-block ml-20 select-box">
+            <button
+              [disabled]="!isEdit"
+              type="button"
+              class="btn btn-outline-secondary w-495 d-flex justify-content-center align-items-center"
+              ngbDropdownToggle
+            >
+              <div class="text text-black-300 text-truncate text-normal mt-auto">{{ groupSelectedString }}</div>
+              <i
+                class="fas my-auto icon ml-2 text-black-300"
+                [class]="ngbGroupDropdown?.isOpen() ? 'icon-arrow-up' : 'icon-arrow-down'"
+              ></i>
+            </button>
+            <div class="group-select" ngbDropdownMenu aria-labelledby="dropdownBasic2">
+              <label
+                [class.active]="groupSelected.length === groupList.length"
+                class="d-flex align-items-start cursor-pointer w-495 m-0 select-item"
+              >
+                <input
+                  type="checkbox"
+                  id="check-all-group"
+                  class="mr-1 my-auto"
+                  [checked]="groupSelected.length === groupList.length"
+                  [class.active]="groupSelected.length === groupList.length"
+                  (click)="checkAll()"
+                  value=""
+                />
+                {{ 'check all' | translate }}
+              </label>
+              <label
+                *ngFor="let item of groupList; let i = index"
+                [class.active]="isChecked(item)"
+                class="d-flex align-items-start cursor-pointer w-495 m-0 select-item"
+                [class.active]="isChecked(item)"
+              >
+                <div class="pt-1">
+                  <input
+                    type="checkbox"
+                    id="{{ 'group_' + i }}"
+                    [checked]="isChecked(item)"
+                    (click)="onSelectedGroupClicked($event, item)"
+                    class="mr-1"
+                    value=""
+                  />
+                </div>
+                <div class="break-space">{{ item.group_name }}</div>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="mb-3 d-flex align-items-center">
+          <label for="name" class="form-label text-right text-normal">
+            <span class="required">*</span>
+            {{ 'name' | translate }} :
+          </label>
+          <input
+            [attr.disabled]="!isEdit ? true : null"
+            type="text"
+            class="form-control ml-20 w-495"
+            maxlength="50"
+            formControlName="patient_full_name"
+            id="name"
+            appTransformSpace
+          />
+        </div>
+
+        <div class="mb-3 d-flex align-items-center">
+          <label for="sex" class="form-label text-right text-normal">
+            <span class="required">*</span>
+            {{ 'sex' | translate }} :
+          </label>
+          <div ngbDropdown #sexDropdown class="d-inline-block ml-20 select-box">
+            <button
+              [disabled]="!isEdit"
+              type="button"
+              class="btn btn-outline-secondary w-152 d-flex align-items-center disabled-ignore"
+              id="dropdownBasic2"
+              ngbDropdownToggle
+            >
+              <div class="text text-black-300 text-truncate text-normal">{{ selected.patient_gender | translate }}</div>
+              <i
+                class="fas my-auto icon ml-auto opacity-25 text-black-300"
+                [class]="ngbSexDropdown?.isOpen() ? 'icon-arrow-up' : 'icon-arrow-down'"
+              ></i>
+            </button>
+            <div class="group-select w-152" ngbDropdownMenu aria-labelledby="dropdownBasic2">
+              <div
+                *ngFor="let item of genders"
+                class="d-flex align-items-start m-0 select-item cursor-pointer"
+                (click)="selectedItem('patient_gender', item.value, item.text)"
+                [class.active]="item.value === patientForm.controls.patient_gender.value"
+              >
+                {{ item.text | translate }}
+              </div>
+            </div>
+          </div>
+
+          <label for="dob" class="form-label text-right w-138 ml-34 mr-2 text-normal">
+            <span class="required">*</span>
+            {{ 'date of birth' | translate }} :
+          </label>
+          <app-custom-datepicker
+            [disabled]="!isEdit"
+            class="ml-10 w-152"
+            inputClass="w-152 h-32 text-normal"
+            [minDate]="minDate"
+            [maxDate]="maxDate"
+            [hasIcon]="true"
+            [date]="patientForm.controls.patient_birthday.value"
+            [format]="sharedService.isJa() ? 'y年MM月DD日' : 'D MMM y'"
+            (dateChange)="onDateChange($event)"
+          ></app-custom-datepicker>
+        </div>
+
+        <div class="mb-3 d-flex align-items-center">
+          <label for="email-address" class="form-label text-right text-normal">
+            {{ 'email address' | translate }} :
+          </label>
+          <input
+            type="text"
+            [value]="patientForm.controls?.patient_email?.value"
+            class="form-control ml-20 w-186"
+            id="email-address"
+            disabled
+          />
+
+          <label for="phone-number" class="form-label text-right w-138 mr-2 text-normal">
+            {{ 'phone number' | translate }} :
+          </label>
+          <input
+            type="text"
+            formControlName="patient_phone"
+            [attr.disabled]="!isEdit ? true : null"
+            appOnlyNumber
+            [phoneNumber]="true"
+            class="form-control w-152 ml-10"
+            id="phone-number"
+          />
+        </div>
+
+        <div class="mb-3 d-flex align-items-center">
+          <label for="arm-circumference" class="form-label text-right text-normal">
+            {{ 'arm circumference' | translate }} :
+          </label>
+          <input
+            type="text"
+            formControlName="patient_arm_circumference"
+            [attr.disabled]="!isEdit ? true : null"
+            [placeholder]="isEdit ? ('arm circumference' | translate) : ''"
+            class="form-control ml-20 w-186"
+            id="arm-circumference"
+          />
+
+          <label for="language" class="form-label mr-2 w-138 text-right text-normal">
+            {{ 'language' | translate }}:
+          </label>
+
+          <div ngbDropdown #langDropdown class="select-box ml-10">
+            <button
+              [attr.disabled]="!isEdit ? true : null"
+              type="button"
+              class="btn btn-outline-secondary disabled-ignore d-flex align-items-center w-152"
+              id="dropdownBasic2"
+              ngbDropdownToggle
+            >
+              <div class="text text-black-300 text-truncate text-normal">
+                {{ patientForm.controls.user.value.user_language | translate }}
+              </div>
+              <i
+                class="fas my-auto icon ml-auto opacity-25 text-black-300"
+                [class]="ngbLangDropdown?.isOpen() ? 'icon-arrow-up' : 'icon-arrow-down'"
+              ></i>
+            </button>
+            <div class="lang-select mw-152" ngbDropdownMenu aria-labelledby="dropdownBasic2">
+              <div
+                *ngFor="let item of language | keyvalue"
+                class="d-flex align-items-start m-0 select-item cursor-pointer"
+                [class.active]="item.value === patientForm.controls.user.value.user_language"
+                (click)="selectedItem('user_language', item.value)"
+              >
+                {{ item.value | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3 d-flex align-items-center">
+          <label for="os-version" class="form-label text-right text-normal"> {{ 'os version' | translate }} : </label>
+          <input
+            type="text"
+            formControlName="patient_os_version"
+            [attr.disabled]="!isEdit ? true : null"
+            [placeholder]="isEdit ? ('os version' | translate) : ''"
+            class="form-control ml-20 w-186"
+            id="os-version"
+          />
+
+          <label for="smartphone" class="form-label w-138 text-right text-normal">
+            {{ 'smartphone' | translate }} :
+          </label>
+          <div ngbDropdown #smartphoneDropdown class="d-inline-block ml-20 select-box">
+            <button
+              [disabled]="!isEdit"
+              type="button"
+              class="btn btn-outline-secondary w-152 d-flex align-items-center disabled-ignore"
+              id="dropdownBasic2"
+              ngbDropdownToggle
+            >
+              <div class="text text-black-300 text-truncate text-normal">{{ selected.smartphone | translate }}</div>
+              <i
+                class="fas my-auto icon ml-auto opacity-25 text-black-300"
+                [class]="ngbSmartphoneDropdown?.isOpen() ? 'icon-arrow-up' : 'icon-arrow-down'"
+              ></i>
+            </button>
+            <div class="group-select mw-152" ngbDropdownMenu aria-labelledby="dropdownBasic2">
+              <div
+                *ngFor="let item of smartphone"
+                class="d-flex align-items-start m-0 select-item cursor-pointer"
+                (click)="selectedItem('patient_smart_phone', item.id, item.name)"
+                [class.active]="item.id === patientForm.controls.patient_smart_phone.value"
+              >
+                {{ item.name | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3 d-flex align-items-center">
+          <label for="model" class="form-label text-right text-normal"> {{ 'model' | translate }} : </label>
+          <input
+            type="text"
+            [placeholder]="isEdit ? ('model' | translate) : ''"
+            class="form-control w-186 ml-20"
+            formControlName="patient_model"
+            [attr.disabled]="!isEdit ? true : null"
+            id="model"
+          />
+        </div>
+
+        <div class="mb-3 d-flex align-items-center">
+          <label for="period off use" class="form-label text-right text-normal">
+            {{ 'period of use' | translate }} :
+          </label>
+          <app-custom-datepicker
+            [disabled]="!isEdit"
+            class="ml-20 w-174"
+            inputClass="w-174 h-32 text-normal"
+            [hasIcon]="true"
+            [date]="patientForm.controls.patient_start_period_of_use.value"
+            (dateChange)="onDateChange($event, 'start')"
+            [format]="sharedService.isJa() ? 'y.MM.DD' : 'D MMM y'"
+          ></app-custom-datepicker>
+          <span class="mx-3 text-normal d-flex align-items-center">～</span>
+          <app-custom-datepicker
+            [disabled]="!isEdit"
+            class="w-174"
+            [hasIcon]="true"
+            inputClass="w-174 h-32 text-normal"
+            [date]="patientForm.controls.patient_end_period_of_use.value"
+            (dateChange)="onDateChange($event, 'end')"
+            [format]="sharedService.isJa() ? 'y.MM.DD' : 'D MMM y'"
+          ></app-custom-datepicker>
+          <button
+            type="button"
+            *ngIf="isEdit"
+            class="btn btn-primary bg-blue-420 btn-close text-normal ml-auto"
+            (click)="resetDate()"
+          >
+            {{ 'button.reset' | translate }}
+          </button>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-outline-secondary btn-close text-black-300 text-normal mr-2"
+          (click)="clickedClose()"
+        >
+          {{ 'button.Close' | translate }}
+        </button>
+        <button
+          type="submit"
+          *ngIf="isEdit"
+          class="btn btn-primary bg-blue-500 btn-close text-normal"
+          (click)="submitClicked()"
+        >
+          {{ 'button.save' | translate }}
+        </button>
+      </div>
+    </ng-template>
+    <ng-template [ngIf]="errMess">
+      <div class="modal-body text-break px-24">
+        <div class="error">{{ ':field does not exist' | translate: { field: 'Patient' | translate } }}</div>
+      </div>
+      <div (click)="clickedClose()" class="modal-footer cursor-pointer justify-content-center">
+        <div class="btn-close text-large text-black-300">
+          {{ 'button.Close' | translate }}
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</form>

@@ -1,0 +1,71 @@
+@import 'src/app/styles/variable';
+
+* {
+  font-family:  'Hiragino Kaku Gothic Pro W3', 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', sans-serif;
+  box-sizing: border-box;
+}
+
+.page {
+  position: relative;
+  overflow: hidden;
+  padding: 0.2in;
+  page-break-after: always;
+  color: $blue-650;
+
+  &.landscape {
+    width: 11.7in;
+    height: 8.2in;
+  }
+}
+
+@page {
+  size: A4 landscape;
+}
+
+#page-header {
+  display: flex;
+  align-items: center;
+  font-size: 10px;
+  .left-side {
+    flex: 1;
+  }
+  .right-side {
+    flex: 1;
+    text-align: right;
+  }
+}
+
+#page-footer {
+  font-size: 8pt;
+}
+
+.border-left {
+  border-left: 1px solid $gray-450 !important;
+}
+
+#page-footer {
+  margin-top: 4px;
+
+  .icon-unit {
+    width: 9px;
+    height: 9px;
+    border: 1px solid $gray-450;
+    border-radius: 2px;
+
+    &.icon-last-bp {
+      background-color: $blue-650;
+    }
+  }
+
+  .img-morning {
+    width: 15px;
+  }
+
+  .icon-time {
+    width: 40px;
+  }
+
+  .img-evening {
+    width: 11px;
+  }
+}

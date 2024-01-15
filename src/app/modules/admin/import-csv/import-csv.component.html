@@ -1,0 +1,58 @@
+<div class="admin-upload-csv">
+  <ul class="invalid mb-3 text-normal text-black-300" *ngIf="fileError || columnErr.length">
+    <li *ngIf="fileError">
+      {{ fileError | translate }}
+    </li>
+    <li *ngIf="columnErr.length" class="text-wrap text-justify">
+      {{ 'the information is incorrect' | translate: { field: columnErr } }}
+    </li>
+  </ul>
+  <div class="upload-file-content">
+    <label for="file" [class.disabled]="importStatus === listImportStatus.INPROGRESS" class="upload-file text-normal">
+      {{ 'patient registration' | translate }}
+    </label>
+    <div class="file-name" [hidden]="!fileName">{{ fileName }}</div>
+    <input
+      type="file"
+      id="file"
+      [disabled]="importStatus === listImportStatus.INPROGRESS"
+      (change)="handleFileInput($event)"
+      (click)="onClickUpload($event)"
+      hidden
+    />
+  </div>
+  <div class="registration-result mb-2">{{ 'registration execution result' | translate }}</div>
+  <div class="result-row bg-gray-150 border-top-row">
+    <div class="information">{{ 'information' | translate }}</div>
+    <div class="number-of-record">{{ 'number of records' | translate }}</div>
+    <div class="situation">{{ 'situation' | translate }}</div>
+  </div>
+  <div class="result-row h-40">
+    <div class="information">{{ 'total number of cases' | translate }}</div>
+    <div class="number-of-record">{{ totalRecord }}</div>
+    <div class="situation d-flex align-items-center">
+      <button
+        *ngIf="importStatus === listImportStatus.NONE_UPLOAD"
+        type="submit"
+        class="btn btn-primary bg-blue-500 btn-close text-normal"
+        (click)="requestUpload()"
+      >
+        {{ 'registration implementation' | translate }}
+      </button>
+      <div *ngIf="importStatus === listImportStatus.INPROGRESS">{{ 'running' | translate }}</div>
+      <div *ngIf="importStatus && importStatus !== listImportStatus.NONE_UPLOAD">
+        {{ 'execution completed' | translate }}({{ timeImport | date: 'yyyy/MM/dd HH:mm:ss' }})
+      </div>
+    </div>
+  </div>
+  <div class="result-row">
+    <div class="information text-blue-500">{{ 'number of successes' | translate }}</div>
+    <div class="number-of-record text-blue-500">{{ totalColumnSuccess }}</div>
+    <div class="situation"></div>
+  </div>
+  <div class="result-row">
+    <div class="information text-red-200">{{ 'number of failed record lines' | translate }}</div>
+    <div class="number-of-record text-red-200">{{ totalColumnError }}</div>
+    <div class="situation">{{ detailColumnError }}</div>
+  </div>
+</div>

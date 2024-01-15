@@ -1,0 +1,36 @@
+@import 'src/app/styles/variable';
+
+.div-left {
+  width: 72%;
+
+  .office-history {
+    border-radius: 2px;
+    padding: 2px 8px;
+
+    img {
+      padding-left: 2px;
+      padding-right: 12px;
+      margin-top: -4px;
+    }
+
+    &:hover {
+      background-color: $gray-320 !important;
+    }
+  }
+
+  .office-history-en {
+    width: 105px;
+
+    img {
+      padding-right: 7px;
+    }
+  }
+}
+
+.div-right {
+  width: 28%;
+}
+
+.content {
+  padding-top: 9px;
+}

@@ -1,0 +1,88 @@
+<div class="modal-header">
+  <div class="modal-title font-weight-500 text-medium text-black-300 text-left" id="modal-basic-title">
+    {{ 'icon display' | translate }}
+  </div>
+  <button type="button" class="close none-outline" aria-label="Close" (click)="clickedClose()">
+    <div class="icon-close btn-icon-close"></div>
+  </button>
+</div>
+
+<div class="modal-body text-break" [class.lang-en]="!sharedService.isJa()">
+  <div class="text-blue-700 text-normal mb-1">{{ 'blood pressure measurement' | translate }}</div>
+  <div class="d-flex">
+    <img src="./assets/images/blood_pressure_chart.svg" alt="" class="mr-3 ml-10" />
+    <div class="mt-15">
+      <div class="d-flex align-items-center">
+        <div class="icon-unit bg-blue-420 mr-2"></div>
+        <span class="text-normal text-black-300" [class.w-112]="!sharedService.isJa()">
+          {{ 'morning' | translate }}
+        </span>
+        <span class="text-normal text-black-300" [class.ml-50]="sharedService.isJa()">
+          {{ setting.hospital_setting_start_morning }} - {{ setting.hospital_setting_end_morning }}
+        </span>
+      </div>
+      <div class="d-flex align-items-center">
+        <div class="icon-unit bg-blue-100 mr-2"></div>
+        <span class="text-normal text-black-300" [class.w-112]="!sharedService.isJa()">
+          {{ 'evening' | translate }}</span
+        >
+        <span class="text-normal text-black-300" [class.ml-50]="sharedService.isJa()">
+          {{ setting.hospital_setting_start_evening }} - {{ setting.hospital_setting_end_evening }}
+        </span>
+      </div>
+      <div class="d-flex align-items-center">
+        <div class="icon-unit bg-gray-360 mr-2"></div>
+        <span class="text-normal text-black-300">{{ 'examination room' | translate }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-blue-700 text-normal mt-20 mb-1">
+    {{ 'measurement status' | translate }}
+  </div>
+  <div *ngFor="let status of measurementStatus" class="ml-10 mt-10 d-flex">
+    <div><img [src]="status.icon" alt="" class="mr-3 status-icon" /></div>
+    <div class="text-normal text-black-300 status-text">{{ status.text1 | translate }}</div>
+    <div class="text-normal text-black-300">{{ status.text2 | translate }}</div>
+  </div>
+
+  <div class="text-blue-700 text-normal mt-20 mb-1">
+    {{ 'consultation' | translate }}
+  </div>
+  <div class="ml-10 mt-10 d-flex">
+    <img src="./assets/images/icon_consultation.svg" alt="" class="mr-3 status-icon" />
+    <div class="text-normal text-black-300">{{ 'consultation day' | translate }}</div>
+  </div>
+
+  <div class="text-blue-700 text-normal mt-20 mb-1">
+    {{ 'medication intake' | translate }}
+  </div>
+  <div class="d-flex">
+    <div class="ml-2 mt-10 d-flex">
+      <div class="icon-circle bg-blue-100"></div>
+      <div class="text-normal text-black-300 d-flex align-items-center">
+        {{ 'medicine has been taken' | translate }}
+      </div>
+    </div>
+    <div class="ml-40 mt-10 d-flex">
+      <div class="icon-circle bg-gray-900"></div>
+      <div class="text-normal text-black-300 d-flex align-items-center">
+        {{ 'medicine has not been taken' | translate }}
+      </div>
+    </div>
+  </div>
+
+  <div class="text-blue-700 text-normal mt-20 mb-1">
+    {{ 'side effect' | translate }}
+  </div>
+  <div class="d-flex mt-10">
+    <div *ngFor="let status of symptom; let i = index" [class]="i === 0 ? 'ml-2' : 'ml-38'">
+      <div class="d-flex justify-content-center">
+        <img class="symptom" [src]="'./assets/images/' + status.icon" alt="" />
+      </div>
+      <div class="text-normal mt-2 text-no-break text-center text-blue-600">
+        {{ 'symptom.' + status.text | translate }}
+      </div>
+    </div>
+  </div>
+</div>

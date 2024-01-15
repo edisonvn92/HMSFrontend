@@ -1,0 +1,31 @@
+@import 'src/styles';
+
+:host {
+  color: $black-300;
+}
+
+.dialog-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 12px 12px;
+  border-bottom-right-radius: calc(0.3rem - 1px);
+  border-bottom-left-radius: calc(0.3rem - 1px);
+
+  .btn-close {
+    border-color: $gray-200;
+  }
+}
+
+.dialog-body {
+  min-height: 70px;
+  display: flex;
+  align-items: center;
+  padding: 32px 32px 24px 32px;
+}
+
+.body_content {
+  max-width: 350px;
+  word-break: break-word;
+}

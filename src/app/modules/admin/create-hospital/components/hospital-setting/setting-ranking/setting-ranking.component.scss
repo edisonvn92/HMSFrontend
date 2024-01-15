@@ -1,0 +1,20 @@
+@import 'src/app/styles/variable';
+
+input {
+  width: calc(100% - 352px);
+  font-size: 14px;
+  height: 32px;
+}
+
+label {
+  width: 190px;
+  margin-right: 18px;
+}
+
+.color {
+  width: 136px;
+  margin-left: 8px;
+  height: 32px;
+  border: 1px solid $gray-260;
+  border-radius: 4px;
+}

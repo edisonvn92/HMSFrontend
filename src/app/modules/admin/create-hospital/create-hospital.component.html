@@ -1,0 +1,34 @@
+<div class="create-hospital-container">
+  <div class="form-content">
+    <app-basic-info id="basic-info" [isCreate]="isCreate" [error]="error" [hospital]="data" #basicInfo></app-basic-info>
+    <app-hospital-setting
+      #setting
+      id="setting"
+      [isCreate]="isCreate"
+      [hospitalSetting]="data"
+      (changeMailSetting)="onChangeMailSetting($event)"
+    ></app-hospital-setting>
+    <app-component-setting #component [componentList]="components"></app-component-setting>
+    <app-mail-template
+      #mailTemplate
+      id="mail-template"
+      [mailTemplate]="data?.hospital_email_templates"
+      [mailSetting]="mailSetting"
+    ></app-mail-template>
+  </div>
+</div>
+<div class="form-footer">
+  <div class="line"></div>
+  <div class="d-flex justify-content-end">
+    <button
+      type="button"
+      (click)="oncancelClicked()"
+      class="btn btn-outline-secondary mr-1 text-black-300 btn-cancel text-normal"
+    >
+      {{ 'button.Cancel' | translate }}
+    </button>
+    <button type="submit" class="btn btn-primary bg-blue-500 btn-close text-normal" (click)="submitClicked()">
+      {{ 'button.save' | translate }}
+    </button>
+  </div>
+</div>
